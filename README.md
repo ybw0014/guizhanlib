@@ -1,5 +1,7 @@
 # ChineseLib
 
+![Jitpack 状态](https://jitpack.io/v/ybw0014/ChineseLib.svg)
+
 一个可用于汉化插件的库。
 
 ## 内容
@@ -78,6 +80,7 @@
 
 | 版本 | 内容 |
 |---|---|
+| 0.2.4 | `ChatColors`增加带颜色字符串获取 |
 | 0.2.3 | 修改错误捕捉 |
 | 0.2.2 | 修改实体列表以适配1.17以下版本 |
 | 0.2.1 | 新增Sf `BasicMetals`基础金属 |

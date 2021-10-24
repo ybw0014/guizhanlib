@@ -52,7 +52,16 @@ public enum ChatColors {
 
     @Override
     public String toString() {
-        return this.chinese;
+        return this.getChinese();
+    }
+
+    /**
+     * 获取带颜色代码的颜色名
+     * @return 带颜色代码的颜色名
+     */
+    public String toStringWithColor() {
+        return this.getColor() +
+            this.getChinese();
     }
 
     /**

@@ -44,7 +44,7 @@ public enum DyeColors {
 
     @Override
     public String toString() {
-        return this.chinese;
+        return this.getChinese();
     }
 
     /**
