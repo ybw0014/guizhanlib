@@ -55,7 +55,7 @@ public enum ChatColors {
 
     /**
      * 根据聊天颜色返回对应的枚举类型
-     * @param chatColor ChatColor
+     * @param chatColor {@link ChatColor} 聊天颜色
      * @return 对应的枚举类型
      */
     public static @Nonnull ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
@@ -69,7 +69,7 @@ public enum ChatColors {
 
     /**
      * 根据英文返回对应的枚举类型
-     * @param english 提供的英文类型
+     * @param english {@link String} 提供的英文类型
      * @return 对应的枚举类型
      */
     public static @Nullable ChatColors fromEnglish(@Nonnull String english) {

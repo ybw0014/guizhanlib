@@ -48,7 +48,7 @@ public enum DyeColors {
 
     /**
      * 根据染料颜色返回对应的枚举类型
-     * @param dyeColor DyeColor
+     * @param dyeColor {@link DyeColor} 染料颜色
      * @return 对应的枚举类型
      */
     public static @Nonnull DyeColors fromDyeColor(@Nonnull DyeColor dyeColor) {
@@ -62,10 +62,9 @@ public enum DyeColors {
 
     /**
      * 根据英文返回对应的枚举类型
-     * @param english 提供的英文类型
+     * @param english {@link String} 提供的英文类型
      * @return 对应的枚举类型
      */
-
     public static @Nullable DyeColors fromEnglish(@Nonnull String english) {
         String humanized = StringUtil.humanize(english);
         for (DyeColors color : DyeColors.values()) {
