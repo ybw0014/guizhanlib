@@ -2,9 +2,12 @@ package net.guizhanss.minecraft.chineselib.minecraft.entity;
 
 import lombok.Getter;
 import net.guizhanss.minecraft.chineselib.utils.StringUtil;
+import org.apache.commons.lang.Validate;
+import org.bukkit.entity.Rabbit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Minecraft - 兔子
@@ -15,34 +18,54 @@ public class Rabbits {
      * 所有兔子的类型
      */
     public enum Type {
-        BLACK("Black", "黑色"),
-        BLACK_AND_WHITE("Black And White", "黑白相间"),
-        BROWN("Brown", "褐色"),
-        GOLD("Gold", "金色"),
-        SALT_AND_PEPPER("Salt And Pepper", "胡椒盐色"),
-        THE_KILLER_BUNNY("The Killer Bunny", "杀手兔"),
-        WHITE("White", "白色");
+        BLACK(Rabbit.Type.BLACK, "Black", "黑色"),
+        BLACK_AND_WHITE(Rabbit.Type.BLACK_AND_WHITE, "Black And White", "黑白相间"),
+        BROWN(Rabbit.Type.BROWN, "Brown", "褐色"),
+        GOLD(Rabbit.Type.GOLD, "Gold", "金色"),
+        SALT_AND_PEPPER(Rabbit.Type.SALT_AND_PEPPER, "Salt And Pepper", "胡椒盐色"),
+        THE_KILLER_BUNNY(Rabbit.Type.THE_KILLER_BUNNY, "The Killer Bunny", "杀手兔"),
+        WHITE(Rabbit.Type.WHITE, "White", "白色");
 
-        private @Getter String english;
-        private @Getter String chinese;
+        private final @Getter Rabbit.Type type;
+        private final @Getter String english;
+        private final @Getter String chinese;
 
-        Type(@Nonnull String english, @Nonnull String chinese) {
+        @ParametersAreNonnullByDefault
+        Type(Rabbit.Type type, String english, String chinese) {
+            this.type = type;
             this.english = english;
             this.chinese = chinese;
         }
 
         @Override
         public String toString() {
-            return this.chinese;
+            return this.getChinese();
         }
 
         /**
-         * 根据英文返回对应的枚举类型
-         * @param english 提供的英文类型
-         * @return 对应的枚举类型
+         * 根据兔子的类型返回对应的枚举
+         * @param rabbitType {@link Rabbit.Type} 兔子的类型
+         * @return 对应的枚举
          */
-        @Nullable
-        public static Type fromEnglish(String english) {
+        public static @Nonnull Type fromType(@Nonnull Rabbit.Type rabbitType) {
+            Validate.notNull(rabbitType, "兔子的类型不能为空");
+
+            for (Type type : Type.values()) {
+                if (type.getType() == rabbitType) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("无效的兔子的类型");
+        }
+
+        /**
+         * 根据英文返回对应的枚举
+         * @param english {@link String} 提供的英文
+         * @return 对应的枚举
+         */
+        public static @Nullable Type fromEnglish(@Nonnull String english) {
+            Validate.notNull(english, "英文不能为空");
+
             String humanized = StringUtil.humanize(english);
             for (Type type : Type.values()) {
                 if (type.getEnglish().equals(humanized)) {

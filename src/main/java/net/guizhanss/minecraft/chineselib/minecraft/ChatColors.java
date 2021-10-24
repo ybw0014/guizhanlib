@@ -2,6 +2,7 @@ package net.guizhanss.minecraft.chineselib.minecraft;
 
 import lombok.Getter;
 import net.guizhanss.minecraft.chineselib.utils.StringUtil;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nonnull;
@@ -54,11 +55,13 @@ public enum ChatColors {
     }
 
     /**
-     * 根据聊天颜色返回对应的枚举类型
+     * 根据聊天颜色返回对应的枚举
      * @param chatColor {@link ChatColor} 聊天颜色
-     * @return 对应的枚举类型
+     * @return 对应的枚举
      */
     public static @Nonnull ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
+        Validate.notNull(chatColor, "聊天颜色不能为空");
+
         for (ChatColors color : ChatColors.values()) {
             if (color.getColor() == chatColor) {
                 return color;
@@ -68,11 +71,13 @@ public enum ChatColors {
     }
 
     /**
-     * 根据英文返回对应的枚举类型
-     * @param english {@link String} 提供的英文类型
-     * @return 对应的枚举类型
+     * 根据英文返回对应的枚举
+     * @param english {@link String} 提供的英文
+     * @return 对应的枚举
      */
     public static @Nullable ChatColors fromEnglish(@Nonnull String english) {
+        Validate.notNull(english, "英文不能为空");
+
         String humanized = StringUtil.humanize(english);
         for (ChatColors color : ChatColors.values()) {
             if (color.getEnglish().equals(humanized)) {

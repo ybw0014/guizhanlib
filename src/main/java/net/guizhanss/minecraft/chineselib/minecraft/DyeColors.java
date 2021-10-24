@@ -2,6 +2,7 @@ package net.guizhanss.minecraft.chineselib.minecraft;
 
 import lombok.Getter;
 import net.guizhanss.minecraft.chineselib.utils.StringUtil;
+import org.apache.commons.lang.Validate;
 import org.bukkit.DyeColor;
 
 import javax.annotation.Nonnull;
@@ -47,11 +48,13 @@ public enum DyeColors {
     }
 
     /**
-     * 根据染料颜色返回对应的枚举类型
+     * 根据染料颜色返回对应的枚举
      * @param dyeColor {@link DyeColor} 染料颜色
-     * @return 对应的枚举类型
+     * @return 对应的枚举
      */
     public static @Nonnull DyeColors fromDyeColor(@Nonnull DyeColor dyeColor) {
+        Validate.notNull(dyeColor, "染料颜色不能为空");
+
         for (DyeColors color : DyeColors.values()) {
             if (color.getColor() == dyeColor) {
                 return color;
@@ -61,11 +64,13 @@ public enum DyeColors {
     }
 
     /**
-     * 根据英文返回对应的枚举类型
-     * @param english {@link String} 提供的英文类型
-     * @return 对应的枚举类型
+     * 根据英文返回对应的枚举
+     * @param english {@link String} 提供的英文
+     * @return 对应的枚举
      */
     public static @Nullable DyeColors fromEnglish(@Nonnull String english) {
+        Validate.notNull(english, "英文不能为空");
+
         String humanized = StringUtil.humanize(english);
         for (DyeColors color : DyeColors.values()) {
             if (color.getEnglish().equals(humanized)) {

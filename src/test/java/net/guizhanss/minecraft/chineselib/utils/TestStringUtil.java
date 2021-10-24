@@ -19,4 +19,19 @@ public class TestStringUtil {
         String expected3 = "The Killer Bunny";
         assertEquals(expected3, StringUtil.humanize(str3));
     }
+
+    @Test
+    void testDehumanize() {
+        String str1 = "Magma Cube";
+        String expected1 = "MAGMA_CUBE";
+        assertEquals(expected1, StringUtil.dehumanize(str1));
+
+        String str2 = "stringstuff";
+        String expected2 = "Do It Again";
+        assertEquals(expected2, StringUtil.dehumanize(str2));
+
+        String str3 = "the_killer_bunny";
+        String expected3 = "The Killer Bunny";
+        assertEquals(expected3, StringUtil.dehumanize(str3));
+    }
 }

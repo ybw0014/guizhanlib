@@ -2,9 +2,12 @@ package net.guizhanss.minecraft.chineselib.minecraft.entity;
 
 import lombok.Getter;
 import net.guizhanss.minecraft.chineselib.utils.StringUtil;
+import org.apache.commons.lang.Validate;
+import org.bukkit.entity.Horse;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Minecraft - 马
@@ -15,34 +18,54 @@ public class Horses {
      * 所有马的颜色
      */
     public enum Color {
-        BLACK("Black", "黑色"),
-        BROWN("Brown", "褐色"),
-        CHESTNUT("Chestnut", "栗色"),
-        CREAMY("Creamy", "奶油色"),
-        DARK_BROWN("Dark Brown", "深褐色"),
-        GRAY("Gray", "灰色"),
-        WHITE("White", "白色");
+        BLACK(Horse.Color.BLACK, "Black", "黑色"),
+        BROWN(Horse.Color.BROWN, "Brown", "褐色"),
+        CHESTNUT(Horse.Color.CHESTNUT, "Chestnut", "栗色"),
+        CREAMY(Horse.Color.CREAMY, "Creamy", "奶油色"),
+        DARK_BROWN(Horse.Color.DARK_BROWN, "Dark Brown", "深褐色"),
+        GRAY(Horse.Color.GRAY, "Gray", "灰色"),
+        WHITE(Horse.Color.WHITE, "White", "白色");
 
+        private @Getter Horse.Color color;
         private @Getter String english;
         private @Getter String chinese;
 
-        Color(@Nonnull String english, @Nonnull String chinese) {
+        @ParametersAreNonnullByDefault
+        Color(Horse.Color color, String english, String chinese) {
+            this.color = color;
             this.english = english;
             this.chinese = chinese;
         }
 
         @Override
         public String toString() {
-            return this.chinese;
+            return this.getChinese();
         }
 
         /**
-         * 根据英文返回对应的枚举类型
-         * @param english 提供的英文类型
-         * @return 对应的枚举类型
+         * 根据马的颜色返回对应的枚举
+         * @param horseColor {@link Horse.Color} 马的颜色
+         * @return 对应的枚举
          */
-        @Nullable
-        public static Color fromEnglish(String english) {
+        public static @Nonnull Color fromColor(@Nonnull Horse.Color horseColor) {
+            Validate.notNull(horseColor, "马的颜色不能为空");
+
+            for (Color color : Color.values()) {
+                if (color.getColor() == horseColor) {
+                    return color;
+                }
+            }
+            throw new IllegalArgumentException("无效的马的颜色");
+        }
+
+        /**
+         * 根据英文返回对应的枚举
+         * @param english {@link String} 提供的英文
+         * @return 对应的枚举
+         */
+        public static @Nullable Color fromEnglish(@Nonnull String english) {
+            Validate.notNull(english, "英文不能为空");
+
             String humanized = StringUtil.humanize(english);
             for (Color color : Color.values()) {
                 if (color.getEnglish().equals(humanized)) {
@@ -57,32 +80,51 @@ public class Horses {
      * 所有马的样式
      */
     public enum Style {
-        BLACK_DOTS("Black Dots", "黑色斑点"),
-        NONE("None", "无"),
-        WHITE("White", "白色"),
-        WHITE_DOTS("White Dots", "白色斑点"),
-        WHITEFIELD("Whitefield", "白色条纹");
+        BLACK_DOTS(Horse.Style.BLACK_DOTS, "Black Dots", "黑色斑点"),
+        NONE(Horse.Style.NONE, "None", "无"),
+        WHITE(Horse.Style.WHITE, "White", "白色"),
+        WHITE_DOTS(Horse.Style.WHITE_DOTS, "White Dots", "白色斑点"),
+        WHITEFIELD(Horse.Style.WHITEFIELD, "Whitefield", "白色条纹");
 
-        private @Getter String english;
-        private @Getter String chinese;
+        private final @Getter Horse.Style style;
+        private final @Getter String english;
+        private final @Getter String chinese;
 
-        Style(@Nonnull String english, @Nonnull String chinese) {
+        Style(Horse.Style style, String english, String chinese) {
+            this.style = style;
             this.english = english;
             this.chinese = chinese;
         }
 
         @Override
         public String toString() {
-            return this.chinese;
+            return this.getChinese();
         }
 
         /**
-         * 根据英文返回对应的枚举类型
-         * @param english 提供的英文类型
-         * @return 对应的枚举类型
+         * 根据马的样式返回对应的枚举
+         * @param horseStyle {@link Horse.Style} 马的样式
+         * @return 对应的枚举
          */
-        @Nullable
-        public static Style fromEnglish(String english) {
+        public static @Nonnull Style fromStyle(@Nonnull Horse.Style horseStyle) {
+            Validate.notNull(horseStyle, "马的样式不能为空");
+
+            for (Style style : Style.values()) {
+                if (style.getStyle() == horseStyle) {
+                    return style;
+                }
+            }
+            throw new IllegalArgumentException("无效的马的样式");
+        }
+
+        /**
+         * 根据英文返回对应的枚举
+         * @param english {@link String} 提供的英文
+         * @return 对应的枚举
+         */
+        public static @Nullable Style fromEnglish(@Nonnull String english) {
+            Validate.notNull(english, "英文不能为空");
+
             String humanized = StringUtil.humanize(english);
             for (Style style : Style.values()) {
                 if (style.getEnglish().equals(humanized)) {
