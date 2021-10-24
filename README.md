@@ -26,9 +26,9 @@
 ```
     <dependency>
         <groupId>com.github.ybw0014</groupId>
-	    <artifactId>ChineseLib</artifactId>
-	    <version>将此处替换为版本号</version>
-	    <scope>compile</scope>
+        <artifactId>ChineseLib</artifactId>
+        <version>将此处替换为版本号</version>
+        <scope>compile</scope>
     </dependency>
 ```
 
@@ -78,5 +78,6 @@
 
 | 版本 | 内容 |
 |---|---|
-| 0.2.0 | 新增`EntityTypes`实体类型 |
+| 0.2.1 | 新增Sf `BasicMetals`基础金属 |
+| 0.2.0 | 新增MC `EntityTypes` 实体类型 |
 | 0.1.0 | 首个版本 |
