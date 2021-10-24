@@ -65,7 +65,7 @@
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <defaultGoal>clean package</defaultGoal>
+        <defaultGoal>clean package javadoc:jar</defaultGoal>
         <finalName>${project.name}-${project.version}</finalName>
 
         <plugins>

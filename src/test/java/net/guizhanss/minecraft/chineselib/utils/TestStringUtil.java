@@ -26,12 +26,12 @@ public class TestStringUtil {
         String expected1 = "MAGMA_CUBE";
         assertEquals(expected1, StringUtil.dehumanize(str1));
 
-        String str2 = "stringstuff";
-        String expected2 = "Do It Again";
+        String str2 = "a-useLESS_sTring";
+        String expected2 = "A_USELESS_STRING";
         assertEquals(expected2, StringUtil.dehumanize(str2));
 
         String str3 = "the_killer_bunny";
-        String expected3 = "The Killer Bunny";
+        String expected3 = "THE_KILLER_BUNNY";
         assertEquals(expected3, StringUtil.dehumanize(str3));
     }
 }
