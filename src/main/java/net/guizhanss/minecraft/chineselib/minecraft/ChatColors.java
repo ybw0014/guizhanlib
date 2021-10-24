@@ -11,6 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Minecraft - 聊天颜色
+ * @author ybw0014
  */
 public enum ChatColors {
     AQUA(ChatColor.AQUA, "Aqua", "天蓝色"),
