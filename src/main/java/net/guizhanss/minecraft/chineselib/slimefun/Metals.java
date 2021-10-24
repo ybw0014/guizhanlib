@@ -1,5 +1,6 @@
-package net.guizhanss.minecraft.chineselib.slimefun.core;
+package net.guizhanss.minecraft.chineselib.slimefun;
 
+import net.guizhanss.minecraft.chineselib.slimefun.core.BasicMetals;
 import net.guizhanss.minecraft.chineselib.utils.StringUtil;
 
 import javax.annotation.Nonnull;
@@ -16,7 +17,7 @@ public class Metals {
      */
     public static @Nonnull String getType(@Nonnull String type){
 
-        // 是否属于基础金属
+        // 是否属于Slimefun基础金属
         BasicMetals basicMetal = BasicMetals.fromEnglish(type);
         if (basicMetal != null)
             return basicMetal.toString();
