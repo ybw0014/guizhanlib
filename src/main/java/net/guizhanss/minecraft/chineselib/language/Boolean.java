@@ -13,7 +13,6 @@ public class Boolean {
      * @param value 一个布尔值
      * @return 根据提供的布尔值返回 {@link String} "是"或"否"
      */
-
     public static @Nonnull String yesOrNo(boolean value) {
         return value ? "是" : "否";
     }
