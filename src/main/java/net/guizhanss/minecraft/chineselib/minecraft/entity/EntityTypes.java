@@ -156,10 +156,10 @@ public enum EntityTypes {
 
         for (EntityTypes type : EntityTypes.values()) {
             try {
-                if (EntityType.valueOf(type.getType()) == entityType) {
+                if (EntityType.valueOf(type.getType()) == entityType)
                     return type;
-                }
-            } catch (IllegalArgumentException ignored) {}
+
+            } catch (IllegalArgumentException | NoSuchFieldError ignored) {}
 
         }
         throw new IllegalArgumentException("无效的实体类型");
