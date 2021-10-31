@@ -1,6 +1,6 @@
-# ChineseLib
+# GuizhanLib
 
-![Jitpack 状态](https://jitpack.io/v/ybw0014/ChineseLib.svg)
+![Jitpack 状态](https://jitpack.io/v/ybw0014/GuizhanLib.svg)
 
 一个可用于汉化插件的库。
 
@@ -23,18 +23,18 @@
     </repositories>
 ```
 
-并将ChineseLib添加为附属:
+并将GuizhanLib添加为附属:
 
 ```
     <dependency>
         <groupId>com.github.ybw0014</groupId>
-        <artifactId>ChineseLib</artifactId>
+        <artifactId>GuizhanLib</artifactId>
         <version>将此处替换为版本号</version>
         <scope>compile</scope>
     </dependency>
 ```
 
-在`build`中，你需要将ChineseLib迁移到你的包中，避免与其他插件冲突:
+在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件冲突:
 
 ```
         <plugins>
@@ -49,8 +49,8 @@
                     <relocations>
                         <!-- 重要: 你需要将以下relocation(迁移)部分添加到你的pom.xml中 -->
                         <relocation>
-                            <pattern>net.guizhanss.minecraft.chineselib</pattern>
-                            <shadedPattern>将此处替换为你的软件包.chineselib</shadedPattern>
+                            <pattern>net.guizhanss.minecraft.guizhanlib</pattern>
+                            <shadedPattern>将此处替换为你的软件包.guizhanlib</shadedPattern>
                         </relocation>
                     </relocations>
 
