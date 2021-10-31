@@ -26,7 +26,7 @@ public class LanguageHelper {
     private static final String filename = "minecraft.zh_cn.json";
     private static Map<String, String> lang;
     static {
-        lang = FileUtil.readJsonFromBufferedReader(FileUtil.readFile(filename));
+        lang = FileUtil.readJsonFromFile(filename);
     }
 
     /**

@@ -6,7 +6,7 @@
 
     <groupId>net.guizhanss.minecraft</groupId>
     <artifactId>GuizhanLib</artifactId>
-    <version>0.3.0-SNAPSHOT-2</version>
+    <version>0.3.0-SNAPSHOT-3</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
