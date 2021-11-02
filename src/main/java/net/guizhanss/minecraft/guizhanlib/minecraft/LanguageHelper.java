@@ -2,7 +2,6 @@ package net.guizhanss.minecraft.guizhanlib.minecraft;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -26,11 +25,12 @@ import java.util.Map;
  *
  * @author ybw0014
  */
-@UtilityClass
 public class LanguageHelper {
+
     private static final String filename = "minecraft.zh_cn.json";
     private static Map<String, String> lang;
-    static {
+
+    LanguageHelper() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
             LanguageHelper.class.getResourceAsStream(filename), StandardCharsets.UTF_8
         ));
@@ -45,7 +45,7 @@ public class LanguageHelper {
      * @param item {@link ItemStack} 物品
      * @return 物品的显示名称
      */
-    public static @Nonnull String getItemDisplayName(@Nonnull ItemStack item) {
+    public @Nonnull String getItemDisplayName(@Nonnull ItemStack item) {
         Validate.notNull(item, "物品不能为空");
 
         if (item.hasItemMeta() && item.getItemMeta().hasDisplayName())
@@ -60,7 +60,7 @@ public class LanguageHelper {
      * @param item {@link ItemStack} 物品
      * @return 物品的中文名称，如果获取失败则返回对应的键名
      */
-    public static @Nonnull String getItemName(@Nonnull ItemStack item) {
+    public @Nonnull String getItemName(@Nonnull ItemStack item) {
         Validate.notNull(item, "物品不能为空");
 
         if (item.getType() == Material.POTION || item.getType() == Material.SPLASH_POTION || item.getType() == Material.LINGERING_POTION || item.getType() == Material.TIPPED_ARROW) {
@@ -79,7 +79,7 @@ public class LanguageHelper {
      * @param mat {@link Material} 材料
      * @return 材料的中文名称，如果获取失败则返回对应的键名
      */
-    public static @Nonnull String getMaterialName(@Nonnull Material mat) {
+    public @Nonnull String getMaterialName(@Nonnull Material mat) {
         return translateToLocal(getMaterialKey(mat));
     }
 
@@ -88,7 +88,7 @@ public class LanguageHelper {
      * @param skull {@link ItemStack} 头颅物品
      * @return 头颅物品的中文名称
      */
-    private static @Nonnull String getPlayerSkullName(@Nonnull ItemStack skull) {
+    private @Nonnull String getPlayerSkullName(@Nonnull ItemStack skull) {
         Validate.notNull(skull, "物品不能为空");
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
@@ -104,7 +104,7 @@ public class LanguageHelper {
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的中文名,如果获取失败则返回键名
      */
-    public static @Nonnull String getBiomeName(@Nonnull Biome biome) {
+    public @Nonnull String getBiomeName(@Nonnull Biome biome) {
         return translateToLocal(getBiomeKey(biome));
     }
 
@@ -114,7 +114,7 @@ public class LanguageHelper {
      * @param entity {@link Entity} 实体
      * @return 实体的显示名称
      */
-    public static @Nonnull String getEntityDisplayName(@Nonnull Entity entity) {
+    public @Nonnull String getEntityDisplayName(@Nonnull Entity entity) {
         return entity.getCustomName() != null ? entity.getCustomName() :
             getEntityName(entity);
     }
@@ -125,7 +125,7 @@ public class LanguageHelper {
      * @param entity {@link Entity} 实体
      * @return 实体的中文名称,如果获取失败则返回键名
      */
-    public static @Nonnull String getEntityName(@Nonnull Entity entity) {
+    public @Nonnull String getEntityName(@Nonnull Entity entity) {
         return translateToLocal(getEntityKey(entity));
     }
 
@@ -135,7 +135,7 @@ public class LanguageHelper {
      * @param entityType {@link EntityType} 实体类型
      * @return 实体类型的中文名称,如果获取失败则返回键名
      */
-    public static @Nonnull String getEntityName(@Nonnull EntityType entityType) {
+    public @Nonnull String getEntityName(@Nonnull EntityType entityType) {
         return translateToLocal(getEntityKey(entityType));
     }
 
@@ -145,7 +145,7 @@ public class LanguageHelper {
      * @param level 附魔等级
      * @return 附魔等级的名称
      */
-    public static @Nonnull String getEnchantmentLevelName(int level) {
+    public @Nonnull String getEnchantmentLevelName(int level) {
         return translateToLocal(getEnchantmentLevelKey(level));
     }
 
@@ -155,7 +155,7 @@ public class LanguageHelper {
      * @param enchantment {@link Enchantment} 附魔
      * @return 附魔的中文名称,如果获取失败则返回键名
      */
-    public static @Nonnull String getEnchantmentName(@Nonnull Enchantment enchantment) {
+    public @Nonnull String getEnchantmentName(@Nonnull Enchantment enchantment) {
         return translateToLocal(getEnchantmentKey(enchantment));
     }
 
@@ -166,7 +166,7 @@ public class LanguageHelper {
      * @param level 附魔等级
      * @return 附魔的中文名称与等级
      */
-    public static @Nonnull String getEnchantmentDisplayName(@Nonnull Enchantment enchantment, int level) {
+    public @Nonnull String getEnchantmentDisplayName(@Nonnull Enchantment enchantment, int level) {
         Validate.notNull(enchantment, "附魔不能为空");
 
         String name = getEnchantmentName(enchantment);
@@ -180,7 +180,7 @@ public class LanguageHelper {
      * @param entry {@code Map.Entry<Enchantment, Integer>} 附魔与附魔等级
      * @return The name of the item
      */
-    public static @Nonnull String getEnchantmentDisplayName(@Nonnull Map.Entry<Enchantment, Integer> entry) {
+    public @Nonnull String getEnchantmentDisplayName(@Nonnull Map.Entry<Enchantment, Integer> entry) {
         return getEnchantmentDisplayName(entry.getKey(), entry.getValue());
     }
 
@@ -190,7 +190,7 @@ public class LanguageHelper {
      * @param mat {@link Material} 物品材料
      * @return 物品材料的键名
      */
-    public static @Nonnull String getMaterialKey(@Nonnull Material mat) {
+    public @Nonnull String getMaterialKey(@Nonnull Material mat) {
         Validate.notNull(mat, "材料不能为空");
 
         return (mat.isBlock() ? "block" : "item") + "."
@@ -204,7 +204,7 @@ public class LanguageHelper {
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的键名
      */
-    public static @Nonnull String getBiomeKey(@Nonnull Biome biome) {
+    public @Nonnull String getBiomeKey(@Nonnull Biome biome) {
         Validate.notNull(biome, "生物群系不能为空");
 
         return "biome.minecraft." + biome.toString().toLowerCase();
@@ -216,7 +216,7 @@ public class LanguageHelper {
      * @param entity {@link Entity} 实体
      * @return 实体的键名
      */
-    public static @Nonnull String getEntityKey(@Nonnull Entity entity) {
+    public @Nonnull String getEntityKey(@Nonnull Entity entity) {
         Validate.notNull(entity, "实体不能为空");
 
         return getEntityKey(entity.getType());
@@ -228,7 +228,7 @@ public class LanguageHelper {
      * @param entityType {@link EntityType} 实体类型
      * @return 实体类型的键名
      */
-    public static @Nonnull String getEntityKey(@Nonnull EntityType entityType) {
+    public @Nonnull String getEntityKey(@Nonnull EntityType entityType) {
         Validate.notNull(entityType, "实体类型不能为空");
 
         if (entityType == EntityType.SNOWMAN)
@@ -243,7 +243,7 @@ public class LanguageHelper {
      * @param level 附魔等级
      * @return 附魔等级的键名
      */
-    public static @Nonnull String getEnchantmentLevelKey(int level) {
+    public @Nonnull String getEnchantmentLevelKey(int level) {
         return "enchantment.level." + level;
     }
 
@@ -253,7 +253,7 @@ public class LanguageHelper {
      * @param enchantment {@link Enchantment} 附魔
      * @return 附魔的键名
      */
-    public static @Nonnull String getEnchantmentKey(@Nonnull Enchantment enchantment) {
+    public @Nonnull String getEnchantmentKey(@Nonnull Enchantment enchantment) {
         return "enchantment.minecraft." + enchantment.getKey().getKey();
     }
 
@@ -263,7 +263,7 @@ public class LanguageHelper {
      * @param key {@link String} 键名
      * @return 键名内容
      */
-    public static String translateToLocal(@Nonnull String key) {
+    public String translateToLocal(@Nonnull String key) {
         Validate.notNull(key, "键名不能为空");
 
         return lang.get(key);
