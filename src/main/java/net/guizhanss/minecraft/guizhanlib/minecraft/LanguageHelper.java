@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class LanguageHelper {
 
-    private static final String filename = "minecraft.zh_cn.json";
+    private static final String filename = "/minecraft.zh_cn.json";
     private static Map<String, String> lang;
 
     public LanguageHelper(JavaPlugin plugin) {
