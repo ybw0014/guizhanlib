@@ -20,8 +20,8 @@ public class DyeColorHelper {
      * @param dyeColor {@link DyeColor} 生物群系
      * @return 生物群系的中文名,如果获取失败则返回键名
      */
-    public static @Nonnull String getDyeColorName(@Nonnull DyeColor dyeColor) {
-        return LanguageHelper.getLang(getDyeColorKey(dyeColor));
+    public static @Nonnull String getName(@Nonnull DyeColor dyeColor) {
+        return LanguageHelper.getLang(getKey(dyeColor));
     }
 
     /**
@@ -30,7 +30,7 @@ public class DyeColorHelper {
      * @param dyeColor {@link DyeColor} 生物群系
      * @return 生物群系的键名
      */
-    public static @Nonnull String getDyeColorKey(@Nonnull DyeColor dyeColor) {
+    public static @Nonnull String getKey(@Nonnull DyeColor dyeColor) {
         Validate.notNull(dyeColor, "染料颜色不能为空");
 
         return "color.minecraft." + dyeColor.toString().toLowerCase();

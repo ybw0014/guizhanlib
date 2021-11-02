@@ -19,11 +19,11 @@ public class EntityHelper {
      * @param entity {@link Entity} 实体
      * @return 实体的显示名称
      */
-    public static @Nonnull String getEntityDisplayName(@Nonnull Entity entity) {
+    public static @Nonnull String getDisplayName(@Nonnull Entity entity) {
         Validate.notNull(entity, "实体不能为空");
 
-        return entity.getCustomName() != null ? entity.getCustomName() :
-            getEntityName(entity);
+        return entity.getCustomName() != null ?
+            entity.getCustomName() : getName(entity);
     }
 
     /**
@@ -32,9 +32,9 @@ public class EntityHelper {
      * @param entity {@link Entity} 实体
      * @return 实体的中文名称,如果获取失败则返回键名
      */
-    public static @Nonnull String getEntityName(@Nonnull Entity entity) {
+    public static @Nonnull String getName(@Nonnull Entity entity) {
         Validate.notNull(entity, "实体不能为空");
 
-        return EntityTypeHelper.getEntityTypeName(entity.getType());
+        return EntityTypeHelper.getName(entity.getType());
     }
 }

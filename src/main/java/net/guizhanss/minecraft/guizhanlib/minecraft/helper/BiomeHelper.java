@@ -20,8 +20,8 @@ public class BiomeHelper {
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的中文名,如果获取失败则返回键名
      */
-    public static @Nonnull String getBiomeName(@Nonnull Biome biome) {
-        return LanguageHelper.getLang(getBiomeKey(biome));
+    public static @Nonnull String getName(@Nonnull Biome biome) {
+        return LanguageHelper.getLang(getKey(biome));
     }
 
     /**
@@ -30,7 +30,7 @@ public class BiomeHelper {
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的键名
      */
-    public static @Nonnull String getBiomeKey(@Nonnull Biome biome) {
+    public static @Nonnull String getKey(@Nonnull Biome biome) {
         Validate.notNull(biome, "生物群系不能为空");
 
         return "biome.minecraft." + biome.toString().toLowerCase();
