@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
@@ -30,9 +31,10 @@ public class LanguageHelper {
     private static final String filename = "minecraft.zh_cn.json";
     private static Map<String, String> lang;
 
-    public LanguageHelper() {
+    public LanguageHelper(JavaPlugin plugin) {
+        plugin.getLogger().info(plugin.getClass().getResourceAsStream(filename).toString());
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-            this.getClass().getResourceAsStream(filename), StandardCharsets.UTF_8
+            plugin.getClass().getResourceAsStream(filename), StandardCharsets.UTF_8
         ));
         Gson gson = new Gson();
         Type type = new TypeToken<Map<String, String>>(){}.getType();
