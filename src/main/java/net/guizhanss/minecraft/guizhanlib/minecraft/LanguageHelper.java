@@ -52,6 +52,10 @@ public class LanguageHelper {
     public static String getLang(@Nonnull String key) {
         Validate.notNull(key, "键名不能为空");
 
-        return lang.get(key);
+        String value = lang.get(key);
+        if (value != null)
+            return value;
+
+        return key;
     }
 }

@@ -1,5 +1,6 @@
 package net.guizhanss.minecraft.guizhanlib.slimefun;
 
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.slimefun.core.BasicMetals;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 
@@ -9,6 +10,7 @@ import javax.annotation.Nonnull;
  * Slimefun - 金属
  * @author ybw0014
  */
+@UtilityClass
 public class Metals {
     /**
      * 获取金属的中文类型
