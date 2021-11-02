@@ -30,9 +30,9 @@ public class LanguageHelper {
     private static final String filename = "minecraft.zh_cn.json";
     private static Map<String, String> lang;
 
-    LanguageHelper() {
+    public LanguageHelper() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-            LanguageHelper.class.getResourceAsStream(filename), StandardCharsets.UTF_8
+            this.getClass().getResourceAsStream(filename), StandardCharsets.UTF_8
         ));
         Gson gson = new Gson();
         Type type = new TypeToken<Map<String, String>>(){}.getType();

@@ -1,6 +1,6 @@
 # GuizhanLib
 
-![Jitpack 状态](https://jitpack.io/v/ybw0014/GuizhanLib.svg)
+[![Jitpack 状态](https://jitpack.io/v/ybw0014/GuizhanLib.svg)](https://jitpack.io/#ybw0014/GuizhanLib)
 
 一个可用于汉化插件的库。
 
