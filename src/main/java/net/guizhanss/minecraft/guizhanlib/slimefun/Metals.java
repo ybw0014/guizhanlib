@@ -1,6 +1,7 @@
 package net.guizhanss.minecraft.guizhanlib.slimefun;
 
 import lombok.experimental.UtilityClass;
+import net.guizhanss.minecraft.guizhanlib.slimefun.core.AdvancedMetals;
 import net.guizhanss.minecraft.guizhanlib.slimefun.core.BasicMetals;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 
@@ -23,6 +24,11 @@ public class Metals {
         BasicMetals basicMetal = BasicMetals.fromEnglish(type);
         if (basicMetal != null)
             return basicMetal.toString();
+
+        // 是否属于Slimefun合金
+        AdvancedMetals advancedMetal = AdvancedMetals.fromEnglish(type);
+        if (advancedMetal != null)
+            return advancedMetal.toString();
 
         return StringUtil.humanize(type);
     }
