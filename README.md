@@ -79,6 +79,10 @@
 
 ## 更新日志
 
+### 0.3.1
+
+* 增加Slimefun合金`AdvancedMetals`
+
 ### 0.3.0
 
 * 加入Minecraft的语言文件
