@@ -11,8 +11,8 @@ import java.util.Optional;
  * @author ybw0014
  */
 public class RateLimit<K> {
-    private final long rateTime;
-    private final long rateVisits;
+    private final long limitTime;
+    private final long limitVisits;
     private Map<K, Long> timeMap; // 重置时间
     private Map<K, Long> visitMap; // 访问次数
 
@@ -22,8 +22,8 @@ public class RateLimit<K> {
      * @param visits 访问次数
      */
     public RateLimit(long time, long visits) {
-        this.rateTime = time;
-        this.rateVisits = visits;
+        this.limitTime = time;
+        this.limitVisits = visits;
         this.timeMap = new HashMap<>();
         this.visitMap = new HashMap<>();
     }
@@ -33,7 +33,7 @@ public class RateLimit<K> {
      * @return 总限制次数
      */
     public long getLimit() {
-        return this.rateVisits;
+        return this.limitVisits;
     }
 
     /**
@@ -63,7 +63,7 @@ public class RateLimit<K> {
      * @return 剩余次数
      */
     public long getRemaining(K key) {
-        return this.rateVisits - this.getUsed(key);
+        return this.limitVisits - this.getUsed(key);
     }
 
     /**
@@ -73,24 +73,24 @@ public class RateLimit<K> {
      * @return 是否成功增加访问次数
      */
     public boolean add(K key, long visits) {
-        if (this.getRemaining(key) < visits) {
-            return false;
-        }
-
         Optional<Long> time = Optional.ofNullable(this.timeMap.get(key));
         if (time.isPresent()) {
             if (time.get() > System.currentTimeMillis()) {
                 this.reset(key);
-                this.timeMap.put(key, System.currentTimeMillis() + this.rateTime);
+                this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
+            }
+
+            Optional<Long> pVisits = Optional.ofNullable(this.visitMap.get(key));
+            if (pVisits.isPresent()) {
+                if (pVisits.get() + visits > this.getLimit()) {
+                    return false;
+                }
+                this.visitMap.put(key, visits + pVisits.get());
+            } else {
+                this.visitMap.put(key, visits);
             }
         } else {
-            this.timeMap.put(key, System.currentTimeMillis() + this.rateTime);
-        }
-
-        Optional<Long> pVisits = Optional.ofNullable(this.visitMap.get(key));
-        if (pVisits.isPresent()) {
-            this.visitMap.put(key, visits + pVisits.get());
-        } else {
+            this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
             this.visitMap.put(key, visits);
         }
 
