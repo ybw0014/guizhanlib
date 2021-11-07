@@ -1,7 +1,5 @@
 package net.guizhanss.minecraft.guizhanlib.common;
 
-import org.bukkit.Bukkit;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -75,30 +73,23 @@ public class RateLimit<K> {
      * @return 是否成功增加访问次数
      */
     public boolean add(K key, long visits) {
-        Bukkit.getLogger().info("current time:" + System.currentTimeMillis());
         Optional<Long> time = Optional.ofNullable(this.timeMap.get(key));
         if (time.isPresent()) {
-            Bukkit.getLogger().info("reset time:" + time.get());
-
-            Bukkit.getLogger().info(time.get() > System.currentTimeMillis() ? "exceed current time" : "not exceed");
-            if (time.get() > System.currentTimeMillis()) {
+            if (time.get() < System.currentTimeMillis()) {
                 this.reset(key);
                 this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
             }
 
             Optional<Long> pVisits = Optional.ofNullable(this.visitMap.get(key));
             if (pVisits.isPresent()) {
-                Bukkit.getLogger().info("current visits:" + pVisits.get());
                 if (pVisits.get() + visits > this.getLimit()) {
                     return false;
                 }
                 this.visitMap.put(key, visits + pVisits.get());
             } else {
-                Bukkit.getLogger().info("no visits");
                 this.visitMap.put(key, visits);
             }
         } else {
-            Bukkit.getLogger().info("no reset time");
             this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
             this.visitMap.put(key, visits);
         }
