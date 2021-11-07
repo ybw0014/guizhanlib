@@ -1,6 +1,7 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.entity;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.entity;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Rabbit;
@@ -10,10 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Minecraft - 兔子
+ * 兔子({@link Rabbit})
+ *
  * @author ybw0014
  */
-public class Rabbits {
+@UtilityClass
+public class RabbitHelper {
     /**
      * 所有兔子的类型
      */
@@ -74,5 +77,14 @@ public class Rabbits {
             }
             return null;
         }
+    }
+
+    /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     * @param type {@link Rabbit.Type} 兔子的类型
+     * @return 兔子的类型的中文
+     */
+    public static @Nonnull String getType(@Nonnull Rabbit.Type type) {
+        return Type.fromType(type).getChinese();
     }
 }

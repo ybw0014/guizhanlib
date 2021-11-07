@@ -1,6 +1,7 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.entity;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.entity;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Fox;
@@ -10,10 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Minecraft - 狐狸
+ * 狐狸({@link Fox})
+ *
  * @author ybw0014
  */
-public class Foxes {
+@UtilityClass
+public class FoxHelper {
     /**
      * 所有狐狸的类型
      */
@@ -69,5 +72,14 @@ public class Foxes {
             }
             return null;
         }
+    }
+
+    /**
+     * 获取狐狸的类型({@link Fox.Type})的中文
+     * @param type {@link Fox.Type} 狐狸的类型
+     * @return 狐狸的类型的中文
+     */
+    public static @Nonnull String getType(@Nonnull Fox.Type type) {
+        return Type.fromType(type).getChinese();
     }
 }

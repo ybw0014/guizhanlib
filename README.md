@@ -79,6 +79,12 @@
 
 ## 更新日志
 
+### 0.3.2
+
+* 增加频率限制`RateLimit`
+* 增加冷却时间`Cooldown`
+* 将实体包迁移至助手包
+
 ### 0.3.1
 
 * 增加Slimefun合金`AdvancedMetals`

@@ -1,6 +1,7 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.entity;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.entity;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Cat;
@@ -10,10 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Minecraft - 猫
+ * 猫({@link Cat})
+ *
  * @author ybw0014
  */
-public class Cats {
+@UtilityClass
+public class CatHelper {
     /**
      * 所有猫的类型
      */
@@ -78,5 +81,14 @@ public class Cats {
             }
             return null;
         }
+    }
+
+    /**
+     * 获取猫的类型({@link Cat.Type})的中文
+     * @param type {@link Cat.Type} 猫的类型
+     * @return 猫的类型的中文
+     */
+    public static @Nonnull String getType(@Nonnull Cat.Type type) {
+        return Type.fromType(type).getChinese();
     }
 }

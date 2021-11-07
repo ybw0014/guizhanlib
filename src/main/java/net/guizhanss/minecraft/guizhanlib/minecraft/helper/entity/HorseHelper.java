@@ -1,6 +1,7 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.entity;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.entity;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Horse;
@@ -10,10 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Minecraft - 马
+ * 马({@link Horse})
+ *
  * @author ybw0014
  */
-public class Horses {
+@UtilityClass
+public class HorseHelper {
     /**
      * 所有马的颜色
      */
@@ -26,9 +29,9 @@ public class Horses {
         GRAY(Horse.Color.GRAY, "Gray", "灰色"),
         WHITE(Horse.Color.WHITE, "White", "白色");
 
-        private @Getter Horse.Color color;
-        private @Getter String english;
-        private @Getter String chinese;
+        private final @Getter Horse.Color color;
+        private final @Getter String english;
+        private final @Getter String chinese;
 
         @ParametersAreNonnullByDefault
         Color(Horse.Color color, String english, String chinese) {
@@ -133,5 +136,23 @@ public class Horses {
             }
             return null;
         }
+    }
+
+    /**
+     * 获取马的颜色({@link Horse.Color})的中文
+     * @param color {@link Horse.Color} 马的颜色
+     * @return 马的颜色的中文
+     */
+    public static @Nonnull String getColor(@Nonnull Horse.Color color) {
+        return Color.fromColor(color).getChinese();
+    }
+
+    /**
+     * 获取马的样式({@link Horse.Style})的中文
+     * @param style {@link Horse.Style} 马的样式
+     * @return 马的样式的中文
+     */
+    public static @Nonnull String getStyle(@Nonnull Horse.Style style) {
+        return Style.fromStyle(style).getChinese();
     }
 }

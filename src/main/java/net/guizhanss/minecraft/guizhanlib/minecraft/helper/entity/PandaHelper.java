@@ -1,6 +1,7 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.entity;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.entity;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Panda;
@@ -10,10 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Minecraft - 熊猫
+ * 熊猫({@link Panda})
+ *
  * @author ybw0014
  */
-public class Pandas {
+@UtilityClass
+public class PandaHelper {
     /**
      * 所有熊猫基因
      */
@@ -74,5 +77,14 @@ public class Pandas {
             }
             return null;
         }
+    }
+
+    /**
+     * 获取熊猫基因({@link Panda.Gene})的中文
+     * @param gene {@link Panda.Gene} 熊猫基因
+     * @return 熊猫基因的中文
+     */
+    public static @Nonnull String getGene(@Nonnull Panda.Gene gene) {
+        return Gene.fromGene(gene).getChinese();
     }
 }
