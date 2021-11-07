@@ -79,6 +79,8 @@ public class RateLimit<K> {
         Optional<Long> time = Optional.ofNullable(this.timeMap.get(key));
         if (time.isPresent()) {
             Bukkit.getLogger().info("reset time:" + time.get());
+
+            Bukkit.getLogger().info(time.get() > System.currentTimeMillis() ? "exceed current time" : "not exceed");
             if (time.get() > System.currentTimeMillis()) {
                 this.reset(key);
                 this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
@@ -86,11 +88,13 @@ public class RateLimit<K> {
 
             Optional<Long> pVisits = Optional.ofNullable(this.visitMap.get(key));
             if (pVisits.isPresent()) {
+                Bukkit.getLogger().info("current visits:" + pVisits.get());
                 if (pVisits.get() + visits > this.getLimit()) {
                     return false;
                 }
                 this.visitMap.put(key, visits + pVisits.get());
             } else {
+                Bukkit.getLogger().info("no visits");
                 this.visitMap.put(key, visits);
             }
         } else {
