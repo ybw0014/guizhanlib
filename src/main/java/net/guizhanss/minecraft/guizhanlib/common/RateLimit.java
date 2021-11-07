@@ -13,8 +13,8 @@ import java.util.Optional;
 public class RateLimit<K> {
     private final long limitTime;
     private final long limitVisits;
-    private Map<K, Long> timeMap; // 重置时间
-    private Map<K, Long> visitMap; // 访问次数
+    private final Map<K, Long> timeMap; // 重置时间
+    private final Map<K, Long> visitMap; // 访问次数
 
     /**
      * 构建函数
