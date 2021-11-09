@@ -79,6 +79,11 @@
 
 ## 更新日志
 
+### 0.3.3
+
+* 增加药水类型助手`PotionEffectTypeHelper`
+* 将生物群系助手`BiomeHelper`迁移
+
 ### 0.3.2
 
 * 增加频率限制`RateLimit`
