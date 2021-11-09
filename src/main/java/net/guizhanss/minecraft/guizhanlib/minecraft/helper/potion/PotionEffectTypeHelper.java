@@ -33,6 +33,29 @@ public class PotionEffectTypeHelper {
     public static @Nonnull String getKey(@Nonnull PotionEffectType type) {
         Validate.notNull(type, "药水效果不能为空");
 
-        return "effect.minecraft." + type.getName().toLowerCase();
+        String key = type.getName().toLowerCase();
+
+        // 语言文件与PotionEffectType不一致的情况
+        if (type == PotionEffectType.CONFUSION) {
+            key = "nausea";
+        } else if (type == PotionEffectType.DAMAGE_RESISTANCE) {
+            key = "resistance";
+        } else if (type == PotionEffectType.FAST_DIGGING) {
+            key = "haste";
+        } else if (type == PotionEffectType.HARM) {
+            key = "instant_damage";
+        } else if (type == PotionEffectType.HEAL) {
+            key = "instant_health";
+        } else if (type == PotionEffectType.INCREASE_DAMAGE) {
+            key = "strength";
+        } else if (type == PotionEffectType.JUMP) {
+            key = "jump_boost";
+        } else if (type == PotionEffectType.SLOW) {
+            key = "slowness";
+        } else if (type == PotionEffectType.SLOW_DIGGING) {
+            key = "mining_fatigue";
+        }
+
+        return "effect.minecraft." + key;
     }
 }
