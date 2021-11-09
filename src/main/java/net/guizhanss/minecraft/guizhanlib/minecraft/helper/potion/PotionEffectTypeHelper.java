@@ -33,6 +33,6 @@ public class PotionEffectTypeHelper {
     public static @Nonnull String getKey(@Nonnull PotionEffectType type) {
         Validate.notNull(type, "药水效果不能为空");
 
-        return "effect.minecraft." + type.toString().toLowerCase();
+        return "effect.minecraft." + type.getName().toLowerCase();
     }
 }
