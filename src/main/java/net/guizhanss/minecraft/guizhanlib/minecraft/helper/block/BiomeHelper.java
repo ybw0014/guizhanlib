@@ -1,4 +1,4 @@
-package net.guizhanss.minecraft.guizhanlib.minecraft.helper;
+package net.guizhanss.minecraft.guizhanlib.minecraft.helper.block;
 
 import lombok.experimental.UtilityClass;
 import net.guizhanss.minecraft.guizhanlib.minecraft.LanguageHelper;
