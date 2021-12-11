@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * 冷却
+ * 该类提供冷却时间相关功能
  *
  * @param <K> 冷却键的类型
  * @author ybw0014
@@ -13,6 +13,9 @@ import java.util.Optional;
 public class Cooldown<K> {
     private final Map<K, Long> cdMap; // 重置时间
 
+    /**
+     * 构建函数
+     */
     public Cooldown() {
         this.cdMap = new HashMap<>();
     }

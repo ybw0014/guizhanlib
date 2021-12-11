@@ -1,12 +1,15 @@
 package net.guizhanss.minecraft.guizhanlib.language;
 
+import lombok.experimental.UtilityClass;
+
 import javax.annotation.Nonnull;
 
 /**
- * 仅根据布尔值输出内容的所有方法
+ * 布尔值(Boolean)相关的中文
  *
  * @author ybw0014
  */
+@UtilityClass
 public class Boolean {
     /**
      * 根据提供的布尔值返回"是"或"否"

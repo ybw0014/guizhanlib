@@ -13,8 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
- * 语言助手
- * 从语言文件中加载内容
+ * 从Minecraft的语言文件中获取内容
  *
  * @author ybw0014
  */

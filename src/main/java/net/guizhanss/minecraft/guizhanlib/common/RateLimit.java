@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * 频率限制
+ * 该类提供频率限制相关功能
  *
  * @param <K> 频率键的类型
  * @author ybw0014
