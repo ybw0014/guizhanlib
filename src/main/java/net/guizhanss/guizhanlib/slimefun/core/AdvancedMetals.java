@@ -1,5 +1,7 @@
 package net.guizhanss.guizhanlib.slimefun.core;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.StringUtil;
 
@@ -15,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 public enum AdvancedMetals {
     STEEL("Steel", "钢"),
-    BRONZE_INGOT("Bronze", "青铜"),
+    BRONZE("Bronze", "青铜"),
     DURALUMIN("Duralumin", "硬铝"),
     BILLON("Billon", "银铜合金"),
     BRASS("Brass", "黄铜"),
@@ -26,19 +28,31 @@ public enum AdvancedMetals {
     DAMASCUS_STEEL("Damascus Steel", "大马士革钢"),
     HARDENED_METAL("Hardened Metal", "硬化金属"),
     REINFORCED_ALLOY("Reinforced Alloy", "强化合金"),
-    FERROSILICON("Ferrosilicon", "硅铁"),
-    GILDED_IRON("Gilded Iron", "镀金铁"),
-    REDSTONE_ALLOY("Redstone Alloy", "红石合金"),
+    FERROSILICON("Ferrosilicon", "硅铁", "FERROSILICON"),
+    GILDED_IRON("Gilded Iron", "镀金铁", "GILDED_IRON"),
+    REDSTONE_ALLOY("Redstone Alloy", "红石合金", "REDSTONE_ALLOY"),
     NICKEL("Nickel", "镍"),
     COBALT("Cobalt", "钴");
 
     private final @Getter String english;
     private final @Getter String chinese;
+    /**
+     * 该合金锭的ID
+     */
+    private final @Getter String slimefunId;
+
+    @ParametersAreNonnullByDefault
+    AdvancedMetals(String english, String chinese, String slimefunId) {
+        this.english = english;
+        this.chinese = chinese;
+        this.slimefunId = slimefunId;
+    }
 
     @ParametersAreNonnullByDefault
     AdvancedMetals(String english, String chinese) {
         this.english = english;
         this.chinese = chinese;
+        this.slimefunId = StringUtil.dehumanize(english) + "_INGOT";
     }
 
     @Override
