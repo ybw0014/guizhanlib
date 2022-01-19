@@ -1,14 +1,16 @@
 package net.guizhanss.guizhanlib.updater;
 
-import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.logging.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+
+import lombok.Getter;
 
 /**
  * 自动更新，从构建站(builds.guizhanss.net)获取最新版本
@@ -91,6 +93,23 @@ public class GuizhanBuildsUpdater {
      */
     public @Nonnull Logger getLogger() {
         return plugin.getLogger();
+    }
+
+    /**
+     * 获取标准构建文件名
+     * @return 构建文件名
+     */
+    public @Nonnull String getTargetFilename() {
+        return MessageFormat.format("{0}-{1}.jar", plugin.getName(), plugin.getDescription().getVersion());
+    }
+
+
+    /**
+     * 获取构建文件URL
+     * @return 构建文件URL
+     */
+    public @Nonnull String getTargetUrl(String target) {
+        return MessageFormat.format("https://builds.guizhanss.net/f/{0}/{1}/{2}/{3}", user, repo, branch, target);
     }
 
     /**
