@@ -32,7 +32,7 @@ public class GuizhanBuildsUpdater {
      * @param checkOnly 是否仅检查而不下载更新
      */
     @ParametersAreNonnullByDefault
-    GuizhanBuildsUpdater(Plugin plugin, File file, String user, String repo, String branch, boolean checkOnly) {
+    public GuizhanBuildsUpdater(Plugin plugin, File file, String user, String repo, String branch, boolean checkOnly) {
         this.plugin = plugin;
         this.file = file;
         this.user = user;

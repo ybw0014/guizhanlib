@@ -1,6 +1,5 @@
 package net.guizhanss.guizhanlib.updater;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.guizhanss.guizhanlib.utils.JsonUtil;
 import org.bukkit.plugin.Plugin;
@@ -39,6 +38,8 @@ public class UpdaterTask implements Runnable {
             plugin.getLogger().log(Level.SEVERE, "无法获取版本格式信息，可能是自动更新模块没有配置正确");
             return;
         }
+
+        plugin.getLogger().log(Level.INFO, format);
     }
 
     private @Nullable String getVersionFormat() {
