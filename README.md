@@ -1,6 +1,6 @@
 # GuizhanLib
 
-[![Jitpack 状态](https://jitpack.io/v/net.guizhanss/GuizhanLib.svg)](https://jitpack.io/#ybw0014/GuizhanLib)
+[![Jitpack 状态](https://jitpack.io/v/net.guizhanss/GuizhanLib.svg)](https://jitpack.io/#net.guizhanss/GuizhanLib)
 
 一个可用于汉化插件的库。
 
@@ -78,6 +78,10 @@
 ```
 
 ## 更新日志
+
+### 0.5.0
+
+* 加入自动更新模块
 
 ### 0.4.0
 
