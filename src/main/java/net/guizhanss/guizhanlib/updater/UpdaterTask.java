@@ -16,6 +16,8 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UpdaterTask implements Runnable {
 
@@ -35,26 +37,36 @@ public class UpdaterTask implements Runnable {
     public void run() {
         String format = getVersionFormat();
         if (format == null) {
-            plugin.getLogger().log(Level.SEVERE, "无法获取版本格式信息，可能是自动更新模块没有配置正确");
+            logger.log(Level.SEVERE, "无法获取版本格式信息，可能是自动更新模块没有配置正确");
             return;
         }
 
-        plugin.getLogger().log(Level.INFO, format);
+        checkVersion(format);
     }
 
     private @Nullable String getVersionFormat() {
         try {
             URL repos = new URL(updater.getRepos());
-            JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
+            JsonObject reposJson = JsonUtil.parse(fetch(repos));
             if (!reposJson.has(updater.getRepoKey())) {
                 return null;
             }
 
-            return reposJson.get(updater.getRepoKey()).toString();
+            JsonObject repo = (JsonObject) reposJson.get(updater.getRepoKey());
+            return ((JsonObject) repo.get("options.target.version")).getAsString();
         } catch (MalformedURLException x) {
-            plugin.getLogger().log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
+            logger.log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
             return null;
         }
+    }
+
+    private void checkVersion(String format) {
+        String regex = format.replace("{version}", "\\d{1,6}")
+            .replace("{git_commit}", "\\s+([a-z0-9]{7})");
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m = pattern.matcher(plugin.getDescription().getVersion());
+        logger.log(Level.INFO, m.matches() ? "版本匹配" : "版本不匹配");
+
     }
 
     private @Nullable String fetch(@Nonnull URL url) {
@@ -79,7 +91,7 @@ public class UpdaterTask implements Runnable {
 
             return content.toString();
         } catch (IOException | NullPointerException e) {
-            plugin.getLogger().log(Level.WARNING, "无法从构建站获取更新信息", e);
+            logger.log(Level.WARNING, "无法从构建站获取更新信息", e);
             return null;
         }
     }
