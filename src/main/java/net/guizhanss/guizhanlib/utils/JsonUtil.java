@@ -16,7 +16,7 @@ public class JsonUtil {
      * @param json 需要进行解析的字符串
      * @return 解析后的 {@link JsonObject}
      */
-    public static JsonObject parse(String json) {
-        return (JsonObject) new JsonParser().parse(json);
+    public static JsonElement parse(String json) {
+        return new JsonParser().parse(json);
     }
 }

@@ -45,12 +45,12 @@ public class UpdaterTask implements Runnable {
     private @Nullable String getVersionFormat() {
         try {
             URL repos = new URL(updater.getRepos());
-            JsonObject reposJson = JsonUtil.parse(fetch(repos));
+            JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
             if (!reposJson.has(updater.getRepoKey())) {
                 return null;
             }
 
-            return reposJson.get(updater.getRepoKey()).getAsString();
+            return reposJson.get(updater.getRepoKey()).toString();
         } catch (MalformedURLException x) {
             plugin.getLogger().log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
             return null;
