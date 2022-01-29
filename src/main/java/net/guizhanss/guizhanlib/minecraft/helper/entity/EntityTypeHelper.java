@@ -44,4 +44,18 @@ public class EntityTypeHelper {
 
         return "entity.minecraft." + entityType.toString().toLowerCase();
     }
+
+    /**
+     * 根据给定的实体类型字符串返回中文名称
+     * @param entityType 实体类型的{@link String}格式
+     * @return 实体类型的中文名称，如果获取失败则返回对应的键名
+     */
+    public static @Nonnull String getNameByString(@Nonnull String entityType) {
+        try {
+            EntityType type = EntityType.valueOf(entityType);
+            return getName(type);
+        } catch (IllegalArgumentException ex) {
+            return "";
+        }
+    }
 }

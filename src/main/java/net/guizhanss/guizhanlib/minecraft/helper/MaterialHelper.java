@@ -37,4 +37,18 @@ public class MaterialHelper {
             + mat.getKey().getNamespace() + "."
             + mat.getKey().getKey();
     }
+
+    /**
+     * 根据给定的材料字符串返回中文名称
+     * @param material 材料的{@link String}格式
+     * @return 物品材料的中文名称，如果获取失败则返回对应的键名
+     */
+    public static @Nonnull String getNameByString(@Nonnull String material) {
+        try {
+            Material mat = Material.valueOf(material);
+            return getName(mat);
+        } catch (IllegalArgumentException ex) {
+            return "";
+        }
+    }
 }
