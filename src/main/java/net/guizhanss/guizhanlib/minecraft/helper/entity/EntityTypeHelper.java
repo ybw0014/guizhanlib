@@ -38,11 +38,9 @@ public class EntityTypeHelper {
      */
     public static @Nonnull String getKey(@Nonnull EntityType entityType) {
         Validate.notNull(entityType, "实体类型不能为空");
+        Validate.isTrue(entityType != EntityType.UNKNOWN, "实体类型不能为无效类型");
 
-        if (entityType == EntityType.SNOWMAN)
-            return "entity.minecraft.snow_golem";
-
-        return "entity.minecraft." + entityType.toString().toLowerCase();
+        return "entity.minecraft." + entityType.getName().toLowerCase();
     }
 
     /**

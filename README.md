@@ -79,6 +79,10 @@
 
 ## 更新日志
 
+### 0.5.2
+
+* 修复`EntityTypeHelper`无法获取部分生物名称的问题
+
 ### 0.5.1
 
 * 为`MaterialHelper`以及`EntityTypeHelper`添加字符串获取中文的方法
