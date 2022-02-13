@@ -79,6 +79,10 @@
 
 ## 更新日志
 
+### 0.5.3
+
+* `JsonUtil`增加`parse(BufferedReader)`方法
+
 ### 0.5.2
 
 * 修复`EntityTypeHelper`无法获取部分生物名称的问题

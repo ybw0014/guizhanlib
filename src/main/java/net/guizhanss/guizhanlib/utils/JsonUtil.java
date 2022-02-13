@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
 
+import java.io.BufferedReader;
+
 /**
  * Json 解析工具包
  * @author ybw0014
@@ -18,6 +20,10 @@ public class JsonUtil {
      */
     public static JsonElement parse(String json) {
         return new JsonParser().parse(json);
+    }
+
+    public static JsonElement parse(BufferedReader reader) {
+        return new JsonParser().parse(reader);
     }
 
     /**
