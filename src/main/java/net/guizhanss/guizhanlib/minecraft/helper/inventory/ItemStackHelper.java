@@ -20,7 +20,8 @@ import javax.annotation.Nonnull;
 @UtilityClass
 public class ItemStackHelper {
     /**
-     * 返回物品({@link ItemStack})的显示名称
+     * 返回物品({@link ItemStack})的显示名称,
+     * 如果无显示名称则返回中文名称
      *
      * @param item {@link ItemStack} 物品
      * @return 物品的显示名称

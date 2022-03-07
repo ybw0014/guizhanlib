@@ -2,6 +2,7 @@ package net.guizhanss.guizhanlib.minecraft.helper;
 
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
+import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
 import org.bukkit.DyeColor;
 
@@ -34,5 +35,19 @@ public class DyeColorHelper {
         Validate.notNull(dyeColor, "染料颜色不能为空");
 
         return "color.minecraft." + dyeColor.toString().toLowerCase();
+    }
+
+    /**
+     * 根据给定的染料颜色字符串返回中文名称
+     * @param dyeColor 染料颜色的{@link String}格式
+     * @return 染料颜色的中文名称，如果获取失败则返回对应的键名
+     */
+    public static @Nonnull String getNameByString(@Nonnull String dyeColor) {
+        try {
+            DyeColor type = DyeColor.valueOf(StringUtil.dehumanize(dyeColor));
+            return getName(type);
+        } catch (IllegalArgumentException ex) {
+            return "";
+        }
     }
 }

@@ -79,6 +79,10 @@
 
 ## 更新日志
 
+### 0.5.4
+
+* 为`DyeColorHelper`添加字符串获取中文的方法
+
 ### 0.5.3
 
 * `JsonUtil`增加`parse(BufferedReader)`方法
