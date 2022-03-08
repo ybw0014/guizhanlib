@@ -45,7 +45,7 @@ jobs:
           changelog=" - ${changelog//$'\r'/'%0D'}"
           echo "$changelog"
           echo ::set-output name=changelog::$changelog
-      - uses: madhead/semver-utils@1.4.3
+      - uses: madhead/semver-utils@1.6.0
         id: comparison
         with:
           version: ${{ steps.run.outputs.new-version }}
