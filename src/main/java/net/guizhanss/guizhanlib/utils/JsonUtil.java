@@ -7,6 +7,8 @@ import lombok.experimental.UtilityClass;
 
 import java.io.BufferedReader;
 
+import javax.annotation.Nonnull;
+
 /**
  * Json 解析工具包
  * @author ybw0014
@@ -18,11 +20,11 @@ public class JsonUtil {
      * @param json 需要进行解析的字符串
      * @return 解析后的 {@link JsonElement}
      */
-    public static JsonElement parse(String json) {
+    public static @Nonnull JsonElement parse(@Nonnull String json) {
         return new JsonParser().parse(json);
     }
 
-    public static JsonElement parse(BufferedReader reader) {
+    public static @Nonnull JsonElement parse(@Nonnull BufferedReader reader) {
         return new JsonParser().parse(reader);
     }
 
@@ -37,10 +39,14 @@ public class JsonUtil {
         for (String element : seg) {
             if (root != null) {
                 JsonElement elem = root.get(element);
-                if (!elem.isJsonObject())
+                if (elem == null) {
+                    return null;
+                }
+                if (!elem.isJsonObject()) {
                     return elem;
-                else
+                } else {
                     root = elem.getAsJsonObject();
+                }
             } else {
                 return null;
             }
