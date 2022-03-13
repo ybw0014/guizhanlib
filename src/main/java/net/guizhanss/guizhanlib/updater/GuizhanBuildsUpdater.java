@@ -21,8 +21,11 @@ public class GuizhanBuildsUpdater {
     private final Plugin plugin;
     @Getter
     private final File file;
+    @Getter
     private final String user;
+    @Getter
     private final String repo;
+    @Getter
     private final String branch;
     private final boolean checkOnly;
 
@@ -67,7 +70,7 @@ public class GuizhanBuildsUpdater {
      * 获取构建站所有仓库列表(repos.json)地址
      * @return 仓库列表地址
      */
-    public @Nonnull String getRepos() {
+    public @Nonnull String getReposFileURL() {
         return "https://builds.guizhanss.net/repos.json";
     }
 
@@ -81,10 +84,11 @@ public class GuizhanBuildsUpdater {
 
     /**
      * 获取构建信息(builds.json)地址
+     * @param directory 工作目录
      * @return 构建信息地址
      */
-    public @Nonnull String getVersions() {
-        return MessageFormat.format("https://builds.guizhanss.net/f/{0}/{1}/{2}/builds.json", user, repo, branch);
+    public @Nonnull String getVersions(@Nonnull String directory) {
+        return MessageFormat.format("https://builds.guizhanss.net/f/{0}/builds.json", directory);
     }
 
     /**
@@ -106,10 +110,13 @@ public class GuizhanBuildsUpdater {
 
     /**
      * 获取构建文件URL
+     * @param directory 工作目录
+     * @param target 构建文件名
      * @return 构建文件URL
      */
-    public @Nonnull String getTargetUrl(String target) {
-        return MessageFormat.format("https://builds.guizhanss.net/f/{0}/{1}/{2}/{3}", user, repo, branch, target);
+    @ParametersAreNonnullByDefault
+    public @Nonnull String getTargetUrl(String directory, String target) {
+        return MessageFormat.format("https://builds.guizhanss.net/f/{0}/{1}", directory, target);
     }
 
     /**

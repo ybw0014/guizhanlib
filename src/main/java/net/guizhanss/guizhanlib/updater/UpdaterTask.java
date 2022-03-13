@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -33,6 +34,8 @@ public class UpdaterTask implements Runnable {
     private final File file;
     private final Logger logger;
 
+    private String workingDirectory;
+    private JsonObject repoInfo = null;
     private JsonObject updateInfo = null;
 
     UpdaterTask(GuizhanBuildsUpdater updater) {
@@ -44,6 +47,8 @@ public class UpdaterTask implements Runnable {
 
     @Override
     public void run() {
+        getRepoInfo();
+
         String format = getVersionFormat();
         if (format == null) {
             logger.log(Level.SEVERE, "无法获取版本格式信息，可能是自动更新模块没有配置正确");
@@ -59,23 +64,44 @@ public class UpdaterTask implements Runnable {
     }
 
     /**
+     * 获取仓库信息
+     */
+    private void getRepoInfo() {
+        try {
+            URL repos = new URL(updater.getReposFileURL());
+            JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
+
+            String key = updater.getRepoKey();
+            JsonElement repoInfo = null;
+            while (key != null) {
+                repoInfo = JsonUtil.getFromPath(reposJson, key);
+
+                if (repoInfo == null) {
+                    return;
+                }
+
+                if (JsonUtil.getFromPath((JsonObject) repoInfo, "type").getAsString().equals("redirect")) {
+                    key = JsonUtil.getFromPath((JsonObject) repoInfo, "options.repo").getAsString();
+                } else {
+                    key = null;
+                }
+            }
+
+            this.repoInfo = (JsonObject) repoInfo;
+        } catch (MalformedURLException ex) {
+            logger.log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
+        } catch (IllegalStateException ex) {
+            logger.log(Level.SEVERE, "构建站配置错误，无法获取版本格式信息", ex);
+        }
+    }
+
+    /**
      * 从构建站获取版本格式
      * @return 版本格式，null表示获取失败
      */
     private @Nullable String getVersionFormat() {
         try {
-            URL repos = new URL(updater.getRepos());
-            JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
-            JsonElement repo = JsonUtil.getFromPath(reposJson, updater.getRepoKey());
-
-            if (repo == null) {
-                return null;
-            }
-
-            return JsonUtil.getFromPath((JsonObject) repo, "options.target.version").getAsString();
-        } catch (MalformedURLException ex) {
-            logger.log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
-            return null;
+            return JsonUtil.getFromPath(repoInfo, "options.target.version").getAsString();
         } catch (IllegalStateException ex) {
             logger.log(Level.SEVERE, "构建站配置错误，无法获取版本格式信息", ex);
             return null;
@@ -103,7 +129,21 @@ public class UpdaterTask implements Runnable {
      */
     private boolean checkUpdate() {
         try {
-            URL buildsUrl = new URL(updater.getVersions());
+            // 获取工作目录
+            JsonElement customDir = JsonUtil.getFromPath(repoInfo, "options.target.customDir");
+            if (customDir != null) {
+                this.workingDirectory = customDir.getAsString();
+            } else {
+                this.workingDirectory = MessageFormat.format(
+                    "{0}/{1}/{2}",
+                    updater.getUser(),
+                    updater.getRepo(),
+                    updater.getBranch()
+                );
+            }
+
+            // 获取构建信息
+            URL buildsUrl = new URL(updater.getVersions(workingDirectory));
             JsonObject buildsJson = (JsonObject) JsonUtil.parse(fetch(buildsUrl));
             JsonArray builds = (JsonArray) JsonUtil.getFromPath(buildsJson, "builds");
 
@@ -140,7 +180,7 @@ public class UpdaterTask implements Runnable {
         logger.log(Level.INFO, "正在下载 {0}", targetFilename);
 
         try {
-            BufferedInputStream input = new BufferedInputStream(new URL(updater.getTargetUrl(targetFilename)).openStream());
+            BufferedInputStream input = new BufferedInputStream(new URL(updater.getTargetUrl(workingDirectory, targetFilename)).openStream());
             FileOutputStream output = new FileOutputStream(new File("plugins/" + plugin.getServer().getUpdateFolder(), file.getName()));
             byte[] data = new byte[1024];
             int read;
@@ -166,8 +206,9 @@ public class UpdaterTask implements Runnable {
      * @return 所有内容 {@link String}
      */
     private @Nullable String fetch(@Nonnull URL url) {
-        StringBuilder content = null;
         try {
+            StringBuilder content = new StringBuilder();
+
             URLConnection connection = url.openConnection();
             connection.setConnectTimeout(10_000);
             connection.addRequestProperty("User-Agent", "Guizhan Updater");
@@ -176,11 +217,7 @@ public class UpdaterTask implements Runnable {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                 String line = reader.readLine();
                 while (line != null) {
-                    if (content == null) {
-                        content = new StringBuilder(line);
-                    } else {
-                        content.append(line);
-                    }
+                    content.append(line);
                     line = reader.readLine();
                 }
             }
