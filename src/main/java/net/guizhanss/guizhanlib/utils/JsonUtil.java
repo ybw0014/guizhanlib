@@ -4,10 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
-
-import java.io.BufferedReader;
+import org.apache.commons.lang.Validate;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.BufferedReader;
 
 /**
  * Json 解析工具包
@@ -21,10 +22,12 @@ public class JsonUtil {
      * @return 解析后的 {@link JsonElement}
      */
     public static @Nonnull JsonElement parse(@Nonnull String json) {
+        Validate.notNull(json, "JSON string should not be null");
         return new JsonParser().parse(json);
     }
 
     public static @Nonnull JsonElement parse(@Nonnull BufferedReader reader) {
+        Validate.notNull(reader, "reader should not be null");
         return new JsonParser().parse(reader);
     }
 
@@ -34,7 +37,10 @@ public class JsonUtil {
      * @param path 路径
      * @return 指定路径的值
      */
-    public static JsonElement getFromPath(JsonObject root, String path) {
+    public static @Nullable JsonElement getFromPath(@Nonnull JsonObject root, @Nonnull String path) {
+        Validate.notNull(root, "root object should not be null");
+        Validate.notNull(path, "path should not be null");
+
         String[] seg = path.split("\\.");
         for (String element : seg) {
             if (root != null) {

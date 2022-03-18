@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import com.google.gson.JsonArray;
@@ -131,6 +132,7 @@ public class UpdaterTask implements Runnable {
         try {
             // 获取工作目录
             JsonElement customDir = JsonUtil.getFromPath(repoInfo, "options.target.customDir");
+            Bukkit.getLogger().info(customDir != null ? customDir.getAsString() : "no custom dir shit");
             if (customDir != null) {
                 this.workingDirectory = customDir.getAsString();
             } else {

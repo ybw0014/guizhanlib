@@ -1,6 +1,7 @@
 package net.guizhanss.guizhanlib.utils;
 
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,8 @@ public class StringUtil {
      * @return 转化后的字符串
      */
     public static @Nonnull String humanize(@Nonnull String str) {
+        Validate.notNull(str, "the string should not be null");
+
         StringBuilder builder = new StringBuilder();
         str = str.toLowerCase(Locale.ROOT).replace(" ", "_");
         String[] segments = Pattern.compile("_").split(str);
@@ -36,6 +39,8 @@ public class StringUtil {
      * @return 转化后的字符串
      */
     public static @Nonnull String dehumanize(@Nonnull String str) {
+        Validate.notNull(str, "the string should not be null");
+
         return str.toUpperCase(Locale.ROOT)
             .replace(" ", "_")
             .replace("-", "_");
