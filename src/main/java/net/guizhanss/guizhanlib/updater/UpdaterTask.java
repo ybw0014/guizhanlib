@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import com.google.gson.JsonArray;
@@ -89,6 +88,19 @@ public class UpdaterTask implements Runnable {
             }
 
             this.repoInfo = (JsonObject) repoInfo;
+
+            // 获取工作目录
+            JsonElement customDir = JsonUtil.getFromPath(this.repoInfo, "options.customDir");
+            if (customDir != null) {
+                this.workingDirectory = customDir.getAsString();
+            } else {
+                this.workingDirectory = MessageFormat.format(
+                    "{0}/{1}/{2}",
+                    updater.getUser(),
+                    updater.getRepo(),
+                    updater.getBranch()
+                );
+            }
         } catch (MalformedURLException ex) {
             logger.log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
         } catch (IllegalStateException ex) {
@@ -130,20 +142,6 @@ public class UpdaterTask implements Runnable {
      */
     private boolean checkUpdate() {
         try {
-            // 获取工作目录
-            JsonElement customDir = JsonUtil.getFromPath(repoInfo, "options.customDir");
-            Bukkit.getLogger().info(customDir != null ? customDir.getAsString() : "no custom dir shit");
-            if (customDir != null) {
-                this.workingDirectory = customDir.getAsString();
-            } else {
-                this.workingDirectory = MessageFormat.format(
-                    "{0}/{1}/{2}",
-                    updater.getUser(),
-                    updater.getRepo(),
-                    updater.getBranch()
-                );
-            }
-
             // 获取构建信息
             URL buildsUrl = new URL(updater.getVersions(workingDirectory));
             JsonObject buildsJson = (JsonObject) JsonUtil.parse(fetch(buildsUrl));
@@ -160,7 +158,8 @@ public class UpdaterTask implements Runnable {
                 return false;
             }
 
-            boolean needUpdate = !updater.getTargetFilename().equals(build.get("target").getAsString());
+            String pluginName = JsonUtil.getFromPath(this.repoInfo, "options.target.name").getAsString();
+            boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, plugin.getDescription().getVersion()).equals(build.get("target").getAsString());
             if (!needUpdate) {
                 logger.log(Level.INFO, "{0} 已是最新版本，无需更新", plugin.getName());
                 return false;
@@ -169,6 +168,9 @@ public class UpdaterTask implements Runnable {
             return true;
         } catch (MalformedURLException ex) {
             logger.log(Level.SEVERE, "构建站URL地址错误，无法获取所有构建信息");
+            return false;
+        } catch (NullPointerException ex) {
+            logger.log(Level.SEVERE, "检查更新时出现错误");
             return false;
         }
     }
@@ -197,7 +199,7 @@ public class UpdaterTask implements Runnable {
 
         plugin.getLogger().log(Level.INFO, " ");
         plugin.getLogger().log(Level.INFO, "============== 自动更新 ==============");
-        plugin.getLogger().log(Level.INFO, "已更新 {0}", plugin.getName());
+        plugin.getLogger().log(Level.INFO, () -> String.format("已更新 {0} 至 {1}", plugin.getName(), updateInfo.get("id").getAsString()));
         plugin.getLogger().log(Level.INFO, "重启服务器以安装新版本");
         plugin.getLogger().log(Level.INFO, " ");
     }

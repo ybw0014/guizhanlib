@@ -1,16 +1,14 @@
 package net.guizhanss.guizhanlib.updater;
 
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.logging.Logger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-import lombok.Getter;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.logging.Logger;
 
 /**
  * 自动更新，从构建站(builds.guizhanss.net)获取最新版本
@@ -31,9 +29,10 @@ public class GuizhanBuildsUpdater {
 
     /**
      * 初始化
-     * @param user 用户
-     * @param repo 仓库
-     * @param branch 分支
+     *
+     * @param user      用户
+     * @param repo      仓库
+     * @param branch    分支
      * @param checkOnly 是否仅检查而不下载更新
      */
     @ParametersAreNonnullByDefault
@@ -68,59 +67,61 @@ public class GuizhanBuildsUpdater {
 
     /**
      * 获取构建站所有仓库列表(repos.json)地址
+     *
      * @return 仓库列表地址
      */
-    public @Nonnull String getReposFileURL() {
+    public @Nonnull
+    String getReposFileURL() {
         return "https://builds.guizhanss.net/repos.json";
     }
 
     /**
      * 获得仓库列表中查询使用的键名
+     *
      * @return 键名
      */
-    public @Nonnull String getRepoKey() {
+    public @Nonnull
+    String getRepoKey() {
         return MessageFormat.format("{0}/{1}:{2}", user, repo, branch);
     }
 
     /**
      * 获取构建信息(builds.json)地址
+     *
      * @param directory 工作目录
      * @return 构建信息地址
      */
-    public @Nonnull String getVersions(@Nonnull String directory) {
+    public @Nonnull
+    String getVersions(@Nonnull String directory) {
         return MessageFormat.format("https://builds.guizhanss.net/f/{0}/builds.json", directory);
     }
 
     /**
      * 获取日志组件
+     *
      * @return 日志组件
      */
-    public @Nonnull Logger getLogger() {
+    public @Nonnull
+    Logger getLogger() {
         return plugin.getLogger();
     }
 
     /**
-     * 获取标准构建文件名
-     * @return 构建文件名
-     */
-    public @Nonnull String getTargetFilename() {
-        return MessageFormat.format("{0}-{1}.jar", plugin.getName(), plugin.getDescription().getVersion());
-    }
-
-
-    /**
      * 获取构建文件URL
+     *
      * @param directory 工作目录
-     * @param target 构建文件名
+     * @param target    构建文件名
      * @return 构建文件URL
      */
     @ParametersAreNonnullByDefault
-    public @Nonnull String getTargetUrl(String directory, String target) {
+    public @Nonnull
+    String getTargetUrl(String directory, String target) {
         return MessageFormat.format("https://builds.guizhanss.net/f/{0}/{1}", directory, target);
     }
 
     /**
      * 运行异步任务
+     *
      * @param task 任务
      */
     private void scheduleAsyncUpdateTask(@Nonnull UpdaterTask task) {
