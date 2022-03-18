@@ -131,7 +131,7 @@ public class UpdaterTask implements Runnable {
     private boolean checkUpdate() {
         try {
             // 获取工作目录
-            JsonElement customDir = JsonUtil.getFromPath(repoInfo, "options.target.customDir");
+            JsonElement customDir = JsonUtil.getFromPath(repoInfo, "options.customDir");
             Bukkit.getLogger().info(customDir != null ? customDir.getAsString() : "no custom dir shit");
             if (customDir != null) {
                 this.workingDirectory = customDir.getAsString();
