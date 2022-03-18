@@ -181,7 +181,7 @@ public class UpdaterTask implements Runnable {
     private void update() {
         String targetFilename = updateInfo.get("target").getAsString();
         logger.log(Level.INFO, "{0} 需要进行更新", plugin.getName());
-        logger.log(Level.INFO, "正在下载 {0}", targetFilename);
+        logger.log(Level.INFO, () -> MessageFormat.format("正在下载 {0} #{1}", plugin.getName(), updateInfo.get("id").getAsString()));
 
         try {
             BufferedInputStream input = new BufferedInputStream(new URL(updater.getTargetUrl(workingDirectory, targetFilename)).openStream());
@@ -199,7 +199,7 @@ public class UpdaterTask implements Runnable {
 
         plugin.getLogger().log(Level.INFO, " ");
         plugin.getLogger().log(Level.INFO, "============== 自动更新 ==============");
-        plugin.getLogger().log(Level.INFO, () -> MessageFormat.format("已更新 {0} 至 {1}", plugin.getName(), updateInfo.get("id").getAsString()));
+        plugin.getLogger().log(Level.INFO, () -> MessageFormat.format("已更新 {0} 至 #{1}", plugin.getName(), updateInfo.get("id").getAsString()));
         plugin.getLogger().log(Level.INFO, "重启服务器以安装新版本");
         plugin.getLogger().log(Level.INFO, " ");
     }
