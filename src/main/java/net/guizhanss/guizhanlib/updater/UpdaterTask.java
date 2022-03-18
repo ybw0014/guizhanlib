@@ -199,7 +199,7 @@ public class UpdaterTask implements Runnable {
 
         plugin.getLogger().log(Level.INFO, " ");
         plugin.getLogger().log(Level.INFO, "============== 自动更新 ==============");
-        plugin.getLogger().log(Level.INFO, () -> String.format("已更新 {0} 至 {1}", plugin.getName(), updateInfo.get("id").getAsString()));
+        plugin.getLogger().log(Level.INFO, () -> MessageFormat.format("已更新 {0} 至 {1}", plugin.getName(), updateInfo.get("id").getAsString()));
         plugin.getLogger().log(Level.INFO, "重启服务器以安装新版本");
         plugin.getLogger().log(Level.INFO, " ");
     }
