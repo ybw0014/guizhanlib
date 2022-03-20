@@ -9,6 +9,7 @@ import org.apache.commons.lang.Validate;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
+import java.util.regex.Pattern;
 
 /**
  * Json 解析工具包
@@ -41,7 +42,7 @@ public class JsonUtil {
         Validate.notNull(root, "root object should not be null");
         Validate.notNull(path, "path should not be null");
 
-        String[] seg = path.split("\\.");
+        String[] seg = Pattern.compile("\\.").split(path);
         for (String element : seg) {
             if (root != null) {
                 JsonElement elem = root.get(element);
