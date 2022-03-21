@@ -9,7 +9,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 
 /**
- * 该类代表一个语言
+ * This class represents a {@link Language}, which holds the localization files.
  *
  * @author ybw0014
  *
