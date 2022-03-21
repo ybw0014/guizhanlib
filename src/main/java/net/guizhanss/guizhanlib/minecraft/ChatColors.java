@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * 聊天颜色类
+ * 聊天颜色
  * @author ybw0014
  *
  * @see ChatColor
