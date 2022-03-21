@@ -27,6 +27,12 @@ import com.google.gson.JsonObject;
 
 import net.guizhanss.guizhanlib.utils.JsonUtil;
 
+/**
+ * 自动更新任务
+ * 由 {@link GuizhanBuildsUpdater} 调用
+ *
+ * @author ybw0014
+ */
 public class UpdaterTask implements Runnable {
 
     private final GuizhanBuildsUpdater updater;
