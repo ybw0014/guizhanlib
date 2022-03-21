@@ -27,6 +27,11 @@ public class JsonUtil {
         return new JsonParser().parse(json);
     }
 
+    /**
+     * 解析JSON字符串 (来自 {@link BufferedReader})
+     * @param reader 需要进行解析的字符串
+     * @return 解析后的 {@link JsonElement}
+     */
     public static @Nonnull JsonElement parse(@Nonnull BufferedReader reader) {
         Validate.notNull(reader, "reader should not be null");
         return new JsonParser().parse(reader);
