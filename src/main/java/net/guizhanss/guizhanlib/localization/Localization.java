@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -118,6 +119,19 @@ public class Localization {
     public @Nonnull List<String> getStringList(@Nonnull String path) {
         List<String> localization = getStringListOrNull(path);
         return localization != null ? localization : Collections.singletonList(path);
+    }
+
+    /**
+     * Get localized {@link String} array from path
+     *
+     * @param path the localization path
+     *
+     * @return Localized {@link String} array
+     */
+    public @Nonnull String[] getStringArray(@Nonnull String path) {
+        List<String> localization = getStringList(path);
+        String[] stringArray = new String[localization.size()];
+        return localization.toArray(stringArray);
     }
 
     private @Nullable String getStringOrNull(@Nonnull String path) {
