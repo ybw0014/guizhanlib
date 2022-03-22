@@ -80,6 +80,7 @@ public class UpdaterTask implements Runnable {
             String key = updater.getRepoKey();
             JsonElement repoInfo = null;
             while (key != null) {
+                plugin.getLogger().log(Level.INFO, "0");
                 repoInfo = JsonUtil.getFromPath(reposJson, key);
                 plugin.getLogger().log(Level.INFO, "1");
 

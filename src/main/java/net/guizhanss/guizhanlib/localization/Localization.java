@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -96,11 +95,13 @@ public class Localization {
 
         File langFile = new File(langFolder, langFilename + ".yml");
         String resourcePath = langFolderName + "/" + langFilename + ".yml";
-        try {
-            plugin.saveResource(resourcePath, false);
-        } catch (IllegalArgumentException ex) {
-            plugin.getLogger().log(Level.SEVERE, "jar包中的语言文件 {0} 不存在!", resourcePath);
-            return;
+        if (!langFile.exists()) {
+            try {
+                plugin.saveResource(resourcePath, false);
+            } catch (IllegalArgumentException ex) {
+                plugin.getLogger().log(Level.SEVERE, "jar包中的语言文件 {0} 不存在!", resourcePath);
+                return;
+            }
         }
 
         languages.add(langFilename);
