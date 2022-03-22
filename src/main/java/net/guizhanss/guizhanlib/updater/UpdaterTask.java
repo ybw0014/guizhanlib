@@ -83,7 +83,7 @@ public class UpdaterTask implements Runnable {
                 repoInfo = JsonUtil.getFromPath(reposJson, key);
 
                 if (repoInfo == null) {
-                    return;
+                    break;
                 }
 
                 if (JsonUtil.getFromPath((JsonObject) repoInfo, "type").getAsString().equals("redirect")) {
@@ -91,6 +91,10 @@ public class UpdaterTask implements Runnable {
                 } else {
                     key = null;
                 }
+            }
+
+            if (repoInfo == null) {
+                throw new IllegalStateException("无法找到仓库信息");
             }
 
             this.repoInfo = (JsonObject) repoInfo;
@@ -108,9 +112,9 @@ public class UpdaterTask implements Runnable {
                 );
             }
         } catch (MalformedURLException ex) {
-            logger.log(Level.SEVERE, "构建站URL地址错误，无法获取版本格式信息");
+            logger.log(Level.SEVERE, "构建站URL地址错误，无法获取仓库配置信息");
         } catch (IllegalStateException ex) {
-            logger.log(Level.SEVERE, "构建站配置错误，无法获取版本格式信息", ex);
+            logger.log(Level.SEVERE, "构建站配置错误，无法获取仓库配置信息", ex);
         }
     }
 
