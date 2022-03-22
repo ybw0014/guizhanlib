@@ -74,10 +74,14 @@ public class UpdaterTask implements Runnable {
      */
     private void getRepoInfo() {
         try {
+            plugin.getLogger().log(Level.INFO, "-3");
             URL repos = new URL(updater.getReposFileURL());
+
+            plugin.getLogger().log(Level.INFO, "-2");
             JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
 
             String key = updater.getRepoKey();
+            plugin.getLogger().log(Level.INFO, "-1");
             JsonElement repoInfo = null;
             while (key != null) {
                 plugin.getLogger().log(Level.INFO, "0");
