@@ -20,6 +20,12 @@ public final class Language {
     private final String lang;
     private final FileConfiguration file;
 
+    /**
+     * Constructor
+     *
+     * @param lang the key of language
+     * @param file the {@link File} of language
+     */
     @ParametersAreNonnullByDefault
     public Language(String lang, File file) {
         Validate.notNull(lang, "语言名称不能为空");
@@ -34,10 +40,20 @@ public final class Language {
         this.file = YamlConfiguration.loadConfiguration(file);
     }
 
+    /**
+     * Get language name
+     *
+     * @return The language name
+     */
     public @Nonnull String getName() {
         return lang;
     }
 
+    /**
+     * Get language {@link File}
+     *
+     * @return the language {@link File}
+     */
     public FileConfiguration getFile() {
         return file;
     }

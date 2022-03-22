@@ -74,22 +74,15 @@ public class UpdaterTask implements Runnable {
      */
     private void getRepoInfo() {
         try {
-            plugin.getLogger().log(Level.INFO, "-3");
             URL repos = new URL(updater.getReposFileURL());
-
-            plugin.getLogger().log(Level.INFO, "-2");
             JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
 
             String key = updater.getRepoKey();
-            plugin.getLogger().log(Level.INFO, "-1");
             JsonElement repoInfo = null;
             while (key != null) {
-                plugin.getLogger().log(Level.INFO, "0");
                 repoInfo = JsonUtil.getFromPath(reposJson, key);
-                plugin.getLogger().log(Level.INFO, "1");
 
                 if (repoInfo == null) {
-                    plugin.getLogger().log(Level.INFO, "2");
                     break;
                 }
 
@@ -100,9 +93,7 @@ public class UpdaterTask implements Runnable {
                 }
             }
 
-            plugin.getLogger().log(Level.INFO, "3");
             if (repoInfo == null) {
-                plugin.getLogger().log(Level.INFO, "4");
                 throw new IllegalArgumentException("无法找到仓库信息");
             }
 
