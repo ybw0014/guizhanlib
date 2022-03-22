@@ -81,8 +81,10 @@ public class UpdaterTask implements Runnable {
             JsonElement repoInfo = null;
             while (key != null) {
                 repoInfo = JsonUtil.getFromPath(reposJson, key);
+                plugin.getLogger().log(Level.INFO, "1");
 
                 if (repoInfo == null) {
+                    plugin.getLogger().log(Level.INFO, "2");
                     break;
                 }
 
@@ -93,7 +95,9 @@ public class UpdaterTask implements Runnable {
                 }
             }
 
+            plugin.getLogger().log(Level.INFO, "3");
             if (repoInfo == null) {
+                plugin.getLogger().log(Level.INFO, "4");
                 throw new IllegalArgumentException("无法找到仓库信息");
             }
 
