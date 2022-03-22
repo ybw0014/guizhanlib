@@ -92,6 +92,7 @@ public class Localization {
         Validate.notNull(langFilename, "The language file name should not be null");
 
         File langFile = new File(langFolder, langFilename + ".yml");
+        plugin.saveResource(langFile.getPath(), false);
 
         languages.add(langFilename);
         langMap.put(langFilename, new Language(langFilename, langFile));
