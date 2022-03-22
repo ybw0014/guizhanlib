@@ -94,7 +94,7 @@ public class UpdaterTask implements Runnable {
             }
 
             if (repoInfo == null) {
-                throw new IllegalStateException("无法找到仓库信息");
+                throw new IllegalArgumentException("无法找到仓库信息");
             }
 
             this.repoInfo = (JsonObject) repoInfo;

@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * Localization service.
@@ -27,6 +28,7 @@ public class Localization {
     private boolean initialized = false;
 
     private final JavaPlugin plugin;
+    private final String langFolderName;
     private final File langFolder;
     private final List<String> languages = new LinkedList<>();
     private final Map<String, Language> langMap = new LinkedHashMap<>();
@@ -60,6 +62,7 @@ public class Localization {
         }
 
         // Check language folder
+        this.langFolderName = folderName;
         langFolder = new File(plugin.getDataFolder(), "/" + folderName);
         if (!langFolder.exists()) {
             langFolder.mkdir();
@@ -92,7 +95,13 @@ public class Localization {
         Validate.notNull(langFilename, "The language file name should not be null");
 
         File langFile = new File(langFolder, langFilename + ".yml");
-        plugin.saveResource(langFile.getPath(), false);
+        String resourcePath = langFolderName + "/" + langFilename + ".yml";
+        try {
+            plugin.saveResource(resourcePath, false);
+        } catch (IllegalArgumentException ex) {
+            plugin.getLogger().log(Level.SEVERE, "jar包中的语言文件 {0} 不存在!", resourcePath);
+            return;
+        }
 
         languages.add(langFilename);
         langMap.put(langFilename, new Language(langFilename, langFile));
