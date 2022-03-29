@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class Boolean {
+public class BooleanHelper {
     /**
      * 根据提供的布尔值返回"是"或"否"
      * @param value 一个布尔值
