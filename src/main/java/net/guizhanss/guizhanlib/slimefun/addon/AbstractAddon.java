@@ -1,7 +1,6 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import lombok.SneakyThrows;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import org.bstats.bukkit.Metrics;
@@ -41,7 +40,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private final String autoUpdateKey;
     private final String bugTrackerURL;
 
-    private Config config;
+    private AddonConfig config;
     private int metricsId;
     private Metrics metrics;
     private boolean loading;
@@ -172,7 +171,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
         // Check config.yml
         try {
-            config = new Config(this, "config.yml");
+            config = new AddonConfig("config.yml");
         } catch (RuntimeException e) {
             brokenConfig = true;
             e.printStackTrace();
@@ -182,6 +181,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         if (autoUpdateKey == null || autoUpdateKey.isEmpty()) {
             brokenConfig = true;
             handleException(new IllegalStateException("Invalid autoUpdateKey"));
+        }
+
+        if (!brokenConfig && !config.getDefaults().contains(autoUpdateKey, true)) {
+            brokenConfig = true;
+            handleException(new IllegalStateException("Auto update key missing from the default config!"));
         }
 
         // Check updater
@@ -342,38 +346,24 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * This method should not be called in {@link AbstractAddon}.
-     * Call {@link #getAddonConfig()} instead.
+     * Get the {@link AddonConfig}
+     *
+     * @return the {@link AddonConfig}
      */
     @Override
     @Nonnull
-    @SneakyThrows
     public final FileConfiguration getConfig() {
-        throw new IllegalAccessException("Call #getAddonConfig() instead to get Config file");
+        return config;
     }
 
     /**
-     * Get the {@link Config} of the addon
+     * Get the {@link AddonConfig}
      *
-     * @return the {@link Config} of the addon
+     * @return the {@link AddonConfig}
      */
     @Nonnull
-    public final Config getAddonConfig() {
+    public static AddonConfig getAddonConfig() {
         return getInstance().config;
-    }
-
-    /**
-     * Reload the {@link Config}
-     */
-    public final void reloadConfig() {
-        getAddonConfig().reload();
-    }
-
-    /**
-     * Save the {@link Config}
-     */
-    public final void saveConfig() {
-        getAddonConfig().save();
     }
 
     /**
