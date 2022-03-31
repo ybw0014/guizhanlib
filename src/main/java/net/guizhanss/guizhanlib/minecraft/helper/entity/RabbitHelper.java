@@ -21,12 +21,33 @@ public class RabbitHelper {
      * 所有兔子的类型
      */
     public enum Type {
+        /**
+         * 黑色
+         */
         BLACK(Rabbit.Type.BLACK, "Black", "黑色"),
+        /**
+         * 黑白相间
+         */
         BLACK_AND_WHITE(Rabbit.Type.BLACK_AND_WHITE, "Black And White", "黑白相间"),
+        /**
+         * 褐色
+         */
         BROWN(Rabbit.Type.BROWN, "Brown", "褐色"),
+        /**
+         * 金色
+         */
         GOLD(Rabbit.Type.GOLD, "Gold", "金色"),
+        /**
+         * 胡椒盐色
+         */
         SALT_AND_PEPPER(Rabbit.Type.SALT_AND_PEPPER, "Salt And Pepper", "胡椒盐色"),
+        /**
+         * 杀手兔
+         */
         THE_KILLER_BUNNY(Rabbit.Type.THE_KILLER_BUNNY, "The Killer Bunny", "杀手兔"),
+        /**
+         * 白色
+         */
         WHITE(Rabbit.Type.WHITE, "White", "白色");
 
         private final @Getter Rabbit.Type type;

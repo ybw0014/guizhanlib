@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import lombok.SneakyThrows;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -41,6 +42,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private final String bugTrackerURL;
 
     private Config config;
+    private int metricsId;
+    private Metrics metrics;
     private boolean loading;
     private boolean enabling;
     private boolean disabling;
@@ -192,6 +195,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             }
         }
 
+        // Setup metrics
+        if (metricsId != 0) {
+            metrics = new Metrics(this, metricsId);
+        }
+
         // Call enable()
         try {
             enable();
@@ -258,6 +266,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * Setup metrics module.
+     * Should be called in constructor.
+     *
+     * @param pluginId the plugin id in bStats
+     */
+    public void setupMetrics(int pluginId) {
+        metricsId = pluginId;
+    }
+
+    /**
      * Get an instance of extended class of {@link AbstractAddon}
      *
      * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
@@ -268,6 +286,15 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     @SuppressWarnings("unchecked")
     public static <T extends AbstractAddon> T getInstance() {
         return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
+    }
+
+    /**
+     * Get the {@link Metrics} module
+     *
+     * @return the {@link Metrics} module
+     */
+    public Metrics getMetrics() {
+        return metrics;
     }
 
     /**

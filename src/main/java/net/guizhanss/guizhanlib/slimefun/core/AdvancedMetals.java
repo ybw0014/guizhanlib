@@ -16,22 +16,73 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 public enum AdvancedMetals {
+    /**
+     * 钢
+     */
     STEEL("Steel", "钢"),
+    /**
+     * 青铜
+     */
     BRONZE("Bronze", "青铜"),
+    /**
+     * 硬铝
+     */
     DURALUMIN("Duralumin", "硬铝"),
+    /**
+     * 银铜合金
+     */
     BILLON("Billon", "银铜合金"),
+    /**
+     * 黄铜
+     */
     BRASS("Brass", "黄铜"),
+    /**
+     * 铝黄铜
+     */
     ALUMINUM_BRASS("Aluminum Brass", "铝黄铜"),
+    /**
+     * 铝青铜
+     */
     ALUMINUM_BRONZE("Aluminum Bronze", "铝青铜"),
+    /**
+     * 科林斯青铜
+     */
     CORINTHIAN_BRONZE("Corinthian Bronze", "科林斯青铜"),
+    /**
+     * 焊锡
+     */
     SOLDER("Solder", "焊锡"),
+    /**
+     * 大马士革钢
+     */
     DAMASCUS_STEEL("Damascus Steel", "大马士革钢"),
+    /**
+     * 硬化金属
+     */
     HARDENED_METAL("Hardened Metal", "硬化金属"),
+    /**
+     * 强化合金
+     */
     REINFORCED_ALLOY("Reinforced Alloy", "强化合金"),
+    /**
+     * 硅铁
+     */
     FERROSILICON("Ferrosilicon", "硅铁", "FERROSILICON"),
+    /**
+     * 镀金铁
+     */
     GILDED_IRON("Gilded Iron", "镀金铁", "GILDED_IRON"),
+    /**
+     * 红石合金
+     */
     REDSTONE_ALLOY("Redstone Alloy", "红石合金", "REDSTONE_ALLOY"),
+    /**
+     * 镍
+     */
     NICKEL("Nickel", "镍"),
+    /**
+     * 钴
+     */
     COBALT("Cobalt", "钴");
 
     private final @Getter String english;

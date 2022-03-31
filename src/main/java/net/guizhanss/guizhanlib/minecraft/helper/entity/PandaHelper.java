@@ -21,12 +21,33 @@ public class PandaHelper {
      * 所有熊猫基因
      */
     public enum Gene {
+        /**
+         * 好斗
+         */
         AGGRESSIVE(Panda.Gene.AGGRESSIVE, "Aggressive", "好斗"),
+        /**
+         * 棕色
+         */
         BROWN(Panda.Gene.BROWN, "Brown", "棕色"),
+        /**
+         * 懒惰
+         */
         LAZY(Panda.Gene.LAZY, "Lazy", "懒惰"),
+        /**
+         * 普通
+         */
         NORMAL(Panda.Gene.NORMAL, "Normal", "普通"),
+        /**
+         * 顽皮
+         */
         PLAYFUL(Panda.Gene.PLAYFUL, "Playful", "顽皮"),
+        /**
+         * 虚弱
+         */
         WEAK(Panda.Gene.WEAK, "Weak", "虚弱"),
+        /**
+         * 发愁
+         */
         WORRIED(Panda.Gene.WORRIED, "Worried", "发愁");
 
         private final @Getter Panda.Gene gene;
