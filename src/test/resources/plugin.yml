@@ -1,0 +1,4 @@
+name: MockAddon
+version: Testing
+main: net.guizhanss.guizhanlib.slimefun.addon.MockAddon
+depend: [Slimefun]
