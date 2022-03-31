@@ -21,16 +21,49 @@ public class CatHelper {
      * 所有猫的类型
      */
     public enum Type {
+        /**
+         * 黑猫
+         */
         ALL_BLACK(Cat.Type.ALL_BLACK, "Black", "黑猫"),
+        /**
+         * 西服猫
+         */
         BLACK(Cat.Type.BLACK, "Tuxedo", "西服猫"),
+        /**
+         * 英国短毛猫
+         */
         BRITISH_SHORTHAIR(Cat.Type.BRITISH_SHORTHAIR, "British Shorthair", "英国短毛猫"),
+        /**
+         * 花猫
+         */
         CALICO(Cat.Type.CALICO, "Calico", "花猫"),
+        /**
+         * Jellie
+         */
         JELLIE(Cat.Type.JELLIE, "Jellie", "Jellie"),
+        /**
+         * 波斯猫
+         */
         PERSIAN(Cat.Type.PERSIAN, "Persian", "波斯猫"),
+        /**
+         * 布偶猫
+         */
         RAGDOLL(Cat.Type.RAGDOLL, "Ragdoll", "布偶猫"),
+        /**
+         * 红虎斑猫
+         */
         RED(Cat.Type.RED, "Red", "红虎斑猫"),
+        /**
+         * 暹罗猫
+         */
         SIAMESE(Cat.Type.SIAMESE, "Siamese", "暹罗猫"),
+        /**
+         * 虎斑猫
+         */
         TABBY(Cat.Type.TABBY, "Tabby", "虎斑猫"),
+        /**
+         * 白猫
+         */
         WHITE(Cat.Type.WHITE, "Calico", "白猫");
 
         private final @Getter Cat.Type type;

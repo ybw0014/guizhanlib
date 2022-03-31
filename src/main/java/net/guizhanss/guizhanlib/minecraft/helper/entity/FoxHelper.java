@@ -21,7 +21,13 @@ public class FoxHelper {
      * 所有狐狸的类型
      */
     public enum Type {
+        /**
+         * 红色
+         */
         RED(Fox.Type.RED, "Red", "红色"),
+        /**
+         * 白色
+         */
         SNOW(Fox.Type.SNOW, "Snow", "白色");
 
         private final @Getter Fox.Type type;
