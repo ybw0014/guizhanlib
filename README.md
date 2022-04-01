@@ -79,6 +79,14 @@
 
 ## 更新日志
 
+### 0.8.0
+
+* 添加附属主类超类`AbstractAddon`
+* 对自动更新模块进行一些小更改
+* 添加`MenuBlock`
+* 添加`Scheduler`
+* 添加一些Javadoc
+
 ### 0.7.0
 
 * 添加多语言支持(`Localization`)
