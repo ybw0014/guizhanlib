@@ -35,8 +35,17 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public abstract class MenuBlock extends SlimefunItem {
 
-    public MenuBlock(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    /**
+     * Constructor of {@link MenuBlock}.
+     * Add events on break and place
+     *
+     * @param itemGroup the {@link ItemGroup} of this {@link MenuBlock}
+     * @param item the {@link SlimefunItemStack} of this {@link MenuBlock}
+     * @param recipeType the {@link RecipeType} of this {@link MenuBlock}
+     * @param recipe the recipe of this {@link MenuBlock}
+     */
+    public MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
 
         addItemHandler(
             new BlockBreakHandler(false, false) {

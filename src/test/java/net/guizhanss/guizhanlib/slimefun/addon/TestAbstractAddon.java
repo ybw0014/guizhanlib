@@ -2,6 +2,7 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ public class TestAbstractAddon {
     @BeforeAll
     public static void load() {
         server = MockBukkit.mock();
+        MockBukkit.load(Slimefun.class);
         addon = MockBukkit.load(MockAddon.class);
     }
 
@@ -37,12 +39,12 @@ public class TestAbstractAddon {
 
     @Test
     void testNotNullEnvironment() {
-        assertNotNull(MockAddon.getInstance().getEnvironment());
+        assertNotNull(addon.getEnvironment());
     }
 
     @Test
     void testNotNullConfig() {
-        assertNotNull(MockAddon.getInstance().getAddonConfig());
+        assertNotNull(addon.getConfig());
     }
 
     @Test

@@ -27,7 +27,6 @@ public class MockAddon extends AbstractAddon {
             "ybw0014", "GuizhanLib", "master", "auto-upadte",
             environment
         );
-        MockBukkit.load(Slimefun.class);
     }
 
     @Override
