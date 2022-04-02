@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
  * @author ybw0014
  */
 @UtilityClass
-public class ChatUtil {
+public final class ChatUtil {
     /**
      * 转换颜色代码
      * @param message 消息

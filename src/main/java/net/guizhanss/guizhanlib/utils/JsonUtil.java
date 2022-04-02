@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 @UtilityClass
-public class JsonUtil {
+public final class JsonUtil {
     /**
      * 解析JSON字符串
      * @param json 需要进行解析的字符串

@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 @UtilityClass
-public class StringUtil {
+public final class StringUtil {
     /**
      * 将字符串转化为可读形式
      * @param str 要转化的字符
