@@ -154,6 +154,29 @@ public enum MinecraftTag {
                 || type == Material.DIAMOND_HOE
                 || type == Material.NETHERITE_HOE;
         }
+    },
+
+    /**
+     * This includes all types of potions
+     */
+    POTION {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.POTION
+                || type == Material.SPLASH_POTION
+                || type == Material.LINGERING_POTION;
+        }
+    },
+
+    /**
+     * This includes all types of potions and tipped arrow
+     */
+    POTION_WITH_TIPPED_ARROW {
+        @Override
+        public boolean isTagged(Material type) {
+            return POTION.isTagged(type)
+                || type == Material.TIPPED_ARROW;
+        }
     };
 
     /**

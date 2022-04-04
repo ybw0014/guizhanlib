@@ -68,7 +68,9 @@ public class PandaHelper {
 
         /**
          * 根据熊猫基因返回对应的枚举
+         *
          * @param pandaGene {@link Panda.Gene} 熊猫基因
+         *
          * @return 对应的枚举
          */
         public static @Nonnull Gene fromGene(@Nonnull Panda.Gene pandaGene) {
@@ -102,10 +104,30 @@ public class PandaHelper {
 
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文
+     *
      * @param gene {@link Panda.Gene} 熊猫基因
+     *
      * @return 熊猫基因的中文
      */
     public static @Nonnull String getGene(@Nonnull Panda.Gene gene) {
         return Gene.fromGene(gene).getChinese();
+    }
+
+    /**
+     * 获取熊猫基因({@link Panda.Gene})的中文
+     *
+     * @param gene {@link String} 熊猫基因
+     *
+     * @return 熊猫基因的中文
+     */
+    public static @Nonnull String getGene(@Nonnull String gene) {
+        Validate.notNull(gene, "熊猫基因不能为空");
+
+        try {
+            Panda.Gene pandaGene = Panda.Gene.valueOf(gene);
+            return Gene.fromGene(pandaGene).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(gene);
+        }
     }
 }

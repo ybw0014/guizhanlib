@@ -68,7 +68,9 @@ public class RabbitHelper {
 
         /**
          * 根据兔子的类型返回对应的枚举
+         *
          * @param rabbitType {@link Rabbit.Type} 兔子的类型
+         *
          * @return 对应的枚举
          */
         public static @Nonnull Type fromType(@Nonnull Rabbit.Type rabbitType) {
@@ -84,7 +86,9 @@ public class RabbitHelper {
 
         /**
          * 根据英文返回对应的枚举
+         *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         public static @Nullable Type fromEnglish(@Nonnull String english) {
@@ -102,10 +106,30 @@ public class RabbitHelper {
 
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
      * @param type {@link Rabbit.Type} 兔子的类型
+     *
      * @return 兔子的类型的中文
      */
     public static @Nonnull String getType(@Nonnull Rabbit.Type type) {
         return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
+     * @param type {@link String} 兔子的类型
+     *
+     * @return 兔子的类型的中文
+     */
+    public static @Nonnull String getType(@Nonnull String type) {
+        Validate.notNull(type, "兔子的类型不能为空");
+
+        try {
+            Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);
+            return Type.fromType(rabbitType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
     }
 }

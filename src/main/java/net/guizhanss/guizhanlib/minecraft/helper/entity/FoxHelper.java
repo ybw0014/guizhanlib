@@ -48,7 +48,9 @@ public class FoxHelper {
 
         /**
          * 根据狐狸的类型返回对应的枚举
+         *
          * @param foxType {@link Fox.Type} 狐狸的类型
+         *
          * @return 对应的枚举
          */
         public static @Nonnull Type fromType(@Nonnull Fox.Type foxType) {
@@ -64,7 +66,9 @@ public class FoxHelper {
 
         /**
          * 根据英文返回对应的枚举
+         *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         public static @Nullable Type fromEnglish(@Nonnull String english) {
@@ -82,10 +86,30 @@ public class FoxHelper {
 
     /**
      * 获取狐狸的类型({@link Fox.Type})的中文
+     *
      * @param type {@link Fox.Type} 狐狸的类型
+     *
      * @return 狐狸的类型的中文
      */
     public static @Nonnull String getType(@Nonnull Fox.Type type) {
         return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取狐狸的类型({@link Fox.Type})的中文
+     *
+     * @param type {@link String} 狐狸的类型
+     *
+     * @return 狐狸的类型的中文
+     */
+    public static @Nonnull String getType(@Nonnull String type) {
+        Validate.notNull(type, "猫类型不能为空");
+
+        try {
+            Fox.Type foxType = Fox.Type.valueOf(type);
+            return Type.fromType(foxType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
     }
 }

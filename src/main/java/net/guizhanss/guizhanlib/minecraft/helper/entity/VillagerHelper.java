@@ -19,6 +19,7 @@ public class VillagerHelper {
      * 返回村民职业({@link Profession})的中文名
      *
      * @param profession {@link Profession} 村民职业
+     *
      * @return 村民职业的中文名称,如果获取失败则返回键名
      */
     public static @Nonnull String getProfessionName(@Nonnull Profession profession) {
@@ -29,11 +30,30 @@ public class VillagerHelper {
      * 获取村民职业({@link Profession})的键名
      *
      * @param profession {@link Profession} 村民职业
+     *
      * @return 村民职业的键名
      */
     public static @Nonnull String getProfessionKey(@Nonnull Profession profession) {
         Validate.notNull(profession, "村民职业不能为空");
 
         return "entity.minecraft.villager." + profession.toString().toLowerCase();
+    }
+
+
+    /**
+     * 返回村民职业({@link Profession})的中文名
+     *
+     * @param profession {@link String} 村民职业
+     * @return 村民职业的中文名称,如果获取失败则返回键名
+     */
+    public static @Nonnull String getProfessionName(@Nonnull String profession) {
+        Validate.notNull(profession, "村民职业不能为空");
+
+        try {
+            Profession villagerProfession = Profession.valueOf(profession);
+            return getProfessionName(villagerProfession);
+        } catch (IllegalArgumentException ex) {
+            return "";
+        }
     }
 }

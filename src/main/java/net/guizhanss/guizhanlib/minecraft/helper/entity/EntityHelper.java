@@ -17,6 +17,7 @@ public class EntityHelper {
      * 返回实体({@link Entity})的显示名称
      *
      * @param entity {@link Entity} 实体
+     *
      * @return 实体的显示名称
      */
     public static @Nonnull String getDisplayName(@Nonnull Entity entity) {
@@ -30,6 +31,7 @@ public class EntityHelper {
      * 返回实体({@link Entity})的中文名称
      *
      * @param entity {@link Entity} 实体
+     *
      * @return 实体的中文名称,如果获取失败则返回键名
      */
     public static @Nonnull String getName(@Nonnull Entity entity) {

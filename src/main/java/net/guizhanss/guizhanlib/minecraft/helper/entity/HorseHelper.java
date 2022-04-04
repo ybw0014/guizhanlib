@@ -47,7 +47,9 @@ public class HorseHelper {
 
         /**
          * 根据马的颜色返回对应的枚举
+         *
          * @param horseColor {@link Horse.Color} 马的颜色
+         *
          * @return 对应的枚举
          */
         public static @Nonnull Color fromColor(@Nonnull Horse.Color horseColor) {
@@ -63,7 +65,9 @@ public class HorseHelper {
 
         /**
          * 根据英文返回对应的枚举
+         *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         public static @Nullable Color fromEnglish(@Nonnull String english) {
@@ -106,7 +110,9 @@ public class HorseHelper {
 
         /**
          * 根据马的样式返回对应的枚举
+         *
          * @param horseStyle {@link Horse.Style} 马的样式
+         *
          * @return 对应的枚举
          */
         public static @Nonnull Style fromStyle(@Nonnull Horse.Style horseStyle) {
@@ -122,7 +128,9 @@ public class HorseHelper {
 
         /**
          * 根据英文返回对应的枚举
+         *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         public static @Nullable Style fromEnglish(@Nonnull String english) {
@@ -140,7 +148,9 @@ public class HorseHelper {
 
     /**
      * 获取马的颜色({@link Horse.Color})的中文
+     *
      * @param color {@link Horse.Color} 马的颜色
+     *
      * @return 马的颜色的中文
      */
     public static @Nonnull String getColor(@Nonnull Horse.Color color) {
@@ -149,10 +159,48 @@ public class HorseHelper {
 
     /**
      * 获取马的样式({@link Horse.Style})的中文
+     *
      * @param style {@link Horse.Style} 马的样式
+     *
      * @return 马的样式的中文
      */
     public static @Nonnull String getStyle(@Nonnull Horse.Style style) {
         return Style.fromStyle(style).getChinese();
+    }
+
+    /**
+     * 获取马的颜色({@link Horse.Color})的中文
+     *
+     * @param color {@link String} 马的颜色
+     *
+     * @return 马的颜色的中文
+     */
+    public static @Nonnull String getColor(@Nonnull String color) {
+        Validate.notNull(color, "马的颜色不能为空");
+
+        try {
+            Horse.Color horseColor = Horse.Color.valueOf(color);
+            return Color.fromColor(horseColor).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(color);
+        }
+    }
+
+    /**
+     * 获取马的样式({@link Horse.Style})的中文
+     *
+     * @param style {@link String} 马的样式
+     *
+     * @return 马的样式的中文
+     */
+    public static @Nonnull String getStyle(@Nonnull String style) {
+        Validate.notNull(style, "马的样式不能为空");
+
+        try {
+            Horse.Style horseColor = Horse.Style.valueOf(style);
+            return Style.fromStyle(horseColor).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(style);
+        }
     }
 }

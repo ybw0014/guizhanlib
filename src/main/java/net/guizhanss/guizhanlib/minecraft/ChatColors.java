@@ -11,6 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * 聊天颜色
+ *
  * @author ybw0014
  *
  * @see ChatColor
@@ -129,6 +130,7 @@ public enum ChatColors {
 
     /**
      * 获取中文名称
+     *
      * @return 中文名称
      */
     @Override
@@ -138,6 +140,7 @@ public enum ChatColors {
 
     /**
      * 获取带颜色代码的颜色名
+     *
      * @return 带颜色代码的颜色名
      */
     public String toStringWithColor() {
@@ -147,7 +150,9 @@ public enum ChatColors {
 
     /**
      * 根据聊天颜色返回对应的枚举
+     *
      * @param chatColor {@link ChatColor} 聊天颜色
+     *
      * @return 对应的枚举
      */
     public static @Nonnull ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
@@ -163,7 +168,9 @@ public enum ChatColors {
 
     /**
      * 根据英文返回对应的枚举
+     *
      * @param english {@link String} 提供的英文
+     *
      * @return 对应的枚举
      */
     public static @Nullable ChatColors fromEnglish(@Nonnull String english) {
