@@ -3,6 +3,8 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import lombok.SneakyThrows;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
+import net.guizhanss.guizhanlib.utils.ChatUtil;
+import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,10 +13,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.logging.Level;
 
 /**
  * An abstract {@link SlimefunAddon} class that contains
@@ -384,5 +388,21 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     @Nonnull
     public static NamespacedKey createKey(String key) {
         return new NamespacedKey(getInstance(), key);
+    }
+
+    /**
+     * Call the logger to log a message with arguments.
+     * ChatColor code '&' will be translated automatically,
+     * and message is dealt with {@see MessageFormat#format()}.
+     *
+     * @param level the log {@link Level}
+     * @param message the message
+     * @param args the arguments with in
+     */
+    public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
+        Validate.notNull(level, "log level should not be null");
+        Validate.notNull(message, "log message should not be null");
+
+        getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
     }
 }
