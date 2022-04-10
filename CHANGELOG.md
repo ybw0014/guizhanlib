@@ -1,5 +1,11 @@
 # 更新日志
 
+## 0.8.3
+
+* `AbstractAddon`类添加了logger助手
+* 添加了背包工具包`InventoryUtil`
+* 添加了随机工具包`RandomUtil`
+
 ## 0.8.2
 
 * 为一些语言助手添加了字符串获取的方法
