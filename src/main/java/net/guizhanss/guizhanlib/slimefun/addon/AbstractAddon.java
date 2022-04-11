@@ -8,6 +8,7 @@ import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -377,6 +378,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      */
     @Override
     public final void saveDefaultConfig() {
+    }
+
+    /**
+     * Get the {@link Command} of {@link AbstractAddon}.
+     *
+     * @return the {@link Command} of {@link AbstractAddon}.
+     */
+    public static @Nonnull Command getPluginCommand(@Nonnull String command) {
+        Validate.notNull(command, "command should not be null");
+        return Objects.requireNonNull(getInstance().getCommand(command));
     }
 
     /**
