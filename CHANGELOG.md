@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.8.4
+
+* `AbstractAddon`添加使用`ConsoleCommandSender`发送消息
+
 ## 0.8.3
 
 * `AbstractAddon`类添加了logger助手
