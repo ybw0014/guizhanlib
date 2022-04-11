@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.language;
+package net.guizhanss.guizhanlib.java;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,11 +1,11 @@
-package net.guizhanss.guizhanlib.language;
+package net.guizhanss.guizhanlib.java;
 
 import lombok.experimental.UtilityClass;
 
 import javax.annotation.Nonnull;
 
 /**
- * 布尔值(Boolean)相关的中文
+ * 布尔值({@link Boolean})助手
  *
  * @author ybw0014
  */
