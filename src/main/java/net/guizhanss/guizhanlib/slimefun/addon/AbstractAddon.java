@@ -1,14 +1,13 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import lombok.SneakyThrows;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
 import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.bukkit.command.Command;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -381,11 +380,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Get the {@link Command} of {@link AbstractAddon}.
+     * Get the {@link PluginCommand} of {@link AbstractAddon}.
      *
-     * @return the {@link Command} of {@link AbstractAddon}.
+     * @return the {@link PluginCommand} of {@link AbstractAddon}.
      */
-    public static @Nonnull Command getPluginCommand(@Nonnull String command) {
+    public static @Nonnull PluginCommand getPluginCommand(@Nonnull String command) {
         Validate.notNull(command, "command should not be null");
         return Objects.requireNonNull(getInstance().getCommand(command));
     }
