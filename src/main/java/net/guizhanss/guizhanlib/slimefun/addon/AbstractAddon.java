@@ -6,6 +6,7 @@ import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
 import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -393,16 +394,34 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Call the logger to log a message with arguments.
      * ChatColor code '&' will be translated automatically,
-     * and message is dealt with {@see MessageFormat#format()}.
+     * and message is dealt with MessageFormat#format().
      *
      * @param level the log {@link Level}
      * @param message the message
      * @param args the arguments with in
+     *
+     * @see MessageFormat
      */
     public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
         Validate.notNull(level, "log level should not be null");
         Validate.notNull(message, "log message should not be null");
 
         getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
+    }
+
+    /**
+     * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
+     * ChatColor code '&' will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param message the message
+     * @param args the arguments with in
+     *
+     * @see MessageFormat
+     */
+    public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
+        Validate.notNull(message, "log message should not be null");
+
+        Bukkit.getConsoleSender().sendMessage(ChatUtil.color(MessageFormat.format(message, args)));
     }
 }
