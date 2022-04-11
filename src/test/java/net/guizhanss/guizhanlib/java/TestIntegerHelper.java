@@ -9,5 +9,7 @@ public class TestIntegerHelper {
     void testParseInt() {
         assertEquals(514, IntegerHelper.parseInt("114514", 114, 514));
         assertEquals(1919, IntegerHelper.parseInt("1919", 810, 114514));
+        assertEquals(114, IntegerHelper.parseInt("", 114, 514));
+        assertEquals(114, IntegerHelper.parseInt("asdad", 114, 514));
     }
 }
