@@ -403,7 +403,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     /**
      * Call the logger to log a message with arguments.
-     * ChatColor code '&' will be translated automatically,
+     * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
      * @param level the log {@link Level}
@@ -421,7 +421,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     /**
      * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
-     * ChatColor code '&' will be translated automatically,
+     * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
      * @param message the message
