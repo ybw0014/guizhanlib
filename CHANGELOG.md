@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.8.5
+
+* `AbstractAddon`的`sendConsole`方法现在会带插件名称了
+
 ## 0.8.4
 
 * `AbstractAddon`添加使用`ConsoleCommandSender`发送消息

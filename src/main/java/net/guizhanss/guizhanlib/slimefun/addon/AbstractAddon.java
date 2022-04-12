@@ -432,6 +432,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
         Validate.notNull(message, "log message should not be null");
 
-        Bukkit.getConsoleSender().sendMessage(ChatUtil.color(MessageFormat.format(message, args)));
+        Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
 }
