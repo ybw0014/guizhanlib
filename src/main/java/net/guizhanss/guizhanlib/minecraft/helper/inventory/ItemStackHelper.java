@@ -50,7 +50,7 @@ public class ItemStackHelper {
 
         if (MinecraftTag.POTION_WITH_TIPPED_ARROW.isTagged(item)) {
             String potion = ((PotionMeta) item.getItemMeta()).getBasePotionData().getType().toString().toLowerCase();
-            return LanguageHelper.getLang(MaterialHelper.getKey(item.getType()) + ".effect." + potion);
+            return LanguageHelper.getLangOrKey(MaterialHelper.getKey(item.getType()) + ".effect." + potion);
         } else if (item.getType() == Material.PLAYER_HEAD || item.getType() == Material.PLAYER_WALL_HEAD) {
             return getPlayerSkullName(item);
         }
@@ -70,10 +70,10 @@ public class ItemStackHelper {
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         if (meta != null && meta.hasOwner()) {
-            return String.format(LanguageHelper.getLang("block.minecraft.player_head.named"),
+            return String.format(LanguageHelper.getLangOrKey("block.minecraft.player_head.named"),
                 meta.getOwningPlayer().getName());
         } else {
-            return LanguageHelper.getLang("block.minecraft.player_head");
+            return LanguageHelper.getLangOrKey("block.minecraft.player_head");
         }
     }
 }

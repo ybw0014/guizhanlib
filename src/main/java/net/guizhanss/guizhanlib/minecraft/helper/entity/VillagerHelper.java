@@ -23,7 +23,7 @@ public class VillagerHelper {
      * @return 村民职业的中文名称,如果获取失败则返回键名
      */
     public static @Nonnull String getProfessionName(@Nonnull Profession profession) {
-        return LanguageHelper.getLang(getProfessionKey(profession));
+        return LanguageHelper.getLangOrKey(getProfessionKey(profession));
     }
 
     /**

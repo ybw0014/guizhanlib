@@ -22,7 +22,7 @@ public class MaterialHelper {
      * @return 材料的中文名称，如果获取失败则返回对应的键名
      */
     public static @Nonnull String getName(@Nonnull Material mat) {
-        return LanguageHelper.getLang(getKey(mat));
+        return LanguageHelper.getLangOrKey(getKey(mat));
     }
 
     /**

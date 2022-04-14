@@ -22,7 +22,7 @@ public class TropicalFishHelper {
      * @return 热带鱼样式的中文名称,如果获取失败则返回键名
      */
     public static @Nonnull String getPatternName(@Nonnull Pattern pattern) {
-        return LanguageHelper.getLang(getPatternKey(pattern));
+        return LanguageHelper.getLangOrKey(getPatternKey(pattern));
     }
 
     /**

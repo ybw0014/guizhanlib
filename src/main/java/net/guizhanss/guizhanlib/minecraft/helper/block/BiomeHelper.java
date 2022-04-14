@@ -21,7 +21,7 @@ public class BiomeHelper {
      * @return 生物群系的中文名,如果获取失败则返回键名
      */
     public static @Nonnull String getName(@Nonnull Biome biome) {
-        return LanguageHelper.getLang(getKey(biome));
+        return LanguageHelper.getLangOrKey(getKey(biome));
     }
 
     /**
