@@ -13,7 +13,7 @@ jobs:
     if: github.repository_owner == 'ybw0014'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.1
+      - uses: actions/checkout@v3.0.2
         with:
           fetch-depth: 0
 
