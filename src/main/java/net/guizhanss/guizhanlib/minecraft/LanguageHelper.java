@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.Validate;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -38,13 +39,20 @@ public class LanguageHelper {
      * @param key {@link String} 键名
      * @return 键名内容
      */
-    public static String getLang(@Nonnull String key) {
+    public static @Nonnull String getLangOrKey(@Nonnull String key) {
+        String lang = getLangOrNull(key);
+        return lang != null ? lang : key;
+    }
+
+    /**
+     * 获取语言文件中指定键名的内容
+     *
+     * @param key {@link String} 键名
+     * @return 键名内容
+     */
+    public static @Nullable String getLangOrNull(@Nonnull String key) {
         Validate.notNull(key, "键名不能为空");
 
-        String value = lang.get(key);
-        if (value != null)
-            return value;
-
-        return key;
+        return lang.get(key);
     }
 }

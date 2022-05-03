@@ -1,12 +1,17 @@
 package net.guizhanss.guizhanlib.localization;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -18,7 +23,7 @@ import java.util.logging.Level;
  * Localization service.
  * Should be initialized after loading config file and before registering items.
  *
- * Localization service will create a folder "lang" (by default) under plugin's data folder,
+ * Localization service will create a folder "lang" (by default) under plugin's data folder.
  *
  * @author ybw0014
  */
@@ -105,7 +110,10 @@ public class Localization {
         }
 
         languages.add(langFilename);
-        langMap.put(langFilename, new Language(langFilename, langFile));
+
+        InputStreamReader defaultReader = new InputStreamReader(plugin.getResource(resourcePath), StandardCharsets.UTF_8);
+        FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultReader);
+        langMap.put(langFilename, new Language(langFilename, langFile, defaultConfig));
     }
 
     /**
@@ -113,11 +121,21 @@ public class Localization {
      *
      * @param path the localization path
      *
-     * @return Localized {@link String}
+     * @return Localized {@link String}, empty if string is not found
      */
     public @Nonnull String getString(@Nonnull String path) {
-        String localization = getStringOrNull(path);
-        return localization != null ? localization : path;
+        Validate.notNull(path, "path cannot be null");
+        if (!initialized) {
+            throw new IllegalStateException("Localization service is not initialized");
+        }
+
+        for (String lang : languages) {
+            String localization = langMap.get(lang).getLang().getString(path);
+            if (localization != null) {
+                return localization;
+            }
+        }
+        return "";
     }
 
     /**
@@ -128,8 +146,18 @@ public class Localization {
      * @return Localized {@link String} {@link List}
      */
     public @Nonnull List<String> getStringList(@Nonnull String path) {
-        List<String> localization = getStringListOrNull(path);
-        return localization != null ? localization : Collections.singletonList(path);
+        Validate.notNull(path, "path cannot be null");
+        if (!initialized) {
+            throw new IllegalStateException("Localization service is not initialized");
+        }
+
+        for (String lang : languages) {
+            List<String> localization = langMap.get(lang).getLang().getStringList(path);
+            if (!localization.isEmpty()) {
+                return localization;
+            }
+        }
+        return new ArrayList<>();
     }
 
     /**
@@ -140,38 +168,6 @@ public class Localization {
      * @return Localized {@link String} array
      */
     public @Nonnull String[] getStringArray(@Nonnull String path) {
-        List<String> localization = getStringList(path);
-        String[] stringArray = new String[localization.size()];
-        return localization.toArray(stringArray);
-    }
-
-    private @Nullable String getStringOrNull(@Nonnull String path) {
-        Validate.notNull(path, "path cannot be null");
-        if (!initialized) {
-            throw new IllegalStateException("Localization service is not initialized");
-        }
-
-        for (String lang : languages) {
-            String localization = langMap.get(lang).getFile().getString(path);
-            if (localization != null) {
-                return localization;
-            }
-        }
-        return null;
-    }
-
-    private @Nullable List<String> getStringListOrNull(@Nonnull String path) {
-        Validate.notNull(path, "path cannot be null");
-        if (!initialized) {
-            throw new IllegalStateException("Localization service is not initialized");
-        }
-
-        for (String lang : languages) {
-            List<String> localization = langMap.get(lang).getFile().getStringList(path);
-            if (!localization.isEmpty()) {
-                return localization;
-            }
-        }
-        return null;
+        return getStringList(path).toArray(new String[0]);
     }
 }

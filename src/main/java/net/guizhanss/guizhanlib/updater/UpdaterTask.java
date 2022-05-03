@@ -115,6 +115,8 @@ public class UpdaterTask implements Runnable {
             logger.log(Level.SEVERE, "构建站URL地址错误，无法获取仓库配置信息");
         } catch (IllegalStateException ex) {
             logger.log(Level.SEVERE, "构建站配置错误，无法获取仓库配置信息", ex);
+        } catch (IllegalArgumentException ex) {
+            logger.log(Level.SEVERE, "无法获取仓库配置信息", ex);
         }
     }
 

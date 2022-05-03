@@ -23,7 +23,7 @@ public class DyeColorHelper {
      * @return 染料颜色的中文名,如果获取失败则返回键名
      */
     public static @Nonnull String getName(@Nonnull DyeColor dyeColor) {
-        return LanguageHelper.getLang(getKey(dyeColor));
+        return LanguageHelper.getLangOrKey(getKey(dyeColor));
     }
 
     /**

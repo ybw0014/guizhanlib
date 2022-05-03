@@ -28,7 +28,7 @@ public class EntityTypeHelper {
         if (entityType.toString().equals("PIG_ZOMBIE"))
             return "僵尸猪人";
 
-        return LanguageHelper.getLang(getKey(entityType));
+        return LanguageHelper.getLangOrKey(getKey(entityType));
     }
 
     /**

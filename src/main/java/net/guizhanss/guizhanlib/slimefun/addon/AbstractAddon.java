@@ -1,13 +1,13 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import lombok.SneakyThrows;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
 import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -380,6 +380,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * Get the {@link PluginCommand} of {@link AbstractAddon}.
+     *
+     * @return the {@link PluginCommand} of {@link AbstractAddon}.
+     */
+    public static @Nonnull PluginCommand getPluginCommand(@Nonnull String command) {
+        Validate.notNull(command, "command should not be null");
+        return Objects.requireNonNull(getInstance().getCommand(command));
+    }
+
+    /**
      * Creates a {@link NamespacedKey} from the given string
      *
      * @param key the {@link String} representation of the key
@@ -393,7 +403,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     /**
      * Call the logger to log a message with arguments.
-     * ChatColor code '&' will be translated automatically,
+     * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
      * @param level the log {@link Level}
@@ -411,7 +421,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     /**
      * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
-     * ChatColor code '&' will be translated automatically,
+     * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
      * @param message the message

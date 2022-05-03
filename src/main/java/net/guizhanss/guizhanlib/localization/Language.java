@@ -7,9 +7,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.IOException;
 
 /**
- * This class represents a {@link Language}, which holds the localization files.
+ * This class represents a {@link Language}, which holds the localization {@link FileConfiguration}.
  *
  * @author ybw0014
  *
@@ -18,26 +19,27 @@ import java.io.File;
 public final class Language {
 
     private final String lang;
-    private final FileConfiguration file;
+    private final File currentFile;
+    private final FileConfiguration currentConfig;
 
     /**
      * Constructor
      *
      * @param lang the key of language
-     * @param file the {@link File} of language
+     * @param currentFile the current language {@link File}
+     * @param defaultConfig the {@link FileConfiguration} of default from resource
      */
     @ParametersAreNonnullByDefault
-    public Language(String lang, File file) {
-        Validate.notNull(lang, "语言名称不能为空");
-        Validate.notNull(file, "语言文件不能为空");
+    public Language(String lang, File currentFile, FileConfiguration defaultConfig) {
+        Validate.notNull(lang, "Language key cannot be null");
+        Validate.notNull(currentFile, "currentFile cannot be null");
+        Validate.notNull(defaultConfig);
 
         this.lang = lang;
-
-        if (!file.exists()) {
-            throw new IllegalArgumentException("语言文件不存在");
-        }
-
-        this.file = YamlConfiguration.loadConfiguration(file);
+        this.currentFile = currentFile;
+        this.currentConfig = YamlConfiguration.loadConfiguration(currentFile);
+        this.currentConfig.setDefaults(defaultConfig);
+        save();
     }
 
     /**
@@ -50,11 +52,22 @@ public final class Language {
     }
 
     /**
-     * Get language {@link File}
+     * Get current language {@link FileConfiguration}
      *
-     * @return the language {@link File}
+     * @return the language {@link FileConfiguration}
      */
-    public FileConfiguration getFile() {
-        return file;
+    public FileConfiguration getLang() {
+        return currentConfig;
+    }
+
+    /**
+     * Save current lang file
+     */
+    public void save() {
+        try {
+            currentConfig.save(currentFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -2,9 +2,7 @@ package net.guizhanss.guizhanlib.minecraft.helper.potion;
 
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.apache.commons.lang.Validate;
-import org.bukkit.DyeColor;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nonnull;
@@ -24,7 +22,7 @@ public class PotionEffectTypeHelper {
      * @return 药水效果的中文名,如果获取失败则返回键名
      */
     public static @Nonnull String getName(@Nonnull PotionEffectType type) {
-        return LanguageHelper.getLang(getKey(type));
+        return LanguageHelper.getLangOrKey(getKey(type));
     }
 
     /**
