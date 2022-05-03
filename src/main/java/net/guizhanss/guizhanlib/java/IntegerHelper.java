@@ -25,7 +25,7 @@ public class IntegerHelper {
         int num;
         try {
             num = Integer.parseInt(sequence);
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException | NullPointerException ex) {
             num = min;
         }
         num = Math.max(min, num);

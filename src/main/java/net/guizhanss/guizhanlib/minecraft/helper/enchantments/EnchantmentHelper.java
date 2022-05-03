@@ -65,11 +65,7 @@ public class EnchantmentHelper {
         String enchant = LanguageHelper.getLangOrNull(enchantKey);
 
         if (enchant == null) {
-            if (returnKey ) {
-                enchant = enchantKey;
-            } else {
-                enchant = StringUtil.humanize(enchantment.getKey().getKey());
-            }
+            enchant = returnKey ? enchantKey : StringUtil.humanize(enchantment.getKey().getKey());
         }
 
         return enchant;
