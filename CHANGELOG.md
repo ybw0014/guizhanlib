@@ -1,5 +1,14 @@
 # 更新日志
 
+## 0.9.0
+
+- 重构了语言助手，正常方法使用不受影响。
+    - 获取中文或键名的方法由`LanguageHelper#getLang`改名为`LanguageHelper#getLangOrKey`
+    - 添加了获取键名或null的方法`LanguageHelper#getLangOrNull`
+- 为`AbstractAddon`添加了获取插件指令的方法`getPluginCommand`
+- 添加用于获取玩家头颅物品的工具包`PlayerHeadUtil`
+- 
+- 修正了部分javadoc
 ## 0.8.5
 
 * `AbstractAddon`的`sendConsole`方法现在会带插件名称了
