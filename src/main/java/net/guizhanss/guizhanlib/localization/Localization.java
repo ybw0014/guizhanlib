@@ -6,13 +6,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -104,7 +102,7 @@ public class Localization {
             try {
                 plugin.saveResource(resourcePath, false);
             } catch (IllegalArgumentException ex) {
-                plugin.getLogger().log(Level.SEVERE, "jar包中的语言文件 {0} 不存在!", resourcePath);
+                plugin.getLogger().log(Level.SEVERE, "The language file {0} does not exist in jar file!", resourcePath);
                 return;
             }
         }
