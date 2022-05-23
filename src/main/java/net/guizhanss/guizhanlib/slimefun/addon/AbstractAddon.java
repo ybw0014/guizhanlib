@@ -54,6 +54,19 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private boolean autoUpdateEnabled;
 
     /**
+     * Live addon constructor (old)
+     *
+     * @param githubUser GitHub username of this project
+     * @param githubRepo GitHub repository of this project
+     * @param githubBranch GitHub branch of this project
+     * @param autoUpdateKey Auto update key in the config
+     */
+    @Deprecated
+    public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
+        this(githubUser, githubRepo, githubBranch, autoUpdateKey, "");
+    }
+
+    /**
      * Live addon constructor
      *
      * @param githubUser GitHub username of this project
