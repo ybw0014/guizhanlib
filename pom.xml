@@ -14,14 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Maven Packages</name>
-            <url>https://maven.pkg.github.com/ybw0014/GuizhanLib</url>
-        </repository>
-    </distributionManagement>
-
     <repositories>
         <repository>
             <id>jitpack.io</id>

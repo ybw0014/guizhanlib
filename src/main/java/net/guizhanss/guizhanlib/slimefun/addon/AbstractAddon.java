@@ -209,7 +209,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             handleException(new IllegalStateException("Auto update key missing from the default config!"));
         }
 
-        String updaterLang = "en";
+        String updaterLang = "zh-CN";
         // Validate updaterLangKey
         if (updaterLangKey != null && !updaterLangKey.isEmpty()) {
             updaterLang = config.getString(updaterLangKey, "en");
