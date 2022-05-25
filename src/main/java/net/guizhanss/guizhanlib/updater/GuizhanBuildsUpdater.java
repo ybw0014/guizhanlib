@@ -182,10 +182,11 @@ public class GuizhanBuildsUpdater {
         Validate.notNull(key, "language key should not be null");
         Validate.notNull(defaultString, "default string should not be null");
 
-        if (this.locale != null) {
-            return this.locale.get(key).getAsString();
-        } else {
-            return defaultString;
-        }
+        try {
+            if (this.locale != null) {
+                return this.locale.get(key).getAsString();
+            }
+        } catch (NullPointerException ignored) {}
+        return defaultString;
     }
 }
