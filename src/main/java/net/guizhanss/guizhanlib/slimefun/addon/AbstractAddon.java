@@ -37,12 +37,12 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     private static AbstractAddon instance;
 
-    private final GuizhanBuildsUpdater updater;
     private final Environment environment;
     private final String githubUser;
     private final String githubRepo;
     private final String githubBranch;
     private final String autoUpdateKey;
+    private final String updaterLangKey;
     private final String bugTrackerURL;
 
     private AddonConfig config;
@@ -54,20 +54,34 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private boolean autoUpdateEnabled;
 
     /**
-     * Live addon constructor
+     * Live addon constructor (old)
      *
      * @param githubUser GitHub username of this project
      * @param githubRepo GitHub repository of this project
      * @param githubBranch GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
      */
+    @Deprecated
     public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
+        this(githubUser, githubRepo, githubBranch, autoUpdateKey, "");
+    }
+
+    /**
+     * Live addon constructor
+     *
+     * @param githubUser GitHub username of this project
+     * @param githubRepo GitHub repository of this project
+     * @param githubBranch GitHub branch of this project
+     * @param autoUpdateKey Auto update key in the config
+     * @param updaterLangKey Updater language key in the config. Leave this empty if you want updater be in English.
+     */
+    public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
         this.environment = Environment.LIVE;
         this.githubUser = githubUser;
         this.githubRepo = githubRepo;
         this.githubBranch = githubBranch;
         this.autoUpdateKey = autoUpdateKey;
-        this.updater = new GuizhanBuildsUpdater(this, getFile(), githubUser, githubRepo, githubBranch, false);
+        this.updaterLangKey = updaterLangKey;
         this.bugTrackerURL = MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
         validate();
     }
@@ -83,10 +97,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @param githubRepo GitHub repository of this project
      * @param githubBranch GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
+     * @param updaterLangKey Updater language key in the config
      */
     public AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
-                         String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
-        this(loader, description, dataFolder, file, githubUser, githubRepo, githubBranch, autoUpdateKey, Environment.TESTING);
+                         String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
+        this(loader, description, dataFolder, file, githubUser, githubRepo, githubBranch, autoUpdateKey, updaterLangKey, Environment.TESTING);
     }
 
     /**
@@ -100,18 +115,19 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @param githubRepo GitHub repository of this project
      * @param githubBranch GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
+     * @param updaterLangKey Updater language key in the config
      * @param environment the {@link Environment} of file
      */
     AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
-                  String githubUser, String githubRepo, String githubBranch, String autoUpdateKey,
+                  String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey,
                   Environment environment) {
         super(loader, description, dataFolder, file);
-        this.updater = null;
         this.environment = environment;
         this.githubUser = githubUser;
         this.githubBranch = githubBranch;
         this.githubRepo = githubRepo;
         this.autoUpdateKey = autoUpdateKey;
+        this.updaterLangKey = updaterLangKey;
         this.bugTrackerURL = MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
         validate();
     }
@@ -193,12 +209,19 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             handleException(new IllegalStateException("Auto update key missing from the default config!"));
         }
 
+        String updaterLang = "zh-CN";
+        // Validate updaterLangKey
+        if (updaterLangKey != null && !updaterLangKey.isEmpty()) {
+            updaterLang = config.getString(updaterLangKey, "en");
+        }
+
         // Check updater
-        if (updater != null) {
+        if (environment == Environment.LIVE) {
+            GuizhanBuildsUpdater updater = new GuizhanBuildsUpdater(this, getFile(), githubUser, githubRepo, githubBranch, false, updaterLang);
             // Set up warning
             if (brokenConfig) {
                 handleException(new IllegalArgumentException("Auto update is not configured correctly"));
-            } else {
+            } else if (config.getBoolean(autoUpdateKey)) {
                 autoUpdateEnabled = true;
                 updater.start();
             }
@@ -207,6 +230,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         // Setup metrics
         if (metricsId != 0) {
             metrics = new Metrics(this, metricsId);
+            setupMetrics(metrics);
         }
 
         // Call enable()
@@ -275,13 +299,22 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Setup metrics module.
+     * Enable metrics module.
      * Should be called in constructor.
      *
      * @param pluginId the plugin id in bStats
      */
-    public void setupMetrics(int pluginId) {
+    public void enableMetrics(int pluginId) {
         metricsId = pluginId;
+    }
+
+    /**
+     * Set up metrics module. If you need this, override it
+     * e.g. Custom charts, etc...
+     *
+     * @param metrics The {@link Metrics} instance.
+     */
+    public void setupMetrics(@Nonnull Metrics metrics) {
     }
 
     /**

@@ -24,7 +24,7 @@ public class MockAddon extends AbstractAddon {
                      Environment environment) {
         super(
             loader, description, dataFolder, file,
-            "ybw0014", "GuizhanLib", "master", "auto-upadte",
+            "ybw0014", "GuizhanLib", "master", "auto-upadte", "",
             environment
         );
     }
