@@ -230,7 +230,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         // Setup metrics
         if (metricsId != 0) {
             metrics = new Metrics(this, metricsId);
-            setupMetrics(metrics);
         }
 
         // Call enable()
@@ -240,6 +239,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             handleException(ex);
         } finally {
             enabling = false;
+        }
+
+        // Call this after enabling
+        if (metricsId != 0 && metrics != null) {
+            setupMetrics(metrics);
         }
     }
 
