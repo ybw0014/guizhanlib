@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.9.2
+
+- 调整`AbstractAddon#setupMetrics()`调用顺序，现在将在启用插件后调用该方法
+
 ## 0.9.1
 
 - 小重构更新模块`GuizhanBuildsUpdater`，支持修改显示语言
