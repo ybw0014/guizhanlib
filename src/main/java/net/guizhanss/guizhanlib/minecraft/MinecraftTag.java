@@ -19,7 +19,8 @@ public enum MinecraftTag {
                 || type == Material.IRON_HELMET
                 || type == Material.GOLDEN_HELMET
                 || type == Material.DIAMOND_HELMET
-                || type == Material.NETHERITE_HELMET;
+                || type == Material.NETHERITE_HELMET
+                || type == Material.TURTLE_HELMET;
         }
     },
 
@@ -34,7 +35,8 @@ public enum MinecraftTag {
                 || type == Material.IRON_CHESTPLATE
                 || type == Material.GOLDEN_CHESTPLATE
                 || type == Material.DIAMOND_CHESTPLATE
-                || type == Material.NETHERITE_CHESTPLATE;
+                || type == Material.NETHERITE_CHESTPLATE
+                || type == Material.ELYTRA;
         }
     },
 
@@ -92,7 +94,8 @@ public enum MinecraftTag {
                 || type == Material.IRON_SWORD
                 || type == Material.GOLDEN_SWORD
                 || type == Material.DIAMOND_SWORD
-                || type == Material.NETHERITE_SWORD;
+                || type == Material.NETHERITE_SWORD
+                || type == Material.TRIDENT;
         }
     },
 
@@ -155,7 +158,77 @@ public enum MinecraftTag {
                 || type == Material.NETHERITE_HOE;
         }
     },
+    /**
+     * This includes all types of skull
+     */
+    SKULL {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.SKELETON_SKULL
+                || type == Material.WITHER_SKELETON_SKULL
+                || type == Material.ZOMBIE_HEAD
+                || type == Material.PLAYER_HEAD
+                || type == Material.CREEPER_HEAD
+                || type == Material.DRAGON_HEAD
+                || type == Material.CARVED_PUMPKIN;
+        }
+    },
+     /**
+     * This includes all types of horse armor
+     */
+    HORSE_ARMOR {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.LEATHER_HORSE_ARMOR
+                || type == Material.IRON_HORSE_ARMOR
+                || type == Material.GOLDEN_HORSE_ARMOR
+                || type == Material.DIAMOND_HORSE_ARMOR
+                || type == Material.SADDLE;
+        }
+    },
+    /**
+     * This includes all types of bow
+     */
+    BOW {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.BOW
+                || type == Material.CROSSBOW;
+        }
+    },
+        /**
+     * This includes all types of fishing rod
+     */
+    
+    FISHING_ROD {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.FISHING_ROD
+                || type == Material.CARROT_ON_A_STICK
+                || type == Material.WARPED_FUNGUS_ON_A_STICK;
+        }
+    },
+    /**
+     * This includes all types of shears
+     */
+    
+    SHEARS {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.SHEARS;
 
+        }
+    },
+     /**
+     * This includes all types of shield
+     */
+    SHIELD {
+        @Override
+        public boolean isTagged(Material type) {
+            return type == Material.SHIELD;
+
+        }
+    },
     /**
      * This includes all types of potions
      */
