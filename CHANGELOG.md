@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.9.3
+
+- 更新了`MinecraftTag`，现在包含更多的分类了
+
 ## 0.9.2
 
 - 调整`AbstractAddon#setupMetrics()`调用顺序，现在将在启用插件后调用该方法
