@@ -213,7 +213,7 @@ public enum MinecraftTag {
     },
     
     /**
-     * This includes all types of shears
+     * This includes all types of off hand tools
      */
     
     OFF_HAND_TOOL {
