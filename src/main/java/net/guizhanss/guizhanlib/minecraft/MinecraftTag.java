@@ -158,6 +158,7 @@ public enum MinecraftTag {
                 || type == Material.NETHERITE_HOE;
         }
     },
+    
     /**
      * This includes all types of skull
      */
@@ -173,6 +174,7 @@ public enum MinecraftTag {
                 || type == Material.CARVED_PUMPKIN;
         }
     },
+    
      /**
      * This includes all types of horse armor
      */
@@ -182,10 +184,10 @@ public enum MinecraftTag {
             return type == Material.LEATHER_HORSE_ARMOR
                 || type == Material.IRON_HORSE_ARMOR
                 || type == Material.GOLDEN_HORSE_ARMOR
-                || type == Material.DIAMOND_HORSE_ARMOR
-                || type == Material.SADDLE;
+                || type == Material.DIAMOND_HORSE_ARMOR;
         }
     },
+    
     /**
      * This includes all types of bow
      */
@@ -196,7 +198,8 @@ public enum MinecraftTag {
                 || type == Material.CROSSBOW;
         }
     },
-        /**
+    
+    /**
      * This includes all types of fishing rod
      */
     
@@ -208,27 +211,20 @@ public enum MinecraftTag {
                 || type == Material.WARPED_FUNGUS_ON_A_STICK;
         }
     },
+    
     /**
      * This includes all types of shears
      */
     
-    SHEARS {
+    OFF_HAND_TOOL {
         @Override
         public boolean isTagged(Material type) {
-            return type == Material.SHEARS;
+            return type == Material.SHEARS
+            || type == Material.SHIELD;
 
         }
     },
-     /**
-     * This includes all types of shield
-     */
-    SHIELD {
-        @Override
-        public boolean isTagged(Material type) {
-            return type == Material.SHIELD;
-
-        }
-    },
+ 
     /**
      * This includes all types of potions
      */
