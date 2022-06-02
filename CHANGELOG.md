@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.9.4
+
+- 向`RandomUtil`添加了`randomDouble`获取随机小数
+
 ## 0.9.3
 
 - 更新了`MinecraftTag`，现在包含更多的分类了
