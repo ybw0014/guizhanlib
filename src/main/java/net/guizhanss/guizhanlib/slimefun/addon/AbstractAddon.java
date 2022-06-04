@@ -1,6 +1,8 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import net.guizhanss.guizhanlib.common.Scheduler;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
 import org.apache.commons.lang.Validate;
@@ -47,6 +49,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     private AddonConfig config;
     private int metricsId;
+    private int slimefunTickCount;
     private Metrics metrics;
     private boolean loading;
     private boolean enabling;
@@ -227,6 +230,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             }
         }
 
+        // Create total tick count
+        Scheduler.repeat(Slimefun.getTickerTask().getTickRate(), () -> slimefunTickCount++);
+
         // Setup metrics
         if (metricsId != 0) {
             metrics = new Metrics(this, metricsId);
@@ -264,6 +270,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             handleException(e);
         } finally {
             disabling = false;
+            slimefunTickCount = 0;
             instance = null;
             config = null;
         }
@@ -414,6 +421,15 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      */
     @Override
     public final void saveDefaultConfig() {
+    }
+
+    /**
+     * Returns the total number of Slimefun ticks that have occurred
+     *
+     * @return total number of Slimefun ticks
+     */
+    public static int getSlimefunTickCount() {
+        return getInstance().slimefunTickCount;
     }
 
     /**

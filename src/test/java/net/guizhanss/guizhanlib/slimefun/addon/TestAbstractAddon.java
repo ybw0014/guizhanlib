@@ -73,6 +73,12 @@ public class TestAbstractAddon {
     }
 
     @Test
+    void testSlimefunTickCount() {
+        server.getScheduler().performOneTick();
+        assertEquals(1, MockAddon.getSlimefunTickCount());
+    }
+
+    @Test
     void testNotRelocatedLive() {
         assertThrows(RuntimeException.class, () -> MockBukkit.load(MockAddon.class, Environment.LIVE, null));
     }
