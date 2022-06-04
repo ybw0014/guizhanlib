@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.9.5
+
+- `AbstractAddon`添加了`getSlimefunTickCount()`方法，获取已经过的粘液刻数
+
 ## 0.9.4
 
 - 向`RandomUtil`添加了`randomDouble`获取随机小数
