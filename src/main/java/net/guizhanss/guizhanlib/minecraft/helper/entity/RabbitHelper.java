@@ -18,6 +18,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @UtilityClass
 public final class RabbitHelper {
     /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
+     * @param type {@link Rabbit.Type} 兔子的类型
+     * @return 兔子的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull Rabbit.Type type) {
+        return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
+     * @param type {@link String} 兔子的类型
+     * @return 兔子的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "兔子的类型不能为空");
+
+        try {
+            Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);
+            return Type.fromType(rabbitType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
+    }
+
+    /**
      * 所有兔子的类型
      */
     public enum Type {
@@ -64,11 +93,6 @@ public final class RabbitHelper {
             this.chinese = chinese;
         }
 
-        @Override
-        public String toString() {
-            return this.getChinese();
-        }
-
         /**
          * 根据兔子的类型返回对应的枚举
          *
@@ -105,34 +129,10 @@ public final class RabbitHelper {
             }
             return null;
         }
-    }
 
-    /**
-     * 获取兔子的类型({@link Rabbit.Type})的中文
-     *
-     * @param type {@link Rabbit.Type} 兔子的类型
-     * @return 兔子的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull Rabbit.Type type) {
-        return Type.fromType(type).getChinese();
-    }
-
-    /**
-     * 获取兔子的类型({@link Rabbit.Type})的中文
-     *
-     * @param type {@link String} 兔子的类型
-     * @return 兔子的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull String type) {
-        Preconditions.checkNotNull(type, "兔子的类型不能为空");
-
-        try {
-            Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);
-            return Type.fromType(rabbitType).getChinese();
-        } catch (IllegalArgumentException ex) {
-            return StringUtil.humanize(type);
+        @Override
+        public String toString() {
+            return this.getChinese();
         }
     }
 }

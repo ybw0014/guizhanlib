@@ -38,12 +38,6 @@ public enum BasicMetals {
         this.chinese = chinese;
     }
 
-    @Nonnull
-    @Override
-    public String toString() {
-        return this.getChinese();
-    }
-
     /**
      * 根据英文返回对应的枚举
      *
@@ -79,5 +73,11 @@ public enum BasicMetals {
             }
         }
         return null;
+    }
+
+    @Nonnull
+    @Override
+    public String toString() {
+        return this.getChinese();
     }
 }

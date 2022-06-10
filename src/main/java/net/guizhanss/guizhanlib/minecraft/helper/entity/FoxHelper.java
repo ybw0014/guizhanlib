@@ -18,6 +18,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @UtilityClass
 public final class FoxHelper {
     /**
+     * 获取狐狸的类型({@link Fox.Type})的中文
+     *
+     * @param type {@link Fox.Type} 狐狸的类型
+     * @return 狐狸的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull Fox.Type type) {
+        return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取狐狸的类型({@link Fox.Type})的中文
+     *
+     * @param type {@link String} 狐狸的类型
+     * @return 狐狸的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "猫类型不能为空");
+
+        try {
+            Fox.Type foxType = Fox.Type.valueOf(type);
+            return Type.fromType(foxType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
+    }
+
+    /**
      * 所有狐狸的类型
      */
     public enum Type {
@@ -42,12 +71,6 @@ public final class FoxHelper {
             this.type = type;
             this.english = english;
             this.chinese = chinese;
-        }
-
-        @Nonnull
-        @Override
-        public String toString() {
-            return this.getChinese();
         }
 
         /**
@@ -86,34 +109,11 @@ public final class FoxHelper {
             }
             return null;
         }
-    }
 
-    /**
-     * 获取狐狸的类型({@link Fox.Type})的中文
-     *
-     * @param type {@link Fox.Type} 狐狸的类型
-     * @return 狐狸的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull Fox.Type type) {
-        return Type.fromType(type).getChinese();
-    }
-
-    /**
-     * 获取狐狸的类型({@link Fox.Type})的中文
-     *
-     * @param type {@link String} 狐狸的类型
-     * @return 狐狸的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull String type) {
-        Preconditions.checkNotNull(type, "猫类型不能为空");
-
-        try {
-            Fox.Type foxType = Fox.Type.valueOf(type);
-            return Type.fromType(foxType).getChinese();
-        } catch (IllegalArgumentException ex) {
-            return StringUtil.humanize(type);
+        @Nonnull
+        @Override
+        public String toString() {
+            return this.getChinese();
         }
     }
 }

@@ -18,6 +18,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @UtilityClass
 public final class CatHelper {
     /**
+     * 获取猫的类型({@link Cat.Type})的中文
+     *
+     * @param type {@link Cat.Type} 猫的类型
+     * @return 猫的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull Cat.Type type) {
+        return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取猫的类型({@link Cat.Type})的中文
+     *
+     * @param type {@link String} 猫的类型
+     * @return 猫的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "猫类型不能为空");
+
+        try {
+            Cat.Type catType = Cat.Type.valueOf(type);
+            return Type.fromType(catType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
+    }
+
+    /**
      * 所有猫的类型
      */
     public enum Type {
@@ -80,12 +109,6 @@ public final class CatHelper {
             this.chinese = chinese;
         }
 
-        @Nonnull
-        @Override
-        public String toString() {
-            return this.getChinese();
-        }
-
         /**
          * 根据猫的类型返回对应的枚举
          *
@@ -122,34 +145,11 @@ public final class CatHelper {
             }
             return null;
         }
-    }
 
-    /**
-     * 获取猫的类型({@link Cat.Type})的中文
-     *
-     * @param type {@link Cat.Type} 猫的类型
-     * @return 猫的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull Cat.Type type) {
-        return Type.fromType(type).getChinese();
-    }
-
-    /**
-     * 获取猫的类型({@link Cat.Type})的中文
-     *
-     * @param type {@link String} 猫的类型
-     * @return 猫的类型的中文
-     */
-    @Nonnull
-    public static String getType(@Nonnull String type) {
-        Preconditions.checkNotNull(type, "猫类型不能为空");
-
-        try {
-            Cat.Type catType = Cat.Type.valueOf(type);
-            return Type.fromType(catType).getChinese();
-        } catch (IllegalArgumentException ex) {
-            return StringUtil.humanize(type);
+        @Nonnull
+        @Override
+        public String toString() {
+            return this.getChinese();
         }
     }
 }

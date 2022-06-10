@@ -121,12 +121,12 @@ public enum ChatColors {
         }
     }
 
-    private final @Getter
-    ChatColor color;
-    private final @Getter
-    String english;
-    private final @Getter
-    String chinese;
+    @Getter
+    private final ChatColor color;
+    @Getter
+    private final String english;
+    @Getter
+    private final String chinese;
 
     /**
      * 构建函数
@@ -140,26 +140,6 @@ public enum ChatColors {
         this.color = color;
         this.english = english;
         this.chinese = chinese;
-    }
-
-    /**
-     * 获取中文名称
-     *
-     * @return 中文名称
-     */
-    @Override
-    public String toString() {
-        return this.getChinese();
-    }
-
-    /**
-     * 获取带颜色代码的颜色名
-     *
-     * @return 带颜色代码的颜色名
-     */
-    public String toStringWithColor() {
-        return this.getColor() +
-            this.getChinese();
     }
 
     /**
@@ -192,5 +172,25 @@ public enum ChatColors {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取中文名称
+     *
+     * @return 中文名称
+     */
+    @Override
+    public String toString() {
+        return this.getChinese();
+    }
+
+    /**
+     * 获取带颜色代码的颜色名
+     *
+     * @return 带颜色代码的颜色名
+     */
+    public String toStringWithColor() {
+        return this.getColor() +
+            this.getChinese();
     }
 }

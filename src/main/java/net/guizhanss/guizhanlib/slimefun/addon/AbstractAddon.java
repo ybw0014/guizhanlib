@@ -136,6 +136,91 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * Get an instance of extended class of {@link AbstractAddon}
+     *
+     * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
+     * @return The instance of extended class of {@link AbstractAddon}
+     */
+    @Nonnull
+    @SuppressWarnings("unchecked")
+    public static <T extends AbstractAddon> T getInstance() {
+        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
+    }
+
+    /**
+     * Get the {@link AddonConfig}
+     *
+     * @return the {@link AddonConfig}
+     */
+    @Nonnull
+    public static AddonConfig getAddonConfig() {
+        return getInstance().config;
+    }
+
+    /**
+     * Returns the total number of Slimefun ticks that have occurred
+     *
+     * @return total number of Slimefun ticks
+     */
+    public static int getSlimefunTickCount() {
+        return getInstance().slimefunTickCount;
+    }
+
+    /**
+     * Get the {@link PluginCommand} of {@link AbstractAddon}.
+     *
+     * @return the {@link PluginCommand} of {@link AbstractAddon}.
+     */
+    @Nonnull
+    public static PluginCommand getPluginCommand(@Nonnull String command) {
+        Preconditions.checkNotNull(command, "command should not be null");
+        return Objects.requireNonNull(getInstance().getCommand(command));
+    }
+
+    /**
+     * Creates a {@link NamespacedKey} from the given string
+     *
+     * @param key the {@link String} representation of the key
+     * @return the {@link NamespacedKey} created from given string
+     */
+    @Nonnull
+    public static NamespacedKey createKey(String key) {
+        return new NamespacedKey(getInstance(), key);
+    }
+
+    /**
+     * Call the logger to log a message with arguments.
+     * ChatColor code will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param level   the log {@link Level}
+     * @param message the message
+     * @param args    the arguments with in
+     * @see MessageFormat
+     */
+    public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
+        Preconditions.checkNotNull(level, "log level should not be null");
+        Preconditions.checkNotNull(message, "log message should not be null");
+
+        getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
+    }
+
+    /**
+     * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
+     * ChatColor code will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param message the message
+     * @param args    the arguments with in
+     * @see MessageFormat
+     */
+    public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
+        Preconditions.checkNotNull(message, "log message should not be null");
+
+        Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
+    }
+
+    /**
      * Validate the information given by constructor
      */
     private void validate() {
@@ -330,18 +415,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Get an instance of extended class of {@link AbstractAddon}
-     *
-     * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
-     * @return The instance of extended class of {@link AbstractAddon}
-     */
-    @Nonnull
-    @SuppressWarnings("unchecked")
-    public static <T extends AbstractAddon> T getInstance() {
-        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
-    }
-
-    /**
      * Get the {@link Metrics} module
      *
      * @return the {@link Metrics} module
@@ -406,83 +479,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Get the {@link AddonConfig}
-     *
-     * @return the {@link AddonConfig}
-     */
-    @Nonnull
-    public static AddonConfig getAddonConfig() {
-        return getInstance().config;
-    }
-
-    /**
      * Save default config.
      * Overridden and does nothing since it is handled in #onEnable()
      */
     @Override
     public final void saveDefaultConfig() {
-    }
-
-    /**
-     * Returns the total number of Slimefun ticks that have occurred
-     *
-     * @return total number of Slimefun ticks
-     */
-    public static int getSlimefunTickCount() {
-        return getInstance().slimefunTickCount;
-    }
-
-    /**
-     * Get the {@link PluginCommand} of {@link AbstractAddon}.
-     *
-     * @return the {@link PluginCommand} of {@link AbstractAddon}.
-     */
-    @Nonnull
-    public static PluginCommand getPluginCommand(@Nonnull String command) {
-        Preconditions.checkNotNull(command, "command should not be null");
-        return Objects.requireNonNull(getInstance().getCommand(command));
-    }
-
-    /**
-     * Creates a {@link NamespacedKey} from the given string
-     *
-     * @param key the {@link String} representation of the key
-     * @return the {@link NamespacedKey} created from given string
-     */
-    @Nonnull
-    public static NamespacedKey createKey(String key) {
-        return new NamespacedKey(getInstance(), key);
-    }
-
-    /**
-     * Call the logger to log a message with arguments.
-     * ChatColor code will be translated automatically,
-     * and message is dealt with MessageFormat#format().
-     *
-     * @param level   the log {@link Level}
-     * @param message the message
-     * @param args    the arguments with in
-     * @see MessageFormat
-     */
-    public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
-        Preconditions.checkNotNull(level, "log level should not be null");
-        Preconditions.checkNotNull(message, "log message should not be null");
-
-        getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
-    }
-
-    /**
-     * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
-     * ChatColor code will be translated automatically,
-     * and message is dealt with MessageFormat#format().
-     *
-     * @param message the message
-     * @param args    the arguments with in
-     * @see MessageFormat
-     */
-    public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
-        Preconditions.checkNotNull(message, "log message should not be null");
-
-        Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
 }

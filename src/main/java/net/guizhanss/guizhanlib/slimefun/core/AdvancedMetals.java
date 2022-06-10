@@ -107,12 +107,6 @@ public enum AdvancedMetals {
         this.slimefunId = StringUtil.dehumanize(english) + "_INGOT";
     }
 
-    @Nonnull
-    @Override
-    public String toString() {
-        return this.getChinese();
-    }
-
     /**
      * 根据英文返回对应的枚举
      *
@@ -148,5 +142,11 @@ public enum AdvancedMetals {
             }
         }
         return null;
+    }
+
+    @Nonnull
+    @Override
+    public String toString() {
+        return this.getChinese();
     }
 }
