@@ -29,9 +29,23 @@ public final class LanguageHelper {
             LanguageHelper.class.getResourceAsStream(filename), StandardCharsets.UTF_8
         ));
         Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>() {
-        }.getType();
+        // @formatter:off
+        Type type = new TypeToken<Map<String, String>>() {}.getType();
+        // @formatter:on
         lang = gson.fromJson(reader, type);
+    }
+
+    /**
+     * 获取语言文件中指定键名的内容
+     *
+     * @param key        {@link String} 键名
+     * @param defaultVal 默认值
+     * @return 键名内容
+     */
+    @Nonnull
+    public static String getLangOrDefault(@Nonnull String key, @Nonnull String defaultVal) {
+        String lang = getLangOrNull(key);
+        return lang != null ? lang : defaultVal;
     }
 
     /**
@@ -42,8 +56,7 @@ public final class LanguageHelper {
      */
     @Nonnull
     public static String getLangOrKey(@Nonnull String key) {
-        String lang = getLangOrNull(key);
-        return lang != null ? lang : key;
+        return getLangOrDefault(key, key);
     }
 
     /**
