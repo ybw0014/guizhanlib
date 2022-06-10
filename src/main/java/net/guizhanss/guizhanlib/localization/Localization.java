@@ -20,7 +20,7 @@ import java.util.logging.Level;
 /**
  * Localization service.
  * Should be initialized after loading config file and before registering items.
- *
+ * <p>
  * Localization service will create a folder "lang" (by default) under plugin's data folder.
  *
  * @author ybw0014
@@ -46,7 +46,7 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin The {@link JavaPlugin} instance
+     * @param plugin     The {@link JavaPlugin} instance
      * @param folderName The name of the folder that holds all language files
      */
     @ParametersAreNonnullByDefault
@@ -72,9 +72,9 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin The {@link JavaPlugin} instance
+     * @param plugin     The {@link JavaPlugin} instance
      * @param folderName The name of the folder that holds all language files
-     * @param langFile The name of language file (without file extension .yml)
+     * @param langFile   The name of language file (without file extension .yml)
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin, String folderName, String langFile) {
@@ -86,7 +86,6 @@ public class Localization {
      * Load a language file to configuration
      *
      * @param langFilename the filename of language file without extension .yml
-     *
      * @throws IllegalStateException when language file does not exist
      */
     public void addLanguage(@Nonnull String langFilename) {
@@ -114,7 +113,6 @@ public class Localization {
      * Get localized {@link String} from path
      *
      * @param path the localization path
-     *
      * @return Localized {@link String}, empty if string is not found
      */
     @Nonnull
@@ -134,7 +132,6 @@ public class Localization {
      * Get localized {@link String} {@link List} from path
      *
      * @param path the localization path
-     *
      * @return Localized {@link String} {@link List}
      */
     @Nonnull
@@ -154,7 +151,6 @@ public class Localization {
      * Get localized {@link String} array from path
      *
      * @param path the localization path
-     *
      * @return Localized {@link String} array
      */
     @Nonnull

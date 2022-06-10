@@ -15,7 +15,6 @@ import java.util.Map;
  * 聊天颜色
  *
  * @author ybw0014
- *
  * @see ChatColor
  */
 public enum ChatColors {
@@ -122,13 +121,17 @@ public enum ChatColors {
         }
     }
 
-    private final @Getter ChatColor color;
-    private final @Getter String english;
-    private final @Getter String chinese;
+    private final @Getter
+    ChatColor color;
+    private final @Getter
+    String english;
+    private final @Getter
+    String chinese;
 
     /**
      * 构建函数
-     * @param color {@link ChatColor}
+     *
+     * @param color   {@link ChatColor}
      * @param english 英文
      * @param chinese 中文
      */
@@ -163,7 +166,6 @@ public enum ChatColors {
      * 根据聊天颜色返回对应的枚举
      *
      * @param chatColor {@link ChatColor} 聊天颜色
-     *
      * @return 对应的枚举
      */
     @Nonnull
@@ -177,7 +179,6 @@ public enum ChatColors {
      * 根据英文返回对应的枚举
      *
      * @param english {@link String} 提供的英文
-     *
      * @return 对应的枚举
      */
     @Nullable

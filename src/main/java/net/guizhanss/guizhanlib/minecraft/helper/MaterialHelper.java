@@ -45,7 +45,6 @@ public class MaterialHelper {
      * 根据给定的材料字符串返回中文名称
      *
      * @param material 材料的{@link String}格式
-     *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式
      */
     @Nonnull
@@ -56,9 +55,8 @@ public class MaterialHelper {
     /**
      * 根据给定的材料字符串返回中文名称
      *
-     * @param material 材料的{@link String}格式
+     * @param material    材料的{@link String}格式
      * @param emptyString 是否返回空字符串
-     *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式或空字符串
      */
     @Nonnull

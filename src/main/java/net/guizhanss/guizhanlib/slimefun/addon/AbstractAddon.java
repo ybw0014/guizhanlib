@@ -26,9 +26,9 @@ import java.util.logging.Level;
 /**
  * An abstract {@link SlimefunAddon} class that contains
  * the updater and some utilities.
- *
+ * <p>
  * Extend this as your main class to use them.
- *
+ * <p>
  * This is modified from InfinityLib
  *
  * @author Mooy1
@@ -59,9 +59,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Live addon constructor (old)
      *
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
+     * @param githubUser    GitHub username of this project
+     * @param githubRepo    GitHub repository of this project
+     * @param githubBranch  GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
      */
     @Deprecated
@@ -72,10 +72,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Live addon constructor
      *
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config. Leave this empty if you want updater be in English.
      */
     public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
@@ -92,14 +92,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Testing addon constructor
      *
-     * @param loader the {@link JavaPluginLoader}
-     * @param description the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder the {@link File} of plugin's data folder
-     * @param file the {@link File} of plugin
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param loader         the {@link JavaPluginLoader}
+     * @param description    the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder     the {@link File} of plugin's data folder
+     * @param file           the {@link File} of plugin
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config
      */
     public AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
@@ -110,16 +110,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Testing library constructor
      *
-     * @param loader the {@link JavaPluginLoader}
-     * @param description the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder the {@link File} of plugin's data folder
-     * @param file the {@link File} of plugin
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param loader         the {@link JavaPluginLoader}
+     * @param description    the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder     the {@link File} of plugin's data folder
+     * @param file           the {@link File} of plugin
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config
-     * @param environment the {@link Environment} of file
+     * @param environment    the {@link Environment} of file
      */
     AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
                   String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey,
@@ -167,11 +167,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         // Load
         try {
             load();
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             handleException(e);
-        }
-        finally {
+        } finally {
             loading = false;
         }
     }
@@ -321,7 +319,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     /**
      * DEPRECATED: Call {@link #getMetrics()} to get {@link Metrics} instance.
-     *
+     * <p>
      * Set up metrics module. If you need this, override it
      * e.g. Custom charts, etc...
      *
@@ -335,7 +333,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * Get an instance of extended class of {@link AbstractAddon}
      *
      * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
-     *
      * @return The instance of extended class of {@link AbstractAddon}
      */
     @Nonnull
@@ -367,7 +364,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * This returns the default bug tracker URL by
      * the given GitHub username and repository in constructor.
-     *
+     * <p>
      * Override it if you don't use GitHub issues as bug tracker
      *
      * @return the default bug tracker url
@@ -450,7 +447,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * Creates a {@link NamespacedKey} from the given string
      *
      * @param key the {@link String} representation of the key
-     *
      * @return the {@link NamespacedKey} created from given string
      */
     @Nonnull
@@ -463,10 +459,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
-     * @param level the log {@link Level}
+     * @param level   the log {@link Level}
      * @param message the message
-     * @param args the arguments with in
-     *
+     * @param args    the arguments with in
      * @see MessageFormat
      */
     public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
@@ -482,8 +477,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * and message is dealt with MessageFormat#format().
      *
      * @param message the message
-     * @param args the arguments with in
-     *
+     * @param args    the arguments with in
      * @see MessageFormat
      */
     public static void sendConsole(@Nonnull String message, @Nullable Object... args) {

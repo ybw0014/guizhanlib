@@ -50,9 +50,12 @@ public final class RabbitHelper {
          */
         WHITE(Rabbit.Type.WHITE, "White", "白色");
 
-        private final @Getter Rabbit.Type type;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        private final @Getter
+        Rabbit.Type type;
+        private final @Getter
+        String english;
+        private final @Getter
+        String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Rabbit.Type type, String english, String chinese) {
@@ -70,11 +73,10 @@ public final class RabbitHelper {
          * 根据兔子的类型返回对应的枚举
          *
          * @param rabbitType {@link Rabbit.Type} 兔子的类型
-         *
          * @return 对应的枚举
          */
         @Nonnull
-    public static Type fromType(@Nonnull Rabbit.Type rabbitType) {
+        public static Type fromType(@Nonnull Rabbit.Type rabbitType) {
             Preconditions.checkNotNull(rabbitType, "兔子的类型不能为空");
 
             for (Type type : Type.values()) {
@@ -89,11 +91,10 @@ public final class RabbitHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
         @Nullable
-    public static Type fromEnglish(@Nonnull String english) {
+        public static Type fromEnglish(@Nonnull String english) {
             Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
@@ -110,7 +111,6 @@ public final class RabbitHelper {
      * 获取兔子的类型({@link Rabbit.Type})的中文
      *
      * @param type {@link Rabbit.Type} 兔子的类型
-     *
      * @return 兔子的类型的中文
      */
     @Nonnull
@@ -122,7 +122,6 @@ public final class RabbitHelper {
      * 获取兔子的类型({@link Rabbit.Type})的中文
      *
      * @param type {@link String} 兔子的类型
-     *
      * @return 兔子的类型的中文
      */
     @Nonnull

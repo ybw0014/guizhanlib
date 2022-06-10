@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * A {@link MenuBlockPreset} is a preset of a menu block
- *
+ * <p>
  * Modified from InfinityLib
  *
  * @author Mooy1

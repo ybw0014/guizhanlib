@@ -13,8 +13,7 @@ final class PathBuilder {
         for (char c : line.toCharArray()) {
             if (c == ' ') {
                 indent++;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -26,12 +25,10 @@ final class PathBuilder {
         int size = path.size();
         if (indent == 0) {
             path.clear();
-        }
-        else if (indent < size) {
+        } else if (indent < size) {
             if (indent + 1 == size) {
                 path.remove(indent);
-            }
-            else {
+            } else {
                 path.subList(indent, size).clear();
             }
         }

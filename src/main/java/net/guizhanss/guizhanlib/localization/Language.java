@@ -13,7 +13,6 @@ import java.io.IOException;
  * This class represents a {@link Language}, which holds the localization {@link FileConfiguration}.
  *
  * @author ybw0014
- *
  * @see Localization
  */
 public final class Language {
@@ -25,8 +24,8 @@ public final class Language {
     /**
      * Constructor
      *
-     * @param lang the key of language
-     * @param currentFile the current language {@link File}
+     * @param lang          the key of language
+     * @param currentFile   the current language {@link File}
      * @param defaultConfig the {@link FileConfiguration} of default from resource
      */
     @ParametersAreNonnullByDefault

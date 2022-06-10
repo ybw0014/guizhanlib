@@ -30,9 +30,12 @@ public final class FoxHelper {
          */
         SNOW(Fox.Type.SNOW, "Snow", "白色");
 
-        private final @Getter Fox.Type type;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        private final @Getter
+        Fox.Type type;
+        private final @Getter
+        String english;
+        private final @Getter
+        String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Fox.Type type, String english, String chinese) {
@@ -51,11 +54,10 @@ public final class FoxHelper {
          * 根据狐狸的类型返回对应的枚举
          *
          * @param foxType {@link Fox.Type} 狐狸的类型
-         *
          * @return 对应的枚举
          */
         @Nonnull
-    public static Type fromType(@Nonnull Fox.Type foxType) {
+        public static Type fromType(@Nonnull Fox.Type foxType) {
             Preconditions.checkNotNull(foxType, "狐狸类型不能为空");
 
             for (Type type : Type.values()) {
@@ -70,11 +72,10 @@ public final class FoxHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
         @Nullable
-    public static Type fromEnglish(@Nonnull String english) {
+        public static Type fromEnglish(@Nonnull String english) {
             Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
@@ -91,7 +92,6 @@ public final class FoxHelper {
      * 获取狐狸的类型({@link Fox.Type})的中文
      *
      * @param type {@link Fox.Type} 狐狸的类型
-     *
      * @return 狐狸的类型的中文
      */
     @Nonnull
@@ -103,7 +103,6 @@ public final class FoxHelper {
      * 获取狐狸的类型({@link Fox.Type})的中文
      *
      * @param type {@link String} 狐狸的类型
-     *
      * @return 狐狸的类型的中文
      */
     @Nonnull

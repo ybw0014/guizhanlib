@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * This enum contains some useful tags that
  * {@link org.bukkit.Tag} does not have.
- *
+ * <p>
  * TODO: rewrite it to have multi-version compatibility
  *
  * @author ybw0014
@@ -179,7 +179,7 @@ public enum MinecraftTag {
         }
     },
 
-     /**
+    /**
      * This includes all types of horse armor
      */
     HORSE_ARMOR {
@@ -242,7 +242,6 @@ public enum MinecraftTag {
      * This method returns if given {@link Material} is tagged.
      *
      * @param type the {@link Material} to be determined
-     *
      * @return if given {@link Material} is tagged
      */
     public abstract boolean isTagged(Material type);
@@ -251,7 +250,6 @@ public enum MinecraftTag {
      * This method returns if given {@link ItemStack} is tagged.
      *
      * @param itemStack the {@link ItemStack} to be determined
-     *
      * @return if given {@link ItemStack} is tagged
      */
     public boolean isTagged(ItemStack itemStack) {

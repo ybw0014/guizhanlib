@@ -18,7 +18,7 @@ public final class BiomeHelper {
      * 返回生物群系({@link Biome})的中文名
      *
      * @param biome {@link Biome} 生物群系
-     * @return 生物群系的中文名,如果获取失败则返回键名
+     * @return 生物群系的中文名, 如果获取失败则返回键名
      */
     @Nonnull
     public static String getName(@Nonnull Biome biome) {

@@ -19,8 +19,7 @@ public final class VillagerHelper {
      * 返回村民职业({@link Profession})的中文名
      *
      * @param profession {@link Profession} 村民职业
-     *
-     * @return 村民职业的中文名称,如果获取失败则返回键名
+     * @return 村民职业的中文名称, 如果获取失败则返回键名
      */
     @Nonnull
     public static String getProfessionName(@Nonnull Profession profession) {
@@ -31,7 +30,6 @@ public final class VillagerHelper {
      * 获取村民职业({@link Profession})的键名
      *
      * @param profession {@link Profession} 村民职业
-     *
      * @return 村民职业的键名
      */
     @Nonnull
@@ -46,7 +44,7 @@ public final class VillagerHelper {
      * 返回村民职业({@link Profession})的中文名
      *
      * @param profession {@link String} 村民职业
-     * @return 村民职业的中文名称,如果获取失败则返回键名
+     * @return 村民职业的中文名称, 如果获取失败则返回键名
      */
     @Nonnull
     public static String getProfessionName(@Nonnull String profession) {

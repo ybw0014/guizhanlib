@@ -16,11 +16,12 @@ import javax.annotation.Nonnull;
 public final class Metals {
     /**
      * 获取金属的中文类型
+     *
      * @param type {@link String} 金属类型
-     * @return 中文类型,如果无匹配则返回英文
+     * @return 中文类型, 如果无匹配则返回英文
      */
     @Nonnull
-    public static String getType(@Nonnull String type){
+    public static String getType(@Nonnull String type) {
 
         // 是否属于Slimefun基础金属
         BasicMetals basicMetal = BasicMetals.fromEnglish(type);

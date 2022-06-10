@@ -50,9 +50,12 @@ public final class HorseHelper {
          */
         WHITE(Horse.Color.WHITE, "White", "白色");
 
-        private final @Getter Horse.Color color;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        private final @Getter
+        Horse.Color color;
+        private final @Getter
+        String english;
+        private final @Getter
+        String chinese;
 
         @ParametersAreNonnullByDefault
         Color(Horse.Color color, String english, String chinese) {
@@ -71,11 +74,10 @@ public final class HorseHelper {
          * 根据马的颜色返回对应的枚举
          *
          * @param horseColor {@link Horse.Color} 马的颜色
-         *
          * @return 对应的枚举
          */
         @Nonnull
-    public static Color fromColor(@Nonnull Horse.Color horseColor) {
+        public static Color fromColor(@Nonnull Horse.Color horseColor) {
             Preconditions.checkNotNull(horseColor, "马的颜色不能为空");
 
             for (Color color : Color.values()) {
@@ -90,11 +92,10 @@ public final class HorseHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
         @Nullable
-    public static Color fromEnglish(@Nonnull String english) {
+        public static Color fromEnglish(@Nonnull String english) {
             Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
@@ -117,9 +118,12 @@ public final class HorseHelper {
         WHITE_DOTS(Horse.Style.WHITE_DOTS, "White Dots", "白色斑点"),
         WHITEFIELD(Horse.Style.WHITEFIELD, "Whitefield", "白色条纹");
 
-        private final @Getter Horse.Style style;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        private final @Getter
+        Horse.Style style;
+        private final @Getter
+        String english;
+        private final @Getter
+        String chinese;
 
         Style(Horse.Style style, String english, String chinese) {
             this.style = style;
@@ -136,11 +140,10 @@ public final class HorseHelper {
          * 根据马的样式返回对应的枚举
          *
          * @param horseStyle {@link Horse.Style} 马的样式
-         *
          * @return 对应的枚举
          */
         @Nonnull
-    public static Style fromStyle(@Nonnull Horse.Style horseStyle) {
+        public static Style fromStyle(@Nonnull Horse.Style horseStyle) {
             Preconditions.checkNotNull(horseStyle, "马的样式不能为空");
 
             for (Style style : Style.values()) {
@@ -155,11 +158,10 @@ public final class HorseHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
         @Nullable
-    public static Style fromEnglish(@Nonnull String english) {
+        public static Style fromEnglish(@Nonnull String english) {
             Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
@@ -176,7 +178,6 @@ public final class HorseHelper {
      * 获取马的颜色({@link Horse.Color})的中文
      *
      * @param color {@link Horse.Color} 马的颜色
-     *
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -188,7 +189,6 @@ public final class HorseHelper {
      * 获取马的样式({@link Horse.Style})的中文
      *
      * @param style {@link Horse.Style} 马的样式
-     *
      * @return 马的样式的中文
      */
     @Nonnull
@@ -200,7 +200,6 @@ public final class HorseHelper {
      * 获取马的颜色({@link Horse.Color})的中文
      *
      * @param color {@link String} 马的颜色
-     *
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -219,7 +218,6 @@ public final class HorseHelper {
      * 获取马的样式({@link Horse.Style})的中文
      *
      * @param style {@link String} 马的样式
-     *
      * @return 马的样式的中文
      */
     @Nonnull

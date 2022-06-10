@@ -66,9 +66,12 @@ public final class CatHelper {
          */
         WHITE(Cat.Type.WHITE, "Calico", "白猫");
 
-        private final @Getter Cat.Type type;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        private final @Getter
+        Cat.Type type;
+        private final @Getter
+        String english;
+        private final @Getter
+        String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Cat.Type type, String english, String chinese) {
@@ -87,7 +90,6 @@ public final class CatHelper {
          * 根据猫的类型返回对应的枚举
          *
          * @param catType {@link Cat.Type} 猫的类型
-         *
          * @return 对应的枚举
          */
         @Nonnull
@@ -106,7 +108,6 @@ public final class CatHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
         @Nullable
@@ -127,7 +128,6 @@ public final class CatHelper {
      * 获取猫的类型({@link Cat.Type})的中文
      *
      * @param type {@link Cat.Type} 猫的类型
-     *
      * @return 猫的类型的中文
      */
     @Nonnull
@@ -139,7 +139,6 @@ public final class CatHelper {
      * 获取猫的类型({@link Cat.Type})的中文
      *
      * @param type {@link String} 猫的类型
-     *
      * @return 猫的类型的中文
      */
     @Nonnull

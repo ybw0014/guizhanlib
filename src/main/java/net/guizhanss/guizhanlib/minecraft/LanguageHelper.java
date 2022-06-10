@@ -29,7 +29,8 @@ public final class LanguageHelper {
             LanguageHelper.class.getResourceAsStream(filename), StandardCharsets.UTF_8
         ));
         Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
         lang = gson.fromJson(reader, type);
     }
 
