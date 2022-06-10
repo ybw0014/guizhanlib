@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.9.6
+
+- 添加`WikiSetup`类，用于设置物品Wiki页面（兼容旧版本粘液）
+
 ## 0.9.5
 
 - `AbstractAddon`添加了`getSlimefunTickCount()`方法，获取已经过的粘液刻数
