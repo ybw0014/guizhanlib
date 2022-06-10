@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class PufferFishHelper {
     /**
      * 获取河豚的膨胀状态的中文

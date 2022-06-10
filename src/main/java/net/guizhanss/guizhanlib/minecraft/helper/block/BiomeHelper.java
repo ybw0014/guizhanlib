@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class BiomeHelper {
     /**
      * 返回生物群系({@link Biome})的中文名

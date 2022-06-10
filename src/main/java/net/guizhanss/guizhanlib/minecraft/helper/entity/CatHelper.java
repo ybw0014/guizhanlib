@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class CatHelper {
     /**
      * 获取猫的类型({@link Cat.Type})的中文
@@ -95,12 +96,12 @@ public final class CatHelper {
          */
         WHITE(Cat.Type.WHITE, "Calico", "白猫");
 
-        private final @Getter
-        Cat.Type type;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Cat.Type type;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Cat.Type type, String english, String chinese) {

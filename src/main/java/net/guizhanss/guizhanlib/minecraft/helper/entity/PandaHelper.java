@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class PandaHelper {
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文
@@ -79,12 +80,12 @@ public final class PandaHelper {
          */
         WORRIED(Panda.Gene.WORRIED, "Worried", "发愁");
 
-        private final @Getter
-        Panda.Gene gene;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Panda.Gene gene;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Gene(Panda.Gene gene, String english, String chinese) {

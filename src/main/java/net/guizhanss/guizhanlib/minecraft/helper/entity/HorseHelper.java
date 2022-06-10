@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class HorseHelper {
     /**
      * 获取马的颜色({@link Horse.Color})的中文
@@ -108,12 +109,12 @@ public final class HorseHelper {
          */
         WHITE(Horse.Color.WHITE, "White", "白色");
 
-        private final @Getter
-        Horse.Color color;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Horse.Color color;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Color(Horse.Color color, String english, String chinese) {
@@ -170,18 +171,33 @@ public final class HorseHelper {
      * 所有马的样式
      */
     public enum Style {
+        /**
+         * 黑色斑点
+         */
         BLACK_DOTS(Horse.Style.BLACK_DOTS, "Black Dots", "黑色斑点"),
+        /**
+         * 无
+         */
         NONE(Horse.Style.NONE, "None", "无"),
+        /**
+         * 白色
+         */
         WHITE(Horse.Style.WHITE, "White", "白色"),
+        /**
+         * 白色斑点
+         */
         WHITE_DOTS(Horse.Style.WHITE_DOTS, "White Dots", "白色斑点"),
+        /**
+         * 白色条纹
+         */
         WHITEFIELD(Horse.Style.WHITEFIELD, "Whitefield", "白色条纹");
 
-        private final @Getter
-        Horse.Style style;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Horse.Style style;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         Style(Horse.Style style, String english, String chinese) {
             this.style = style;

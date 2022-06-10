@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class PotionEffectTypeHelper {
     /**
      * 返回药水效果({@link PotionEffectType})的中文名

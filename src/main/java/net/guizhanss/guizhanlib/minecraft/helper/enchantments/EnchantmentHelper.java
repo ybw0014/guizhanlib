@@ -15,6 +15,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class EnchantmentHelper {
     /**
      * 返回附魔({@link Enchantment})的中文名称与附魔等级

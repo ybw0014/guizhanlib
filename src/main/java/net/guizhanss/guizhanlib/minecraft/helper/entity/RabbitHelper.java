@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class RabbitHelper {
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文
@@ -79,12 +80,12 @@ public final class RabbitHelper {
          */
         WHITE(Rabbit.Type.WHITE, "White", "白色");
 
-        private final @Getter
-        Rabbit.Type type;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Rabbit.Type type;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Rabbit.Type type, String english, String chinese) {

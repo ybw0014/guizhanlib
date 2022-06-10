@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public final class FoxHelper {
     /**
      * 获取狐狸的类型({@link Fox.Type})的中文
@@ -59,12 +60,12 @@ public final class FoxHelper {
          */
         SNOW(Fox.Type.SNOW, "Snow", "白色");
 
-        private final @Getter
-        Fox.Type type;
-        private final @Getter
-        String english;
-        private final @Getter
-        String chinese;
+        @Getter
+        private final Fox.Type type;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Fox.Type type, String english, String chinese) {
