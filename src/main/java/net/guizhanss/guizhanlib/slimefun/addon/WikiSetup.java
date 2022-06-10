@@ -15,6 +15,8 @@ import java.util.logging.Level;
  * 设置附属的Wiki.
  * <p>
  * 需要最新汉化粘液开发版, 否则功能不会生效.
+ *
+ * @author ybw0014
  */
 @UtilityClass
 public final class WikiSetup {
