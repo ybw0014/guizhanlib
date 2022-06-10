@@ -1,19 +1,20 @@
 package net.guizhanss.guizhanlib.minecraft;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 聊天颜色
  *
  * @author ybw0014
- *
  * @see ChatColor
  */
 public enum ChatColors {
@@ -111,13 +112,26 @@ public enum ChatColors {
      */
     public static final char COLOR_CHAR = '\u00a7';
 
-    private final @Getter ChatColor color;
-    private final @Getter String english;
-    private final @Getter String chinese;
+    private static final ChatColors[] valuesCache = values();
+    private static final Map<ChatColor, ChatColors> colorLookup = new HashMap<>();
+
+    static {
+        for (ChatColors color : valuesCache) {
+            colorLookup.put(color.getColor(), color);
+        }
+    }
+
+    @Getter
+    private final ChatColor color;
+    @Getter
+    private final String english;
+    @Getter
+    private final String chinese;
 
     /**
-     * 构建函数
-     * @param color {@link ChatColor}
+     * 构造函数
+     *
+     * @param color   {@link ChatColor}
      * @param english 英文
      * @param chinese 中文
      */
@@ -126,6 +140,38 @@ public enum ChatColors {
         this.color = color;
         this.english = english;
         this.chinese = chinese;
+    }
+
+    /**
+     * 根据聊天颜色返回对应的枚举
+     *
+     * @param chatColor {@link ChatColor} 聊天颜色
+     * @return 对应的枚举
+     */
+    @Nonnull
+    public static ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
+        Preconditions.checkNotNull(chatColor, "聊天颜色不能为空");
+
+        return colorLookup.get(chatColor);
+    }
+
+    /**
+     * 根据英文返回对应的枚举
+     *
+     * @param english {@link String} 提供的英文
+     * @return 对应的枚举
+     */
+    @Nullable
+    public static ChatColors fromEnglish(@Nonnull String english) {
+        Preconditions.checkNotNull(english, "英文不能为空");
+
+        String humanized = StringUtil.humanize(english);
+        for (ChatColors color : valuesCache) {
+            if (color.getEnglish().equals(humanized)) {
+                return color;
+            }
+        }
+        return null;
     }
 
     /**
@@ -146,42 +192,5 @@ public enum ChatColors {
     public String toStringWithColor() {
         return this.getColor() +
             this.getChinese();
-    }
-
-    /**
-     * 根据聊天颜色返回对应的枚举
-     *
-     * @param chatColor {@link ChatColor} 聊天颜色
-     *
-     * @return 对应的枚举
-     */
-    public static @Nonnull ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
-        Validate.notNull(chatColor, "聊天颜色不能为空");
-
-        for (ChatColors color : ChatColors.values()) {
-            if (color.getColor() == chatColor) {
-                return color;
-            }
-        }
-        throw new IllegalArgumentException("无效的ChatColor");
-    }
-
-    /**
-     * 根据英文返回对应的枚举
-     *
-     * @param english {@link String} 提供的英文
-     *
-     * @return 对应的枚举
-     */
-    public static @Nullable ChatColors fromEnglish(@Nonnull String english) {
-        Validate.notNull(english, "英文不能为空");
-
-        String humanized = StringUtil.humanize(english);
-        for (ChatColors color : ChatColors.values()) {
-            if (color.getEnglish().equals(humanized)) {
-                return color;
-            }
-        }
-        return null;
     }
 }

@@ -1,7 +1,7 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
 
 import javax.annotation.Nonnull;
@@ -12,16 +12,17 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class EntityHelper {
+@SuppressWarnings("unused")
+public final class EntityHelper {
     /**
      * 返回实体({@link Entity})的显示名称
      *
      * @param entity {@link Entity} 实体
-     *
      * @return 实体的显示名称
      */
-    public static @Nonnull String getDisplayName(@Nonnull Entity entity) {
-        Validate.notNull(entity, "实体不能为空");
+    @Nonnull
+    public static String getDisplayName(@Nonnull Entity entity) {
+        Preconditions.checkNotNull(entity, "实体不能为空");
 
         return entity.getCustomName() != null ?
             entity.getCustomName() : getName(entity);
@@ -31,11 +32,11 @@ public class EntityHelper {
      * 返回实体({@link Entity})的中文名称
      *
      * @param entity {@link Entity} 实体
-     *
-     * @return 实体的中文名称,如果获取失败则返回键名
+     * @return 实体的中文名称, 如果获取失败则返回键名
      */
-    public static @Nonnull String getName(@Nonnull Entity entity) {
-        Validate.notNull(entity, "实体不能为空");
+    @Nonnull
+    public static String getName(@Nonnull Entity entity) {
+        Preconditions.checkNotNull(entity, "实体不能为空");
 
         return EntityTypeHelper.getName(entity.getType());
     }

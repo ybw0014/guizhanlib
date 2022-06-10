@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Rabbit;
 
 import javax.annotation.Nonnull;
@@ -16,7 +16,37 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-public class RabbitHelper {
+@SuppressWarnings("unused")
+public final class RabbitHelper {
+    /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
+     * @param type {@link Rabbit.Type} 兔子的类型
+     * @return 兔子的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull Rabbit.Type type) {
+        return Type.fromType(type).getChinese();
+    }
+
+    /**
+     * 获取兔子的类型({@link Rabbit.Type})的中文
+     *
+     * @param type {@link String} 兔子的类型
+     * @return 兔子的类型的中文
+     */
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "兔子的类型不能为空");
+
+        try {
+            Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);
+            return Type.fromType(rabbitType).getChinese();
+        } catch (IllegalArgumentException ex) {
+            return StringUtil.humanize(type);
+        }
+    }
+
     /**
      * 所有兔子的类型
      */
@@ -50,9 +80,12 @@ public class RabbitHelper {
          */
         WHITE(Rabbit.Type.WHITE, "White", "白色");
 
-        private final @Getter Rabbit.Type type;
-        private final @Getter String english;
-        private final @Getter String chinese;
+        @Getter
+        private final Rabbit.Type type;
+        @Getter
+        private final String english;
+        @Getter
+        private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Rabbit.Type type, String english, String chinese) {
@@ -61,20 +94,15 @@ public class RabbitHelper {
             this.chinese = chinese;
         }
 
-        @Override
-        public String toString() {
-            return this.getChinese();
-        }
-
         /**
          * 根据兔子的类型返回对应的枚举
          *
          * @param rabbitType {@link Rabbit.Type} 兔子的类型
-         *
          * @return 对应的枚举
          */
-        public static @Nonnull Type fromType(@Nonnull Rabbit.Type rabbitType) {
-            Validate.notNull(rabbitType, "兔子的类型不能为空");
+        @Nonnull
+        public static Type fromType(@Nonnull Rabbit.Type rabbitType) {
+            Preconditions.checkNotNull(rabbitType, "兔子的类型不能为空");
 
             for (Type type : Type.values()) {
                 if (type.getType() == rabbitType) {
@@ -88,11 +116,11 @@ public class RabbitHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
-         *
          * @return 对应的枚举
          */
-        public static @Nullable Type fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+        public static Type fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Type type : Type.values()) {
@@ -102,34 +130,10 @@ public class RabbitHelper {
             }
             return null;
         }
-    }
 
-    /**
-     * 获取兔子的类型({@link Rabbit.Type})的中文
-     *
-     * @param type {@link Rabbit.Type} 兔子的类型
-     *
-     * @return 兔子的类型的中文
-     */
-    public static @Nonnull String getType(@Nonnull Rabbit.Type type) {
-        return Type.fromType(type).getChinese();
-    }
-
-    /**
-     * 获取兔子的类型({@link Rabbit.Type})的中文
-     *
-     * @param type {@link String} 兔子的类型
-     *
-     * @return 兔子的类型的中文
-     */
-    public static @Nonnull String getType(@Nonnull String type) {
-        Validate.notNull(type, "兔子的类型不能为空");
-
-        try {
-            Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);
-            return Type.fromType(rabbitType).getChinese();
-        } catch (IllegalArgumentException ex) {
-            return StringUtil.humanize(type);
+        @Override
+        public String toString() {
+            return this.getChinese();
         }
     }
 }

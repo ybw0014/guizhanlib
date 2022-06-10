@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 
 import javax.annotation.Nonnull;
@@ -14,6 +14,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public class MaterialHelper {
     /**
      * 返回材料({@link Material})的中文名称
@@ -21,7 +22,8 @@ public class MaterialHelper {
      * @param mat {@link Material} 材料
      * @return 材料的中文名称，如果获取失败则返回对应的键名
      */
-    public static @Nonnull String getName(@Nonnull Material mat) {
+    @Nonnull
+    public static String getName(@Nonnull Material mat) {
         return LanguageHelper.getLangOrKey(getKey(mat));
     }
 
@@ -31,8 +33,9 @@ public class MaterialHelper {
      * @param mat {@link Material} 物品材料
      * @return 物品材料的键名
      */
-    public static @Nonnull String getKey(@Nonnull Material mat) {
-        Validate.notNull(mat, "材料不能为空");
+    @Nonnull
+    public static String getKey(@Nonnull Material mat) {
+        Preconditions.checkNotNull(mat, "材料不能为空");
 
         return (mat.isBlock() ? "block" : "item") + "."
             + mat.getKey().getNamespace() + "."
@@ -43,22 +46,22 @@ public class MaterialHelper {
      * 根据给定的材料字符串返回中文名称
      *
      * @param material 材料的{@link String}格式
-     *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式
      */
-    public static @Nonnull String getName(@Nonnull String material) {
+    @Nonnull
+    public static String getName(@Nonnull String material) {
         return getName(material, false);
     }
 
     /**
      * 根据给定的材料字符串返回中文名称
      *
-     * @param material 材料的{@link String}格式
+     * @param material    材料的{@link String}格式
      * @param emptyString 是否返回空字符串
-     *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式或空字符串
      */
-    public static @Nonnull String getName(@Nonnull String material, boolean emptyString) {
+    @Nonnull
+    public static String getName(@Nonnull String material, boolean emptyString) {
         try {
             Material mat = Material.valueOf(material);
             return getName(mat);

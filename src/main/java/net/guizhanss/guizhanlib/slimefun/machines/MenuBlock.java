@@ -6,15 +6,12 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -26,7 +23,7 @@ import java.util.List;
 
 /**
  * A {@link MenuBlock} is a {@link SlimefunItem} with {@link MenuBlockPreset}.
- *
+ * <p>
  * Modified from InfinityLib
  *
  * @author Mooy1
@@ -39,10 +36,10 @@ public abstract class MenuBlock extends SlimefunItem {
      * Constructor of {@link MenuBlock}.
      * Add events on break and place
      *
-     * @param itemGroup the {@link ItemGroup} of this {@link MenuBlock}
-     * @param item the {@link SlimefunItemStack} of this {@link MenuBlock}
+     * @param itemGroup  the {@link ItemGroup} of this {@link MenuBlock}
+     * @param item       the {@link SlimefunItemStack} of this {@link MenuBlock}
      * @param recipeType the {@link RecipeType} of this {@link MenuBlock}
-     * @param recipe the recipe of this {@link MenuBlock}
+     * @param recipe     the recipe of this {@link MenuBlock}
      */
     public MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);

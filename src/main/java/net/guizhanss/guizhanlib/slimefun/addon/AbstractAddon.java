@@ -1,11 +1,11 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
+import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.guizhanss.guizhanlib.common.Scheduler;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
-import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -26,9 +26,9 @@ import java.util.logging.Level;
 /**
  * An abstract {@link SlimefunAddon} class that contains
  * the updater and some utilities.
- *
+ * <p>
  * Extend this as your main class to use them.
- *
+ * <p>
  * This is modified from InfinityLib
  *
  * @author Mooy1
@@ -59,9 +59,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Live addon constructor (old)
      *
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
+     * @param githubUser    GitHub username of this project
+     * @param githubRepo    GitHub repository of this project
+     * @param githubBranch  GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
      */
     @Deprecated
@@ -72,10 +72,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Live addon constructor
      *
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config. Leave this empty if you want updater be in English.
      */
     public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
@@ -92,14 +92,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Testing addon constructor
      *
-     * @param loader the {@link JavaPluginLoader}
-     * @param description the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder the {@link File} of plugin's data folder
-     * @param file the {@link File} of plugin
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param loader         the {@link JavaPluginLoader}
+     * @param description    the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder     the {@link File} of plugin's data folder
+     * @param file           the {@link File} of plugin
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config
      */
     public AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
@@ -110,16 +110,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Testing library constructor
      *
-     * @param loader the {@link JavaPluginLoader}
-     * @param description the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder the {@link File} of plugin's data folder
-     * @param file the {@link File} of plugin
-     * @param githubUser GitHub username of this project
-     * @param githubRepo GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param loader         the {@link JavaPluginLoader}
+     * @param description    the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder     the {@link File} of plugin's data folder
+     * @param file           the {@link File} of plugin
+     * @param githubUser     GitHub username of this project
+     * @param githubRepo     GitHub repository of this project
+     * @param githubBranch   GitHub branch of this project
+     * @param autoUpdateKey  Auto update key in the config
      * @param updaterLangKey Updater language key in the config
-     * @param environment the {@link Environment} of file
+     * @param environment    the {@link Environment} of file
      */
     AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
                   String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey,
@@ -133,6 +133,91 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         this.updaterLangKey = updaterLangKey;
         this.bugTrackerURL = MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
         validate();
+    }
+
+    /**
+     * Get an instance of extended class of {@link AbstractAddon}
+     *
+     * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
+     * @return The instance of extended class of {@link AbstractAddon}
+     */
+    @Nonnull
+    @SuppressWarnings("unchecked")
+    public static <T extends AbstractAddon> T getInstance() {
+        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
+    }
+
+    /**
+     * Get the {@link AddonConfig}
+     *
+     * @return the {@link AddonConfig}
+     */
+    @Nonnull
+    public static AddonConfig getAddonConfig() {
+        return getInstance().config;
+    }
+
+    /**
+     * Returns the total number of Slimefun ticks that have occurred
+     *
+     * @return total number of Slimefun ticks
+     */
+    public static int getSlimefunTickCount() {
+        return getInstance().slimefunTickCount;
+    }
+
+    /**
+     * Get the {@link PluginCommand} of {@link AbstractAddon}.
+     *
+     * @return the {@link PluginCommand} of {@link AbstractAddon}.
+     */
+    @Nonnull
+    public static PluginCommand getPluginCommand(@Nonnull String command) {
+        Preconditions.checkNotNull(command, "command should not be null");
+        return Objects.requireNonNull(getInstance().getCommand(command));
+    }
+
+    /**
+     * Creates a {@link NamespacedKey} from the given string
+     *
+     * @param key the {@link String} representation of the key
+     * @return the {@link NamespacedKey} created from given string
+     */
+    @Nonnull
+    public static NamespacedKey createKey(String key) {
+        return new NamespacedKey(getInstance(), key);
+    }
+
+    /**
+     * Call the logger to log a message with arguments.
+     * ChatColor code will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param level   the log {@link Level}
+     * @param message the message
+     * @param args    the arguments with in
+     * @see MessageFormat
+     */
+    public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
+        Preconditions.checkNotNull(level, "log level should not be null");
+        Preconditions.checkNotNull(message, "log message should not be null");
+
+        getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
+    }
+
+    /**
+     * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
+     * ChatColor code will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param message the message
+     * @param args    the arguments with in
+     * @see MessageFormat
+     */
+    public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
+        Preconditions.checkNotNull(message, "log message should not be null");
+
+        Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
 
     /**
@@ -167,11 +252,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         // Load
         try {
             load();
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             handleException(e);
-        }
-        finally {
+        } finally {
             loading = false;
         }
     }
@@ -320,25 +403,15 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * DEPRECATED: Call {@link #getMetrics()} to get {@link Metrics} instance.
+     * <p>
      * Set up metrics module. If you need this, override it
      * e.g. Custom charts, etc...
      *
      * @param metrics The {@link Metrics} instance.
      */
+    @Deprecated
     public void setupMetrics(@Nonnull Metrics metrics) {
-    }
-
-    /**
-     * Get an instance of extended class of {@link AbstractAddon}
-     *
-     * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
-     *
-     * @return The instance of extended class of {@link AbstractAddon}
-     */
-    @Nonnull
-    @SuppressWarnings("unchecked")
-    public static <T extends AbstractAddon> T getInstance() {
-        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
     }
 
     /**
@@ -364,7 +437,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * This returns the default bug tracker URL by
      * the given GitHub username and repository in constructor.
-     *
+     * <p>
      * Override it if you don't use GitHub issues as bug tracker
      *
      * @return the default bug tracker url
@@ -406,85 +479,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Get the {@link AddonConfig}
-     *
-     * @return the {@link AddonConfig}
-     */
-    @Nonnull
-    public static AddonConfig getAddonConfig() {
-        return getInstance().config;
-    }
-
-    /**
      * Save default config.
      * Overridden and does nothing since it is handled in #onEnable()
      */
     @Override
     public final void saveDefaultConfig() {
-    }
-
-    /**
-     * Returns the total number of Slimefun ticks that have occurred
-     *
-     * @return total number of Slimefun ticks
-     */
-    public static int getSlimefunTickCount() {
-        return getInstance().slimefunTickCount;
-    }
-
-    /**
-     * Get the {@link PluginCommand} of {@link AbstractAddon}.
-     *
-     * @return the {@link PluginCommand} of {@link AbstractAddon}.
-     */
-    public static @Nonnull PluginCommand getPluginCommand(@Nonnull String command) {
-        Validate.notNull(command, "command should not be null");
-        return Objects.requireNonNull(getInstance().getCommand(command));
-    }
-
-    /**
-     * Creates a {@link NamespacedKey} from the given string
-     *
-     * @param key the {@link String} representation of the key
-     *
-     * @return the {@link NamespacedKey} created from given string
-     */
-    @Nonnull
-    public static NamespacedKey createKey(String key) {
-        return new NamespacedKey(getInstance(), key);
-    }
-
-    /**
-     * Call the logger to log a message with arguments.
-     * ChatColor code will be translated automatically,
-     * and message is dealt with MessageFormat#format().
-     *
-     * @param level the log {@link Level}
-     * @param message the message
-     * @param args the arguments with in
-     *
-     * @see MessageFormat
-     */
-    public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
-        Validate.notNull(level, "log level should not be null");
-        Validate.notNull(message, "log message should not be null");
-
-        getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
-    }
-
-    /**
-     * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
-     * ChatColor code will be translated automatically,
-     * and message is dealt with MessageFormat#format().
-     *
-     * @param message the message
-     * @param args the arguments with in
-     *
-     * @see MessageFormat
-     */
-    public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
-        Validate.notNull(message, "log message should not be null");
-
-        Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
 }

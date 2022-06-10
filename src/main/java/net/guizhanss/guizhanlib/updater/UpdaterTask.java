@@ -1,5 +1,13 @@
 package net.guizhanss.guizhanlib.updater;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import net.guizhanss.guizhanlib.utils.JsonUtil;
+import org.bukkit.plugin.Plugin;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,24 +24,13 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.bukkit.plugin.Plugin;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import net.guizhanss.guizhanlib.utils.JsonUtil;
-
 /**
  * 自动更新任务
  * 由 {@link GuizhanBuildsUpdater} 调用
  *
  * @author ybw0014
  */
-public class UpdaterTask implements Runnable {
+public final class UpdaterTask implements Runnable {
 
     private final GuizhanBuildsUpdater updater;
     private final Plugin plugin;
@@ -120,9 +117,11 @@ public class UpdaterTask implements Runnable {
 
     /**
      * 从构建站获取版本格式
+     *
      * @return 版本格式，null表示获取失败
      */
-    private @Nullable String getVersionFormat() {
+    @Nullable
+    private String getVersionFormat() {
         try {
             return JsonUtil.getFromPath(repoInfo, "options.target.version").getAsString();
         } catch (IllegalStateException ex) {
@@ -132,6 +131,7 @@ public class UpdaterTask implements Runnable {
 
     /**
      * 检查插件版本是否与构建站版本格式一致
+     *
      * @param format 从构建站获取的版本格式
      * @return 格式是否一致
      */
@@ -147,6 +147,7 @@ public class UpdaterTask implements Runnable {
 
     /**
      * 检查是否有新版本
+     *
      * @return 是否有新版本
      */
     private boolean checkUpdate() {
@@ -157,7 +158,7 @@ public class UpdaterTask implements Runnable {
             JsonArray builds = (JsonArray) JsonUtil.getFromPath(buildsJson, "builds");
 
             JsonObject build = null;
-            for (int i = builds.size() - 1; i >= 0 ; i --) {
+            for (int i = builds.size() - 1; i >= 0; i--) {
                 build = (JsonObject) builds.get(i);
                 if (build.get("success").getAsBoolean()) break;
                 build = null;
@@ -212,10 +213,12 @@ public class UpdaterTask implements Runnable {
 
     /**
      * 从URL获取所有内容
+     *
      * @param url 资源所在的 {@link URL}
      * @return 所有内容 {@link String}
      */
-    private @Nullable String fetch(@Nonnull URL url) {
+    @Nullable
+    private String fetch(@Nonnull URL url) {
         try {
             StringBuilder content = new StringBuilder();
 

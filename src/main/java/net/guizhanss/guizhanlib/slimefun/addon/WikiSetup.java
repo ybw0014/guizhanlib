@@ -13,8 +13,10 @@ import java.util.logging.Level;
 
 /**
  * 设置附属的Wiki.
- *
+ * <p>
  * 需要最新汉化粘液开发版, 否则功能不会生效.
+ *
+ * @author ybw0014
  */
 @UtilityClass
 public final class WikiSetup {
@@ -39,7 +41,7 @@ public final class WikiSetup {
     /**
      * 调用方法添加物品的wiki页面
      *
-     * @param item 粘液物品{@link SlimefunItem}实例
+     * @param item     粘液物品{@link SlimefunItem}实例
      * @param wikiPage Wiki页面
      */
     @ParametersAreNonnullByDefault

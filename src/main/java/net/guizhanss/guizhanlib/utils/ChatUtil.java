@@ -4,6 +4,10 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.text.MessageFormat;
+
 /**
  * 聊天相关工具包
  *
@@ -13,19 +17,23 @@ import org.bukkit.command.CommandSender;
 public final class ChatUtil {
     /**
      * 转换颜色代码
+     *
      * @param message 消息
      * @return 转换后的消息
      */
-    public static String color(String message) {
+    @Nonnull
+    public static String color(@Nonnull String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
     /**
      * 向 {@link CommandSender} 发送消息
-     * @param sender {@link CommandSender} 接收者
+     *
+     * @param sender  {@link CommandSender} 接收者
      * @param message 消息
      */
-    public static void send(CommandSender sender, String message) {
-        sender.sendMessage(color(message));
+    @ParametersAreNonnullByDefault
+    public static void send(CommandSender sender, String message, Object... args) {
+        sender.sendMessage(color(MessageFormat.format(message, args)));
     }
 }

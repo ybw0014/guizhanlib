@@ -1,12 +1,12 @@
 package net.guizhanss.guizhanlib.utils;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -17,17 +17,19 @@ import java.util.Objects;
  * @author ybw0014
  */
 @UtilityClass
-public class InventoryUtil {
+public final class InventoryUtil {
     /**
      * This method push all {@link ItemStack} to {@link Player}'s inventory
      * if some items cannot be pushed, they will be dropped at {@link Player}'s {@link Location}
      *
-     * @param p the {@link Player}
+     * @param p          the {@link Player}
      * @param itemStacks all the {@link ItemStack}s to be pushed
      */
-    public static void push(@Nonnull Player p, @Nonnull ItemStack... itemStacks) {
-        Validate.notNull(p, "player should not be null");
-        Validate.notNull(itemStacks, "at least one ItemStack is required");
+    @ParametersAreNonnullByDefault
+    public static void push(Player p, ItemStack... itemStacks) {
+        Preconditions.checkNotNull(p, "player should not be null");
+        Preconditions.checkNotNull(itemStacks, "at least one ItemStack is required");
+        Preconditions.checkArgument(itemStacks.length > 0, "at least one ItemStack is required");
 
         // filter null ItemStacks
         itemStacks = Arrays.stream(itemStacks).filter(Objects::nonNull).toArray(ItemStack[]::new);

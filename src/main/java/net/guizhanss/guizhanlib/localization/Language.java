@@ -1,6 +1,6 @@
 package net.guizhanss.guizhanlib.localization;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -13,7 +13,6 @@ import java.io.IOException;
  * This class represents a {@link Language}, which holds the localization {@link FileConfiguration}.
  *
  * @author ybw0014
- *
  * @see Localization
  */
 public final class Language {
@@ -25,15 +24,15 @@ public final class Language {
     /**
      * Constructor
      *
-     * @param lang the key of language
-     * @param currentFile the current language {@link File}
+     * @param lang          the key of language
+     * @param currentFile   the current language {@link File}
      * @param defaultConfig the {@link FileConfiguration} of default from resource
      */
     @ParametersAreNonnullByDefault
     public Language(String lang, File currentFile, FileConfiguration defaultConfig) {
-        Validate.notNull(lang, "Language key cannot be null");
-        Validate.notNull(currentFile, "currentFile cannot be null");
-        Validate.notNull(defaultConfig);
+        Preconditions.checkNotNull(lang, "Language key cannot be null");
+        Preconditions.checkNotNull(currentFile, "Current file cannot be null");
+        Preconditions.checkNotNull(defaultConfig, "default config cannot be null");
 
         this.lang = lang;
         this.currentFile = currentFile;
@@ -47,7 +46,8 @@ public final class Language {
      *
      * @return The language name
      */
-    public @Nonnull String getName() {
+    @Nonnull
+    public String getName() {
         return lang;
     }
 
@@ -56,6 +56,7 @@ public final class Language {
      *
      * @return the language {@link FileConfiguration}
      */
+    @Nonnull
     public FileConfiguration getLang() {
         return currentConfig;
     }
