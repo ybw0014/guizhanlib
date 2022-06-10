@@ -5,7 +5,12 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  * This enum contains some useful tags that
- * {@link org.bukkit.Tag} does not have
+ * {@link org.bukkit.Tag} does not have.
+ *
+ * TODO: rewrite it to have multi-version compatibility
+ *
+ * @author ybw0014
+ * @author haiman233
  */
 public enum MinecraftTag {
     /**

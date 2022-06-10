@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-public class LanguageHelper {
+public final class LanguageHelper {
 
     private static final String filename = "/minecraft.zh_cn.json";
     private static final Map<String, String> lang;
@@ -39,7 +39,8 @@ public class LanguageHelper {
      * @param key {@link String} 键名
      * @return 键名内容
      */
-    public static @Nonnull String getLangOrKey(@Nonnull String key) {
+    @Nonnull
+    public static String getLangOrKey(@Nonnull String key) {
         String lang = getLangOrNull(key);
         return lang != null ? lang : key;
     }
@@ -50,8 +51,9 @@ public class LanguageHelper {
      * @param key {@link String} 键名
      * @return 键名内容
      */
-    public static @Nullable String getLangOrNull(@Nonnull String key) {
-        Validate.notNull(key, "键名不能为空");
+    @Nullable
+    public static String getLangOrNull(@Nonnull String key) {
+        Preconditions.checkNotNull(key, "键名不能为空");
 
         return lang.get(key);
     }

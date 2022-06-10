@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Rabbit;
 
 import javax.annotation.Nonnull;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-public class RabbitHelper {
+public final class RabbitHelper {
     /**
      * 所有兔子的类型
      */
@@ -73,8 +73,9 @@ public class RabbitHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nonnull Type fromType(@Nonnull Rabbit.Type rabbitType) {
-            Validate.notNull(rabbitType, "兔子的类型不能为空");
+        @Nonnull
+    public static Type fromType(@Nonnull Rabbit.Type rabbitType) {
+            Preconditions.checkNotNull(rabbitType, "兔子的类型不能为空");
 
             for (Type type : Type.values()) {
                 if (type.getType() == rabbitType) {
@@ -91,8 +92,9 @@ public class RabbitHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nullable Type fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+    public static Type fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Type type : Type.values()) {
@@ -111,7 +113,8 @@ public class RabbitHelper {
      *
      * @return 兔子的类型的中文
      */
-    public static @Nonnull String getType(@Nonnull Rabbit.Type type) {
+    @Nonnull
+    public static String getType(@Nonnull Rabbit.Type type) {
         return Type.fromType(type).getChinese();
     }
 
@@ -122,8 +125,9 @@ public class RabbitHelper {
      *
      * @return 兔子的类型的中文
      */
-    public static @Nonnull String getType(@Nonnull String type) {
-        Validate.notNull(type, "兔子的类型不能为空");
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "兔子的类型不能为空");
 
         try {
             Rabbit.Type rabbitType = Rabbit.Type.valueOf(type);

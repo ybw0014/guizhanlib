@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Horse;
 
 import javax.annotation.Nonnull;
@@ -16,17 +16,38 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-public class HorseHelper {
+public final class HorseHelper {
     /**
      * 所有马的颜色
      */
     public enum Color {
+        /**
+         * 黑色
+         */
         BLACK(Horse.Color.BLACK, "Black", "黑色"),
+        /**
+         * 褐色
+         */
         BROWN(Horse.Color.BROWN, "Brown", "褐色"),
+        /**
+         * 栗色
+         */
         CHESTNUT(Horse.Color.CHESTNUT, "Chestnut", "栗色"),
+        /**
+         * 奶油色
+         */
         CREAMY(Horse.Color.CREAMY, "Creamy", "奶油色"),
+        /**
+         * 深褐色
+         */
         DARK_BROWN(Horse.Color.DARK_BROWN, "Dark Brown", "深褐色"),
+        /**
+         * 灰色
+         */
         GRAY(Horse.Color.GRAY, "Gray", "灰色"),
+        /**
+         * 白色
+         */
         WHITE(Horse.Color.WHITE, "White", "白色");
 
         private final @Getter Horse.Color color;
@@ -40,6 +61,7 @@ public class HorseHelper {
             this.chinese = chinese;
         }
 
+        @Nonnull
         @Override
         public String toString() {
             return this.getChinese();
@@ -52,8 +74,9 @@ public class HorseHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nonnull Color fromColor(@Nonnull Horse.Color horseColor) {
-            Validate.notNull(horseColor, "马的颜色不能为空");
+        @Nonnull
+    public static Color fromColor(@Nonnull Horse.Color horseColor) {
+            Preconditions.checkNotNull(horseColor, "马的颜色不能为空");
 
             for (Color color : Color.values()) {
                 if (color.getColor() == horseColor) {
@@ -70,8 +93,9 @@ public class HorseHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nullable Color fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+    public static Color fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Color color : Color.values()) {
@@ -115,8 +139,9 @@ public class HorseHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nonnull Style fromStyle(@Nonnull Horse.Style horseStyle) {
-            Validate.notNull(horseStyle, "马的样式不能为空");
+        @Nonnull
+    public static Style fromStyle(@Nonnull Horse.Style horseStyle) {
+            Preconditions.checkNotNull(horseStyle, "马的样式不能为空");
 
             for (Style style : Style.values()) {
                 if (style.getStyle() == horseStyle) {
@@ -133,8 +158,9 @@ public class HorseHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nullable Style fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+    public static Style fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Style style : Style.values()) {
@@ -153,7 +179,8 @@ public class HorseHelper {
      *
      * @return 马的颜色的中文
      */
-    public static @Nonnull String getColor(@Nonnull Horse.Color color) {
+    @Nonnull
+    public static String getColor(@Nonnull Horse.Color color) {
         return Color.fromColor(color).getChinese();
     }
 
@@ -164,7 +191,8 @@ public class HorseHelper {
      *
      * @return 马的样式的中文
      */
-    public static @Nonnull String getStyle(@Nonnull Horse.Style style) {
+    @Nonnull
+    public static String getStyle(@Nonnull Horse.Style style) {
         return Style.fromStyle(style).getChinese();
     }
 
@@ -175,8 +203,9 @@ public class HorseHelper {
      *
      * @return 马的颜色的中文
      */
-    public static @Nonnull String getColor(@Nonnull String color) {
-        Validate.notNull(color, "马的颜色不能为空");
+    @Nonnull
+    public static String getColor(@Nonnull String color) {
+        Preconditions.checkNotNull(color, "马的颜色不能为空");
 
         try {
             Horse.Color horseColor = Horse.Color.valueOf(color);
@@ -193,8 +222,9 @@ public class HorseHelper {
      *
      * @return 马的样式的中文
      */
-    public static @Nonnull String getStyle(@Nonnull String style) {
-        Validate.notNull(style, "马的样式不能为空");
+    @Nonnull
+    public static String getStyle(@Nonnull String style) {
+        Preconditions.checkNotNull(style, "马的样式不能为空");
 
         try {
             Horse.Style horseColor = Horse.Style.valueOf(style);

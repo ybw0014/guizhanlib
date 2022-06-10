@@ -1,11 +1,8 @@
 package net.guizhanss.guizhanlib.slimefun.core;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-
-import org.apache.commons.lang.Validate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,6 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Slimefun - 高级金属(合金)
+ *
  * @author ybw0014
  */
 public enum AdvancedMetals {
@@ -85,12 +83,15 @@ public enum AdvancedMetals {
      */
     COBALT("Cobalt", "钴");
 
-    private final @Getter String english;
-    private final @Getter String chinese;
+    @Getter
+    private final String english;
+    @Getter
+    private final String chinese;
     /**
      * 该合金锭的ID
      */
-    private final @Getter String slimefunId;
+    @Getter
+    private final String slimefunId;
 
     @ParametersAreNonnullByDefault
     AdvancedMetals(String english, String chinese, String slimefunId) {
@@ -106,6 +107,7 @@ public enum AdvancedMetals {
         this.slimefunId = StringUtil.dehumanize(english) + "_INGOT";
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return this.getChinese();
@@ -113,11 +115,13 @@ public enum AdvancedMetals {
 
     /**
      * 根据英文返回对应的枚举
+     *
      * @param english {@link String} 提供的英文
      * @return 对应的枚举
      */
-    public static @Nullable AdvancedMetals fromEnglish(@Nonnull String english) {
-        Validate.notNull(english, "英文不能为空");
+    @Nullable
+    public static AdvancedMetals fromEnglish(@Nonnull String english) {
+        Preconditions.checkNotNull(english, "英文不能为空");
 
         String humanized = StringUtil.humanize(english);
         for (AdvancedMetals metal : AdvancedMetals.values()) {
@@ -130,11 +134,13 @@ public enum AdvancedMetals {
 
     /**
      * 根据中文返回对应的枚举
+     *
      * @param chinese {@link String} 提供的中文
      * @return 对应的枚举
      */
-    public static @Nullable AdvancedMetals fromChinese(@Nonnull String chinese) {
-        Validate.notNull(chinese, "中文不能为空");
+    @Nullable
+    public static AdvancedMetals fromChinese(@Nonnull String chinese) {
+        Preconditions.checkNotNull(chinese, "中文不能为空");
 
         for (AdvancedMetals metal : AdvancedMetals.values()) {
             if (metal.getChinese().equals(chinese)) {

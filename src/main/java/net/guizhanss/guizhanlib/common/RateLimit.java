@@ -18,7 +18,8 @@ public class RateLimit<K> {
 
     /**
      * 构建函数
-     * @param time 时间(毫秒)
+     *
+     * @param time   时间(毫秒)
      * @param visits 访问次数
      */
     public RateLimit(long time, long visits) {
@@ -30,6 +31,7 @@ public class RateLimit<K> {
 
     /**
      * 获取总限制次数
+     *
      * @return 总限制次数
      */
     public long getLimit() {
@@ -38,6 +40,7 @@ public class RateLimit<K> {
 
     /**
      * 获取已用次数
+     *
      * @param key 查询键
      * @return 已用次数
      */
@@ -59,6 +62,7 @@ public class RateLimit<K> {
 
     /**
      * 获取剩余次数
+     *
      * @param key 查询键
      * @return 剩余次数
      */
@@ -68,7 +72,8 @@ public class RateLimit<K> {
 
     /**
      * 增加访问次数
-     * @param key 查询键
+     *
+     * @param key    查询键
      * @param visits 访问次数
      * @return 是否成功增加访问次数
      */
@@ -99,6 +104,7 @@ public class RateLimit<K> {
 
     /**
      * 增加1次访问次数
+     *
      * @param key 查询键
      * @return 是否成功增加访问次数
      */
@@ -108,6 +114,7 @@ public class RateLimit<K> {
 
     /**
      * 重置频率限制
+     *
      * @param key 查询键
      */
     public void reset(K key) {

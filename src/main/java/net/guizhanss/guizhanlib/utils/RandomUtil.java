@@ -16,7 +16,6 @@ public class RandomUtil {
      *
      * @param min 最小范围
      * @param max 最大范围
-     *
      * @return 随机数
      */
     public static int randomInt(int min, int max) {
@@ -28,7 +27,6 @@ public class RandomUtil {
      *
      * @param min 最小范围
      * @param max 最大范围
-     *
      * @return 随机数
      */
     public static double randomDouble(double min, double max) {
@@ -41,8 +39,7 @@ public class RandomUtil {
      * 以 chance / bound 的概率进行尝试
      *
      * @param chance 分子
-     * @param bound 分母
-     *
+     * @param bound  分母
      * @return 是否成功
      */
     public static boolean testChance(int chance, int bound) {

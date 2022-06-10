@@ -11,13 +11,14 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class PufferFishHelper {
+public final class PufferFishHelper {
     /**
      * 获取河豚的膨胀状态的中文
      * @param level 膨胀状态
      * @return 膨胀状态的中文
      */
-    public static @Nonnull String getPuffState(int level){
+    @Nonnull
+    public static String getPuffState(int level){
         switch(level){
             case 0:
                 return "未膨胀";

@@ -1,10 +1,9 @@
 package net.guizhanss.guizhanlib.updater;
 
-import com.google.gson.Gson;
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.JsonUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -20,23 +19,16 @@ import java.util.logging.Logger;
 /**
  * 自动更新，从构建站(builds.guizhanss.net)获取最新版本
  */
-public class GuizhanBuildsUpdater {
+@Getter
+public final class GuizhanBuildsUpdater {
 
-    @Getter
     private final Plugin plugin;
-    @Getter
     private final File file;
-    @Getter
     private final String user;
-    @Getter
     private final String repo;
-    @Getter
     private final String branch;
-    @Getter
     private final boolean checkOnly;
-    @Getter
     private String lang;
-    @Getter
     private JsonObject locale;
 
     /**
@@ -161,7 +153,7 @@ public class GuizhanBuildsUpdater {
      */
     private void loadLang() {
         // 从资源中加载
-        InputStream stream = getPlugin().getResource("updater.json");
+        InputStream stream = plugin.getResource("updater.json");
         if (stream == null) {
             throw new IllegalStateException("The updater's language file is missing, did you correctly relocated it?");
         }
@@ -179,14 +171,15 @@ public class GuizhanBuildsUpdater {
 
     @Nonnull
     public String getFromLocale(@Nonnull String key, @Nonnull String defaultString) {
-        Validate.notNull(key, "language key should not be null");
-        Validate.notNull(defaultString, "default string should not be null");
+        Preconditions.checkNotNull(key, "language key should not be null");
+        Preconditions.checkNotNull(defaultString, "default string should not be null");
 
         try {
             if (this.locale != null) {
                 return this.locale.get(key).getAsString();
             }
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException ignored) {
+        }
         return defaultString;
     }
 }

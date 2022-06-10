@@ -1,6 +1,6 @@
 package net.guizhanss.guizhanlib.localization;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,8 +27,6 @@ import java.util.logging.Level;
  */
 public class Localization {
 
-    private boolean initialized = false;
-
     private final JavaPlugin plugin;
     private final String langFolderName;
     private final File langFolder;
@@ -53,8 +51,8 @@ public class Localization {
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin, String folderName) {
-        Validate.notNull(plugin, "The plugin instance should not be null");
-        Validate.notNull(folderName, "The folder name should not be null");
+        Preconditions.checkNotNull(plugin, "The plugin instance should not be null");
+        Preconditions.checkNotNull(folderName, "The folder name should not be null");
 
         this.plugin = plugin;
 
@@ -69,8 +67,6 @@ public class Localization {
         if (!langFolder.exists()) {
             langFolder.mkdir();
         }
-
-        this.initialized = true;
     }
 
     /**
@@ -94,7 +90,7 @@ public class Localization {
      * @throws IllegalStateException when language file does not exist
      */
     public void addLanguage(@Nonnull String langFilename) {
-        Validate.notNull(langFilename, "The language file name should not be null");
+        Preconditions.checkNotNull(langFilename, "The language file name should not be null");
 
         File langFile = new File(langFolder, langFilename + ".yml");
         String resourcePath = langFolderName + "/" + langFilename + ".yml";
@@ -121,11 +117,9 @@ public class Localization {
      *
      * @return Localized {@link String}, empty if string is not found
      */
-    public @Nonnull String getString(@Nonnull String path) {
-        Validate.notNull(path, "path cannot be null");
-        if (!initialized) {
-            throw new IllegalStateException("Localization service is not initialized");
-        }
+    @Nonnull
+    public String getString(@Nonnull String path) {
+        Preconditions.checkNotNull(path, "path cannot be null");
 
         for (String lang : languages) {
             String localization = langMap.get(lang).getLang().getString(path);
@@ -143,11 +137,9 @@ public class Localization {
      *
      * @return Localized {@link String} {@link List}
      */
-    public @Nonnull List<String> getStringList(@Nonnull String path) {
-        Validate.notNull(path, "path cannot be null");
-        if (!initialized) {
-            throw new IllegalStateException("Localization service is not initialized");
-        }
+    @Nonnull
+    public List<String> getStringList(@Nonnull String path) {
+        Preconditions.checkNotNull(path, "path cannot be null");
 
         for (String lang : languages) {
             List<String> localization = langMap.get(lang).getLang().getStringList(path);
@@ -165,7 +157,8 @@ public class Localization {
      *
      * @return Localized {@link String} array
      */
-    public @Nonnull String[] getStringArray(@Nonnull String path) {
+    @Nonnull
+    public String[] getStringArray(@Nonnull String path) {
         return getStringList(path).toArray(new String[0]);
     }
 }

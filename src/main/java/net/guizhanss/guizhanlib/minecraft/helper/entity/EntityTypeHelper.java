@@ -1,8 +1,8 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.EntityType;
 
 import javax.annotation.Nonnull;
@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class EntityTypeHelper {
+public final class EntityTypeHelper {
     /**
      * 返回实体类型({@link EntityType})的中文名
      *
@@ -21,8 +21,9 @@ public class EntityTypeHelper {
      *
      * @return 实体类型的中文名称,如果获取失败则返回键名
      */
-    public static @Nonnull String getName(@Nonnull EntityType entityType) {
-        Validate.notNull(entityType, "实体类型不能为空");
+    @Nonnull
+    public static String getName(@Nonnull EntityType entityType) {
+        Preconditions.checkNotNull(entityType, "实体类型不能为空");
 
         // 1.16 中移除的类型
         if (entityType.toString().equals("PIG_ZOMBIE"))
@@ -38,9 +39,10 @@ public class EntityTypeHelper {
      *
      * @return 实体类型的键名
      */
-    public static @Nonnull String getKey(@Nonnull EntityType entityType) {
-        Validate.notNull(entityType, "实体类型不能为空");
-        Validate.isTrue(entityType != EntityType.UNKNOWN, "实体类型不能为无效类型");
+    @Nonnull
+    public static String getKey(@Nonnull EntityType entityType) {
+        Preconditions.checkNotNull(entityType, "实体类型不能为空");
+        Preconditions.checkArgument(entityType != EntityType.UNKNOWN, "实体类型不能为无效类型");
 
         return "entity.minecraft." + entityType.getName().toLowerCase();
     }
@@ -52,7 +54,8 @@ public class EntityTypeHelper {
      *
      * @return 实体类型的中文名称，如果获取失败则返回对应的键名
      */
-    public static @Nonnull String getName(@Nonnull String entityType) {
+    @Nonnull
+    public static String getName(@Nonnull String entityType) {
         try {
             EntityType type = EntityType.valueOf(entityType);
             return getName(type);

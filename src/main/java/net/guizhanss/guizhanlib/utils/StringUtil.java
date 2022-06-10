@@ -1,7 +1,7 @@
 package net.guizhanss.guizhanlib.utils;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 
 import javax.annotation.Nonnull;
@@ -10,17 +10,20 @@ import java.util.regex.Pattern;
 
 /**
  * 字符串工具包
+ *
  * @author ybw0014
  */
 @UtilityClass
 public final class StringUtil {
     /**
      * 将字符串转化为可读形式
+     *
      * @param str 要转化的字符
      * @return 转化后的字符串
      */
-    public static @Nonnull String humanize(@Nonnull String str) {
-        Validate.notNull(str, "the string should not be null");
+    @Nonnull
+    public static String humanize(@Nonnull String str) {
+        Preconditions.checkNotNull(str, "the string should not be null");
 
         StringBuilder builder = new StringBuilder();
         str = str.toLowerCase(Locale.ROOT).replace(" ", "_");
@@ -35,11 +38,13 @@ public final class StringUtil {
 
     /**
      * 将字符串转化为大写+下划线形式
+     *
      * @param str 要转化的字符
      * @return 转化后的字符串
      */
-    public static @Nonnull String dehumanize(@Nonnull String str) {
-        Validate.notNull(str, "the string should not be null");
+    @Nonnull
+    public static String dehumanize(@Nonnull String str) {
+        Preconditions.checkNotNull(str, "the string should not be null");
 
         return str.toUpperCase(Locale.ROOT)
             .replace(" ", "_")

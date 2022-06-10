@@ -1,10 +1,10 @@
 package net.guizhanss.guizhanlib.utils;
 
+import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -21,11 +21,11 @@ public class PlayerHeadUtil {
      * 使用hash获取玩家头颅物品 {@link ItemStack}
      *
      * @param hashCode 玩家头颅 hash
-     *
      * @return 玩家头颅物品 {@link ItemStack}
      */
-    public static @Nonnull ItemStack getFromHash(@Nonnull String hashCode) {
-        Validate.notNull(hashCode, "hash code cannot be null");
+    @Nonnull
+    public static ItemStack getFromHash(@Nonnull String hashCode) {
+        Preconditions.checkNotNull(hashCode, "hash code cannot be null");
         return PlayerHead.getItemStack(PlayerSkin.fromHashCode(hashCode));
     }
 
@@ -34,13 +34,13 @@ public class PlayerHeadUtil {
      * 可用于定义材质包
      *
      * @param hashCode 玩家头颅 hash
-     * @param id 物品 ID
-     *
+     * @param id       物品 ID
      * @return 玩家头颅物品 {@link ItemStack}
      */
     @ParametersAreNonnullByDefault
-    public static @Nonnull ItemStack getFromHash(String hashCode, String id) {
-        Validate.notNull(hashCode, "id cannot be null");
+    @Nonnull
+    public static ItemStack getFromHash(String hashCode, String id) {
+        Preconditions.checkNotNull(hashCode, "id cannot be null");
         return new SlimefunItemStack(id, getFromHash(hashCode));
     }
 
@@ -49,11 +49,11 @@ public class PlayerHeadUtil {
      * 使用base64获取玩家头颅物品 {@link ItemStack}
      *
      * @param base64 玩家头颅 base64
-     *
      * @return 玩家头颅物品 {@link ItemStack}
      */
-    public static @Nonnull ItemStack getFromBase64(@Nonnull String base64) {
-        Validate.notNull(base64, "base64 cannot be null");
+    @Nonnull
+    public static ItemStack getFromBase64(@Nonnull String base64) {
+        Preconditions.checkNotNull(base64, "base64 cannot be null");
         return PlayerHead.getItemStack(PlayerSkin.fromBase64(base64));
     }
 
@@ -62,13 +62,13 @@ public class PlayerHeadUtil {
      * 可用于定义材质包
      *
      * @param base64 玩家头颅 base64
-     * @param id 物品 ID
-     *
+     * @param id     物品 ID
      * @return 玩家头颅物品 {@link ItemStack}
      */
     @ParametersAreNonnullByDefault
-    public static @Nonnull ItemStack getFromBase64(String base64, String id) {
-        Validate.notNull(id, "id cannot be null");
+    @Nonnull
+    public static ItemStack getFromBase64(String base64, String id) {
+        Preconditions.checkNotNull(id, "id cannot be null");
         return new SlimefunItemStack(id, getFromBase64(base64));
     }
 }

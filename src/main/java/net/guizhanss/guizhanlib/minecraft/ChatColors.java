@@ -1,13 +1,15 @@
 package net.guizhanss.guizhanlib.minecraft;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 聊天颜色
@@ -111,6 +113,15 @@ public enum ChatColors {
      */
     public static final char COLOR_CHAR = '\u00a7';
 
+    private static final ChatColors[] valuesCache = values();
+    private static final Map<ChatColor, ChatColors> colorLookup = new HashMap<>();
+
+    static {
+        for (ChatColors color : valuesCache) {
+            colorLookup.put(color.getColor(), color);
+        }
+    }
+
     private final @Getter ChatColor color;
     private final @Getter String english;
     private final @Getter String chinese;
@@ -155,15 +166,11 @@ public enum ChatColors {
      *
      * @return 对应的枚举
      */
-    public static @Nonnull ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
-        Validate.notNull(chatColor, "聊天颜色不能为空");
+    @Nonnull
+    public static ChatColors fromChatColor(@Nonnull ChatColor chatColor) {
+        Preconditions.checkNotNull(chatColor, "聊天颜色不能为空");
 
-        for (ChatColors color : ChatColors.values()) {
-            if (color.getColor() == chatColor) {
-                return color;
-            }
-        }
-        throw new IllegalArgumentException("无效的ChatColor");
+        return colorLookup.get(chatColor);
     }
 
     /**
@@ -173,11 +180,12 @@ public enum ChatColors {
      *
      * @return 对应的枚举
      */
-    public static @Nullable ChatColors fromEnglish(@Nonnull String english) {
-        Validate.notNull(english, "英文不能为空");
+    @Nullable
+    public static ChatColors fromEnglish(@Nonnull String english) {
+        Preconditions.checkNotNull(english, "英文不能为空");
 
         String humanized = StringUtil.humanize(english);
-        for (ChatColors color : ChatColors.values()) {
+        for (ChatColors color : valuesCache) {
             if (color.getEnglish().equals(humanized)) {
                 return color;
             }

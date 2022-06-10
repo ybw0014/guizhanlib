@@ -154,6 +154,7 @@ public final class AddonConfig extends YamlConfiguration {
         reload();
     }
 
+    @Nonnull
     private String readDefaults(@Nonnull InputStream inputStream) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         StringBuilder yamlBuilder = new StringBuilder();

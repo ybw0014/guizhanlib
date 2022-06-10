@@ -22,6 +22,7 @@ public class Cooldown<K> {
 
     /**
      * 查询是否仍在冷却中
+     *
      * @param key 冷却键
      * @return 是否在冷却中
      */
@@ -32,7 +33,8 @@ public class Cooldown<K> {
 
     /**
      * 设置冷却
-     * @param key 冷却键
+     *
+     * @param key  冷却键
      * @param time 冷却时间(毫秒)
      */
     public void set(K key, long time) {

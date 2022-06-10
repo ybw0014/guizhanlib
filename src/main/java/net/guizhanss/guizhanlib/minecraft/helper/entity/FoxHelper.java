@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Fox;
 
 import javax.annotation.Nonnull;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-public class FoxHelper {
+public final class FoxHelper {
     /**
      * 所有狐狸的类型
      */
@@ -41,6 +41,7 @@ public class FoxHelper {
             this.chinese = chinese;
         }
 
+        @Nonnull
         @Override
         public String toString() {
             return this.getChinese();
@@ -53,8 +54,9 @@ public class FoxHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nonnull Type fromType(@Nonnull Fox.Type foxType) {
-            Validate.notNull(foxType, "狐狸类型不能为空");
+        @Nonnull
+    public static Type fromType(@Nonnull Fox.Type foxType) {
+            Preconditions.checkNotNull(foxType, "狐狸类型不能为空");
 
             for (Type type : Type.values()) {
                 if (type.getType() == foxType) {
@@ -71,8 +73,9 @@ public class FoxHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nullable Type fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+    public static Type fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Type type : Type.values()) {
@@ -91,7 +94,8 @@ public class FoxHelper {
      *
      * @return 狐狸的类型的中文
      */
-    public static @Nonnull String getType(@Nonnull Fox.Type type) {
+    @Nonnull
+    public static String getType(@Nonnull Fox.Type type) {
         return Type.fromType(type).getChinese();
     }
 
@@ -102,8 +106,9 @@ public class FoxHelper {
      *
      * @return 狐狸的类型的中文
      */
-    public static @Nonnull String getType(@Nonnull String type) {
-        Validate.notNull(type, "猫类型不能为空");
+    @Nonnull
+    public static String getType(@Nonnull String type) {
+        Preconditions.checkNotNull(type, "猫类型不能为空");
 
         try {
             Fox.Type foxType = Fox.Type.valueOf(type);

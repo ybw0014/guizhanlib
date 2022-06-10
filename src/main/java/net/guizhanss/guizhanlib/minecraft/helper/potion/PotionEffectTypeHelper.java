@@ -1,8 +1,8 @@
 package net.guizhanss.guizhanlib.minecraft.helper.potion;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import org.apache.commons.lang.Validate;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nonnull;
@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class PotionEffectTypeHelper {
+public final class PotionEffectTypeHelper {
     /**
      * 返回药水效果({@link PotionEffectType})的中文名
      *
@@ -21,7 +21,8 @@ public class PotionEffectTypeHelper {
      *
      * @return 药水效果的中文名,如果获取失败则返回键名
      */
-    public static @Nonnull String getName(@Nonnull PotionEffectType type) {
+    @Nonnull
+    public static String getName(@Nonnull PotionEffectType type) {
         return LanguageHelper.getLangOrKey(getKey(type));
     }
 
@@ -32,8 +33,9 @@ public class PotionEffectTypeHelper {
      *
      * @return 药水效果的键名
      */
-    public static @Nonnull String getKey(@Nonnull PotionEffectType type) {
-        Validate.notNull(type, "药水效果不能为空");
+    @Nonnull
+    public static String getKey(@Nonnull PotionEffectType type) {
+        Preconditions.checkNotNull(type, "药水效果不能为空");
 
         String key = type.getName().toLowerCase();
 

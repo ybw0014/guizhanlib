@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.minecraft.helper.entity;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Panda;
 
 import javax.annotation.Nonnull;
@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-public class PandaHelper {
+public final class PandaHelper {
     /**
      * 所有熊猫基因
      */
@@ -61,6 +61,7 @@ public class PandaHelper {
             this.chinese = chinese;
         }
 
+        @Nonnull
         @Override
         public String toString() {
             return this.getChinese();
@@ -73,8 +74,9 @@ public class PandaHelper {
          *
          * @return 对应的枚举
          */
-        public static @Nonnull Gene fromGene(@Nonnull Panda.Gene pandaGene) {
-            Validate.notNull(pandaGene, "熊猫基因不能为空");
+        @Nonnull
+        public static Gene fromGene(@Nonnull Panda.Gene pandaGene) {
+            Preconditions.checkNotNull(pandaGene, "熊猫基因不能为空");
 
             for (Gene gene : Gene.values()) {
                 if (gene.getGene() == pandaGene) {
@@ -89,8 +91,9 @@ public class PandaHelper {
          * @param english {@link String} 提供的英文
          * @return 对应的枚举
          */
-        public static @Nullable Gene fromEnglish(@Nonnull String english) {
-            Validate.notNull(english, "英文不能为空");
+        @Nullable
+        public static Gene fromEnglish(@Nonnull String english) {
+            Preconditions.checkNotNull(english, "英文不能为空");
 
             String humanized = StringUtil.humanize(english);
             for (Gene gene : Gene.values()) {
@@ -109,7 +112,8 @@ public class PandaHelper {
      *
      * @return 熊猫基因的中文
      */
-    public static @Nonnull String getGene(@Nonnull Panda.Gene gene) {
+    @Nonnull
+    public static String getGene(@Nonnull Panda.Gene gene) {
         return Gene.fromGene(gene).getChinese();
     }
 
@@ -120,8 +124,9 @@ public class PandaHelper {
      *
      * @return 熊猫基因的中文
      */
-    public static @Nonnull String getGene(@Nonnull String gene) {
-        Validate.notNull(gene, "熊猫基因不能为空");
+    @Nonnull
+    public static String getGene(@Nonnull String gene) {
+        Preconditions.checkNotNull(gene, "熊猫基因不能为空");
 
         try {
             Panda.Gene pandaGene = Panda.Gene.valueOf(gene);

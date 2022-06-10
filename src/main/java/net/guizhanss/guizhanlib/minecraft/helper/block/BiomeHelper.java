@@ -1,8 +1,8 @@
 package net.guizhanss.guizhanlib.minecraft.helper.block;
 
+import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import org.apache.commons.lang.Validate;
 import org.bukkit.block.Biome;
 
 import javax.annotation.Nonnull;
@@ -13,14 +13,15 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-public class BiomeHelper {
+public final class BiomeHelper {
     /**
      * 返回生物群系({@link Biome})的中文名
      *
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的中文名,如果获取失败则返回键名
      */
-    public static @Nonnull String getName(@Nonnull Biome biome) {
+    @Nonnull
+    public static String getName(@Nonnull Biome biome) {
         return LanguageHelper.getLangOrKey(getKey(biome));
     }
 
@@ -30,8 +31,9 @@ public class BiomeHelper {
      * @param biome {@link Biome} 生物群系
      * @return 生物群系的键名
      */
-    public static @Nonnull String getKey(@Nonnull Biome biome) {
-        Validate.notNull(biome, "生物群系不能为空");
+    @Nonnull
+    public static String getKey(@Nonnull Biome biome) {
+        Preconditions.checkNotNull(biome, "生物群系不能为空");
 
         return "biome.minecraft." + biome.toString().toLowerCase();
     }

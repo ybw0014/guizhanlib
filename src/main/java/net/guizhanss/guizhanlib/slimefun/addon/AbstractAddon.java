@@ -1,11 +1,11 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
+import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.guizhanss.guizhanlib.common.Scheduler;
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
-import org.apache.commons.lang.Validate;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -320,11 +320,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * DEPRECATED: Call {@link #getMetrics()} to get {@link Metrics} instance.
+     *
      * Set up metrics module. If you need this, override it
      * e.g. Custom charts, etc...
      *
      * @param metrics The {@link Metrics} instance.
      */
+    @Deprecated
     public void setupMetrics(@Nonnull Metrics metrics) {
     }
 
@@ -437,8 +440,9 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      *
      * @return the {@link PluginCommand} of {@link AbstractAddon}.
      */
-    public static @Nonnull PluginCommand getPluginCommand(@Nonnull String command) {
-        Validate.notNull(command, "command should not be null");
+    @Nonnull
+    public static PluginCommand getPluginCommand(@Nonnull String command) {
+        Preconditions.checkNotNull(command, "command should not be null");
         return Objects.requireNonNull(getInstance().getCommand(command));
     }
 
@@ -466,8 +470,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @see MessageFormat
      */
     public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
-        Validate.notNull(level, "log level should not be null");
-        Validate.notNull(message, "log message should not be null");
+        Preconditions.checkNotNull(level, "log level should not be null");
+        Preconditions.checkNotNull(message, "log message should not be null");
 
         getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
     }
@@ -483,7 +487,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @see MessageFormat
      */
     public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
-        Validate.notNull(message, "log message should not be null");
+        Preconditions.checkNotNull(message, "log message should not be null");
 
         Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
