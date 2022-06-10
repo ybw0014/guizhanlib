@@ -49,7 +49,7 @@ public final class WikiSetup {
 
         try {
             Class<?> clazz = item.getClass();
-            clazz.getMethod("addWikiPage", String.class).invoke(null, wikiPage);
+            clazz.getMethod("addWikiPage", String.class).invoke(item, wikiPage);
         } catch (NoSuchMethodException | NullPointerException
             | IllegalAccessException | InvocationTargetException ignored) {
         }
