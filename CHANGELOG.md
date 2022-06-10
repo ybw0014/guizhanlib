@@ -1,4 +1,8 @@
-# 更新日志
+# Changelog
+
+## 0.9.7
+
+- 修复`WikiSetup#setupItem(SlimefunItem, String)`错误调用静态方法的问题
 
 ## 0.9.6
 
