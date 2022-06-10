@@ -129,7 +129,7 @@ public enum ChatColors {
     private final String chinese;
 
     /**
-     * 构建函数
+     * 构造函数
      *
      * @param color   {@link ChatColor}
      * @param english 英文

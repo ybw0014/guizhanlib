@@ -17,7 +17,7 @@ public class RateLimit<K> {
     private final Map<K, Long> visitMap; // 访问次数
 
     /**
-     * 构建函数
+     * 构造函数
      *
      * @param time   时间(毫秒)
      * @param visits 访问次数

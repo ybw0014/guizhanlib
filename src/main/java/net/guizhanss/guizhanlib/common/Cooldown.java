@@ -14,7 +14,7 @@ public class Cooldown<K> {
     private final Map<K, Long> cdMap; // 重置时间
 
     /**
-     * 构建函数
+     * 构造函数
      */
     public Cooldown() {
         this.cdMap = new HashMap<>();
