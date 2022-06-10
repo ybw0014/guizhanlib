@@ -120,8 +120,8 @@ public final class UpdaterTask implements Runnable {
      *
      * @return 版本格式，null表示获取失败
      */
-    private @Nullable
-    String getVersionFormat() {
+    @Nullable
+    private String getVersionFormat() {
         try {
             return JsonUtil.getFromPath(repoInfo, "options.target.version").getAsString();
         } catch (IllegalStateException ex) {
@@ -217,8 +217,8 @@ public final class UpdaterTask implements Runnable {
      * @param url 资源所在的 {@link URL}
      * @return 所有内容 {@link String}
      */
-    private @Nullable
-    String fetch(@Nonnull URL url) {
+    @Nullable
+    private String fetch(@Nonnull URL url) {
         try {
             StringBuilder content = new StringBuilder();
 

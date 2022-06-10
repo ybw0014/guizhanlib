@@ -26,11 +26,9 @@ public enum BasicMetals {
     MAGNESIUM("Magnesium", "镁");
 
     @Getter
-    private final
-    String english;
+    private final String english;
     @Getter
-    private final
-    String chinese;
+    private final String chinese;
 
     @ParametersAreNonnullByDefault
     BasicMetals(String english, String chinese) {
