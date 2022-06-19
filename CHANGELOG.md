@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.8
+
+- 为`AbstractAddon`添加了可传递`Throwable`的`log`方法
+- 不再调用`AbstractAddon#setupMetrics()`方法
+
 ## 0.9.7
 
 - 修复`WikiSetup#setupItem(SlimefunItem, String)`错误调用静态方法的问题
