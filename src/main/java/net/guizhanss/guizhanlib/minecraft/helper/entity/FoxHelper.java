@@ -37,7 +37,7 @@ public final class FoxHelper {
      */
     @Nonnull
     public static String getType(@Nonnull String type) {
-        Preconditions.checkNotNull(type, "猫类型不能为空");
+        Preconditions.checkNotNull(type, "狐狸类型不能为空");
 
         try {
             Fox.Type foxType = Fox.Type.valueOf(type);
@@ -52,13 +52,13 @@ public final class FoxHelper {
      */
     public enum Type {
         /**
-         * 红色
+         * 红狐
          */
-        RED(Fox.Type.RED, "Red", "红色"),
+        RED(Fox.Type.RED, "Red", "红狐"),
         /**
-         * 白色
+         * 雪狐
          */
-        SNOW(Fox.Type.SNOW, "Snow", "白色");
+        SNOW(Fox.Type.SNOW, "Snow", "雪狐");
 
         @Getter
         private final Fox.Type type;
