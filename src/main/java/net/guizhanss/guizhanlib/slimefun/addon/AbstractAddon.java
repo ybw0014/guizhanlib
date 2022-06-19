@@ -206,6 +206,24 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
+     * Call the logger to log a message with arguments.
+     * ChatColor code will be translated automatically,
+     * and message is dealt with MessageFormat#format().
+     *
+     * @param level   the log {@link Level}
+     * @param ex      the {@link Throwable} exception
+     * @param message the message
+     * @param args    the arguments with in
+     * @see MessageFormat
+     */
+    public static void log(@Nonnull Level level, @Nonnull Throwable ex, @Nonnull String message, @Nullable Object... args) {
+        Preconditions.checkNotNull(level, "log level should not be null");
+        Preconditions.checkNotNull(message, "log message should not be null");
+
+        getInstance().getLogger().log(level, ex, () -> ChatUtil.color(MessageFormat.format(message, args)));
+    }
+
+    /**
      * Call the {@link org.bukkit.command.ConsoleCommandSender} to send a message with arguments.
      * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
@@ -329,11 +347,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         } finally {
             enabling = false;
         }
-
-        // Call this after enabling
-        if (metricsId != 0 && metrics != null) {
-            setupMetrics(metrics);
-        }
     }
 
     /**
@@ -363,7 +376,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * Called when loading
      */
     protected void load() {
-
     }
 
     /**
@@ -399,11 +411,16 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @param pluginId the plugin id in bStats
      */
     public void enableMetrics(int pluginId) {
+        if (enabling) {
+            throw new IllegalStateException("You should call #enableMetrics(int) in constructor!");
+        }
         metricsId = pluginId;
     }
 
     /**
      * DEPRECATED: Call {@link #getMetrics()} to get {@link Metrics} instance.
+     * <p>
+     * Will NOT be called any more.
      * <p>
      * Set up metrics module. If you need this, override it
      * e.g. Custom charts, etc...
