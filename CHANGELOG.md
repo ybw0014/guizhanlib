@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.9
+
+- 更新语言文件为MC1.19版本。
+
 ## 0.9.8
 
 - 为`AbstractAddon`添加了可传递`Throwable`的`log`方法
