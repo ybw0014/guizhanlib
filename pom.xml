@@ -25,7 +25,8 @@
     <modules>
         <module>GuizhanLib-lib</module>
         <module>GuizhanLib-plugin</module>
-        <!--module>GuizhanLib-API</module-->
+
+        <module>GuizhanLib-api</module>
     </modules>
 
     <build>
