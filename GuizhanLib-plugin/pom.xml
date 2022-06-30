@@ -18,12 +18,19 @@
             <groupId>net.guizhanss</groupId>
             <artifactId>GuizhanLib-lib</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.papermc</groupId>
+            <artifactId>paperlib</artifactId>
+            <version>1.0.7</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -67,7 +74,16 @@
 
                 <configuration>
                     <minimizeJar>true</minimizeJar>
-                    <!-- Exclude unneeded metadata files from shaded dependencies -->
+                    <relocations>
+                        <relocation>
+                            <pattern>com.google.gson</pattern>
+                            <shadedPattern>net.guizhanss.guizhanlib.gson</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>io.paper.lib</pattern>
+                            <shadedPattern>net.guizhanss.guizhanlib.paperlib</shadedPattern>
+                        </relocation>
+                    </relocations>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
