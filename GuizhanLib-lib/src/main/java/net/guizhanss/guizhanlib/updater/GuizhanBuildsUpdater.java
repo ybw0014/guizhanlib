@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * 自动更新，从构建站(builds.guizhanss.net)获取最新版本
  */
 @Getter
-public final class GuizhanBuildsUpdater {
+public class GuizhanBuildsUpdater {
 
     private final Plugin plugin;
     private final File file;
