@@ -1,5 +1,6 @@
 # GuizhanLib
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/GuizhanLib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
 [![Jitpack 状态](https://jitpack.io/v/net.guizhanss/GuizhanLib.svg)](https://jitpack.io/#net.guizhanss/GuizhanLib)
 
 一个可用于汉化插件的库。
