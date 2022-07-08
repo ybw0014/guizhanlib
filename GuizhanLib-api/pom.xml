@@ -7,7 +7,7 @@
     <parent>
         <groupId>net.guizhanss</groupId>
         <artifactId>GuizhanLib</artifactId>
-        <version>1.0.0-SNAPSHOT-1</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>GuizhanLib-api</artifactId>
@@ -56,13 +56,31 @@
     <dependencies>
         <dependency>
             <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib-lib</artifactId>
+            <artifactId>GuizhanLib-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib-plugin</artifactId>
+            <artifactId>GuizhanLib-localization</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-minecraft</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-slimefun</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-updater</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
