@@ -13,6 +13,64 @@
     <artifactId>GuizhanLib-api</artifactId>
     <packaging>jar</packaging>
 
+    <profiles>
+        <profile>
+            <id>release</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.4.0</version>
+
+                        <configuration>
+                            <includeDependencySources>true</includeDependencySources>
+                            <detectOfflineLinks>false</detectOfflineLinks>
+
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>net.guizhanss.guizhanlib:*</dependencySourceInclude>
+                            </dependencySourceIncludes>
+
+                            <groups>
+                                <group>
+                                    <title>Module "GuizhanLib-common"</title>
+                                    <packages>net.guizhanss.guizhanlib.common:net.guizhanss.guizhanlib.java:net.guizhanss.guizhanlib.utils</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-localization"</title>
+                                    <packages>net.guizhanss.guizhanlib.localization</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-minecraft"</title>
+                                    <packages>net.guizhanss.guizhanlib.minecraft</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-slimefun"</title>
+                                    <packages>net.guizhanss.guizhanlib.slimefun</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-updater"</title>
+                                    <packages>net.guizhanss.guizhanlib.updater</packages>
+                                </group>
+                            </groups>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+
+                                <goals>
+                                    <goal>aggregate-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -21,9 +79,6 @@
                 <version>3.3.0</version>
 
                 <configuration>
-                    <createSourcesJar>true</createSourcesJar>
-                    <shadedGroupFilter>net.guizhanss</shadedGroupFilter>
-
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -58,6 +113,12 @@
             <groupId>net.guizhanss</groupId>
             <artifactId>GuizhanLib-common</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -82,7 +143,12 @@
             <groupId>net.guizhanss</groupId>
             <artifactId>GuizhanLib-updater</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
-
 </project>

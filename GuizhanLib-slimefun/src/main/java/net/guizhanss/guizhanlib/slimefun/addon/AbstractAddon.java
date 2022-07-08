@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.guizhanss.guizhanlib.utils.ChatUtil;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
@@ -46,7 +45,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
     private AddonConfig config;
     private int metricsId;
-    private Metrics metrics;
     private int slimefunTickCount;
     private Scheduler scheduler;
     private boolean loading;
@@ -340,11 +338,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             scheduler.repeat(Slimefun.getTickerTask().getTickRate(), () -> slimefunTickCount++);
         }
 
-        // Setup metrics
-        if (metricsId != 0) {
-            metrics = new Metrics(this, metricsId);
-        }
-
         // Call enable()
         try {
             enable();
@@ -414,42 +407,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
             case TESTING:
                 throw ex;
         }
-    }
-
-    /**
-     * Enable metrics module.
-     * Should be called in constructor.
-     *
-     * @param pluginId the plugin id in bStats
-     */
-    public void enableMetrics(int pluginId) {
-        if (enabling) {
-            throw new IllegalStateException("You should call #enableMetrics(int) in constructor!");
-        }
-        metricsId = pluginId;
-    }
-
-    /**
-     * DEPRECATED: Call {@link #getMetrics()} to get {@link Metrics} instance.
-     * <p>
-     * Will NOT be called any more.
-     * <p>
-     * Set up metrics module. If you need this, override it
-     * e.g. Custom charts, etc...
-     *
-     * @param metrics The {@link Metrics} instance.
-     */
-    @Deprecated
-    public void setupMetrics(@Nonnull Metrics metrics) {
-    }
-
-    /**
-     * Get the {@link Metrics} module
-     *
-     * @return the {@link Metrics} module
-     */
-    public Metrics getMetrics() {
-        return metrics;
     }
 
     /**
