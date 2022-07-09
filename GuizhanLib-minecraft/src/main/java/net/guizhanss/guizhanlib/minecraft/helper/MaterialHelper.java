@@ -62,15 +62,11 @@ public class MaterialHelper {
      */
     @Nonnull
     public static String getName(@Nonnull String material, boolean emptyString) {
-        try {
-            Material mat = Material.valueOf(material);
+        Material mat = Material.getMaterial(material);
+        if (mat == null) {
+            return StringUtil.humanize(material);
+        } else {
             return getName(mat);
-        } catch (IllegalArgumentException ex) {
-            if (emptyString) {
-                return StringUtil.humanize(material);
-            } else {
-                return "";
-            }
         }
     }
 }
