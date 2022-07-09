@@ -90,7 +90,7 @@ public class Localization {
      *
      * @param langFilename the filename of language file without extension .yml
      */
-    public void addLanguage(@Nonnull String langFilename) {
+    public final void addLanguage(@Nonnull String langFilename) {
         Preconditions.checkArgument(langFilename != null, "The language file name should not be null");
 
         File langFile = new File(langFolder, langFilename + ".yml");

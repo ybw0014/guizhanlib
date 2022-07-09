@@ -1,5 +1,6 @@
 package net.guizhanss.guizhanlib.common;
 
+import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class Cooldown<K> {
      */
     public boolean has(K key) {
         Optional<Long> resetTime = Optional.ofNullable(cdMap.get(key));
-        return resetTime.filter(time -> System.currentTimeMillis() < time).isPresent();
+        return resetTime.filter(time -> Clock.systemUTC().millis() < time).isPresent();
     }
 
     /**
@@ -34,6 +35,6 @@ public class Cooldown<K> {
      * @param time 冷却时间(毫秒)
      */
     public void set(K key, long time) {
-        cdMap.put(key, System.currentTimeMillis() + time);
+        cdMap.put(key, Clock.systemUTC().millis() + time);
     }
 }
