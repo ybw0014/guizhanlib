@@ -15,7 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
- * 从Minecraft的语言文件中获取内容
+ * 从Minecraft的语言文件中获取内容。
+ * 只有读取语言文件后，其他包内的助手才能正常使用
  *
  * @author ybw0014
  */
@@ -26,6 +27,11 @@ public final class LanguageHelper {
     private static final Gson GSON = new Gson();
     private static Map<String, String> lang;
 
+    /**
+     * 从输入流({@link InputStream})中读取语言文件
+     *
+     * @param stream 输入流({@link InputStream})
+     */
     public static void loadFromStream(InputStream stream) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
             stream, StandardCharsets.UTF_8
