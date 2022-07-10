@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public final class ItemStackHelper {
     /**
      * 返回物品({@link ItemStack})的显示名称,

@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public final class DyeColorHelper {
     /**
      * 返回染料颜色({@link DyeColor})的中文名

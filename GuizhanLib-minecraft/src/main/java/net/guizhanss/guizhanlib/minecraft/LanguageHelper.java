@@ -8,6 +8,7 @@ import lombok.experimental.UtilityClass;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -19,20 +20,20 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
+@SuppressWarnings("ConstantConditions")
 public final class LanguageHelper {
 
-    private static final String filename = "/minecraft-langs/1.19/zh_cn.json";
-    private static final Map<String, String> lang;
+    private static final Gson GSON = new Gson();
+    private static Map<String, String> lang;
 
-    static {
+    public static void loadFromStream(InputStream stream) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-            LanguageHelper.class.getResourceAsStream(filename), StandardCharsets.UTF_8
+            stream, StandardCharsets.UTF_8
         ));
-        Gson gson = new Gson();
         // @formatter:off
         Type type = new TypeToken<Map<String, String>>() {}.getType();
         // @formatter:on
-        lang = gson.fromJson(reader, type);
+        lang = GSON.fromJson(reader, type);
     }
 
     /**
