@@ -25,9 +25,9 @@ public final class Language {
     /**
      * Constructor
      *
-     * @param lang          the key of language
-     * @param currentFile   the current language {@link File}
-     * @param defaultConfig the {@link FileConfiguration} of default from resource
+     * @param lang          The name of language.
+     * @param currentFile   The current language {@link File}.
+     * @param defaultConfig The {@link FileConfiguration} of default from resource.
      */
     @ParametersAreNonnullByDefault
     public Language(String lang, File currentFile, FileConfiguration defaultConfig) {
@@ -43,9 +43,9 @@ public final class Language {
     }
 
     /**
-     * Get language name
+     * Get language name.
      *
-     * @return The language name
+     * @return The language name.
      */
     @Nonnull
     public String getName() {
@@ -53,9 +53,9 @@ public final class Language {
     }
 
     /**
-     * Get current language {@link FileConfiguration}
+     * Get current language {@link FileConfiguration}.
      *
-     * @return the language {@link FileConfiguration}
+     * @return The language {@link FileConfiguration}.
      */
     @Nonnull
     public FileConfiguration getLang() {
@@ -63,7 +63,7 @@ public final class Language {
     }
 
     /**
-     * Save current lang file
+     * Save current language file.
      */
     public void save() {
         try {

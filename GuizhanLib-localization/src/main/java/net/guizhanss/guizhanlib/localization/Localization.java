@@ -39,7 +39,7 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin The {@link JavaPlugin} instance
+     * @param plugin The {@link JavaPlugin} instance.
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin) {
@@ -75,8 +75,8 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin     The {@link JavaPlugin} instance
-     * @param folderName The name of the folder that holds all language files
+     * @param plugin     The {@link JavaPlugin} instance.
+     * @param folderName The name of the folder that holds all language files.
      * @param langFile   The name of language file (without file extension .yml)
      */
     @ParametersAreNonnullByDefault
@@ -99,7 +99,7 @@ public class Localization {
             try {
                 plugin.saveResource(resourcePath, false);
             } catch (IllegalArgumentException ex) {
-                plugin.getLogger().log(Level.SEVERE, "The language file {0} does not exist in jar file!", resourcePath);
+                plugin.getLogger().log(Level.SEVERE, "The default language file {0} does not exist in jar file!", resourcePath);
                 return;
             }
         }
@@ -112,10 +112,11 @@ public class Localization {
     }
 
     /**
-     * Get localized {@link String} from path
+     * Get localized {@link String} from path.
      *
-     * @param path the localization path
-     * @return Localized {@link String}, empty if string is not found
+     * @param path The localization path.
+     *
+     * @return Localized {@link String}, empty if string is not found.
      */
     @Nonnull
     public String getString(@Nonnull String path) {
@@ -131,10 +132,11 @@ public class Localization {
     }
 
     /**
-     * Get localized {@link String} {@link List} from path
+     * Get localized {@link String} {@link List} from path.
      *
-     * @param path the localization path
-     * @return Localized {@link String} {@link List}
+     * @param path The localization path.
+     *
+     * @return Localized {@link String} {@link List}.
      */
     @Nonnull
     public List<String> getStringList(@Nonnull String path) {
@@ -150,10 +152,11 @@ public class Localization {
     }
 
     /**
-     * Get localized {@link String} array from path
+     * Get localized {@link String} array from path.
      *
-     * @param path the localization path
-     * @return Localized {@link String} array
+     * @param path the localization path.
+     *
+     * @return Localized {@link String} array.
      */
     @Nonnull
     public String[] getStringArray(@Nonnull String path) {
