@@ -1,6 +1,6 @@
 package net.guizhanss.guizhanlib.localization;
 
-import net.guizhanss.guizhanlib.utils.ChatUtil;
+import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;

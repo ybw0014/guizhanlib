@@ -3,6 +3,8 @@ package net.guizhanss.guizhanlib.utils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestStringUtil {
     @Test
@@ -40,6 +42,17 @@ public class TestStringUtil {
         String str1 = "magma_Cube";
         String expected1 = "Magma_Cube";
         assertEquals(expected1, StringUtil.capitalize(str1));
+    }
 
+    @Test
+    void testIsBlank() {
+        String str1 = null;
+        assertTrue(StringUtil.isBlank(str1));
+
+        String str2 = "";
+        assertTrue(StringUtil.isBlank(str2));
+
+        String str3 = "notempty";
+        assertFalse(StringUtil.isBlank(str3));
     }
 }

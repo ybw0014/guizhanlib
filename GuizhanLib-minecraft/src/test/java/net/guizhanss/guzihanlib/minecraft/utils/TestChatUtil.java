@@ -1,5 +1,6 @@
-package net.guizhanss.guizhanlib.utils;
+package net.guizhanss.guzihanlib.minecraft.utils;
 
+import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

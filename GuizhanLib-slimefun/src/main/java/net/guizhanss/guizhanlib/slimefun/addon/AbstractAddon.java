@@ -3,7 +3,7 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import net.guizhanss.guizhanlib.utils.ChatUtil;
+import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
@@ -32,6 +32,7 @@ import java.util.logging.Level;
  * @author ybw0014
  */
 @ParametersAreNonnullByDefault
+@SuppressWarnings("ConstantConditions")
 public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon {
 
     private static AbstractAddon instance;
@@ -44,7 +45,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private final String bugTrackerURL;
 
     private AddonConfig config;
-    private int metricsId;
     private int slimefunTickCount;
     private Scheduler scheduler;
     private boolean loading;
@@ -73,9 +73,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Live addon constructor (Deprecated)
-     * <p>
-     * Updater lang key is not used any more since it is not included in the lib anymore.
+     * Live addon constructor
+     * @deprecated Updater lang key is not used any more since it is not included in the lib anymore.
      *
      * @param githubUser     GitHub username of this project
      * @param githubRepo     GitHub repository of this project

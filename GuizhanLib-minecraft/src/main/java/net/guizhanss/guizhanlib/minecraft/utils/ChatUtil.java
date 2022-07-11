@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.utils;
+package net.guizhanss.guizhanlib.minecraft.utils;
 
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
