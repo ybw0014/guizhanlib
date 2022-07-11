@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author ybw0014
  */
 @UtilityClass
-public class RandomUtil {
+public final class RandomUtil {
     private static final double DOUBLE_PRECISION = 1_000_000D;
 
     /**
