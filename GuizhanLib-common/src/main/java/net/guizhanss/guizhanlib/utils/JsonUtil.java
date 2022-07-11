@@ -1,9 +1,9 @@
 package net.guizhanss.guizhanlib.utils;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
 
 import javax.annotation.Nonnull;
@@ -19,39 +19,41 @@ import java.util.regex.Pattern;
 @UtilityClass
 @SuppressWarnings("ConstantConditions")
 public final class JsonUtil {
-    private static final Gson GSON = new Gson();
     private static final Pattern DOT_SPLIT = Pattern.compile("\\.");
 
     /**
-     * Parse json {@link String}
+     * Parse json {@link String}.
      *
-     * @param json the string to be parsed
-     * @return The parsed {@link JsonElement}
+     * @param json The string to be parsed.
+     *
+     * @return The parsed {@link JsonElement}.
      */
     @Nonnull
     public static JsonElement parse(@Nonnull String json) {
         Preconditions.checkArgument(json != null, "JSON string should not be null");
-        return GSON.fromJson(json, JsonElement.class);
+        return JsonParser.parseString(json);
     }
 
     /**
-     * Parse json from {@link BufferedReader}
+     * Parse json from {@link BufferedReader}.
      *
-     * @param reader The {@link BufferedReader} to read json from
-     * @return The parsed {@link JsonElement}
+     * @param reader The {@link BufferedReader} to read json from.
+     *
+     * @return The parsed {@link JsonElement}.
      */
     @Nonnull
     public static JsonElement parse(@Nonnull BufferedReader reader) {
         Preconditions.checkArgument(reader != null, "reader should not be null");
-        return GSON.fromJson(reader, JsonElement.class);
+        return JsonParser.parseReader(reader);
     }
 
     /**
-     * The value from given path of {@link JsonObject}
+     * The value from given path of {@link JsonObject}.
      *
-     * @param root Root {@link JsonElement}
+     * @param root Root {@link JsonElement}.
      * @param path The path of target value.
-     * @return The value got from path.
+     *
+     * @return The value got from path, {@code null} if not found.
      */
     @Nullable
     public static JsonElement getFromPath(@Nonnull JsonObject root, @Nonnull String path) {

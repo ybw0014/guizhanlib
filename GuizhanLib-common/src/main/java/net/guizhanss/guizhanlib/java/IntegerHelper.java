@@ -18,13 +18,14 @@ public final class IntegerHelper {
      * @param sequence 字符串 {@link String}
      * @param min      最小值
      * @param max      最大值
+     *
      * @return 范围内的整型
      */
     public static int parseInt(@Nullable String sequence, int min, int max) {
         int num;
         try {
             num = Integer.parseInt(sequence);
-        } catch (NumberFormatException | NullPointerException ex) {
+        } catch (NumberFormatException ex) {
             num = min;
         }
         num = Math.max(min, num);

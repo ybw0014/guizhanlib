@@ -22,6 +22,7 @@ public final class StringUtil {
      * Make the string readable.
      *
      * @param str The original {@link String}.
+     *
      * @return Readable {@link String}.
      */
     @Nonnull
@@ -45,6 +46,7 @@ public final class StringUtil {
      * Make string to uppercase format and replace hyphen and spaces to underscore.
      *
      * @param str The original {@link String}.
+     *
      * @return Readable string.
      */
     @Nonnull
@@ -61,6 +63,7 @@ public final class StringUtil {
      * DOES NOT lower case other letters in a word.
      *
      * @param str The original {@link String}.
+     *
      * @return Capitalized {@link String}.
      */
     @Nonnull
@@ -91,6 +94,7 @@ public final class StringUtil {
      * Check if given {@link String} is blank.
      *
      * @param str The {@link String} to be checked.
+     *
      * @return If the {@link String} is blank.
      */
     public static boolean isBlank(@Nullable String str) {

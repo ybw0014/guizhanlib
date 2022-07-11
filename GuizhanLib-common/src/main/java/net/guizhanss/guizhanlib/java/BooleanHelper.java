@@ -15,6 +15,7 @@ public final class BooleanHelper {
      * 根据提供的布尔值返回"是"或"否"
      *
      * @param value 一个布尔值
+     *
      * @return 根据提供的布尔值返回 {@link String} "是"或"否"
      */
     @Nonnull
@@ -26,6 +27,7 @@ public final class BooleanHelper {
      * 根据提供的布尔值返回"已启用"或"已禁用"
      *
      * @param value 一个布尔值
+     *
      * @return 根据提供的布尔值返回 {@link String} "已启用"或"已禁用"
      */
     @Nonnull
