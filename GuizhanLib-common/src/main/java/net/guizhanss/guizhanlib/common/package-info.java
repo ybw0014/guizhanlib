@@ -1,4 +1,4 @@
 /**
- * 该包包含一些通用类
+ * This package provides some useful classes.
  */
 package net.guizhanss.guizhanlib.common;

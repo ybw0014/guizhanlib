@@ -1,40 +1,52 @@
 package net.guizhanss.guizhanlib.common;
 
-import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
- * 该类提供冷却时间相关功能
+ * This class provides cooldown feature, based on keys.
  *
- * @param <K> 冷却键的类型
+ * @param <K> The type of key.
+ *
  * @author ybw0014
  */
-public class Cooldown<K> {
+public final class Cooldown<K> {
     /**
-     * 记录冷却结束时间
+     * This map records when key is used.
      */
-    private final Map<K, Long> cdMap = new HashMap<>();
+    private final Map<K, Long> useMap = new HashMap<>();
+    /**
+     * This map records the cooldown time/
+     */
+    private final Map<K, Long> timeMap = new HashMap<>();
 
     /**
-     * 查询是否仍在冷却中
+     * Query if the key can be used.
      *
-     * @param key 冷却键
-     * @return 是否在冷却中
+     * @param key The key.
+     *
+     * @return Whether the key can be used.
      */
-    public boolean has(K key) {
-        Optional<Long> resetTime = Optional.ofNullable(cdMap.get(key));
-        return resetTime.filter(time -> Clock.systemUTC().millis() < time).isPresent();
+    public boolean check(K key) {
+        Long lastUse = useMap.get(key);
+        Long cdTime = timeMap.get(key);
+
+        // Lack of record, this should not happen.
+        if (lastUse == null || cdTime == null) {
+            return true;
+        }
+
+        return System.nanoTime() - lastUse >= cdTime;
     }
 
     /**
-     * 设置冷却
+     * Set cooldown of key.
      *
-     * @param key  冷却键
-     * @param time 冷却时间(毫秒)
+     * @param key  The key.
+     * @param time The cooldown in milliseconds.
      */
     public void set(K key, long time) {
-        cdMap.put(key, Clock.systemUTC().millis() + time);
+        useMap.put(key, System.nanoTime());
+        timeMap.put(key, time * 1_000_000L);
     }
 }

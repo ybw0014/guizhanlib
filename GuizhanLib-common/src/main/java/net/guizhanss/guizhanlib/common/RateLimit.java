@@ -2,123 +2,127 @@ package net.guizhanss.guizhanlib.common;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
- * 该类提供频率限制相关功能
+ * This package provides rate limit feature.
  *
- * @param <K> 频率键的类型
+ * @param <K> The type of key.
+ *
  * @author ybw0014
  */
-public class RateLimit<K> {
+public final class RateLimit<K> {
     private final long limitTime;
-    private final long limitVisits;
-    private final Map<K, Long> timeMap; // 重置时间
-    private final Map<K, Long> visitMap; // 访问次数
+    private final int limitVisits;
+    /**
+     * This map records the first visit time.
+     */
+    private final Map<K, Long> timeMap = new HashMap<>();
+    /**
+     * This map records the times of visits.
+     */
+    private final Map<K, Integer> visitMap = new HashMap<>();
 
     /**
-     * 构造函数
+     * Constructor.
      *
-     * @param time   时间(毫秒)
-     * @param visits 访问次数
+     * @param time   Time period in milliseconds.
+     * @param visits The limit times of visits.
      */
-    public RateLimit(long time, long visits) {
+    public RateLimit(long time, int visits) {
         this.limitTime = time;
         this.limitVisits = visits;
-        this.timeMap = new HashMap<>();
-        this.visitMap = new HashMap<>();
     }
 
     /**
-     * 获取总限制次数
+     * Get the overall limit of visits.
      *
-     * @return 总限制次数
+     * @return The overall limit of visits.
      */
-    public long getLimit() {
+    public int getLimit() {
         return this.limitVisits;
     }
 
     /**
-     * 获取已用次数
+     * Get the used visits.
      *
-     * @param key 查询键
-     * @return 已用次数
+     * @param key The query key.
+     *
+     * @return Used times of visits.
      */
-    public long getUsed(K key) {
-        Optional<Long> time = Optional.ofNullable(this.timeMap.get(key));
-        if (time.isPresent()) {
-            if (time.get() > System.currentTimeMillis()) {
-                return 0;
-            }
+    public int getUsed(K key) {
+        Long time = timeMap.get(key);
+        Integer visits = visitMap.get(key);
 
-            Optional<Long> visits = Optional.ofNullable(this.visitMap.get(key));
-
-            if (visits.isPresent()) {
-                return visits.get();
-            }
+        // Lack of record, this should not happen
+        if (time == null || visits == null) {
+            return 0;
         }
-        return 0;
+
+        // Time out
+        if (System.nanoTime() - time >= limitTime) {
+            return 0;
+        }
+
+        return visits;
     }
 
     /**
-     * 获取剩余次数
+     * Get remaining times of visits
      *
-     * @param key 查询键
-     * @return 剩余次数
+     * @param key The query key.
+     *
+     * @return Remaining times of visits
      */
-    public long getRemaining(K key) {
-        return this.limitVisits - this.getUsed(key);
+    public int getRemaining(K key) {
+        return getLimit() - getUsed(key);
     }
 
     /**
-     * 增加访问次数
+     * Increases the times of visits.
      *
-     * @param key    查询键
-     * @param visits 访问次数
-     * @return 是否成功增加访问次数
+     * @param key    The query key.
+     * @param visits The times of visits
+     *
+     * @return Whether the action succeeds.
      */
-    public boolean add(K key, long visits) {
-        Optional<Long> time = Optional.ofNullable(this.timeMap.get(key));
-        if (time.isPresent()) {
-            if (time.get() < System.currentTimeMillis()) {
-                this.reset(key);
-                this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
-            }
+    public boolean add(K key, int visits) {
+        Long time = timeMap.get(key);
+        Integer visited = visitMap.get(key);
 
-            Optional<Long> pVisits = Optional.ofNullable(this.visitMap.get(key));
-            if (pVisits.isPresent()) {
-                if (pVisits.get() + visits > this.getLimit()) {
-                    return false;
-                }
-                this.visitMap.put(key, visits + pVisits.get());
-            } else {
-                this.visitMap.put(key, visits);
-            }
+        // Lack of record, just init
+        if (time == null || visited == null) {
+            reset(key);
+            timeMap.put(key, System.nanoTime());
+            visitMap.put(key, visits);
+            return true;
+        }
+
+        if (getRemaining(key) < visits) {
+            return false;
         } else {
-            this.timeMap.put(key, System.currentTimeMillis() + this.limitTime);
-            this.visitMap.put(key, visits);
+            visitMap.put(key, visited + visits);
+            return true;
         }
-
-        return true;
     }
 
     /**
-     * 增加1次访问次数
+     * Increases the times of visits by 1.
      *
-     * @param key 查询键
-     * @return 是否成功增加访问次数
+     * @param key The query key.
+     *
+     * @return Whether the action succeeds.
      */
     public boolean add(K key) {
-        return this.add(key, 1);
+        return add(key, 1);
     }
 
     /**
-     * 重置频率限制
+     * Reset rate limit
      *
-     * @param key 查询键
+     * @param key The query key.
      */
     public void reset(K key) {
-        this.timeMap.remove(key);
-        this.visitMap.remove(key);
+        timeMap.remove(key);
+        visitMap.remove(key);
     }
 }
