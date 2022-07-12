@@ -37,8 +37,8 @@
 
     <properties>
         <java.version>16</java.version>
-        <spigot.version>1.17.1</spigot.version>
-        <slimefun.version>RC-31</slimefun.version>
+        <spigot.version>1.19</spigot.version>
+        <slimefun.version>RC-32</slimefun.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -126,8 +126,8 @@
 
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.17</artifactId>
-            <version>1.13.0</version>
+            <artifactId>MockBukkit-v1.19</artifactId>
+            <version>2.29.0</version>
             <scope>test</scope>
 
             <exclusions>
