@@ -25,6 +25,7 @@ public final class ItemStackHelper {
      * 如果无显示名称则返回中文名称
      *
      * @param item {@link ItemStack} 物品
+     *
      * @return 物品的显示名称
      */
     @Nonnull
@@ -42,6 +43,7 @@ public final class ItemStackHelper {
      * 返回物品({@link ItemStack})的中文名称
      *
      * @param item {@link ItemStack} 物品
+     *
      * @return 物品的中文名称，如果获取失败则返回对应的键名
      */
     @Nonnull
@@ -62,6 +64,7 @@ public final class ItemStackHelper {
      * 返回头颅物品({@link ItemStack})的中文名称
      *
      * @param skull {@link ItemStack} 头颅物品
+     *
      * @return 头颅物品的中文名称
      */
     @Nonnull
@@ -70,8 +73,10 @@ public final class ItemStackHelper {
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         if (meta != null && meta.hasOwner()) {
-            return String.format(LanguageHelper.getLangOrKey("block.minecraft.player_head.named"),
-                meta.getOwningPlayer().getName());
+            return String.format(
+                LanguageHelper.getLangOrKey("block.minecraft.player_head.named"),
+                meta.getOwningPlayer().getName()
+            );
         } else {
             return LanguageHelper.getLangOrKey("block.minecraft.player_head");
         }

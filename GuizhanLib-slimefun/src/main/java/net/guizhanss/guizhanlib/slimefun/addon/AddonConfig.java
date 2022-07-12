@@ -1,6 +1,6 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
-import org.apache.commons.lang.StringUtils;
+import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import javax.annotation.Nonnull;
@@ -126,7 +126,6 @@ public final class AddonConfig extends YamlConfiguration {
                 save.append(line).append('\n');
             }
             return save.toString();
-
         } catch (Exception e) {
             e.printStackTrace();
             return defaultSave;
@@ -161,7 +160,7 @@ public final class AddonConfig extends YamlConfiguration {
         while ((line = input.readLine()) != null) {
             yamlBuilder.append(line).append('\n');
 
-            if (StringUtils.isBlank(line)) {
+            if (StringUtil.isBlank(line)) {
                 // Skip
                 continue;
             }

@@ -20,8 +20,8 @@ import java.util.Objects;
 @UtilityClass
 public final class InventoryUtil {
     /**
-     * This method push all {@link ItemStack} to {@link Player}'s inventory
-     * if some items cannot be pushed, they will be dropped at {@link Player}'s {@link Location}
+     * This method push all {@link ItemStack} to {@link Player}'s inventory.
+     * if some items cannot be pushed, they will be dropped at {@link Player}'s {@link Location}.
      *
      * @param p          the {@link Player}
      * @param itemStacks all the {@link ItemStack}s to be pushed

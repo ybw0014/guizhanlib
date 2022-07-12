@@ -27,6 +27,7 @@ public final class ChatUtil {
      * Translate color code of a {@link String}.
      *
      * @param str The {@link String} to be translated.
+     *
      * @return String with color code translated.
      */
     @Nonnull
@@ -38,6 +39,7 @@ public final class ChatUtil {
      * Translate color code of a {@link String} {@link List}.
      *
      * @param strList The {@link String} {@link List} to be translated.
+     *
      * @return {@link String} {@link List} with color code translated.
      */
     @Nonnull

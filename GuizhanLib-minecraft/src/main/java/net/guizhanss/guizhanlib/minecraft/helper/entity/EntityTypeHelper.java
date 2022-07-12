@@ -19,6 +19,7 @@ public final class EntityTypeHelper {
      * 返回实体类型({@link EntityType})的中文名
      *
      * @param entityType {@link EntityType} 实体类型
+     *
      * @return 实体类型的中文名称, 如果获取失败则返回键名
      */
     @Nonnull
@@ -36,6 +37,7 @@ public final class EntityTypeHelper {
      * 获取实体类型({@link EntityType})的键名
      *
      * @param entityType {@link EntityType} 实体类型
+     *
      * @return 实体类型的键名
      */
     @Nonnull
@@ -50,6 +52,7 @@ public final class EntityTypeHelper {
      * 根据给定的实体类型字符串返回中文名称
      *
      * @param entityType 实体类型的{@link String}格式
+     *
      * @return 实体类型的中文名称，如果获取失败则返回对应的键名
      */
     @Nonnull

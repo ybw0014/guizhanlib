@@ -20,6 +20,7 @@ public final class TropicalFishHelper {
      * 返回热带鱼样式({@link Pattern})的中文名
      *
      * @param pattern {@link Pattern} 热带鱼样式
+     *
      * @return 热带鱼样式的中文名称, 如果获取失败则返回键名
      */
     @Nonnull
@@ -31,6 +32,7 @@ public final class TropicalFishHelper {
      * 获取热带鱼样式({@link Pattern})的键名
      *
      * @param pattern {@link Pattern} 热带鱼样式
+     *
      * @return 热带鱼样式的键名
      */
     @Nonnull

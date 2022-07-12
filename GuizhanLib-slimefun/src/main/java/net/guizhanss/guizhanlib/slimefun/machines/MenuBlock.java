@@ -41,6 +41,7 @@ public abstract class MenuBlock extends SlimefunItem {
      * @param recipeType the {@link RecipeType} of this {@link MenuBlock}
      * @param recipe     the recipe of this {@link MenuBlock}
      */
+    @ParametersAreNonnullByDefault
     public MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
 
@@ -68,20 +69,19 @@ public abstract class MenuBlock extends SlimefunItem {
         new MenuBlockPreset(this);
     }
 
+    @ParametersAreNonnullByDefault
     protected abstract void setup(BlockMenuPreset preset);
 
+    @ParametersAreNonnullByDefault
     @Nonnull
     protected final int[] getTransportSlots(DirtyChestMenu menu, ItemTransportFlow flow, ItemStack item) {
-        switch (flow) {
-            case INSERT:
-                return getInputSlots(menu, item);
-            case WITHDRAW:
-                return getOutputSlots();
-            default:
-                return new int[0];
-        }
+        return switch (flow) {
+            case INSERT -> getInputSlots(menu, item);
+            case WITHDRAW -> getOutputSlots();
+        };
     }
 
+    @ParametersAreNonnullByDefault
     protected int[] getInputSlots(DirtyChestMenu menu, ItemStack item) {
         return getInputSlots();
     }
@@ -90,16 +90,19 @@ public abstract class MenuBlock extends SlimefunItem {
 
     protected abstract int[] getOutputSlots();
 
+    @ParametersAreNonnullByDefault
     protected void onNewInstance(BlockMenu menu, Block b) {
 
     }
 
+    @ParametersAreNonnullByDefault
     protected void onBreak(BlockBreakEvent e, BlockMenu menu) {
         Location l = menu.getLocation();
         menu.dropItems(l, getInputSlots());
         menu.dropItems(l, getOutputSlots());
     }
 
+    @ParametersAreNonnullByDefault
     protected void onPlace(BlockPlaceEvent e, Block b) {
 
     }

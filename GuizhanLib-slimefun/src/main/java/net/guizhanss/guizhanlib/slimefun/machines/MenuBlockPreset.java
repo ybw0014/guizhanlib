@@ -13,29 +13,31 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * A {@link MenuBlockPreset} is a preset of a menu block
+ * A {@link MenuBlockPreset} is a preset of a menu block.
  * <p>
- * Modified from InfinityLib
+ * Modified from InfinityLib.
  *
  * @author Mooy1
  * @author ybw0014
  */
-@ParametersAreNonnullByDefault
 final class MenuBlockPreset extends BlockMenuPreset {
 
     private final MenuBlock menuBlock;
 
+    @ParametersAreNonnullByDefault
     MenuBlockPreset(MenuBlock menuBlock) {
         super(menuBlock.getId(), menuBlock.getItemName());
         this.menuBlock = menuBlock;
         menuBlock.setup(this);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public void newInstance(BlockMenu menu, Block b) {
         menuBlock.onNewInstance(menu, b);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public int[] getSlotsAccessedByItemTransport(DirtyChestMenu menu, ItemTransportFlow flow, ItemStack item) {
         return menuBlock.getTransportSlots(menu, flow, item);
@@ -46,12 +48,14 @@ final class MenuBlockPreset extends BlockMenuPreset {
 
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public boolean canOpen(Block b, Player p) {
         return Slimefun.getProtectionManager().hasPermission(p, b.getLocation(), Interaction.INTERACT_BLOCK)
             && menuBlock.canUse(p, false);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public int[] getSlotsAccessedByItemTransport(ItemTransportFlow flow) {
         return new int[0];

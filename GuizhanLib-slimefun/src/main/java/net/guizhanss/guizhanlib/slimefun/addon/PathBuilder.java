@@ -51,5 +51,4 @@ final class PathBuilder {
         }
         return builder.toString();
     }
-
 }

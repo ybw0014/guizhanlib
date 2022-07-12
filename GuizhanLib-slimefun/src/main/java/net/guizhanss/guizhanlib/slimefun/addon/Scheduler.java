@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * A class for scheduling tasks
+ * A class for scheduling tasks.
  * Modified from InfinityLib
  *
  * @author Mooy1
@@ -56,5 +56,4 @@ public final class Scheduler {
     public void repeatAsync(int intervalTicks, int delayTicks, @Nonnull Runnable runnable) {
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delayTicks, Math.max(1, intervalTicks));
     }
-
 }

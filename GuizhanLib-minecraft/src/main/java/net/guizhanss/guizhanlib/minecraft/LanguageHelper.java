@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * 从Minecraft的语言文件中获取内容。
- * 只有读取语言文件后，其他包内的助手才能正常使用
+ * 只有读取语言文件后，其他包内的助手才能正常使用。
  *
  * @author ybw0014
  */
@@ -47,6 +47,7 @@ public final class LanguageHelper {
      *
      * @param key        {@link String} 键名
      * @param defaultVal 默认值
+     *
      * @return 键名内容
      */
     @Nonnull
@@ -59,6 +60,7 @@ public final class LanguageHelper {
      * 获取语言文件中指定键名的内容
      *
      * @param key {@link String} 键名
+     *
      * @return 键名内容
      */
     @Nonnull
@@ -70,6 +72,7 @@ public final class LanguageHelper {
      * 获取语言文件中指定键名的内容
      *
      * @param key {@link String} 键名
+     *
      * @return 键名内容
      */
     @Nullable

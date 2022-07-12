@@ -17,6 +17,7 @@ import java.util.Map;
  * @author ybw0014
  * @see ChatColor
  */
+@SuppressWarnings("ConstantConditions")
 public enum ChatColors {
     /**
      * 天蓝色
@@ -146,6 +147,7 @@ public enum ChatColors {
      * 根据聊天颜色返回对应的枚举
      *
      * @param chatColor {@link ChatColor} 聊天颜色
+     *
      * @return 对应的枚举
      */
     @Nonnull
@@ -159,6 +161,7 @@ public enum ChatColors {
      * 根据英文返回对应的枚举
      *
      * @param english {@link String} 提供的英文
+     *
      * @return 对应的枚举
      */
     @Nullable

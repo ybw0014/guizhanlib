@@ -22,6 +22,7 @@ public final class HorseHelper {
      * 获取马的颜色({@link Horse.Color})的中文
      *
      * @param color {@link Horse.Color} 马的颜色
+     *
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -33,6 +34,7 @@ public final class HorseHelper {
      * 获取马的样式({@link Horse.Style})的中文
      *
      * @param style {@link Horse.Style} 马的样式
+     *
      * @return 马的样式的中文
      */
     @Nonnull
@@ -44,6 +46,7 @@ public final class HorseHelper {
      * 获取马的颜色({@link Horse.Color})的中文
      *
      * @param color {@link String} 马的颜色
+     *
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -62,6 +65,7 @@ public final class HorseHelper {
      * 获取马的样式({@link Horse.Style})的中文
      *
      * @param style {@link String} 马的样式
+     *
      * @return 马的样式的中文
      */
     @Nonnull
@@ -127,6 +131,7 @@ public final class HorseHelper {
          * 根据马的颜色返回对应的枚举
          *
          * @param horseColor {@link Horse.Color} 马的颜色
+         *
          * @return 对应的枚举
          */
         @Nonnull
@@ -145,6 +150,7 @@ public final class HorseHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         @Nullable
@@ -209,6 +215,7 @@ public final class HorseHelper {
          * 根据马的样式返回对应的枚举
          *
          * @param horseStyle {@link Horse.Style} 马的样式
+         *
          * @return 对应的枚举
          */
         @Nonnull
@@ -227,6 +234,7 @@ public final class HorseHelper {
          * 根据英文返回对应的枚举
          *
          * @param english {@link String} 提供的英文
+         *
          * @return 对应的枚举
          */
         @Nullable
