@@ -10,7 +10,9 @@ import org.bukkit.plugin.Plugin;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -117,26 +119,10 @@ public abstract class AbstractGuizhanBuildsUpdater {
 
     /**
      * Initialize localization
-     *
-     * TODO: new localization
      */
     private void initLocalization() {
-
-//        // 从资源中加载
-//        InputStream stream = plugin.getResource("updater.json");
-//        if (stream == null) {
-//            throw new IllegalStateException("The updater's language file is missing, did you correctly relocated it?");
-//        }
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-//        JsonObject langRoot = (JsonObject) JsonUtil.parse(reader);
-//
-//        if (JsonUtil.getFromPath(langRoot, lang) != null) {
-//            lang = "en";
-//            langRoot = (JsonObject) JsonUtil.getFromPath(langRoot, lang);
-//        }
-//
-//        // 加载
-//        this.locale = langRoot;
+        InputStream stream = AbstractGuizhanBuildsUpdater.class.getResourceAsStream("updater.json");
+        localization = new UpdaterLocalization(stream);
     }
 
     /**
@@ -150,6 +136,14 @@ public abstract class AbstractGuizhanBuildsUpdater {
      */
     @Nonnull
     public abstract String getBuildsURL();
+
+    /**
+     * Override this method to set the language of updater.
+     *
+     * @return the language of updater
+     */
+    @Nonnull
+    public abstract String getLanguage();
 
     /**
      * Run updater task.
@@ -230,8 +224,6 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Get localized {@link String}.
      *
-     * TODO: new localization
-     *
      * @param key          The localization key
      * @param defaultValue The default value if localization is not found by key.
      *
@@ -242,6 +234,8 @@ public abstract class AbstractGuizhanBuildsUpdater {
     public String getLocalizedString(String key, String defaultValue) {
         Preconditions.checkArgument(key != null, "The localization key cannot be null.");
         Preconditions.checkArgument(defaultValue != null, "The localization key cannot be null.");
-        return defaultValue;
+
+        String result = localization.getLocalization(getLanguage(), key);
+        return Objects.requireNonNullElse(result, defaultValue);
     }
 }

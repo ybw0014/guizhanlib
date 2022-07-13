@@ -1,20 +1,10 @@
 package net.guizhanss.guizhanlib.updater;
 
-import com.google.common.base.Preconditions;
-import com.google.gson.JsonObject;
-import lombok.Getter;
-import net.guizhanss.guizhanlib.utils.JsonUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.MessageFormat;
-import java.util.logging.Logger;
 
 /**
  * The Guizhan Builds Updater is responsible to auto-update the plugin from
@@ -63,5 +53,16 @@ public class GuizhanBuildsUpdater extends AbstractGuizhanBuildsUpdater {
     @Override
     public String getBuildsURL() {
         return "https://builds.guizhanss.net";
+    }
+
+    /**
+     * Set the language of updater.
+     *
+     * @return the language of updater
+     */
+    @Nonnull
+    @Override
+    public String getLanguage() {
+        return "en-US";
     }
 }

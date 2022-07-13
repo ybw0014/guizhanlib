@@ -54,4 +54,15 @@ public class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
     public String getBuildsURL() {
         return "https://builds.guizhanss.cn";
     }
+
+    /**
+     * Set the language of updater.
+     *
+     * @return the language of updater
+     */
+    @Nonnull
+    @Override
+    public String getLanguage() {
+        return "zh-CN";
+    }
 }

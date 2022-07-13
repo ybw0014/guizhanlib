@@ -149,7 +149,7 @@ class UpdaterTask implements Runnable {
      */
     private boolean hasUpdate() {
         try {
-            // 获取构建信息
+            // Retrieve builds info
             URL buildsUrl = new URL(updater.getBuildsInfo(workingDirectory));
             JsonObject buildsJson = (JsonObject) JsonUtil.parse(fetch(buildsUrl));
             JsonArray builds = (JsonArray) JsonUtil.getFromPath(buildsJson, "builds");
