@@ -12,7 +12,7 @@ import java.io.File;
  *
  * @author ybw0014
  */
-public class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
+public final class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
 
     /**
      * This constructor sets up the updater.
