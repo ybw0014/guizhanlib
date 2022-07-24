@@ -26,9 +26,9 @@ class UpdaterLocalization {
     @ParametersAreNonnullByDefault
     @Nullable
     public String getLocalization(String lang, String path) {
-        JsonElement local = JsonUtil.getFromPath(localizations, lang + "." + path);
-        if (local.isJsonObject()) {
-            return local.getAsString();
+        JsonElement locale = JsonUtil.getFromPath(localizations, lang + "." + path);
+        if (locale != null && locale.isJsonObject()) {
+            return locale.getAsString();
         } else {
             return null;
         }

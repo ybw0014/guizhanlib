@@ -121,7 +121,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
      * Initialize localization
      */
     private void initLocalization() {
-        InputStream stream = AbstractGuizhanBuildsUpdater.class.getResourceAsStream("updater.json");
+        InputStream stream = AbstractGuizhanBuildsUpdater.class.getResourceAsStream("/updater.json");
         localization = new UpdaterLocalization(stream);
     }
 
