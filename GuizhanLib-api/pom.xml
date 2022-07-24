@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.guizhanss</groupId>
+        <artifactId>GuizhanLib</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>GuizhanLib-api</artifactId>
+    <packaging>jar</packaging>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.4.0</version>
+
+                        <configuration>
+                            <includeDependencySources>true</includeDependencySources>
+                            <detectOfflineLinks>false</detectOfflineLinks>
+
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>net.guizhanss:*</dependencySourceInclude>
+                            </dependencySourceIncludes>
+
+                            <groups>
+                                <group>
+                                    <title>Module "GuizhanLib-common"</title>
+                                    <packages>net.guizhanss.guizhanlib.common:net.guizhanss.guizhanlib.java:net.guizhanss.guizhanlib.utils</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-localization"</title>
+                                    <packages>net.guizhanss.guizhanlib.localization</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-minecraft"</title>
+                                    <packages>net.guizhanss.guizhanlib.minecraft</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-slimefun"</title>
+                                    <packages>net.guizhanss.guizhanlib.slimefun</packages>
+                                </group>
+                                <group>
+                                    <title>Module "GuizhanLib-updater"</title>
+                                    <packages>net.guizhanss.guizhanlib.updater</packages>
+                                </group>
+                            </groups>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+
+                                <goals>
+                                    <goal>aggregate-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+
+                <configuration>
+                    <createSourcesJar>true</createSourcesJar>
+
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-common</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-localization</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-minecraft</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-slimefun</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.guizhanss</groupId>
+            <artifactId>GuizhanLib-updater</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>

@@ -6,7 +6,9 @@
 
     <groupId>net.guizhanss</groupId>
     <artifactId>GuizhanLib</artifactId>
-    <version>0.9.9</version>
+    <version>1.0.0</version>
+
+    <packaging>pom</packaging>
 
     <name>GuizhanLib</name>
     <description>A library for Slimefun addon development, and Simplified Chinese translation.</description>
@@ -30,14 +32,30 @@
     <scm>
         <connection>scm:git:git://github.com/ybw0014/GuizhanLib.git</connection>
         <developerConnection>scm:git:ssh://github.com:ybw0014/GuizhanLib.git</developerConnection>
-        <url>http://github.com/ybw0014/GuizhanLib/tree/master</url>
+        <url>https://github.com/ybw0014/GuizhanLib/tree/master</url>
     </scm>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>16</java.version>
+        <spigot.version>1.19</spigot.version>
+        <slimefun.version>RC-32</slimefun.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/ybw0014/GuizhanLib/issues</url>
+    </issueManagement>
+
+    <modules>
+        <module>GuizhanLib-common</module>
+        <module>GuizhanLib-localization</module>
+        <module>GuizhanLib-minecraft</module>
+        <module>GuizhanLib-slimefun</module>
+        <module>GuizhanLib-updater</module>
+
+        <module>GuizhanLib-api</module>
+    </modules>
 
     <distributionManagement>
         <snapshotRepository>
@@ -60,23 +78,31 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <repository>
+            <id>paper-repo</id>
+            <url>https://papermc.io/repo/repository/maven-public</url>
+        </repository>
     </repositories>
 
     <dependencies>
+        <!-- Minecraft -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>${spigot.version}-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- Slimefun -->
         <dependency>
             <groupId>io.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-30</version>
+            <version>${slimefun.version}</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- Tools and libraries -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
@@ -100,17 +126,18 @@
 
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.16</artifactId>
-            <version>1.5.0</version>
+            <artifactId>MockBukkit-v1.19</artifactId>
+            <version>2.29.0</version>
             <scope>test</scope>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jetbrains</groupId>
+                    <artifactId>annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <profiles>
@@ -221,6 +248,8 @@
                 <version>3.10.1</version>
 
                 <configuration>
+                    <release>${java.version}</release>
+
                     <excludes>
                         <exclude>**/package-info.java</exclude>
                     </excludes>
@@ -245,37 +274,6 @@
                     <junitArtifactName>org.junit.jupiter:junit-jupiter</junitArtifactName>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
-
-                <configuration>
-                    <relocations>
-                        <relocation>
-                            <pattern>org.bstats</pattern>
-                            <shadedPattern>net.guizhanss.guizhanlib.bstats</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>META-INF/*</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
