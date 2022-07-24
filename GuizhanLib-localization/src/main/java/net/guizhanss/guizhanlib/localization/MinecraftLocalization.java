@@ -57,11 +57,11 @@ public class MinecraftLocalization extends Localization {
     }
 
     /**
-     * Get colored & localized {@link String} {@link List} from path
+     * Get colored and localized {@link String} {@link List} from path
      *
      * @param path the localization path
      *
-     * @return Colored & localized {@link String} {@link List}
+     * @return Colored and localized {@link String} {@link List}
      */
     @Nonnull
     @Override
@@ -70,11 +70,11 @@ public class MinecraftLocalization extends Localization {
     }
 
     /**
-     * Get colored & localized {@link String} array from path
+     * Get colored and localized {@link String} array from path
      *
      * @param path the localization path
      *
-     * @return Colored & localized {@link String} array
+     * @return Colored and localized {@link String} array
      */
     @Nonnull
     @Override
