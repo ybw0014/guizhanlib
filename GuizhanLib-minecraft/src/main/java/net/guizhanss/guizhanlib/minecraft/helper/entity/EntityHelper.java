@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public final class EntityHelper {
     /**
      * 返回实体({@link Entity})的显示名称

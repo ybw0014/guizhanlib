@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused"})
 public final class PufferFishHelper {
     /**
      * 获取河豚的膨胀状态的中文
@@ -22,15 +22,11 @@ public final class PufferFishHelper {
      */
     @Nonnull
     public static String getPuffState(int level) {
-        switch (level) {
-            case 0:
-                return "未膨胀";
-            case 1:
-                return "半膨胀";
-            case 2:
-                return "完全膨胀";
-            default:
-                return "未知";
-        }
+        return switch (level) {
+            case 0 -> "未膨胀";
+            case 1 -> "半膨胀";
+            case 2 -> "完全膨胀";
+            default -> "未知";
+        };
     }
 }

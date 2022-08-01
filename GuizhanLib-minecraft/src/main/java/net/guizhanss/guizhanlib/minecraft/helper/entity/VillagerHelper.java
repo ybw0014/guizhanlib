@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public final class VillagerHelper {
     /**
      * 返回村民职业({@link Profession})的中文名
@@ -47,7 +47,7 @@ public final class VillagerHelper {
      *
      * @param profession {@link String} 村民职业
      *
-     * @return 村民职业的中文名称, 如果获取失败则返回键名
+     * @return 村民职业的中文名称, 如果获取失败则返回空
      */
     @Nonnull
     public static String getProfessionName(@Nonnull String profession) {
