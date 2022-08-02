@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings("ConstantConditions")
 public final class TropicalFishHelper {
     /**
      * 返回热带鱼样式({@link Pattern})的中文名

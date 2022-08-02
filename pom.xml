@@ -37,8 +37,6 @@
 
     <properties>
         <java.version>16</java.version>
-        <spigot.version>1.19</spigot.version>
-        <slimefun.version>RC-32</slimefun.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -90,7 +88,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>${spigot.version}-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -98,7 +96,7 @@
         <dependency>
             <groupId>io.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>${slimefun.version}</version>
+            <version>RC-32</version>
             <scope>provided</scope>
         </dependency>
 

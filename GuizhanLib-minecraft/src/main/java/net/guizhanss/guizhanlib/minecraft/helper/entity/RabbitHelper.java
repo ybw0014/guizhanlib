@@ -7,8 +7,9 @@ import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.bukkit.entity.Rabbit;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * 兔子({@link Rabbit})
@@ -16,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings("ConstantConditions")
 public final class RabbitHelper {
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文
@@ -56,85 +57,67 @@ public final class RabbitHelper {
         /**
          * 黑色
          */
-        BLACK(Rabbit.Type.BLACK, "Black", "黑色"),
+        BLACK(Rabbit.Type.BLACK, "黑色"),
         /**
          * 黑白相间
          */
-        BLACK_AND_WHITE(Rabbit.Type.BLACK_AND_WHITE, "Black And White", "黑白相间"),
+        BLACK_AND_WHITE(Rabbit.Type.BLACK_AND_WHITE, "黑白相间"),
         /**
          * 褐色
          */
-        BROWN(Rabbit.Type.BROWN, "Brown", "褐色"),
+        BROWN(Rabbit.Type.BROWN, "褐色"),
         /**
          * 金色
          */
-        GOLD(Rabbit.Type.GOLD, "Gold", "金色"),
+        GOLD(Rabbit.Type.GOLD, "金色"),
         /**
          * 胡椒盐色
          */
-        SALT_AND_PEPPER(Rabbit.Type.SALT_AND_PEPPER, "Salt And Pepper", "胡椒盐色"),
+        SALT_AND_PEPPER(Rabbit.Type.SALT_AND_PEPPER, "胡椒盐色"),
         /**
          * 杀手兔
          */
-        THE_KILLER_BUNNY(Rabbit.Type.THE_KILLER_BUNNY, "The Killer Bunny", "杀手兔"),
+        THE_KILLER_BUNNY(Rabbit.Type.THE_KILLER_BUNNY, "杀手兔"),
         /**
          * 白色
          */
-        WHITE(Rabbit.Type.WHITE, "White", "白色");
+        WHITE(Rabbit.Type.WHITE, "白色");
+
+        private static final Type[] cachedValues = values();
+        private static final Map<Rabbit.Type, Type> typeLookup = new EnumMap<>(Rabbit.Type.class);
+
+        static {
+            for (Type type : cachedValues) {
+                typeLookup.put(type.getType(), type);
+            }
+        }
 
         @Getter
         private final Rabbit.Type type;
         @Getter
-        private final String english;
-        @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
-        Type(Rabbit.Type type, String english, String chinese) {
+        Type(Rabbit.Type type, String chinese) {
             this.type = type;
-            this.english = english;
             this.chinese = chinese;
         }
 
         /**
-         * 根据兔子的类型返回对应的枚举
+         * 获取兔子的类型
          *
          * @param rabbitType {@link Rabbit.Type} 兔子的类型
          *
-         * @return 对应的枚举
+         * @return 兔子的类型
          */
         @Nonnull
         public static Type fromType(@Nonnull Rabbit.Type rabbitType) {
             Preconditions.checkArgument(rabbitType != null, "兔子的类型不能为空");
 
-            for (Type type : Type.values()) {
-                if (type.getType() == rabbitType) {
-                    return type;
-                }
-            }
-            throw new IllegalArgumentException("无效的兔子的类型");
+            return typeLookup.get(rabbitType);
         }
 
-        /**
-         * 根据英文返回对应的枚举
-         *
-         * @param english {@link String} 提供的英文
-         *
-         * @return 对应的枚举
-         */
-        @Nullable
-        public static Type fromEnglish(@Nonnull String english) {
-            Preconditions.checkArgument(english != null, "英文不能为空");
-
-            String humanized = StringUtil.humanize(english);
-            for (Type type : Type.values()) {
-                if (type.getEnglish().equals(humanized)) {
-                    return type;
-                }
-            }
-            return null;
-        }
-
+        @Nonnull
         @Override
         public String toString() {
             return this.getChinese();

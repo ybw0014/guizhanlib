@@ -7,8 +7,9 @@ import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.bukkit.entity.Panda;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * 熊猫({@link Panda})
@@ -16,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings("ConstantConditions")
 public final class PandaHelper {
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文
@@ -56,52 +57,58 @@ public final class PandaHelper {
         /**
          * 好斗
          */
-        AGGRESSIVE(Panda.Gene.AGGRESSIVE, "Aggressive", "好斗"),
+        AGGRESSIVE(Panda.Gene.AGGRESSIVE, "好斗"),
         /**
          * 棕色
          */
-        BROWN(Panda.Gene.BROWN, "Brown", "棕色"),
+        BROWN(Panda.Gene.BROWN, "棕色"),
         /**
          * 懒惰
          */
-        LAZY(Panda.Gene.LAZY, "Lazy", "懒惰"),
+        LAZY(Panda.Gene.LAZY, "懒惰"),
         /**
          * 普通
          */
-        NORMAL(Panda.Gene.NORMAL, "Normal", "普通"),
+        NORMAL(Panda.Gene.NORMAL, "普通"),
         /**
          * 顽皮
          */
-        PLAYFUL(Panda.Gene.PLAYFUL, "Playful", "顽皮"),
+        PLAYFUL(Panda.Gene.PLAYFUL, "顽皮"),
         /**
          * 虚弱
          */
-        WEAK(Panda.Gene.WEAK, "Weak", "虚弱"),
+        WEAK(Panda.Gene.WEAK, "虚弱"),
         /**
          * 发愁
          */
-        WORRIED(Panda.Gene.WORRIED, "Worried", "发愁");
+        WORRIED(Panda.Gene.WORRIED, "发愁");
+
+        private static final Gene[] cachedValues = values();
+        private static final Map<Panda.Gene, Gene> geneLookup = new EnumMap<>(Panda.Gene.class);
+
+        static {
+            for (Gene gene : cachedValues) {
+                geneLookup.put(gene.getGene(), gene);
+            }
+        }
 
         @Getter
         private final Panda.Gene gene;
         @Getter
-        private final String english;
-        @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
-        Gene(Panda.Gene gene, String english, String chinese) {
+        Gene(Panda.Gene gene, String chinese) {
             this.gene = gene;
-            this.english = english;
             this.chinese = chinese;
         }
 
         /**
-         * 根据熊猫基因返回对应的枚举
+         * 获取熊猫基因
          *
          * @param pandaGene {@link Panda.Gene} 熊猫基因
          *
-         * @return 对应的枚举
+         * @return 熊猫基因
          */
         @Nonnull
         public static Gene fromGene(@Nonnull Panda.Gene pandaGene) {
@@ -113,26 +120,6 @@ public final class PandaHelper {
                 }
             }
             throw new IllegalArgumentException("无效的熊猫基因");
-        }
-
-        /**
-         * 根据英文返回对应的枚举
-         *
-         * @param english {@link String} 提供的英文
-         *
-         * @return 对应的枚举
-         */
-        @Nullable
-        public static Gene fromEnglish(@Nonnull String english) {
-            Preconditions.checkArgument(english != null, "英文不能为空");
-
-            String humanized = StringUtil.humanize(english);
-            for (Gene gene : Gene.values()) {
-                if (gene.getEnglish().equals(humanized)) {
-                    return gene;
-                }
-            }
-            return null;
         }
 
         @Nonnull

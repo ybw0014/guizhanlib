@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings("ConstantConditions")
 public final class EntityTypeHelper {
     /**
      * 返回实体类型({@link EntityType})的中文名
@@ -25,10 +25,6 @@ public final class EntityTypeHelper {
     @Nonnull
     public static String getName(@Nonnull EntityType entityType) {
         Preconditions.checkArgument(entityType != null, "实体类型不能为空");
-
-        // 1.16 中移除的类型
-        if (entityType.toString().equals("PIG_ZOMBIE"))
-            return "僵尸猪人";
 
         return LanguageHelper.getLangOrKey(getKey(entityType));
     }
@@ -53,7 +49,7 @@ public final class EntityTypeHelper {
      *
      * @param entityType 实体类型的{@link String}格式
      *
-     * @return 实体类型的中文名称，如果获取失败则返回对应的键名
+     * @return 实体类型的中文名称，如果获取失败则返回空
      */
     @Nonnull
     public static String getName(@Nonnull String entityType) {
