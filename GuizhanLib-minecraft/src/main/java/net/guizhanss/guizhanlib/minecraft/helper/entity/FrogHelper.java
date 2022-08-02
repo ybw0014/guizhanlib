@@ -96,7 +96,7 @@ public final class FrogHelper {
          */
         @Nonnull
         public static Variant fromVariant(@Nonnull Frog.Variant frogVariant) {
-            Preconditions.checkArgument(frogVariant != null, "熊猫基因不能为空");
+            Preconditions.checkArgument(frogVariant != null, "青蛙肤色不能为空");
 
             return variantLookup.get(frogVariant);
         }
