@@ -1,7 +1,6 @@
 # GuizhanLib
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/GuizhanLib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
-[![Jitpack 状态](https://jitpack.io/v/net.guizhanss/GuizhanLib.svg)](https://jitpack.io/#net.guizhanss/GuizhanLib)
 
 一个可用于汉化插件的库。
 
@@ -14,23 +13,12 @@
 
 ## 如何使用
 
-你需要在`pom.xml`中添加Jitpack的仓库:
-
-```
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-```
-
-并将GuizhanLib添加为附属:
+将GuizhanLib添加为依赖项:
 
 ```
     <dependency>
         <groupId>net.guizhanss</groupId>
-        <artifactId>GuizhanLib</artifactId>
+        <artifactId>GuizhanLib-api</artifactId>
         <version>将此处替换为版本号</version>
         <scope>compile</scope>
     </dependency>
@@ -43,7 +31,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0</version>
 
                 <configuration>
                     <!-- 你可以添加下面这一行，去除所有库中未使用的类，来减少生成jar的大小，非必须，但建议开启 -->
