@@ -6,8 +6,6 @@ import org.bukkit.inventory.ItemStack;
 /**
  * This enum contains some useful tags that
  * {@link org.bukkit.Tag} does not have.
- * <p>
- * TODO: rewrite it to have multi-version compatibility
  *
  * @author ybw0014
  * @author haiman233
