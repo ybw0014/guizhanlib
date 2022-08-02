@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class VillagerHelper {
     /**
      * 返回村民职业({@link Profession})的中文名

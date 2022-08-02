@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class FrogHelper {
     /**
      * 获取青蛙肤色({@link Frog.Variant})的中文

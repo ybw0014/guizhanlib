@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class RabbitHelper {
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文

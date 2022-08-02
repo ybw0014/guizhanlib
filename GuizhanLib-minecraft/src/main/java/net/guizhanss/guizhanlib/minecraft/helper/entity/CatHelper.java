@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class CatHelper {
     /**
      * 获取猫的类型({@link Cat.Type})的中文

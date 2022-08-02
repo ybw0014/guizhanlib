@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class FoxHelper {
     /**
      * 获取狐狸的类型({@link Fox.Type})的中文

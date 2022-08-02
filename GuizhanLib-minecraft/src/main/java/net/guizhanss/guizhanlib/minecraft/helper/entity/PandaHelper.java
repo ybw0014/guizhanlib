@@ -17,7 +17,7 @@ import java.util.Map;
  * @author ybw0014
  */
 @UtilityClass
-@SuppressWarnings({"unused", "ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 public final class PandaHelper {
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文

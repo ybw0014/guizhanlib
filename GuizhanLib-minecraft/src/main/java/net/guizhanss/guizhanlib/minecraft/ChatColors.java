@@ -22,91 +22,91 @@ public enum ChatColors {
     /**
      * 天蓝色
      */
-    AQUA(ChatColor.AQUA, "Aqua", "天蓝色"),
+    AQUA(ChatColor.AQUA, "天蓝色"),
     /**
      * 黑色
      */
-    BLACK(ChatColor.BLACK, "Black", "黑色"),
+    BLACK(ChatColor.BLACK, "黑色"),
     /**
      * 蓝色
      */
-    BLUE(ChatColor.BLUE, "Blue", "蓝色"),
+    BLUE(ChatColor.BLUE, "蓝色"),
     /**
      * 加粗
      */
-    BOLD(ChatColor.BOLD, "Bold", "加粗"),
+    BOLD(ChatColor.BOLD, "加粗"),
     /**
      * 湖蓝色
      */
-    DARK_AQUA(ChatColor.DARK_AQUA, "Dark Aqua", "湖蓝色"),
+    DARK_AQUA(ChatColor.DARK_AQUA, "湖蓝色"),
     /**
      * 深蓝色
      */
-    DARK_BLUE(ChatColor.DARK_BLUE, "Dark Blue", "深蓝色"),
+    DARK_BLUE(ChatColor.DARK_BLUE, "深蓝色"),
     /**
      * 深灰色
      */
-    DARK_GRAY(ChatColor.DARK_GRAY, "Dark Gray", "深灰色"),
+    DARK_GRAY(ChatColor.DARK_GRAY, "深灰色"),
     /**
      * 深绿色
      */
-    DARK_GREEN(ChatColor.DARK_GREEN, "Dark Green", "深绿色"),
+    DARK_GREEN(ChatColor.DARK_GREEN, "深绿色"),
     /**
      * 紫色
      */
-    DARK_PURPLE(ChatColor.DARK_PURPLE, "Dark Purple", "紫色"),
+    DARK_PURPLE(ChatColor.DARK_PURPLE, "紫色"),
     /**
      * 深红色
      */
-    DARK_RED(ChatColor.DARK_RED, "Dark Red", "深红色"),
+    DARK_RED(ChatColor.DARK_RED, "深红色"),
     /**
      * 金色
      */
-    GOLD(ChatColor.GOLD, "Gold", "金色"),
+    GOLD(ChatColor.GOLD, "金色"),
     /**
      * 灰色
      */
-    GRAY(ChatColor.GRAY, "Gray", "灰色"),
+    GRAY(ChatColor.GRAY, "灰色"),
     /**
      * 绿色
      */
-    GREEN(ChatColor.GREEN, "Green", "绿色"),
+    GREEN(ChatColor.GREEN, "绿色"),
     /**
      * 斜体
      */
-    ITALIC(ChatColor.ITALIC, "Italic", "斜体"),
+    ITALIC(ChatColor.ITALIC, "斜体"),
     /**
      * 粉红色
      */
-    LIGHT_PURPLE(ChatColor.LIGHT_PURPLE, "Light Purple", "粉红色"),
+    LIGHT_PURPLE(ChatColor.LIGHT_PURPLE, "粉红色"),
     /**
      * 随机
      */
-    MAGIC(ChatColor.MAGIC, "Magic", "随机"),
+    MAGIC(ChatColor.MAGIC, "随机"),
     /**
      * 红色
      */
-    RED(ChatColor.RED, "Red", "红色"),
+    RED(ChatColor.RED, "红色"),
     /**
      * 重置
      */
-    RESET(ChatColor.RESET, "Reset", "重置"),
+    RESET(ChatColor.RESET, "重置"),
     /**
      * 删除线
      */
-    STRIKETHROUGH(ChatColor.STRIKETHROUGH, "Strikethrough", "删除线"),
+    STRIKETHROUGH(ChatColor.STRIKETHROUGH, "删除线"),
     /**
      * 下划线
      */
-    UNDERLINE(ChatColor.UNDERLINE, "Underline", "下划线"),
+    UNDERLINE(ChatColor.UNDERLINE, "下划线"),
     /**
      * 白色
      */
-    WHITE(ChatColor.WHITE, "White", "白色"),
+    WHITE(ChatColor.WHITE, "白色"),
     /**
      * 黄色
      */
-    YELLOW(ChatColor.YELLOW, "Yellow", "黄色");
+    YELLOW(ChatColor.YELLOW, "黄色");
 
     /**
      * 颜色代码前缀
@@ -125,21 +125,17 @@ public enum ChatColors {
     @Getter
     private final ChatColor color;
     @Getter
-    private final String english;
-    @Getter
     private final String chinese;
 
     /**
      * 构造函数
      *
      * @param color   {@link ChatColor}
-     * @param english 英文
      * @param chinese 中文
      */
     @ParametersAreNonnullByDefault
-    ChatColors(ChatColor color, String english, String chinese) {
+    ChatColors(ChatColor color, String chinese) {
         this.color = color;
-        this.english = english;
         this.chinese = chinese;
     }
 
@@ -155,26 +151,6 @@ public enum ChatColors {
         Preconditions.checkArgument(chatColor != null, "聊天颜色不能为空");
 
         return colorLookup.get(chatColor);
-    }
-
-    /**
-     * 根据英文返回对应的枚举
-     *
-     * @param english {@link String} 提供的英文
-     *
-     * @return 对应的枚举
-     */
-    @Nullable
-    public static ChatColors fromEnglish(@Nonnull String english) {
-        Preconditions.checkArgument(english != null, "英文不能为空");
-
-        String humanized = StringUtil.humanize(english);
-        for (ChatColors color : valuesCache) {
-            if (color.getEnglish().equals(humanized)) {
-                return color;
-            }
-        }
-        return null;
     }
 
     /**
