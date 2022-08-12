@@ -31,7 +31,7 @@ public final class JsonUtil {
     @Nonnull
     public static JsonElement parse(@Nonnull String json) {
         Preconditions.checkArgument(json != null, "JSON string should not be null");
-        return JsonParser.parseString(json);
+        return new JsonParser().parse(json);
     }
 
     /**
@@ -44,7 +44,7 @@ public final class JsonUtil {
     @Nonnull
     public static JsonElement parse(@Nonnull BufferedReader reader) {
         Preconditions.checkArgument(reader != null, "reader should not be null");
-        return JsonParser.parseReader(reader);
+        return new JsonParser().parse(reader);
     }
 
     /**
