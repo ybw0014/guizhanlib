@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- 使用旧版JsonParser，兼容旧版本MC。
+
 ## 1.0.1
 
 - 修改了Minecraft模块的entity包，并新增青蛙。
