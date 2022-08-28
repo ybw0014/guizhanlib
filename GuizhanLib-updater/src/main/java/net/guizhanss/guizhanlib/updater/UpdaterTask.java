@@ -103,7 +103,7 @@ class UpdaterTask implements Runnable {
                     updater.getBranch()
                 );
             }
-        } catch (MalformedURLException | IllegalStateException ex) {
+        } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             updater.log(Level.SEVERE, updater.getLocalizedString("cannot_find_repo", "Cannot find repo in Guizhan Builds."), ex);
         }
     }
@@ -233,12 +233,11 @@ class UpdaterTask implements Runnable {
             connection.addRequestProperty("User-Agent", "Guizhan Updater");
             connection.setDoOutput(true);
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                String line = reader.readLine();
-                while (line != null) {
-                    content.append(line);
-                    line = reader.readLine();
-                }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
+            String line = reader.readLine();
+            while (line != null) {
+                content.append(line);
+                line = reader.readLine();
             }
 
             return content.toString();
