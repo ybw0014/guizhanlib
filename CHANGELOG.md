@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3
+
+- Minecraft包新增美西螈。
+- 自动更新捕捉更多错误。
+
 ## 1.0.2
 
 - 使用旧版JsonParser，兼容旧版本MC。
