@@ -27,7 +27,7 @@ public final class AxolotlHelper {
      * @return 美西螈的变种的中文
      */
     @Nonnull
-    public static String getType(@Nonnull Axolotl.Variant variant) {
+    public static String getVariant(@Nonnull Axolotl.Variant variant) {
         return Type.fromType(variant).getChinese();
     }
 
@@ -39,12 +39,12 @@ public final class AxolotlHelper {
      * @return 美西螈的变种的中文
      */
     @Nonnull
-    public static String getType(@Nonnull String variant) {
-        Preconditions.checkArgument(variant != null, "猫类型不能为空");
+    public static String getVariant(@Nonnull String variant) {
+        Preconditions.checkArgument(variant != null, "美西螈的变种不能为空");
 
         try {
-            Axolotl.Variant catType = Axolotl.Variant.valueOf(variant);
-            return Type.fromType(catType).getChinese();
+            Axolotl.Variant axolotlVariant = Axolotl.Variant.valueOf(variant);
+            return Type.fromType(axolotlVariant).getChinese();
         } catch (IllegalArgumentException ex) {
             return StringUtil.humanize(variant);
         }
