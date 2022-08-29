@@ -19,6 +19,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 
 /**
  * An abstract {@link SlimefunAddon} class that contains
@@ -34,6 +35,10 @@ import java.util.logging.Level;
 @ParametersAreNonnullByDefault
 @SuppressWarnings("ConstantConditions")
 public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon {
+
+    private static final Pattern GITHUB_PATTERN = Pattern.compile("[\\w-]+");
+    private static final String NULL_LOG_LEVEL = "Log level cannot be null";
+    private static final String NULL_LOG_MESSAGE = "Log message cannot be null";
 
     private static AbstractAddon instance;
 
@@ -53,16 +58,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private boolean autoUpdateEnabled;
 
     /**
-     * Live addon constructor
-     * <p>
-     * Updater lang key is not used any more since it is not included in the lib anymore.
+     * Live addon constructor.
      *
      * @param githubUser    GitHub username of this project
      * @param githubRepo    GitHub repository of this project
      * @param githubBranch  GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
      */
-    public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
+    protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         this.environment = Environment.LIVE;
         this.githubUser = githubUser;
         this.githubRepo = githubRepo;
@@ -73,7 +76,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Live addon constructor
+     * Live addon constructor.
      *
      * @param githubUser     GitHub username of this project
      * @param githubRepo     GitHub repository of this project
@@ -84,7 +87,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @deprecated Updater lang key is not used any more since it is not included in the lib anymore.
      */
     @Deprecated
-    public AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
+    protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
         this(githubUser, githubRepo, githubBranch, autoUpdateKey);
     }
 
@@ -129,6 +132,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         this.autoUpdateKey = autoUpdateKey;
         this.bugTrackerURL = MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
         validate();
+    }
+
+    private static <T extends AbstractAddon> void setInstance(T inst) {
+        instance = inst;
     }
 
     /**
@@ -208,8 +215,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @see MessageFormat
      */
     public static void log(@Nonnull Level level, @Nonnull String message, @Nullable Object... args) {
-        Preconditions.checkArgument(level != null, "log level should not be null");
-        Preconditions.checkArgument(message != null, "log message should not be null");
+        Preconditions.checkArgument(level != null, NULL_LOG_LEVEL);
+        Preconditions.checkArgument(message != null, NULL_LOG_MESSAGE);
 
         getInstance().getLogger().log(level, ChatUtil.color(MessageFormat.format(message, args)));
     }
@@ -227,8 +234,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @see MessageFormat
      */
     public static void log(@Nonnull Level level, @Nonnull Throwable ex, @Nonnull String message, @Nullable Object... args) {
-        Preconditions.checkArgument(level != null, "log level should not be null");
-        Preconditions.checkArgument(message != null, "log message should not be null");
+        Preconditions.checkArgument(level != null, NULL_LOG_LEVEL);
+        Preconditions.checkArgument(message != null, NULL_LOG_MESSAGE);
 
         getInstance().getLogger().log(level, ex, () -> ChatUtil.color(MessageFormat.format(message, args)));
     }
@@ -244,7 +251,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @see MessageFormat
      */
     public static void sendConsole(@Nonnull String message, @Nullable Object... args) {
-        Preconditions.checkArgument(message != null, "log message should not be null");
+        Preconditions.checkArgument(message != null, NULL_LOG_MESSAGE);
 
         Bukkit.getConsoleSender().sendMessage("[" + getInstance().getName() + "] " + ChatUtil.color(MessageFormat.format(message, args)));
     }
@@ -256,13 +263,13 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         if (instance != null) {
             throw new IllegalStateException("Addon " + instance.getName() + " is already using this GuizhanLib, Shade an relocate your own!");
         }
-        if (!githubUser.matches("[\\w-]+")) {
+        if (!GITHUB_PATTERN.matcher(githubUser).matches()) {
             throw new IllegalArgumentException("Invalid githubUser");
         }
-        if (!githubRepo.matches("[\\w-]+")) {
+        if (!GITHUB_PATTERN.matcher(githubRepo).matches()) {
             throw new IllegalArgumentException("Invalid githubRepo");
         }
-        if (!githubBranch.matches("[\\w-]+")) {
+        if (!GITHUB_PATTERN.matcher(githubBranch).matches()) {
             throw new IllegalArgumentException("Invalid githubBranch");
         }
     }
@@ -300,7 +307,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         enabling = true;
 
         // Set instance
-        instance = this;
+        setInstance(this);
 
         // This is used to check if the auto update config is broken
         boolean brokenConfig = false;
@@ -371,7 +378,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         } finally {
             disabling = false;
             slimefunTickCount = 0;
-            instance = null;
+            setInstance(null);
             config = null;
         }
     }
@@ -406,11 +413,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      */
     private void handleException(RuntimeException ex) {
         switch (environment) {
-            case LIVE:
-                ex.printStackTrace();
-                break;
-            case TESTING:
-                throw ex;
+            case LIVE -> ex.printStackTrace();
+            case TESTING, LIB_TESTING -> throw ex;
         }
     }
 
@@ -445,7 +449,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @return the current {@link Environment}
      */
     @Nonnull
-    public Environment getEnvironment() {
+    public final Environment getEnvironment() {
         return environment;
     }
 

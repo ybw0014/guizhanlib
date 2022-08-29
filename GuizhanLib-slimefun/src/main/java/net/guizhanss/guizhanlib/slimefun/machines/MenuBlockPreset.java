@@ -45,7 +45,7 @@ final class MenuBlockPreset extends BlockMenuPreset {
 
     @Override
     public void init() {
-
+        // do nothing yet
     }
 
     @ParametersAreNonnullByDefault

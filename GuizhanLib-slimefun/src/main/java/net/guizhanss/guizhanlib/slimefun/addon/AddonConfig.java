@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -28,25 +29,27 @@ public final class AddonConfig extends YamlConfiguration {
     private final Map<String, String> comments = new HashMap<>();
     private final File file;
 
-    public AddonConfig(String path) {
+    public AddonConfig(@Nonnull String path) {
         AbstractAddon addon = AbstractAddon.getInstance();
         file = new File(addon.getDataFolder(), path);
         super.defaults = defaults;
         loadDefaults(addon, path);
     }
 
-    public int getInt(String path, int min, int max) {
+    public int getInt(@Nonnull String path, int min, int max) {
         int val = getInt(path);
         if (val < min || val > max) {
-            set(path, val = getDefaults().getInt(path));
+            val = getDefaults().getInt(path);
+            set(path, val);
         }
         return val;
     }
 
-    public double getDouble(String path, double min, double max) {
+    public double getDouble(@Nonnull String path, double min, double max) {
         double val = getDouble(path);
         if (val < min || val > max) {
-            set(path, val = getDefaults().getDouble(path));
+            val = getDefaults().getDouble(path);
+            set(path, val);
         }
         return val;
     }
@@ -59,6 +62,12 @@ public final class AddonConfig extends YamlConfiguration {
             if (!defaults.contains(key)) {
                 set(key, null);
             }
+        }
+    }
+
+    public void setDefault(@Nonnull String path, @Nullable Object obj) {
+        if (!contains(path)) {
+            set(path, obj);
         }
     }
 
@@ -132,6 +141,7 @@ public final class AddonConfig extends YamlConfiguration {
         }
     }
 
+    @ParametersAreNonnullByDefault
     private void loadDefaults(AbstractAddon addon, String name) {
         InputStream stream = addon.getResource(name);
 
