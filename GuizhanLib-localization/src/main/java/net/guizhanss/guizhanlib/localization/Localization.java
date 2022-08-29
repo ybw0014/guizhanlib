@@ -66,7 +66,7 @@ public class Localization {
 
         // Check language folder
         this.langFolderName = folderName;
-        langFolder = new File(plugin.getDataFolder(), "/" + folderName);
+        langFolder = new File(plugin.getDataFolder(), folderName);
         if (!langFolder.exists()) {
             langFolder.mkdir();
         }
