@@ -19,6 +19,25 @@ import java.util.Map;
 @UtilityClass
 @SuppressWarnings("ConstantConditions")
 public final class AxolotlHelper {
+
+    /**
+     * @deprecated {@link #getVariant(Axolotl.Variant)}
+     */
+    @Deprecated
+    @Nonnull
+    public static String getType(@Nonnull Axolotl.Variant variant) {
+        return getVariant(variant);
+    }
+
+    /**
+     * @deprecated {@link #getVariant(String)}
+     */
+    @Deprecated
+    @Nonnull
+    public static String getType(@Nonnull String variant) {
+        return getVariant(variant);
+    }
+
     /**
      * 获取美西螈的变种({@link Axolotl.Variant})的中文
      *

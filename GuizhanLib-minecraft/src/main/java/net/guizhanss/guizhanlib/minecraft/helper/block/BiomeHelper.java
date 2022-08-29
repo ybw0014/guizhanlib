@@ -38,6 +38,6 @@ public final class BiomeHelper {
     public static String getKey(@Nonnull Biome biome) {
         Preconditions.checkArgument(biome != null, "生物群系不能为空");
 
-        return "biome.minecraft." + biome.toString().toLowerCase();
+        return "biome.minecraft." + biome.getKey().getKey();
     }
 }

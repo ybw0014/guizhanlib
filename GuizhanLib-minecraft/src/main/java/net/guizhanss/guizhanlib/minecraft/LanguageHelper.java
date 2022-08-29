@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,14 +26,18 @@ import java.util.Map;
 public final class LanguageHelper {
 
     private static final Gson GSON = new Gson();
-    private static Map<String, String> lang;
+    private static Map<String, String> lang = new HashMap<>();
 
     /**
      * 从输入流({@link InputStream})中读取语言文件
      *
      * @param stream 输入流({@link InputStream})
+     *
+     * @throws IllegalArgumentException 如果输入流为空
      */
-    public static void loadFromStream(InputStream stream) {
+    public static void loadFromStream(@Nonnull InputStream stream) {
+        Preconditions.checkArgument(stream != null, "输入流不能为空");
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(
             stream, StandardCharsets.UTF_8
         ));

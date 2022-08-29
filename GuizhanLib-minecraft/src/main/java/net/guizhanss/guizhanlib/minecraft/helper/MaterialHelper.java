@@ -68,7 +68,7 @@ public final class MaterialHelper {
     public static String getName(@Nonnull String material, boolean emptyString) {
         Material mat = Material.getMaterial(material);
         if (mat == null) {
-            return StringUtil.humanize(material);
+            return emptyString ? "" : StringUtil.humanize(material);
         } else {
             return getName(mat);
         }

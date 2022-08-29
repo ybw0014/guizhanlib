@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
+import org.bukkit.Keyed;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nonnull;
@@ -40,14 +41,14 @@ public final class PotionEffectTypeHelper {
     public static String getKey(@Nonnull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "药水效果不能为空");
 
-        String key = type.getName().toLowerCase();
+        String key;
 
         /*
           处理语言文件与内部代码不一致的问题。
           在1.18后，PotionEffectType 增加了 NamespacedKey 可以直接获取语言key。
          */
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_18)) {
-            key = type.getName();
+            key = type.getKey().getKey();
         } else {
             if (type == PotionEffectType.CONFUSION) {
                 key = "nausea";
@@ -67,6 +68,8 @@ public final class PotionEffectTypeHelper {
                 key = "slowness";
             } else if (type == PotionEffectType.SLOW_DIGGING) {
                 key = "mining_fatigue";
+            } else {
+                key = type.getName().toLowerCase();
             }
         }
 
