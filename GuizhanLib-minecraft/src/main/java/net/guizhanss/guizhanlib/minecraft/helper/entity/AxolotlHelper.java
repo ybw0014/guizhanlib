@@ -47,7 +47,7 @@ public final class AxolotlHelper {
      */
     @Nonnull
     public static String getVariant(@Nonnull Axolotl.Variant variant) {
-        return Type.fromType(variant).getChinese();
+        return Variant.fromType(variant).getChinese();
     }
 
     /**
@@ -63,7 +63,7 @@ public final class AxolotlHelper {
 
         try {
             Axolotl.Variant axolotlVariant = Axolotl.Variant.valueOf(variant);
-            return Type.fromType(axolotlVariant).getChinese();
+            return Variant.fromType(axolotlVariant).getChinese();
         } catch (IllegalArgumentException ex) {
             return StringUtil.humanize(variant);
         }
@@ -72,7 +72,7 @@ public final class AxolotlHelper {
     /**
      * 所有美西螈的变种
      */
-    public enum Type {
+    public enum Variant {
         /**
          * 粉红色
          */
@@ -94,23 +94,23 @@ public final class AxolotlHelper {
          */
         BLUE(Axolotl.Variant.BLUE, "蓝色");
 
-        private static final Type[] cachedValues = values();
-        private static final Map<Axolotl.Variant, Type> variantLookup = new EnumMap<>(Axolotl.Variant.class);
+        private static final Variant[] cachedValues = values();
+        private static final Map<Axolotl.Variant, Variant> variantLookup = new EnumMap<>(Axolotl.Variant.class);
 
         static {
-            for (Type type : cachedValues) {
-                variantLookup.put(type.getType(), type);
+            for (Variant variant : cachedValues) {
+                variantLookup.put(variant.getAxolotlVariant(), variant);
             }
         }
 
         @Getter
-        private final Axolotl.Variant type;
+        private final Axolotl.Variant axolotlVariant;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
-        Type(Axolotl.Variant type, String chinese) {
-            this.type = type;
+        Variant(Axolotl.Variant variant, String chinese) {
+            this.axolotlVariant = variant;
             this.chinese = chinese;
         }
 
@@ -122,7 +122,7 @@ public final class AxolotlHelper {
          * @return 美西螈的变种
          */
         @Nonnull
-        public static Type fromType(@Nonnull Axolotl.Variant axolotlVariant) {
+        public static Variant fromType(@Nonnull Axolotl.Variant axolotlVariant) {
             Preconditions.checkArgument(axolotlVariant != null, "美西螈变种不能为空");
 
             return variantLookup.get(axolotlVariant);

@@ -72,18 +72,18 @@ public final class FrogHelper {
 
         static {
             for (Variant variant : cachedValues) {
-                variantLookup.put(variant.getVariant(), variant);
+                variantLookup.put(variant.getFrogVariant(), variant);
             }
         }
 
         @Getter
-        private final Frog.Variant variant;
+        private final Frog.Variant frogVariant;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Variant(Frog.Variant variant, String chinese) {
-            this.variant = variant;
+            this.frogVariant = variant;
             this.chinese = chinese;
         }
 

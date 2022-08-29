@@ -119,18 +119,18 @@ public final class HorseHelper {
 
         static {
             for (Color color : cachedValues) {
-                colorLookup.put(color.getColor(), color);
+                colorLookup.put(color.getHorseColor(), color);
             }
         }
 
         @Getter
-        private final Horse.Color color;
+        private final Horse.Color horseColor;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Color(Horse.Color color, String chinese) {
-            this.color = color;
+            this.horseColor = color;
             this.chinese = chinese;
         }
 
@@ -185,18 +185,18 @@ public final class HorseHelper {
 
         static {
             for (Style style : cachedValues) {
-                styleLookup.put(style.getStyle(), style);
+                styleLookup.put(style.getHorseStyle(), style);
             }
         }
 
         @Getter
-        private final Horse.Style style;
+        private final Horse.Style horseStyle;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Style(Horse.Style style, String chinese) {
-            this.style = style;
+            this.horseStyle = style;
             this.chinese = chinese;
         }
 

@@ -104,18 +104,18 @@ public final class CatHelper {
 
         static {
             for (Type type : cachedValues) {
-                typeLookup.put(type.getType(), type);
+                typeLookup.put(type.getCatType(), type);
             }
         }
 
         @Getter
-        private final Cat.Type type;
+        private final Cat.Type catType;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Cat.Type type, String chinese) {
-            this.type = type;
+            this.catType = type;
             this.chinese = chinese;
         }
 

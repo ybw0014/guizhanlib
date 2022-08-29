@@ -171,6 +171,7 @@ public enum MinecraftTag {
                 || type == Material.WITHER_SKELETON_SKULL
                 || type == Material.ZOMBIE_HEAD
                 || type == Material.PLAYER_HEAD
+                || type == Material.PLAYER_WALL_HEAD
                 || type == Material.CREEPER_HEAD
                 || type == Material.DRAGON_HEAD
                 || type == Material.CARVED_PUMPKIN;

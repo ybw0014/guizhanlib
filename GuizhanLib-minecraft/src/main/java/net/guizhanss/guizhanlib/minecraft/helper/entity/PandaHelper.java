@@ -88,18 +88,18 @@ public final class PandaHelper {
 
         static {
             for (Gene gene : cachedValues) {
-                geneLookup.put(gene.getGene(), gene);
+                geneLookup.put(gene.getPandaGene(), gene);
             }
         }
 
         @Getter
-        private final Panda.Gene gene;
+        private final Panda.Gene pandaGene;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Gene(Panda.Gene gene, String chinese) {
-            this.gene = gene;
+            this.pandaGene = gene;
             this.chinese = chinese;
         }
 
@@ -115,7 +115,7 @@ public final class PandaHelper {
             Preconditions.checkArgument(pandaGene != null, "熊猫基因不能为空");
 
             for (Gene gene : Gene.values()) {
-                if (gene.getGene() == pandaGene) {
+                if (gene.getPandaGene() == pandaGene) {
                     return gene;
                 }
             }

@@ -20,6 +20,8 @@ import javax.annotation.Nonnull;
 @UtilityClass
 @SuppressWarnings("ConstantConditions")
 public final class ItemStackHelper {
+    private static final String NULL_ITEMSTACK_MESSAGE = "物品不能为空";
+
     /**
      * 返回物品({@link ItemStack})的显示名称,
      * 如果无显示名称则返回中文名称
@@ -30,7 +32,7 @@ public final class ItemStackHelper {
      */
     @Nonnull
     public static String getDisplayName(@Nonnull ItemStack item) {
-        Preconditions.checkArgument(item != null, "物品不能为空");
+        Preconditions.checkArgument(item != null, NULL_ITEMSTACK_MESSAGE);
 
         if (item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
             return item.getItemMeta().getDisplayName();
@@ -48,7 +50,7 @@ public final class ItemStackHelper {
      */
     @Nonnull
     public static String getName(@Nonnull ItemStack item) {
-        Preconditions.checkArgument(item != null, "物品不能为空");
+        Preconditions.checkArgument(item != null, NULL_ITEMSTACK_MESSAGE);
 
         if (MinecraftTag.POTION_WITH_TIPPED_ARROW.isTagged(item)) {
             String potion = ((PotionMeta) item.getItemMeta()).getBasePotionData().getType().toString().toLowerCase();
@@ -69,7 +71,7 @@ public final class ItemStackHelper {
      */
     @Nonnull
     private static String getPlayerSkullName(@Nonnull ItemStack skull) {
-        Preconditions.checkArgument(skull != null, "物品不能为空");
+        Preconditions.checkArgument(skull != null, NULL_ITEMSTACK_MESSAGE);
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         if (meta != null && meta.hasOwner()) {

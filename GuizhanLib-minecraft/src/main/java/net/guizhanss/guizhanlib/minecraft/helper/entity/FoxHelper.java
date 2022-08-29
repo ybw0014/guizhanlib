@@ -68,18 +68,18 @@ public final class FoxHelper {
 
         static {
             for (Type type : cachedValues) {
-                typeLookup.put(type.getType(), type);
+                typeLookup.put(type.getFoxType(), type);
             }
         }
 
         @Getter
-        private final Fox.Type type;
+        private final Fox.Type foxType;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Fox.Type type, String chinese) {
-            this.type = type;
+            this.foxType = type;
             this.chinese = chinese;
         }
 

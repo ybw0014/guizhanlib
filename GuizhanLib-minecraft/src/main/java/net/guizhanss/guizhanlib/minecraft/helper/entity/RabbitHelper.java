@@ -88,18 +88,18 @@ public final class RabbitHelper {
 
         static {
             for (Type type : cachedValues) {
-                typeLookup.put(type.getType(), type);
+                typeLookup.put(type.getRabbitType(), type);
             }
         }
 
         @Getter
-        private final Rabbit.Type type;
+        private final Rabbit.Type rabbitType;
         @Getter
         private final String chinese;
 
         @ParametersAreNonnullByDefault
         Type(Rabbit.Type type, String chinese) {
-            this.type = type;
+            this.rabbitType = type;
             this.chinese = chinese;
         }
 

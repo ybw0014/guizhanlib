@@ -3,6 +3,7 @@ package net.guizhanss.guizhanlib.minecraft.helper.entity;
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
+import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
 
@@ -47,7 +48,7 @@ public final class VillagerHelper {
      *
      * @param profession {@link String} 村民职业
      *
-     * @return 村民职业的中文名称, 如果获取失败则返回空
+     * @return 村民职业的中文名称, 如果获取失败则返回可读形式
      */
     @Nonnull
     public static String getProfessionName(@Nonnull String profession) {
@@ -57,7 +58,7 @@ public final class VillagerHelper {
             Profession villagerProfession = Profession.valueOf(profession);
             return getProfessionName(villagerProfession);
         } catch (IllegalArgumentException ex) {
-            return "";
+            return StringUtil.humanize(profession);
         }
     }
 }
