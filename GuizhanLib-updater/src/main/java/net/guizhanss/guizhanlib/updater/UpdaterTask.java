@@ -70,26 +70,26 @@ class UpdaterTask implements Runnable {
             JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
 
             String key = updater.getRepoKey();
-            JsonElement repoInfo = null;
+            JsonElement currentRepoInfo = null;
             while (key != null) {
-                repoInfo = JsonUtil.getFromPath(reposJson, key);
+                currentRepoInfo = JsonUtil.getFromPath(reposJson, key);
 
-                if (repoInfo == null) {
+                if (currentRepoInfo == null) {
                     break;
                 }
 
-                if (JsonUtil.getFromPath((JsonObject) repoInfo, "type").getAsString().equals("redirect")) {
-                    key = JsonUtil.getFromPath((JsonObject) repoInfo, "options.repo").getAsString();
+                if (JsonUtil.getFromPath((JsonObject) currentRepoInfo, "type").getAsString().equals("redirect")) {
+                    key = JsonUtil.getFromPath((JsonObject) currentRepoInfo, "options.repo").getAsString();
                 } else {
                     key = null;
                 }
             }
 
-            if (repoInfo == null) {
+            if (currentRepoInfo == null) {
                 throw new IllegalStateException("Repository information is not found");
             }
 
-            this.repoInfo = (JsonObject) repoInfo;
+            this.repoInfo = (JsonObject) currentRepoInfo;
 
             // Get working directory
             JsonElement customDir = JsonUtil.getFromPath(this.repoInfo, "options.customDir");
@@ -104,7 +104,7 @@ class UpdaterTask implements Runnable {
                 );
             }
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
-            updater.log(Level.SEVERE, updater.getLocalizedString("cannot_find_repo", "Cannot find repo in Guizhan Builds."), ex);
+            updater.log(Level.SEVERE, updater.getLocalizedString("cannot_find_repo", "Cannot find repo in Guizhan Builds."));
         }
     }
 
@@ -205,7 +205,7 @@ class UpdaterTask implements Runnable {
                 output.write(data, 0, read);
             }
         } catch (Exception ex) {
-            updater.log(Level.SEVERE, ex, MessageFormat.format(updater.getLocalizedString("update_fail", "Failed to update {0}"), updater.getPlugin().getName()));
+            updater.log(Level.SEVERE, MessageFormat.format(updater.getLocalizedString("update_fail", "Failed to update {0}"), updater.getPlugin().getName()));
             return;
         }
 
@@ -242,7 +242,7 @@ class UpdaterTask implements Runnable {
 
             return content.toString();
         } catch (IOException | NullPointerException ex) {
-            updater.log(Level.WARNING, updater.getLocalizedString("cannot_fetch_info", "Cannot fetch info from Guizhan Builds"), ex);
+            updater.log(Level.WARNING, updater.getLocalizedString("cannot_fetch_info", "Cannot fetch info from Guizhan Builds"));
             return null;
         }
     }

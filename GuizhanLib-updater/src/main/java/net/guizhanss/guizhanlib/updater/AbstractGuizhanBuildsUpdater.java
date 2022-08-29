@@ -56,7 +56,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
      * @param checkOnly Whether to check the version only, without downloading
      */
     @ParametersAreNonnullByDefault
-    public AbstractGuizhanBuildsUpdater(
+    protected AbstractGuizhanBuildsUpdater(
         Plugin plugin,
         File file,
         String user,
@@ -93,7 +93,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
      */
     @Deprecated
     @ParametersAreNonnullByDefault
-    public AbstractGuizhanBuildsUpdater(
+    protected AbstractGuizhanBuildsUpdater(
         Plugin plugin,
         File file,
         String user,
