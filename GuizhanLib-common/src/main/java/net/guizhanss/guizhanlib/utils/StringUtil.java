@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("ConstantConditions")
 public final class StringUtil {
     private static final Pattern UNDERSCORE_PATTERN = Pattern.compile("_");
+    private static final String NULL_STRING_MESSAGE = "The string cannot be null";
 
     /**
      * Make the string readable.
@@ -27,7 +28,7 @@ public final class StringUtil {
      */
     @Nonnull
     public static String humanize(@Nonnull String str) {
-        Preconditions.checkArgument(str != null, "The string cannot be null");
+        Preconditions.checkArgument(str != null, NULL_STRING_MESSAGE);
 
         StringBuilder builder = new StringBuilder();
         str = str.toLowerCase(Locale.ROOT)
@@ -51,7 +52,7 @@ public final class StringUtil {
      */
     @Nonnull
     public static String dehumanize(@Nonnull String str) {
-        Preconditions.checkArgument(str != null, "The string cannot be null");
+        Preconditions.checkArgument(str != null, NULL_STRING_MESSAGE);
 
         return str.toUpperCase(Locale.ROOT)
             .replace(" ", "_")
@@ -68,26 +69,26 @@ public final class StringUtil {
      */
     @Nonnull
     public static String capitalize(@Nonnull String str) {
-        Preconditions.checkArgument(str != null, "The string cannot be null");
+        Preconditions.checkArgument(str != null, NULL_STRING_MESSAGE);
 
         int strLen = str.length();
-        StringBuffer buffer = new StringBuffer(strLen);
+        StringBuilder builder = new StringBuilder(strLen);
         boolean capitalizeNext = true;
 
         for (int i = 0; i < strLen; i++) {
             char ch = str.charAt(i);
             if (Character.isWhitespace(ch)) {
-                buffer.append(ch);
+                builder.append(ch);
                 capitalizeNext = true;
             } else if (capitalizeNext) {
-                buffer.append(Character.toTitleCase(ch));
+                builder.append(Character.toTitleCase(ch));
                 capitalizeNext = false;
             } else {
-                buffer.append(ch);
+                builder.append(ch);
             }
         }
 
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**
