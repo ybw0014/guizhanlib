@@ -3,6 +3,7 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.Getter;
 import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -43,8 +44,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private static AbstractAddon instance;
 
     private final Environment environment;
+    @Getter
     private final String githubUser;
+    @Getter
     private final String githubRepo;
+    @Getter
     private final String githubBranch;
     private final String autoUpdateKey;
     private final String bugTrackerURL;
@@ -324,11 +328,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         if (autoUpdateKey == null || autoUpdateKey.isEmpty()) {
             brokenConfig = true;
             handleException(new IllegalStateException("Invalid autoUpdateKey"));
-        }
-
-        if (!brokenConfig && !config.getDefaults().contains(autoUpdateKey, true)) {
-            brokenConfig = true;
-            handleException(new IllegalStateException("Auto update key missing from the default config!"));
         }
 
         // Check updater
