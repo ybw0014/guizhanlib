@@ -30,7 +30,11 @@ public final class AddonConfig extends YamlConfiguration {
     private final File file;
 
     public AddonConfig(@Nonnull String path) {
-        AbstractAddon addon = AbstractAddon.getInstance();
+        this(AbstractAddon.getInstance(), path);
+    }
+
+    @ParametersAreNonnullByDefault
+    public AddonConfig(AbstractAddon addon, String path) {
         file = new File(addon.getDataFolder(), path);
         super.defaults = defaults;
         loadDefaults(addon, path);
