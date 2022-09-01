@@ -5,13 +5,13 @@ on:
     branches:
       - master
     paths:
-      - 'src/**'
+      - '*.java'
       - 'pom.xml'
   pull_request:
     branches:
       - master
     paths:
-      - 'src/**'
+      - '*.java'
       - 'pom.xml'
 
 jobs:
