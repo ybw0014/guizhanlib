@@ -204,6 +204,9 @@ class UpdaterTask implements Runnable {
             while ((read = input.read(data, 0, 1024)) != -1) {
                 output.write(data, 0, read);
             }
+
+            input.close();
+            output.close();
         } catch (Exception ex) {
             updater.log(Level.SEVERE, Locales.DOWNLOAD_FAIL, updater.getPlugin().getName());
             return;
