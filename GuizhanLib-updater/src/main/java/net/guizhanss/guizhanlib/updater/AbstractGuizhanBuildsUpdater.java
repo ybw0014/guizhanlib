@@ -10,9 +10,7 @@ import org.bukkit.plugin.Plugin;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
-import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +39,6 @@ public abstract class AbstractGuizhanBuildsUpdater {
     @Getter
     private final boolean checkOnly;
 
-    private UpdaterLocalization localization;
     @Setter
     private Logger logger;
 
@@ -74,7 +71,6 @@ public abstract class AbstractGuizhanBuildsUpdater {
         this.logger = plugin.getLogger();
 
         prepareUpdateFolder();
-        initLocalization();
     }
 
     /**
@@ -115,14 +111,6 @@ public abstract class AbstractGuizhanBuildsUpdater {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-    }
-
-    /**
-     * Initialize localization
-     */
-    private void initLocalization() {
-        InputStream stream = AbstractGuizhanBuildsUpdater.class.getResourceAsStream("/updater.json");
-        localization = new UpdaterLocalization(stream);
     }
 
     /**
@@ -208,6 +196,29 @@ public abstract class AbstractGuizhanBuildsUpdater {
     }
 
     /**
+     * Call the logger of plugin.
+     *
+     * @param level log {@link Level}
+     * @param key   the message key
+     * @param args  the arguments
+     */
+    public void log(Level level, Locales key, Object... args) {
+        log(level, getLocalizedString(key), args);
+    }
+
+    /**
+     * Call the logger of plugin.
+     *
+     * @param level     log {@link Level}
+     * @param exception the {@link Exception}
+     * @param key       the message key
+     * @param args      the arguments
+     */
+    public void log(Level level, Exception exception, Locales key, Object... args) {
+        log(level, exception, getLocalizedString(key), args);
+    }
+
+    /**
      * Get the URL of the build artifact.
      *
      * @param directory Working directory
@@ -224,18 +235,15 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Get localized {@link String}.
      *
-     * @param key          The localization key
-     * @param defaultValue The default value if localization is not found by key.
+     * @param key The localization key.
      *
      * @return The localized {@link String}.
      */
     @ParametersAreNonnullByDefault
     @Nonnull
-    public String getLocalizedString(String key, String defaultValue) {
+    public String getLocalizedString(Locales key) {
         Preconditions.checkArgument(key != null, "The localization key cannot be null.");
-        Preconditions.checkArgument(defaultValue != null, "The localization key cannot be null.");
 
-        String result = localization.getLocalization(getLanguage(), key);
-        return Objects.requireNonNullElse(result, defaultValue);
+        return UpdaterLocalizations.get(getLanguage(), key);
     }
 }

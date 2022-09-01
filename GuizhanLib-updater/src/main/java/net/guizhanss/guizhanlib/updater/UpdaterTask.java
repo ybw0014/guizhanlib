@@ -45,11 +45,11 @@ class UpdaterTask implements Runnable {
 
         String format = getVersionFormat();
         if (format == null) {
-            updater.log(Level.SEVERE, updater.getLocalizedString("invalid_version_format", "Cannot get version format. Maybe the developer did not configure the updater correctly?"));
+            updater.log(Level.SEVERE, Locales.INVALID_VERSION);
             return;
         }
         if (!checkVersion(format)) {
-            updater.log(Level.WARNING, updater.getLocalizedString("invalid_version", "You are using an unofficial version, which is not downloaded from Guizhan Builds. The updater has stopped."));
+            updater.log(Level.WARNING, Locales.INVALID_FILE_VERSION);
             return;
         }
         if (hasUpdate()) {
@@ -104,7 +104,7 @@ class UpdaterTask implements Runnable {
                 );
             }
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
-            updater.log(Level.SEVERE, updater.getLocalizedString("cannot_find_repo", "Cannot find repo in Guizhan Builds."));
+            updater.log(Level.SEVERE, Locales.CANNOT_FIND_REPO);
         }
     }
 
@@ -161,20 +161,20 @@ class UpdaterTask implements Runnable {
                 build = null;
             }
             if (build == null) {
-                updater.log(Level.SEVERE, updater.getLocalizedString("no_successful_builds", "There is no successful build in Guizhan Builds. How did you do this?"));
+                updater.log(Level.SEVERE, Locales.CANNOT_FIND_BUILDS);
                 return false;
             }
 
             String pluginName = JsonUtil.getFromPath(this.repoInfo, "options.target.name").getAsString();
             boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, updater.getPlugin().getDescription().getVersion()).equals(build.get("target").getAsString());
             if (!needUpdate) {
-                updater.log(Level.INFO, updater.getLocalizedString("latest", "{0} is up-to-date."), updater.getPlugin().getName());
+                updater.log(Level.INFO, Locales.UP_TO_DATE, updater.getPlugin().getName());
                 return false;
             }
             updateInfo = build;
             return true;
         } catch (MalformedURLException | NullPointerException ex) {
-            updater.log(Level.SEVERE, updater.getLocalizedString("an_error_has_occurred", "An error has occurred while checking for update"));
+            updater.log(Level.SEVERE, Locales.CANNOT_FETCH_INFO);
             return false;
         }
     }
@@ -183,8 +183,8 @@ class UpdaterTask implements Runnable {
      * Send update notification.
      */
     private void sendUpdateNotification() {
-        updater.log(Level.INFO, updater.getLocalizedString("need_update", "{0} needs to be updated."), updater.getPlugin().getName());
-        updater.log(Level.INFO, updater.getLocalizedString("download_notification", "Since this updater is set to check update only, you need to download the new version of {0} manually from Guizhan Builds, or disable checkOnly option."), updater.getPlugin().getName());
+        updater.log(Level.INFO, Locales.NEED_UPDATE, updater.getPlugin().getName());
+        updater.log(Level.INFO, Locales.DOWNLOAD_NOTIFICATION, updater.getPlugin().getName());
     }
 
     /**
@@ -192,8 +192,8 @@ class UpdaterTask implements Runnable {
      */
     private void update() {
         String targetFilename = updateInfo.get("target").getAsString();
-        updater.log(Level.INFO, updater.getLocalizedString("need_update", "{0} needs to be updated."), updater.getPlugin().getName());
-        updater.log(Level.INFO, updater.getLocalizedString("downloading", "Downloading {0} - Build {1}"), updater.getPlugin().getName(), updateInfo.get("id").getAsString());
+        updater.log(Level.INFO, Locales.NEED_UPDATE, updater.getPlugin().getName());
+        updater.log(Level.INFO, Locales.DOWNLOADING, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
 
         try {
             BufferedInputStream input = new BufferedInputStream(new URL(updater.getTargetUrl(workingDirectory, targetFilename)).openStream());
@@ -205,14 +205,14 @@ class UpdaterTask implements Runnable {
                 output.write(data, 0, read);
             }
         } catch (Exception ex) {
-            updater.log(Level.SEVERE, MessageFormat.format(updater.getLocalizedString("update_fail", "Failed to update {0}"), updater.getPlugin().getName()));
+            updater.log(Level.SEVERE, Locales.DOWNLOAD_FAIL, updater.getPlugin().getName());
             return;
         }
 
         updater.log(Level.INFO, " ");
-        updater.log(Level.INFO, updater.getLocalizedString("info_auto_update", "============== Auto update =============="));
-        updater.log(Level.INFO, updater.getLocalizedString("info_auto_update_1", "Downloaded {0} Build {1}"), updater.getPlugin().getName(), updateInfo.get("id").getAsString());
-        updater.log(Level.INFO, updater.getLocalizedString("info_auto_update_2", "Restart server to update"));
+        updater.log(Level.INFO, Locales.UPDATE_INFO_0);
+        updater.log(Level.INFO, Locales.UPDATE_INFO_1, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
+        updater.log(Level.INFO, Locales.UPDATE_INFO_2);
         updater.log(Level.INFO, " ");
     }
 
@@ -242,7 +242,7 @@ class UpdaterTask implements Runnable {
 
             return content.toString();
         } catch (IOException | NullPointerException ex) {
-            updater.log(Level.WARNING, updater.getLocalizedString("cannot_fetch_info", "Cannot fetch info from Guizhan Builds"));
+            updater.log(Level.WARNING, Locales.CANNOT_FETCH_INFO);
             return null;
         }
     }
