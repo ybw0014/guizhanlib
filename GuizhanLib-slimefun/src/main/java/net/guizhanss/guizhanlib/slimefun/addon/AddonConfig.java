@@ -94,7 +94,7 @@ public final class AddonConfig extends YamlConfiguration {
         if (file.exists()) {
             try {
                 load(file);
-            } catch (Throwable e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -155,7 +155,7 @@ public final class AddonConfig extends YamlConfiguration {
             try {
                 String def = readDefaults(stream);
                 defaults.loadFromString(def);
-            } catch (Throwable e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

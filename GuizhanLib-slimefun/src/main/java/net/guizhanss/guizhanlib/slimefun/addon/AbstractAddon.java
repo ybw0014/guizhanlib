@@ -80,22 +80,6 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     }
 
     /**
-     * Live addon constructor.
-     *
-     * @param githubUser     GitHub username of this project
-     * @param githubRepo     GitHub repository of this project
-     * @param githubBranch   GitHub branch of this project
-     * @param autoUpdateKey  Auto update key in the config
-     * @param updaterLangKey Updater language key in the config. Leave this empty if you want updater be in English.
-     *
-     * @deprecated Updater lang key is not used any more since it is not included in the lib anymore.
-     */
-    @Deprecated
-    protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey, String updaterLangKey) {
-        this(githubUser, githubRepo, githubBranch, autoUpdateKey);
-    }
-
-    /**
      * Testing addon constructor
      *
      * @param loader        the {@link JavaPluginLoader}
@@ -107,7 +91,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * @param githubBranch  GitHub branch of this project
      * @param autoUpdateKey Auto update key in the config
      */
-    public AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
+    protected AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
                          String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         this(loader, description, dataFolder, file, githubUser, githubRepo, githubBranch, autoUpdateKey, Environment.TESTING);
     }
@@ -138,7 +122,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         validate();
     }
 
-    private static <T extends AbstractAddon> void setInstance(T inst) {
+    private static <T extends AbstractAddon> void setInstance(@Nullable T inst) {
         instance = inst;
     }
 

@@ -42,7 +42,7 @@ public abstract class MenuBlock extends SlimefunItem {
      * @param recipe     the recipe of this {@link MenuBlock}
      */
     @ParametersAreNonnullByDefault
-    public MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    protected MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
 
         addItemHandler(

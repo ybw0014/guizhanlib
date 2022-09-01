@@ -2,13 +2,11 @@ package net.guizhanss.guizhanlib.minecraft;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
-import net.guizhanss.guizhanlib.utils.StringUtil;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -114,7 +112,7 @@ public enum ChatColors {
     public static final char COLOR_CHAR = '\u00a7';
 
     private static final ChatColors[] valuesCache = values();
-    private static final Map<ChatColor, ChatColors> colorLookup = new HashMap<>();
+    private static final Map<ChatColor, ChatColors> colorLookup = new EnumMap<>(ChatColor.class);
 
     static {
         for (ChatColors color : valuesCache) {

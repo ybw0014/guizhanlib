@@ -22,7 +22,7 @@ class UpdaterLocalizations {
     private static final Map<String, Map<Locales, String>> MAP = new HashMap<>();
 
     private static final Map<Locales, String> LOCALE_EN = new EnumMap<>(Locales.class);
-    private static final Map<Locales, String> LOCALE_ZH_CN = new HashMap<>();
+    private static final Map<Locales, String> LOCALE_ZH_CN = new EnumMap<>(Locales.class);
 
     static {
         LOCALE_EN.put(Locales.CANNOT_FIND_REPO, "Cannot find repo in Guizhan Builds. Did you set up the auto updater correctly?");
