@@ -13,7 +13,7 @@
 
 ## 如何使用
 
-将GuizhanLib添加为依赖项:
+将GuizhanLib-api（包含所有包）或者指定的包添加为依赖项:
 
 ```
     <dependency>
