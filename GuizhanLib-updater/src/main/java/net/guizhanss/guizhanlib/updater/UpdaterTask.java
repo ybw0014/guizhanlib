@@ -117,7 +117,7 @@ class UpdaterTask implements Runnable {
     private String getVersionFormat() {
         try {
             return JsonUtil.getFromPath(repoInfo, "options.target.version").getAsString();
-        } catch (IllegalStateException | NullPointerException ex) {
+        } catch (IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             return null;
         }
     }
@@ -173,7 +173,7 @@ class UpdaterTask implements Runnable {
             }
             updateInfo = build;
             return true;
-        } catch (MalformedURLException | NullPointerException ex) {
+        } catch (MalformedURLException | IllegalArgumentException | IllegalStateException | NullPointerException ex) {
             updater.log(Level.SEVERE, Locales.CANNOT_FETCH_INFO);
             return false;
         }
