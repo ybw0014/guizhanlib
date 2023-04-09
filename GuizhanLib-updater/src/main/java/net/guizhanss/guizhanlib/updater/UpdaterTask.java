@@ -53,7 +53,7 @@ class UpdaterTask implements Runnable {
             return;
         }
         if (hasUpdate()) {
-            if (updater.checkOnly()) {
+            if (updater.getConfig().checkOnly()) {
                 sendUpdateNotification();
             } else {
                 update();

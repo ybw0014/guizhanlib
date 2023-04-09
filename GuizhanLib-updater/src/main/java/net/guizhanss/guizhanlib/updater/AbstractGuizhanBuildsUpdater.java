@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * The Guizhan Builds Updater is responsible to auto-update the plugin from
  * Guizhan Builds (builds.guizhanss.net).
  * <p>
- * This class can be extended for mirror URLs.
+ * This class can be extended to provide mirror URLs.
  *
  * @author ybw0014
  */
@@ -35,9 +35,8 @@ public abstract class AbstractGuizhanBuildsUpdater {
     private final String repo;
     @Getter
     private final String branch;
-    @Accessors(fluent = true)
     @Getter
-    private final boolean checkOnly;
+    private final UpdaterConfig config;
 
     @Setter
     private Logger logger;
@@ -50,8 +49,42 @@ public abstract class AbstractGuizhanBuildsUpdater {
      * @param user      GitHub user
      * @param repo      GitHub repository
      * @param branch    GitHub branch
-     * @param checkOnly Whether to check the version only, without downloading
+     * @param updaterConfig The {@link UpdaterConfig} of updater.
      */
+    @ParametersAreNonnullByDefault
+    protected AbstractGuizhanBuildsUpdater(
+        Plugin plugin,
+        File file,
+        String user,
+        String repo,
+        String branch,
+        UpdaterConfig updaterConfig
+    ) {
+        this.plugin = plugin;
+        this.file = file;
+        this.user = user;
+        this.repo = repo;
+        this.branch = branch;
+        this.config = updaterConfig;
+
+        this.logger = plugin.getLogger();
+
+        prepareUpdateFolder();
+    }
+
+    /**
+     * This constructor sets up the updater.
+     *
+     * @param plugin    The {@link Plugin} instance
+     * @param file      The {@link File} of plugin
+     * @param user      GitHub user
+     * @param repo      GitHub repository
+     * @param branch    GitHub branch
+     * @param checkOnly Whether to check the version only, without downloading
+     *
+     * @deprecated in favor of {@link UpdaterConfig}.
+     */
+    @Deprecated
     @ParametersAreNonnullByDefault
     protected AbstractGuizhanBuildsUpdater(
         Plugin plugin,
@@ -61,16 +94,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
         String branch,
         boolean checkOnly
     ) {
-        this.plugin = plugin;
-        this.file = file;
-        this.user = user;
-        this.repo = repo;
-        this.branch = branch;
-        this.checkOnly = checkOnly;
-
-        this.logger = plugin.getLogger();
-
-        prepareUpdateFolder();
+        this(plugin, file, user, repo, branch, UpdaterConfig.builder().checkOnly(checkOnly).build());
     }
 
     /**
