@@ -22,6 +22,20 @@ public final class GuizhanBuildsUpdater extends AbstractGuizhanBuildsUpdater {
      * @param user      GitHub user
      * @param repo      GitHub repository
      * @param branch    GitHub branch
+     */
+    @ParametersAreNonnullByDefault
+    public GuizhanBuildsUpdater(Plugin plugin, File file, String user, String repo, String branch) {
+        super(plugin, file, user, repo, branch, UpdaterConfig.DEFAULT);
+    }
+
+    /**
+     * This constructor sets up the updater.
+     *
+     * @param plugin    The {@link Plugin} instance
+     * @param file      The {@link File} of plugin
+     * @param user      GitHub user
+     * @param repo      GitHub repository
+     * @param branch    GitHub branch
      * @param updaterConfig The {@link UpdaterConfig}.
      */
     @ParametersAreNonnullByDefault
