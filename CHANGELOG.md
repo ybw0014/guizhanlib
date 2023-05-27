@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+- `AddonConfig`添加`getOrCreateSection`方法
+
 ## 1.2.1
 
 - 自动更新添加新的构造函数
