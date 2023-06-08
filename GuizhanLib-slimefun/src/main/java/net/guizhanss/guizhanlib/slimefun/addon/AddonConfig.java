@@ -1,7 +1,6 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
 import net.guizhanss.guizhanlib.utils.StringUtil;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import javax.annotation.Nonnull;
@@ -57,15 +56,6 @@ public final class AddonConfig extends YamlConfiguration {
             set(path, val);
         }
         return val;
-    }
-
-    @Nonnull
-    public ConfigurationSection getOrCreateSection(@Nonnull String path) {
-        ConfigurationSection section = getConfigurationSection(path);
-        if (section == null) {
-            section = createSection(path);
-        }
-        return section;
     }
 
     /**
