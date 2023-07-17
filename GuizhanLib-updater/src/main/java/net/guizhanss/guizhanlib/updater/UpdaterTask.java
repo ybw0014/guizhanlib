@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 class UpdaterTask implements Runnable {
+    private static boolean DEBUG = false;
 
     private final AbstractGuizhanBuildsUpdater updater;
 
@@ -109,6 +110,9 @@ class UpdaterTask implements Runnable {
             );
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             updater.log(Level.SEVERE, Locales.CANNOT_FIND_REPO);
+            if (DEBUG) {
+                updater.log(Level.SEVERE, ex, ex.getMessage());
+            }
         }
     }
 
@@ -122,6 +126,9 @@ class UpdaterTask implements Runnable {
         try {
             return JsonUtil.getFromPath(repoInfo, "buildOptions.version").getAsString();
         } catch (IllegalStateException | IllegalArgumentException | NullPointerException ex) {
+            if (DEBUG) {
+                updater.log(Level.SEVERE, ex, ex.getMessage());
+            }
             return null;
         }
     }
@@ -185,6 +192,9 @@ class UpdaterTask implements Runnable {
             return true;
         } catch (MalformedURLException | IllegalArgumentException | IllegalStateException | NullPointerException ex) {
             updater.log(Level.SEVERE, Locales.CANNOT_FETCH_INFO);
+            if (DEBUG) {
+                updater.log(Level.SEVERE, ex, ex.getMessage());
+            }
             return false;
         }
     }
@@ -219,6 +229,9 @@ class UpdaterTask implements Runnable {
             output.close();
         } catch (Exception ex) {
             updater.log(Level.SEVERE, Locales.DOWNLOAD_FAIL, updater.getPlugin().getName());
+            if (DEBUG) {
+                updater.log(Level.SEVERE, ex, ex.getMessage());
+            }
             return;
         }
 
@@ -256,6 +269,9 @@ class UpdaterTask implements Runnable {
             return content.toString();
         } catch (IOException | NullPointerException ex) {
             updater.log(Level.WARNING, Locales.CANNOT_FETCH_INFO);
+            if (DEBUG) {
+                updater.log(Level.SEVERE, ex, ex.getMessage());
+            }
             return null;
         }
     }
