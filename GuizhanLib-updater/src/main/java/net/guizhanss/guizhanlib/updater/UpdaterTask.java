@@ -99,10 +99,10 @@ class UpdaterTask implements Runnable {
                 throw new IllegalStateException("Repository information is not found");
             }
 
-            this.repoInfo = (JsonObject) currentRepoInfo;
+            repoInfo = (JsonObject) currentRepoInfo;
 
             // Get working directory
-            this.workingDirectory = MessageFormat.format(
+            workingDirectory = MessageFormat.format(
                 "{0}/{1}/{2}",
                 updater.getUser(),
                 updater.getRepo(),
@@ -182,7 +182,7 @@ class UpdaterTask implements Runnable {
                 return false;
             }
 
-            String pluginName = JsonUtil.getFromPath(this.repoInfo, "buildsOptions.name").getAsString();
+            String pluginName = JsonUtil.getFromPath(repoInfo, "buildOptions.name").getAsString();
             boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, updater.getPlugin().getDescription().getVersion()).equals(build.get("target").getAsString());
             if (!needUpdate) {
                 updater.log(Level.INFO, Locales.UP_TO_DATE, updater.getPlugin().getName());
