@@ -70,18 +70,27 @@ class UpdaterTask implements Runnable {
             JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
 
             String key = updater.getRepoKey();
-            JsonElement currentRepoInfo = null;
-            while (key != null) {
-                currentRepoInfo = JsonUtil.getFromPath(reposJson, key);
+            // direct find
+            JsonElement currentRepoInfo = JsonUtil.getFromPath(reposJson, key);
 
-                if (currentRepoInfo == null) {
-                    break;
-                }
-
-                if (JsonUtil.getFromPath((JsonObject) currentRepoInfo, "type").getAsString().equals("redirect")) {
-                    key = JsonUtil.getFromPath((JsonObject) currentRepoInfo, "options.repo").getAsString();
-                } else {
-                    key = null;
+            if (currentRepoInfo == null) {
+                // find by alias
+                JsonArray reposArray = JsonUtil.getFromPath(reposJson, "repos").getAsJsonArray();
+                for (JsonElement repo : reposArray) {
+                    JsonObject repoObj = repo.getAsJsonObject();
+                    if (!repoObj.has("alias")) {
+                        continue;
+                    }
+                    for (JsonElement alias : repoObj.get("alias").getAsJsonArray()) {
+                        String aliasPrimitive = alias.getAsJsonPrimitive().getAsString();
+                        if (aliasPrimitive.equals(key)) {
+                            currentRepoInfo = repoObj;
+                            break;
+                        }
+                    }
+                    if (currentRepoInfo != null) {
+                        break;
+                    }
                 }
             }
 
@@ -92,17 +101,12 @@ class UpdaterTask implements Runnable {
             this.repoInfo = (JsonObject) currentRepoInfo;
 
             // Get working directory
-            JsonElement customDir = JsonUtil.getFromPath(this.repoInfo, "options.customDir");
-            if (customDir != null) {
-                this.workingDirectory = customDir.getAsString();
-            } else {
-                this.workingDirectory = MessageFormat.format(
-                    "{0}/{1}/{2}",
-                    updater.getUser(),
-                    updater.getRepo(),
-                    updater.getBranch()
-                );
-            }
+            this.workingDirectory = MessageFormat.format(
+                "{0}/{1}/{2}",
+                updater.getUser(),
+                updater.getRepo(),
+                updater.getBranch()
+            );
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             updater.log(Level.SEVERE, Locales.CANNOT_FIND_REPO);
         }
@@ -116,7 +120,7 @@ class UpdaterTask implements Runnable {
     @Nullable
     private String getVersionFormat() {
         try {
-            return JsonUtil.getFromPath(repoInfo, "options.target.version").getAsString();
+            return JsonUtil.getFromPath(repoInfo, "buildOptions.version").getAsString();
         } catch (IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             return null;
         }
@@ -130,13 +134,19 @@ class UpdaterTask implements Runnable {
      * @return Whether the version format matches.
      */
     private boolean checkVersion(String format) {
+        if (!updater.getConfig().checkVersionFormat()) {
+            return true;
+        }
         String regex = format.replace("(", "\\(")
             .replace(")", "\\)")
             .replace("{version}", "\\d{1,6}")
             .replace("{git_commit}", "([a-z0-9]{7})")
-            .replace("{year}", "\\d{1,4}")
+            .replace("{Year}", "\\d{4}")
+            .replace("{year}", "\\d{2}")
+            .replace("{Month}", "\\d{2}")
             .replace("{month}", "\\d{1,2}")
-            .replace("{day}", "\\d{1,2}");
+            .replace("{Date}", "\\d{2}")
+            .replace("{date}", "\\d{1,2}");
         Pattern pattern = Pattern.compile(regex);
         Matcher m = pattern.matcher(updater.getPlugin().getDescription().getVersion());
         return m.matches();
@@ -165,7 +175,7 @@ class UpdaterTask implements Runnable {
                 return false;
             }
 
-            String pluginName = JsonUtil.getFromPath(this.repoInfo, "options.target.name").getAsString();
+            String pluginName = JsonUtil.getFromPath(this.repoInfo, "buildsOptions.name").getAsString();
             boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, updater.getPlugin().getDescription().getVersion()).equals(build.get("target").getAsString());
             if (!needUpdate) {
                 updater.log(Level.INFO, Locales.UP_TO_DATE, updater.getPlugin().getName());

@@ -30,5 +30,5 @@ public final class UpdaterConfig {
     /**
      * Whether the updater checks the version format
      */
-    private boolean checkVersionFormat = true;
+    private boolean checkVersionFormat = false;
 }
