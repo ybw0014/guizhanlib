@@ -8,7 +8,7 @@ import java.io.File;
 
 /**
  * The Guizhan Builds Updater is responsible to auto-update the plugin from
- * Guizhan Builds (builds.guizhanss.net).
+ * Guizhan Builds (builds.guizhanss.com).
  *
  * @author ybw0014
  */
@@ -85,7 +85,7 @@ public final class GuizhanBuildsUpdater extends AbstractGuizhanBuildsUpdater {
     @Nonnull
     @Override
     public String getBuildsURL() {
-        return "https://builds.guizhanss.net";
+        return "https://builds.guizhanss.com";
     }
 
     /**
