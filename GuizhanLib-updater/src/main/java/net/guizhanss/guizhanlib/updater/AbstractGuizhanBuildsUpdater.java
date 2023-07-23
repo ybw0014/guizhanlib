@@ -170,6 +170,18 @@ public abstract class AbstractGuizhanBuildsUpdater {
     public abstract String getBuildsURL();
 
     /**
+     * Override this method to specify the R2 bucket URL.
+     * <p>
+     * No trailing slash is needed.
+     * <p>
+     * Example: {@code https://builds-r2.gzassets.net}
+     *
+     * @return The R2 bucket URL
+     */
+    @Nonnull
+    public abstract String getR2URL();
+
+    /**
      * Override this method to set the language of updater.
      *
      * @return the language of updater
@@ -213,7 +225,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
      */
     @Nonnull
     public String getBuildsInfo(@Nonnull String directory) {
-        return MessageFormat.format("{0}/f/{1}/builds.json", getBuildsURL(), directory);
+        return MessageFormat.format("{0}/{1}/builds.json", getR2URL(), directory);
     }
 
     /**
@@ -273,7 +285,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
     @ParametersAreNonnullByDefault
     @Nonnull
     public String getTargetUrl(String directory, String target) {
-        return MessageFormat.format("{0}/f/{1}/{2}", getBuildsURL(), directory, target);
+        return MessageFormat.format("{0}/{1}/{2}", getBuildsURL(), directory, target);
     }
 
     /**

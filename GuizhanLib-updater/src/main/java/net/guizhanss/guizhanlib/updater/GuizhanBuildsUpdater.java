@@ -88,6 +88,12 @@ public final class GuizhanBuildsUpdater extends AbstractGuizhanBuildsUpdater {
         return "https://builds.guizhanss.com";
     }
 
+    @Nonnull
+    @Override
+    public String getR2URL() {
+        return "https://builds-r2.gzassets.net";
+    }
+
     /**
      * Set the language of updater.
      *
