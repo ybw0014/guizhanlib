@@ -285,7 +285,7 @@ public abstract class AbstractGuizhanBuildsUpdater {
     @ParametersAreNonnullByDefault
     @Nonnull
     public String getTargetUrl(String directory, String target) {
-        return MessageFormat.format("{0}/{1}/{2}", getBuildsURL(), directory, target);
+        return MessageFormat.format("{0}/{1}/{2}", getR2URL(), directory, target);
     }
 
     /**
