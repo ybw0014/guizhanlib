@@ -97,9 +97,9 @@
 
         <!-- Slimefun -->
         <dependency>
-            <groupId>io.github.Slimefun</groupId>
+            <groupId>com.github.StarWishsama</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-32</version>
+            <version>2023.07.22</version>
             <scope>provided</scope>
         </dependency>
 
