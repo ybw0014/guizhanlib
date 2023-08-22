@@ -18,6 +18,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,8 +68,12 @@ class UpdaterTask implements Runnable {
      */
     private void getRepoInfo() {
         try {
-            URL repos = new URL(updater.getReposFileURL());
-            JsonObject reposJson = (JsonObject) JsonUtil.parse(fetch(repos));
+            URL reposUrl = new URL(updater.getReposFileURL());
+            String repos = fetch(reposUrl);
+            if (repos == null) {
+                throw new IllegalStateException("Repository list is null");
+            }
+            JsonObject reposJson = (JsonObject) JsonUtil.parse(repos);
 
             String key = updater.getRepoKey();
             // direct find
@@ -76,9 +81,8 @@ class UpdaterTask implements Runnable {
 
             if (currentRepoInfo == null) {
                 // find by alias
-                JsonArray reposArray = JsonUtil.getFromPath(reposJson, "repos").getAsJsonArray();
-                for (JsonElement repo : reposArray) {
-                    JsonObject repoObj = repo.getAsJsonObject();
+                for (Map.Entry<String, JsonElement> repoEntry : reposJson.entrySet()) {
+                    JsonObject repoObj = repoEntry.getValue().getAsJsonObject();
                     if (!repoObj.has("alias")) {
                         continue;
                     }
