@@ -90,6 +90,7 @@ class UpdaterTask implements Runnable {
                         String aliasPrimitive = alias.getAsJsonPrimitive().getAsString();
                         if (aliasPrimitive.equals(key)) {
                             currentRepoInfo = repoObj;
+                            key = repoEntry.getKey();
                             break;
                         }
                     }
@@ -106,12 +107,7 @@ class UpdaterTask implements Runnable {
             repoInfo = (JsonObject) currentRepoInfo;
 
             // Get working directory
-            workingDirectory = MessageFormat.format(
-                "{0}/{1}/{2}",
-                updater.getUser(),
-                updater.getRepo(),
-                updater.getBranch()
-            );
+            workingDirectory = key.replace(":", "/");
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             updater.log(Level.SEVERE, Locales.CANNOT_FIND_REPO);
             if (DEBUG) {
