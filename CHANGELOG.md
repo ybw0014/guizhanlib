@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0
+
+- 添加`BlockStorageUtil`
+
 ## 1.3.4
 
 - 修复自动更新的R2资源地址错误
