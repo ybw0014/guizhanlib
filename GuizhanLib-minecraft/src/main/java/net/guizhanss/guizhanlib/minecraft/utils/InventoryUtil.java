@@ -29,6 +29,22 @@ public final class InventoryUtil {
     @ParametersAreNonnullByDefault
     public static void push(Player p, ItemStack... itemStacks) {
         Preconditions.checkArgument(p != null, "player should not be null");
+
+        push(p, p.getLocation(), itemStacks);
+    }
+
+    /**
+     * This method push all {@link ItemStack} to {@link Player}'s inventory.
+     * if some items cannot be pushed, they will be dropped at the specified {@link Location}.
+     *
+     * @param p          the {@link Player}
+     * @param loc        the {@link Location} to drop items
+     * @param itemStacks all the {@link ItemStack}s to be pushed
+     */
+    @ParametersAreNonnullByDefault
+    public static void push(Player p, Location loc, ItemStack... itemStacks) {
+        Preconditions.checkArgument(p != null, "player should not be null");
+        Preconditions.checkArgument(loc != null, "location should not be null");
         Preconditions.checkArgument(itemStacks != null, "at least one ItemStack is required");
         Preconditions.checkArgument(itemStacks.length > 0, "at least one ItemStack is required");
 
@@ -38,7 +54,7 @@ public final class InventoryUtil {
         Map<Integer, ItemStack> remainingItemMap = p.getInventory().addItem(itemStacks);
 
         for (ItemStack item : remainingItemMap.values()) {
-            p.getWorld().dropItem(p.getLocation(), item.clone());
+            p.getWorld().dropItem(loc, item.clone());
         }
     }
 }
