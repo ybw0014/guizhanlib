@@ -1,7 +1,6 @@
 package net.guizhanss.guzihanlib.minecraft.utils;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;
@@ -16,6 +15,16 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class TestItemUtil {
+    @BeforeAll
+    public static void setUp() {
+        MockBukkit.mock();
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        MockBukkit.unmock();
+    }
+
     @Test
     @DisplayName("Test ItemUtil.appendLore(...)")
     void testAppendLore() {
