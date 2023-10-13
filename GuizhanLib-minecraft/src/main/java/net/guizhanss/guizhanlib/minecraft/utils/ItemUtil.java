@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Utility methods about {@link ItemStack}.
+ *
+ * @author ybw0014
+ */
 @UtilityClass
 @SuppressWarnings("deprecation")
 public class ItemUtil {
