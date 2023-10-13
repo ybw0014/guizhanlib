@@ -2,6 +2,7 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import lombok.Getter;
 import lombok.Setter;
 import net.guizhanss.guizhanlib.localization.MinecraftLocalization;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
@@ -27,6 +28,10 @@ public class SlimefunLocalization extends MinecraftLocalization {
     private static final String MSG_MATERIAL_NULL = "Material cannot be null";
     private static final String MSG_ITEMSTACK_NULL = "ItemStack cannot be null";
     private static final String MSG_TEXTURE_NULL = "Texture cannot be null";
+
+    @Getter
+    @Setter
+    private String prefix = "";
 
     /**
      * The key of item groups in language file.
@@ -97,7 +102,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             itemStack,
             getString(itemGroupKey + KEY_NAME + id)
         );
@@ -121,7 +126,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             material,
             getString(itemGroupKey + KEY_NAME + id)
         );
@@ -145,7 +150,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             texture,
             getString(itemGroupKey + KEY_NAME + id)
         );
@@ -169,7 +174,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             material,
             getString(itemsKey + KEY_NAME + id),
             getStringArray(itemsKey + KEY_LORE + id)
@@ -213,7 +218,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             texture,
             getString(itemsKey + KEY_NAME + id),
             getStringArray(itemsKey + KEY_LORE + id)
@@ -257,7 +262,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
         id = id.toLowerCase(Locale.ROOT);
         return new SlimefunItemStack(
-            id,
+            prefix + id,
             itemStack,
             getString(itemsKey + KEY_NAME + id),
             getStringArray(itemsKey + KEY_LORE + id)
