@@ -4,6 +4,7 @@ import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class MinecraftLocalization extends Localization {
      *
      * @param plugin The {@link JavaPlugin} instance
      */
+    @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin) {
         super(plugin);
     }
@@ -28,6 +30,7 @@ public class MinecraftLocalization extends Localization {
      * @param plugin     The {@link JavaPlugin} instance
      * @param folderName The name of the folder that holds all language files
      */
+    @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin, String folderName) {
         super(plugin, folderName);
     }
@@ -39,6 +42,7 @@ public class MinecraftLocalization extends Localization {
      * @param folderName The name of the folder that holds all language files
      * @param langFile   The name of language file (without file extension .yml)
      */
+    @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin, String folderName, String langFile) {
         super(plugin, folderName, langFile);
     }

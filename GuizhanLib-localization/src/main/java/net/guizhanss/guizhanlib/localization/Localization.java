@@ -1,6 +1,8 @@
 package net.guizhanss.guizhanlib.localization;
 
 import com.google.common.base.Preconditions;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +32,7 @@ import java.util.logging.Level;
 @SuppressWarnings("ConstantConditions")
 public class Localization {
 
+    @Getter(AccessLevel.PROTECTED)
     private final JavaPlugin plugin;
     private final String langFolderName;
     private final File langFolder;
