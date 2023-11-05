@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * This class represents a {@link Language}, which holds the localization {@link FileConfiguration}.
+ * All the localization stays in a single file.
  *
  * @author ybw0014
  * @see Localization
@@ -39,6 +40,13 @@ public final class Language {
         this.currentFile = currentFile;
         this.currentConfig = YamlConfiguration.loadConfiguration(currentFile);
         this.currentConfig.setDefaults(defaultConfig);
+
+        for (String key : defaultConfig.getKeys(true)) {
+            if (!currentConfig.contains(key)) {
+                currentConfig.set(key, defaultConfig.get(key));
+            }
+        }
+
         save();
     }
 

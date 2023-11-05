@@ -31,7 +31,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
     @Getter
     @Setter
-    private String prefix = "";
+    private String itemPrefix = "";
 
     /**
      * The key of item groups in language file.
@@ -101,7 +101,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             itemStack,
             getString(itemGroupKey + "." + id + KEY_NAME)
         );
@@ -124,7 +124,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             material,
             getString(itemGroupKey + "." + id + KEY_NAME)
         );
@@ -147,7 +147,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             texture,
             getString(itemGroupKey + "." + id + KEY_NAME)
         );
@@ -170,7 +170,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             material,
             getString(itemsKey + "." + id + KEY_NAME),
             getStringArray(itemsKey + "." + id + KEY_LORE)
@@ -213,7 +213,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             texture,
             getString(itemsKey + "." + id + KEY_NAME),
             getStringArray(itemsKey + "." + id + KEY_LORE)
@@ -256,7 +256,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
 
         return new SlimefunItemStack(
-            (prefix + id).toUpperCase(Locale.ROOT),
+            (itemPrefix + id).toUpperCase(Locale.ROOT),
             itemStack,
             getString(itemsKey + "." + id + KEY_NAME),
             getStringArray(itemsKey + "." + id + KEY_LORE)
