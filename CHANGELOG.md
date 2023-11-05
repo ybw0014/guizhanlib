@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0
+
+- 添加`InventoryUtil#push`方法
+- 添加`SlimefunLocalization`
+- `AddonConfig`添加新的方法
+
 ## 1.4.0
 
 - 添加`BlockStorageUtil`
