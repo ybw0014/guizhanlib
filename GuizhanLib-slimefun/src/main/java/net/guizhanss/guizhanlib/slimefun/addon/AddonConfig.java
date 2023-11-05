@@ -41,7 +41,11 @@ public final class AddonConfig extends YamlConfiguration {
     }
 
     public int getInt(@Nonnull String path, int min, int max) {
-        int val = getInt(path);
+        return getInt(path, min, 0, max);
+    }
+
+    public int getInt(@Nonnull String path, int min, int defaultVal, int max) {
+        int val = getInt(path, defaultVal);
         if (val < min || val > max) {
             val = getDefaults().getInt(path);
             set(path, val);
@@ -50,7 +54,11 @@ public final class AddonConfig extends YamlConfiguration {
     }
 
     public double getDouble(@Nonnull String path, double min, double max) {
-        double val = getDouble(path);
+        return getDouble(path, min, 0d, max);
+    }
+
+    public double getDouble(@Nonnull String path, double min, double defaultVal, double max) {
+        double val = getDouble(path, defaultVal);
         if (val < min || val > max) {
             val = getDefaults().getDouble(path);
             set(path, val);
@@ -65,6 +73,17 @@ public final class AddonConfig extends YamlConfiguration {
         for (String key : getKeys(true)) {
             if (!defaults.contains(key)) {
                 set(key, null);
+            }
+        }
+    }
+
+    /**
+     * Adds the missing keys from the default config to the users config
+     */
+    public void addMissingKeys() {
+        for (String key : defaults.getKeys(true)) {
+            if (!contains(key)) {
+                set(key, defaults.get(key));
             }
         }
     }
