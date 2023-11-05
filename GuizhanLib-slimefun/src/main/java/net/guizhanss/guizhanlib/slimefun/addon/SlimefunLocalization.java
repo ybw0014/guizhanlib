@@ -7,8 +7,10 @@ import lombok.Setter;
 import net.guizhanss.guizhanlib.localization.MinecraftLocalization;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -24,6 +26,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
     private static final String KEY_NAME = ".name";
     private static final String KEY_LORE = ".lore";
+    private static final String MSG_KEY_NULL = "key cannot be null";
     private static final String MSG_ID_NULL = "id cannot be null";
     private static final String MSG_MATERIAL_NULL = "Material cannot be null";
     private static final String MSG_ITEMSTACK_NULL = "ItemStack cannot be null";
@@ -31,19 +34,25 @@ public class SlimefunLocalization extends MinecraftLocalization {
 
     @Getter
     @Setter
-    private String itemPrefix = "";
+    private String idPrefix = "";
 
     /**
-     * The key of item groups in language file.
+     * The key of ItemGroups in language file.
      */
     @Setter
     private String itemGroupKey = "categories";
 
     /**
-     * They key of items in language file.
+     * The key of items in language file.
      */
     @Setter
     private String itemsKey = "items";
+
+    /**
+     * The key of recipe types in language file.
+     */
+    @Setter
+    private String recipesKey = "recipes";
 
     /**
      * Constructor
@@ -85,25 +94,98 @@ public class SlimefunLocalization extends MinecraftLocalization {
     }
 
     /**
-     * Get the {@link SlimefunItemStack} for ItemGroup.
+     * Get the {@link SlimefunItemStack} with specified key, id and {@link Material}.
      *
+     * @param key
+     *     The key to read item from in language file.
      * @param id
-     *     The id of category.
-     * @param itemStack
-     *     The {@link ItemStack} of item.
+     *     The id of item.
+     * @param material
+     *     The {@link Material} of item.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
      *
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItemGroupItem(String id, ItemStack itemStack) {
+    public SlimefunItemStack getItemBy(String key, String id, Material material, String... extraLore) {
+        Preconditions.checkArgument(key != null, MSG_KEY_NULL);
+        Preconditions.checkArgument(id != null, MSG_ID_NULL);
+        Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
+
+        return ItemUtil.appendLore(
+            new SlimefunItemStack(
+                (idPrefix + id).toUpperCase(Locale.ROOT),
+                material,
+                getString(key + "." + id + KEY_NAME),
+                getStringArray(key + "." + id + KEY_LORE)
+            ),
+            extraLore
+        );
+    }
+
+    /**
+     * Get the {@link SlimefunItemStack} with specified key, id and head texture.
+     *
+     * @param key
+     *     The key to read item from in language file.
+     * @param id
+     *     The id of item.
+     * @param texture
+     *     The texture of head.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
+     *
+     * @return The {@link SlimefunItemStack} with specified id and head texture.
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public SlimefunItemStack getItemBy(String key, String id, String texture, String... extraLore) {
+        Preconditions.checkArgument(key != null, MSG_KEY_NULL);
+        Preconditions.checkArgument(id != null, MSG_ID_NULL);
+        Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
+
+        return ItemUtil.appendLore(
+            new SlimefunItemStack(
+                (idPrefix + id).toUpperCase(Locale.ROOT),
+                texture,
+                getString(key + "." + id + KEY_NAME),
+                getStringArray(key + "." + id + KEY_LORE)
+            ),
+            extraLore
+        );
+    }
+
+    /**
+     * Get the {@link SlimefunItemStack} with specified key, id and {@link ItemStack}.
+     *
+     * @param key
+     *     The key to read item from in language file.
+     * @param id
+     *     The id of item.
+     * @param itemStack
+     *     The {@link ItemStack}.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
+     *
+     * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public SlimefunItemStack getItemBy(String key, String id, ItemStack itemStack, String... extraLore) {
+        Preconditions.checkArgument(key != null, MSG_KEY_NULL);
         Preconditions.checkArgument(id != null, MSG_ID_NULL);
         Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
 
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            itemStack,
-            getString(itemGroupKey + "." + id + KEY_NAME)
+        return ItemUtil.appendLore(
+            new SlimefunItemStack(
+                (idPrefix + id).toUpperCase(Locale.ROOT),
+                itemStack,
+                getString(key + "." + id + KEY_NAME),
+                getStringArray(key + "." + id + KEY_LORE)
+            ),
+            extraLore
         );
     }
 
@@ -120,14 +202,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
     @Nonnull
     @ParametersAreNonnullByDefault
     public SlimefunItemStack getItemGroupItem(String id, Material material) {
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
-
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            material,
-            getString(itemGroupKey + "." + id + KEY_NAME)
-        );
+        return getItemBy(itemGroupKey, id, material);
     }
 
     /**
@@ -143,14 +218,23 @@ public class SlimefunLocalization extends MinecraftLocalization {
     @Nonnull
     @ParametersAreNonnullByDefault
     public SlimefunItemStack getItemGroupItem(String id, String texture) {
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
+        return getItemBy(itemGroupKey, id, texture);
+    }
 
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            texture,
-            getString(itemGroupKey + "." + id + KEY_NAME)
-        );
+    /**
+     * Get the {@link SlimefunItemStack} for ItemGroup.
+     *
+     * @param id
+     *     The id of category.
+     * @param itemStack
+     *     The {@link ItemStack} of item.
+     *
+     * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public SlimefunItemStack getItemGroupItem(String id, ItemStack itemStack) {
+        return getItemBy(itemGroupKey, id, itemStack);
     }
 
     /**
@@ -160,125 +244,111 @@ public class SlimefunLocalization extends MinecraftLocalization {
      *     The id of item.
      * @param material
      *     The {@link Material} of item.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
      *
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
+    public SlimefunItemStack getItem(String id, Material material, String... extraLore) {
+        return getItemBy(itemsKey, id, material, extraLore);
+    }
+
+    /**
+     * Get the {@link SlimefunItemStack} with specified id and head texture.
+     *
+     * @param id
+     *     The id of item.
+     * @param texture
+     *     The texture of head.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
+     *
+     * @return The {@link SlimefunItemStack} with specified id and head texture.
+     */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, Material material) {
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
-
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            material,
-            getString(itemsKey + "." + id + KEY_NAME),
-            getStringArray(itemsKey + "." + id + KEY_LORE)
-        );
+    public SlimefunItemStack getItem(String id, String texture, String... extraLore) {
+        return getItemBy(itemsKey, id, texture, extraLore);
     }
 
     /**
      * Get the {@link SlimefunItemStack} with specified id and {@link Material}.
-     * The extra lore will be appended to the end of current lore.
+     *
+     * @param id
+     *     The id of item.
+     * @param itemStack
+     *     The {@link ItemStack}.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
+     *
+     * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public SlimefunItemStack getItem(String id, ItemStack itemStack, String... extraLore) {
+        return getItemBy(itemsKey, id, itemStack, extraLore);
+    }
+
+    /**
+     * Get the {@link RecipeType} with specified id and {@link Material}.
      *
      * @param id
      *     The id of item.
      * @param material
      *     The {@link Material} of item.
-     * @param appendLore
-     *     The extra lore of item.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
      *
-     * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
+     * @return The {@link RecipeType} with specified id and {@link Material}.
      */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, Material material, String... appendLore) {
-        return (SlimefunItemStack) ItemUtil.appendLore(getItem(id, material), appendLore);
+    public RecipeType getRecipeType(String id, Material material, String... extraLore) {
+        return new RecipeType(
+            new NamespacedKey(getPlugin(), id),
+            getItemBy(recipesKey, id, material, extraLore)
+        );
     }
 
     /**
-     * Get the {@link SlimefunItemStack} with specified id and head texture.
+     * Get the {@link RecipeType} with specified id and head texture.
      *
      * @param id
      *     The id of item.
      * @param texture
      *     The texture of head.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
      *
-     * @return The {@link SlimefunItemStack} with specified id and head texture.
+     * @return The {@link RecipeType} with specified id and head texture.
      */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, String texture) {
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
-
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            texture,
-            getString(itemsKey + "." + id + KEY_NAME),
-            getStringArray(itemsKey + "." + id + KEY_LORE)
+    public RecipeType getRecipeType(String id, String texture, String... extraLore) {
+        return new RecipeType(
+            new NamespacedKey(getPlugin(), id),
+            getItemBy(recipesKey, id, texture, extraLore)
         );
     }
 
     /**
-     * Get the {@link SlimefunItemStack} with specified id and head texture.
-     * The extra lore will be appended to the end of current lore.
-     *
-     * @param id
-     *     The id of item.
-     * @param texture
-     *     The texture of head.
-     * @param appendLore
-     *     The extra lore of item.
-     *
-     * @return The {@link SlimefunItemStack} with specified id and head texture.
-     */
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, String texture, String... appendLore) {
-        return (SlimefunItemStack) ItemUtil.appendLore(getItem(id, texture), appendLore);
-    }
-
-    /**
-     * Get the {@link SlimefunItemStack} with specified id and {@link ItemStack}.
+     * Get the {@link RecipeType} with specified id and {@link ItemStack}.
      *
      * @param id
      *     The id of item.
      * @param itemStack
-     *     The {@link ItemStack} of item.
+     *     The {@link ItemStack}.
+     * @param extraLore
+     *     The extra lore to append to the end of current lore.
      *
-     * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
+     * @return The {@link RecipeType} with specified id and {@link ItemStack}.
      */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, ItemStack itemStack) {
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
-
-        return new SlimefunItemStack(
-            (itemPrefix + id).toUpperCase(Locale.ROOT),
-            itemStack,
-            getString(itemsKey + "." + id + KEY_NAME),
-            getStringArray(itemsKey + "." + id + KEY_LORE)
+    public RecipeType getRecipeType(String id, ItemStack itemStack, String... extraLore) {
+        return new RecipeType(
+            new NamespacedKey(getPlugin(), id),
+            getItemBy(recipesKey, id, itemStack, extraLore)
         );
-    }
-
-    /**
-     * Get the {@link SlimefunItemStack} with specified id and {@link ItemStack}.
-     * The extra lore will be appended to the end of current lore.
-     *
-     * @param id
-     *     The id of item.
-     * @param itemStack
-     *     The {@link ItemStack} of item.
-     * @param appendLore
-     *     The extra lore of item.
-     *
-     * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
-     */
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    public SlimefunItemStack getItem(String id, ItemStack itemStack, String... appendLore) {
-        return (SlimefunItemStack) ItemUtil.appendLore(getItem(id, itemStack), appendLore);
     }
 }
