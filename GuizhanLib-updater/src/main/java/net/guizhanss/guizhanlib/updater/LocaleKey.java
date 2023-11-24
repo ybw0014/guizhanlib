@@ -5,7 +5,7 @@ package net.guizhanss.guizhanlib.updater;
  *
  * @author ybw0014
  */
-enum Locales {
+public enum LocaleKey {
     CANNOT_FIND_REPO,
     CANNOT_FETCH_INFO,
     INVALID_VERSION,

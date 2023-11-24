@@ -21,6 +21,7 @@ import lombok.experimental.Accessors;
 public final class UpdaterConfig {
 
     public static final UpdaterConfig DEFAULT = new UpdaterConfig();
+
     /**
      * Limits the updater to check update only,
      * no file download.
@@ -29,6 +30,9 @@ public final class UpdaterConfig {
 
     /**
      * Whether the updater checks the version format
+     *
+     * @deprecated This option is no longer used, now the updater checks the checksum of the file, instead of version.
      */
+    @Deprecated
     private boolean checkVersionFormat = false;
 }
