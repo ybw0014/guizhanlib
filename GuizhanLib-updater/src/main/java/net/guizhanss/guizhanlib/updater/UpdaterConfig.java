@@ -30,9 +30,6 @@ public final class UpdaterConfig {
 
     /**
      * Whether the updater checks the version format
-     *
-     * @deprecated This option is no longer used, now the updater checks the checksum of the file, instead of version.
      */
-    @Deprecated
     private boolean checkVersionFormat = false;
 }

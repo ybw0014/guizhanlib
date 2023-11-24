@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
@@ -45,15 +44,18 @@ class UpdaterTask implements Runnable {
     public void run() {
         getRepoInfo();
 
-        String format = getVersionFormat();
-        if (format == null) {
-            updater.log(Level.SEVERE, LocaleKey.INVALID_VERSION);
-            return;
+        if (updater.getConfig().checkVersionFormat()) {
+            String format = getVersionFormat();
+            if (format == null) {
+                updater.log(Level.SEVERE, LocaleKey.INVALID_VERSION);
+                return;
+            }
+            if (!checkVersion(format)) {
+                updater.log(Level.WARNING, LocaleKey.INVALID_FILE_VERSION);
+                return;
+            }
         }
-        if (!checkVersion(format)) {
-            updater.log(Level.WARNING, LocaleKey.INVALID_FILE_VERSION);
-            return;
-        }
+
         if (hasUpdate()) {
             if (updater.getConfig().checkOnly()) {
                 sendUpdateNotification();
@@ -142,9 +144,6 @@ class UpdaterTask implements Runnable {
      * @return Whether the version format matches.
      */
     private boolean checkVersion(String format) {
-        if (!updater.getConfig().checkVersionFormat()) {
-            return true;
-        }
         String regex = format.replace("(", "\\(")
             .replace(")", "\\)")
             .replace("{version}", "\\d{1,6}")
@@ -183,15 +182,20 @@ class UpdaterTask implements Runnable {
                 return false;
             }
 
-            String pluginName = JsonUtil.getFromPath(repoInfo, "buildOptions.name").getAsString();
-            boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, updater.getPlugin().getDescription().getVersion()).equals(build.get("target").getAsString());
-            if (!needUpdate) {
+            // compare the checksum
+            String currentChecksum = updater.getChecksum();
+            if (currentChecksum == null) {
+                return false;
+            }
+
+            String checksum = build.get("sha1").getAsString();
+            if (currentChecksum.equals(checksum)) {
                 updater.log(Level.INFO, LocaleKey.UP_TO_DATE, updater.getPlugin().getName());
                 return false;
             }
             updateInfo = build;
             return true;
-        } catch (MalformedURLException | IllegalArgumentException | IllegalStateException | NullPointerException ex) {
+        } catch (IllegalArgumentException | IllegalStateException | NullPointerException | IOException ex) {
             updater.log(Level.SEVERE, LocaleKey.CANNOT_FETCH_INFO);
             if (DEBUG) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());

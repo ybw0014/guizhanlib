@@ -7,8 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -337,5 +342,33 @@ public abstract class AbstractGuizhanBuildsUpdater {
         Preconditions.checkArgument(key != null, "The localization key cannot be null.");
 
         return UpdaterLocalizations.get(getLanguage(), key);
+    }
+
+    /**
+     * Get the SHA1 checksum of the file.
+     *
+     * @return the checksum of the file, null when there is an error.
+     */
+    @Nullable
+    public String getChecksum() {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            FileInputStream fis = new FileInputStream(file);
+            byte[] byteArray = new byte[1024];
+            int bytesCount;
+            while ((bytesCount = fis.read(byteArray)) != -1) {
+                digest.update(byteArray, 0, bytesCount);
+            }
+            fis.close();
+            byte[] bytes = digest.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException | IOException ex) {
+            log(Level.SEVERE, ex, LocaleKey.CANNOT_CALCULATE_CHECKSUM);
+            return null;
+        }
     }
 }

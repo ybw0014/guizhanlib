@@ -31,6 +31,7 @@ class UpdaterLocalizations {
         LOCALE_EN.put(LocaleKey.INVALID_VERSION, "Cannot fetch version format from Guizhan Builds. Is it down?");
         LOCALE_EN.put(LocaleKey.INVALID_FILE_VERSION, "Auto updater has been shut down since this version is not from Guizhan Builds.");
         LOCALE_EN.put(LocaleKey.CANNOT_FIND_BUILDS, "Cannot find successful builds. How did you get this plugin?");
+        LOCALE_EN.put(LocaleKey.CANNOT_CALCULATE_CHECKSUM, "Cannot calculate the checksum of this plugin.");
         LOCALE_EN.put(LocaleKey.UP_TO_DATE, "{0} is up to date.");
         LOCALE_EN.put(LocaleKey.NEED_UPDATE, "{0} needs to be updated.");
         LOCALE_EN.put(LocaleKey.DOWNLOAD_NOTIFICATION, "Downloading has been disabled due to check only mode. You will need to download from Guizhan Builds manually.");
@@ -45,6 +46,7 @@ class UpdaterLocalizations {
         LOCALE_ZH_CN.put(LocaleKey.INVALID_VERSION, "无法从构建站获取版本格式信息。");
         LOCALE_ZH_CN.put(LocaleKey.INVALID_FILE_VERSION, "自动更新已禁用，该版本不是从鬼斩构建站下载的。");
         LOCALE_ZH_CN.put(LocaleKey.CANNOT_FIND_BUILDS, "无法找到成功的构建。你是怎么获取这个插件的。");
+        LOCALE_ZH_CN.put(LocaleKey.CANNOT_CALCULATE_CHECKSUM, "无法计算插件的校验和。");
         LOCALE_ZH_CN.put(LocaleKey.UP_TO_DATE, "{0} 已是最新版本。");
         LOCALE_ZH_CN.put(LocaleKey.NEED_UPDATE, "{0} 需要更新。");
         LOCALE_ZH_CN.put(LocaleKey.DOWNLOAD_NOTIFICATION, "由于开启了仅通知模式，下载更新已禁用。你需要手动前往鬼斩构建站下载更新。");
