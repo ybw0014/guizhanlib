@@ -22,7 +22,8 @@ public final class CatHelper {
     /**
      * 获取猫的类型({@link Cat.Type})的中文
      *
-     * @param type {@link Cat.Type} 猫的类型
+     * @param type
+     *     {@link Cat.Type} 猫的类型
      *
      * @return 猫的类型的中文
      */
@@ -34,7 +35,8 @@ public final class CatHelper {
     /**
      * 获取猫的类型({@link Cat.Type})的中文
      *
-     * @param type {@link String} 猫的类型
+     * @param type
+     *     {@link String} 猫的类型
      *
      * @return 猫的类型的中文
      */
@@ -122,7 +124,8 @@ public final class CatHelper {
         /**
          * 获取猫的类型
          *
-         * @param catType {@link Cat.Type} 猫的类型
+         * @param catType
+         *     {@link Cat.Type} 猫的类型
          *
          * @return 猫的类型
          */

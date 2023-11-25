@@ -26,7 +26,8 @@ public final class ItemStackHelper {
      * 返回物品({@link ItemStack})的显示名称,
      * 如果无显示名称则返回中文名称
      *
-     * @param item {@link ItemStack} 物品
+     * @param item
+     *     {@link ItemStack} 物品
      *
      * @return 物品的显示名称
      */
@@ -44,7 +45,8 @@ public final class ItemStackHelper {
     /**
      * 返回物品({@link ItemStack})的中文名称
      *
-     * @param item {@link ItemStack} 物品
+     * @param item
+     *     {@link ItemStack} 物品
      *
      * @return 物品的中文名称，如果获取失败则返回对应的键名
      */
@@ -65,7 +67,8 @@ public final class ItemStackHelper {
     /**
      * 返回头颅物品({@link ItemStack})的中文名称
      *
-     * @param skull {@link ItemStack} 头颅物品
+     * @param skull
+     *     {@link ItemStack} 头颅物品
      *
      * @return 头颅物品的中文名称
      */

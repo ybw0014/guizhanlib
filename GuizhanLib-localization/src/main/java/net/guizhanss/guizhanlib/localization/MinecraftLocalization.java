@@ -17,7 +17,8 @@ public class MinecraftLocalization extends Localization {
     /**
      * Constructor
      *
-     * @param plugin The {@link JavaPlugin} instance
+     * @param plugin
+     *     The {@link JavaPlugin} instance
      */
     @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin) {
@@ -27,8 +28,10 @@ public class MinecraftLocalization extends Localization {
     /**
      * Constructor
      *
-     * @param plugin     The {@link JavaPlugin} instance
-     * @param folderName The name of the folder that holds all language files
+     * @param plugin
+     *     The {@link JavaPlugin} instance
+     * @param folderName
+     *     The name of the folder that holds all language files
      */
     @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin, String folderName) {
@@ -38,9 +41,12 @@ public class MinecraftLocalization extends Localization {
     /**
      * Constructor
      *
-     * @param plugin     The {@link JavaPlugin} instance
-     * @param folderName The name of the folder that holds all language files
-     * @param langFile   The name of language file (without file extension .yml)
+     * @param plugin
+     *     The {@link JavaPlugin} instance
+     * @param folderName
+     *     The name of the folder that holds all language files
+     * @param langFile
+     *     The name of language file (without file extension .yml)
      */
     @ParametersAreNonnullByDefault
     public MinecraftLocalization(JavaPlugin plugin, String folderName, String langFile) {
@@ -50,7 +56,8 @@ public class MinecraftLocalization extends Localization {
     /**
      * Get colored and localized {@link String} from path
      *
-     * @param path the localization path
+     * @param path
+     *     the localization path
      *
      * @return Colored and localized {@link String}, empty if string is not found
      */
@@ -63,7 +70,8 @@ public class MinecraftLocalization extends Localization {
     /**
      * Get colored and localized {@link String} {@link List} from path
      *
-     * @param path the localization path
+     * @param path
+     *     the localization path
      *
      * @return Colored and localized {@link String} {@link List}
      */
@@ -76,7 +84,8 @@ public class MinecraftLocalization extends Localization {
     /**
      * Get colored and localized {@link String} array from path
      *
-     * @param path the localization path
+     * @param path
+     *     the localization path
      *
      * @return Colored and localized {@link String} array
      */

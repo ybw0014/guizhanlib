@@ -24,7 +24,8 @@
     </dependency>
 ```
 
-在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突（如果已存在`maven-shade-plugin`的配置，只需要添加relocation即可:
+在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突（如果已存在`maven-shade-plugin`
+的配置，只需要添加relocation即可:
 
 ```
         <plugins>

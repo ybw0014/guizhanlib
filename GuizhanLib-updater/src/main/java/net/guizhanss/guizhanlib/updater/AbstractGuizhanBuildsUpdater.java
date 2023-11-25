@@ -1,15 +1,19 @@
 package net.guizhanss.guizhanlib.updater;
 
 import com.google.common.base.Preconditions;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,33 +26,33 @@ import java.util.logging.Logger;
  *
  * @author ybw0014
  */
+@Getter
 @SuppressWarnings("ConstantConditions")
 public abstract class AbstractGuizhanBuildsUpdater {
 
-    @Getter
     private final Plugin plugin;
-    @Getter
     private final File file;
-    @Getter
     private final String user;
-    @Getter
     private final String repo;
-    @Getter
     private final String branch;
-    @Getter
     private final UpdaterConfig config;
 
-    @Setter
-    private Logger logger;
+    @Getter(AccessLevel.NONE)
+    private final Logger logger;
 
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin    The {@link Plugin} instance
-     * @param file      The {@link File} of plugin
-     * @param user      GitHub user
-     * @param repo      GitHub repository
-     * @param branch    GitHub branch
+     * @param plugin
+     *     The {@link Plugin} instance
+     * @param file
+     *     The {@link File} of plugin
+     * @param user
+     *     GitHub user
+     * @param repo
+     *     GitHub repository
+     * @param branch
+     *     GitHub branch
      */
     @ParametersAreNonnullByDefault
     protected AbstractGuizhanBuildsUpdater(
@@ -64,12 +68,18 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin    The {@link Plugin} instance
-     * @param file      The {@link File} of plugin
-     * @param user      GitHub user
-     * @param repo      GitHub repository
-     * @param branch    GitHub branch
-     * @param updaterConfig The {@link UpdaterConfig} of updater.
+     * @param plugin
+     *     The {@link Plugin} instance
+     * @param file
+     *     The {@link File} of plugin
+     * @param user
+     *     GitHub user
+     * @param repo
+     *     GitHub repository
+     * @param branch
+     *     GitHub branch
+     * @param updaterConfig
+     *     The {@link UpdaterConfig} of updater.
      */
     @ParametersAreNonnullByDefault
     protected AbstractGuizhanBuildsUpdater(
@@ -95,12 +105,18 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin    The {@link Plugin} instance
-     * @param file      The {@link File} of plugin
-     * @param user      GitHub user
-     * @param repo      GitHub repository
-     * @param branch    GitHub branch
-     * @param checkOnly Whether to check the version only, without downloading
+     * @param plugin
+     *     The {@link Plugin} instance
+     * @param file
+     *     The {@link File} of plugin
+     * @param user
+     *     GitHub user
+     * @param repo
+     *     GitHub repository
+     * @param branch
+     *     GitHub branch
+     * @param checkOnly
+     *     Whether to check the version only, without downloading
      *
      * @deprecated in favor of {@link UpdaterConfig}.
      */
@@ -120,16 +136,23 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin    The {@link Plugin} instance
-     * @param file      The {@link File} of plugin
-     * @param user      GitHub user
-     * @param repo      GitHub repository
-     * @param branch    GitHub branch
-     * @param checkOnly Whether to check the version only, without downloading
-     * @param lang      The language of updater
+     * @param plugin
+     *     The {@link Plugin} instance
+     * @param file
+     *     The {@link File} of plugin
+     * @param user
+     *     GitHub user
+     * @param repo
+     *     GitHub repository
+     * @param branch
+     *     GitHub branch
+     * @param checkOnly
+     *     Whether to check the version only, without downloading
+     * @param lang
+     *     The language of updater
      *
-     * @deprecated The language option is no longer used, since it is now
-     * configured under global config file (/plugins/GuizhanBuildsUpdater/config.yml).
+     * @deprecated The language option is no longer used, it is configured globally in GuizhanLibPlugin, or depends
+     * on the updater implementation.
      */
     @Deprecated
     @ParametersAreNonnullByDefault
@@ -219,7 +242,8 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Get the URL of builds information file (builds.json).
      *
-     * @param directory Working directory
+     * @param directory
+     *     Working directory
      *
      * @return the URL of builds information file
      */
@@ -231,9 +255,12 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Call the logger of plugin.
      *
-     * @param level   log {@link Level}
-     * @param message the message
-     * @param args    the arguments
+     * @param level
+     *     log {@link Level}
+     * @param message
+     *     the message
+     * @param args
+     *     the arguments
      */
     public void log(Level level, String message, Object... args) {
         logger.log(level, () -> MessageFormat.format(message, args));
@@ -242,10 +269,14 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Call the logger of plugin.
      *
-     * @param level     log {@link Level}
-     * @param exception the {@link Exception}
-     * @param message   the message
-     * @param args      the arguments
+     * @param level
+     *     log {@link Level}
+     * @param exception
+     *     the {@link Exception}
+     * @param message
+     *     the message
+     * @param args
+     *     the arguments
      */
     public void log(Level level, Exception exception, String message, Object... args) {
         logger.log(level, exception, () -> MessageFormat.format(message, args));
@@ -254,31 +285,40 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Call the logger of plugin.
      *
-     * @param level log {@link Level}
-     * @param key   the message key
-     * @param args  the arguments
+     * @param level
+     *     log {@link Level}
+     * @param key
+     *     the message key
+     * @param args
+     *     the arguments
      */
-    public void log(Level level, Locales key, Object... args) {
+    public void log(Level level, LocaleKey key, Object... args) {
         log(level, getLocalizedString(key), args);
     }
 
     /**
      * Call the logger of plugin.
      *
-     * @param level     log {@link Level}
-     * @param exception the {@link Exception}
-     * @param key       the message key
-     * @param args      the arguments
+     * @param level
+     *     log {@link Level}
+     * @param exception
+     *     the {@link Exception}
+     * @param key
+     *     the message key
+     * @param args
+     *     the arguments
      */
-    public void log(Level level, Exception exception, Locales key, Object... args) {
+    public void log(Level level, Exception exception, LocaleKey key, Object... args) {
         log(level, exception, getLocalizedString(key), args);
     }
 
     /**
      * Get the URL of the build artifact.
      *
-     * @param directory Working directory
-     * @param target    Target filename
+     * @param directory
+     *     Working directory
+     * @param target
+     *     Target filename
      *
      * @return the URL of the build artifact
      */
@@ -291,15 +331,44 @@ public abstract class AbstractGuizhanBuildsUpdater {
     /**
      * Get localized {@link String}.
      *
-     * @param key The localization key.
+     * @param key
+     *     The localization key.
      *
      * @return The localized {@link String}.
      */
     @ParametersAreNonnullByDefault
     @Nonnull
-    public String getLocalizedString(Locales key) {
+    public String getLocalizedString(LocaleKey key) {
         Preconditions.checkArgument(key != null, "The localization key cannot be null.");
 
         return UpdaterLocalizations.get(getLanguage(), key);
+    }
+
+    /**
+     * Get the SHA1 checksum of the file.
+     *
+     * @return the checksum of the file, null when there is an error.
+     */
+    @Nullable
+    public String getChecksum() {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            FileInputStream fis = new FileInputStream(file);
+            byte[] byteArray = new byte[1024];
+            int bytesCount;
+            while ((bytesCount = fis.read(byteArray)) != -1) {
+                digest.update(byteArray, 0, bytesCount);
+            }
+            fis.close();
+            byte[] bytes = digest.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException | IOException ex) {
+            log(Level.SEVERE, ex, LocaleKey.CANNOT_CALCULATE_CHECKSUM);
+            return null;
+        }
     }
 }

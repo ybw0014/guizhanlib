@@ -21,6 +21,7 @@ import lombok.experimental.Accessors;
 public final class UpdaterConfig {
 
     public static final UpdaterConfig DEFAULT = new UpdaterConfig();
+
     /**
      * Limits the updater to check update only,
      * no file download.

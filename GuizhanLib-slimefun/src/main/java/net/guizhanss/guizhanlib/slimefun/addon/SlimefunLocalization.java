@@ -2,6 +2,7 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import lombok.Getter;
 import lombok.Setter;
 import net.guizhanss.guizhanlib.localization.MinecraftLocalization;
@@ -10,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

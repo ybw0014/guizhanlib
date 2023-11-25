@@ -17,7 +17,8 @@ public final class Metals {
     /**
      * 获取金属的中文类型
      *
-     * @param type {@link String} 金属类型
+     * @param type
+     *     {@link String} 金属类型
      *
      * @return 中文类型, 如果无匹配则返回英文
      */

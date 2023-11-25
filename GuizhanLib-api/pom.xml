@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>net.guizhanss</groupId>
         <artifactId>GuizhanLib</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.0</version>
     </parent>
 
     <artifactId>GuizhanLib-api</artifactId>
@@ -49,7 +49,9 @@
                             <groups>
                                 <group>
                                     <title>Module "GuizhanLib-common"</title>
-                                    <packages>net.guizhanss.guizhanlib.common:net.guizhanss.guizhanlib.java:net.guizhanss.guizhanlib.utils</packages>
+                                    <packages>
+                                        net.guizhanss.guizhanlib.common:net.guizhanss.guizhanlib.java:net.guizhanss.guizhanlib.utils
+                                    </packages>
                                 </group>
                                 <group>
                                     <title>Module "GuizhanLib-localization"</title>

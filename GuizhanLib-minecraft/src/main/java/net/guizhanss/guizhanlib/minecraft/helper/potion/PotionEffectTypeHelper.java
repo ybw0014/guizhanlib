@@ -5,7 +5,6 @@ import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import org.bukkit.Keyed;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nonnull;
@@ -21,7 +20,8 @@ public final class PotionEffectTypeHelper {
     /**
      * 返回药水效果({@link PotionEffectType})的中文名
      *
-     * @param type {@link PotionEffectType} 药水效果
+     * @param type
+     *     {@link PotionEffectType} 药水效果
      *
      * @return 药水效果的中文名, 如果获取失败则返回键名
      */
@@ -33,7 +33,8 @@ public final class PotionEffectTypeHelper {
     /**
      * 获取药水效果({@link PotionEffectType}的键名
      *
-     * @param type {@link PotionEffectType} 药水效果
+     * @param type
+     *     {@link PotionEffectType} 药水效果
      *
      * @return 药水效果的键名
      */

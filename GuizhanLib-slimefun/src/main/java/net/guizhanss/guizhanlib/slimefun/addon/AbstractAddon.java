@@ -64,10 +64,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Live addon constructor.
      *
-     * @param githubUser    GitHub username of this project
-     * @param githubRepo    GitHub repository of this project
-     * @param githubBranch  GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param githubUser
+     *     GitHub username of this project
+     * @param githubRepo
+     *     GitHub repository of this project
+     * @param githubBranch
+     *     GitHub branch of this project
+     * @param autoUpdateKey
+     *     Auto update key in the config
      */
     protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         this.environment = Environment.LIVE;
@@ -82,32 +86,49 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Testing addon constructor
      *
-     * @param loader        the {@link JavaPluginLoader}
-     * @param description   the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder    the {@link File} of plugin's data folder
-     * @param file          the {@link File} of plugin
-     * @param githubUser    GitHub username of this project
-     * @param githubRepo    GitHub repository of this project
-     * @param githubBranch  GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
+     * @param loader
+     *     the {@link JavaPluginLoader}
+     * @param description
+     *     the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder
+     *     the {@link File} of plugin's data folder
+     * @param file
+     *     the {@link File} of plugin
+     * @param githubUser
+     *     GitHub username of this project
+     * @param githubRepo
+     *     GitHub repository of this project
+     * @param githubBranch
+     *     GitHub branch of this project
+     * @param autoUpdateKey
+     *     Auto update key in the config
      */
     protected AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
-                         String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
+                            String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         this(loader, description, dataFolder, file, githubUser, githubRepo, githubBranch, autoUpdateKey, Environment.TESTING);
     }
 
     /**
      * Testing library constructor
      *
-     * @param loader        the {@link JavaPluginLoader}
-     * @param description   the {@link PluginDescriptionFile} of plugin
-     * @param dataFolder    the {@link File} of plugin's data folder
-     * @param file          the {@link File} of plugin
-     * @param githubUser    GitHub username of this project
-     * @param githubRepo    GitHub repository of this project
-     * @param githubBranch  GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
-     * @param environment   the {@link Environment} of file
+     * @param loader
+     *     the {@link JavaPluginLoader}
+     * @param description
+     *     the {@link PluginDescriptionFile} of plugin
+     * @param dataFolder
+     *     the {@link File} of plugin's data folder
+     * @param file
+     *     the {@link File} of plugin
+     * @param githubUser
+     *     GitHub username of this project
+     * @param githubRepo
+     *     GitHub repository of this project
+     * @param githubBranch
+     *     GitHub branch of this project
+     * @param autoUpdateKey
+     *     Auto update key in the config
+     * @param environment
+     *     the {@link Environment} of file
      */
     AbstractAddon(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file,
                   String githubUser, String githubRepo, String githubBranch, String autoUpdateKey,
@@ -122,14 +143,11 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
         validate();
     }
 
-    private static <T extends AbstractAddon> void setInstance(@Nullable T inst) {
-        instance = inst;
-    }
-
     /**
      * Get an instance of extended class of {@link AbstractAddon}
      *
-     * @param <T> The class that extends {@link AbstractAddon}, which is the real addon main class
+     * @param <T>
+     *     The class that extends {@link AbstractAddon}, which is the real addon main class
      *
      * @return The instance of extended class of {@link AbstractAddon}
      */
@@ -137,6 +155,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     @SuppressWarnings("unchecked")
     public static <T extends AbstractAddon> T getInstance() {
         return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
+    }
+
+    private static <T extends AbstractAddon> void setInstance(@Nullable T inst) {
+        instance = inst;
     }
 
     /**
@@ -182,7 +204,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     /**
      * Creates a {@link NamespacedKey} from the given string
      *
-     * @param key the {@link String} representation of the key
+     * @param key
+     *     the {@link String} representation of the key
      *
      * @return the {@link NamespacedKey} created from given string
      */
@@ -196,9 +219,12 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
-     * @param level   the log {@link Level}
-     * @param message the message
-     * @param args    the arguments with in
+     * @param level
+     *     the log {@link Level}
+     * @param message
+     *     the message
+     * @param args
+     *     the arguments with in
      *
      * @see MessageFormat
      */
@@ -214,10 +240,14 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
-     * @param level   the log {@link Level}
-     * @param ex      the {@link Throwable} exception
-     * @param message the message
-     * @param args    the arguments with in
+     * @param level
+     *     the log {@link Level}
+     * @param ex
+     *     the {@link Throwable} exception
+     * @param message
+     *     the message
+     * @param args
+     *     the arguments with in
      *
      * @see MessageFormat
      */
@@ -233,8 +263,10 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * ChatColor code will be translated automatically,
      * and message is dealt with MessageFormat#format().
      *
-     * @param message the message
-     * @param args    the arguments with in
+     * @param message
+     *     the message
+     * @param args
+     *     the arguments with in
      *
      * @see MessageFormat
      */
@@ -392,7 +424,8 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
      * Handle the {@link RuntimeException} in different environments.
      * Print the exception if in live environment, throw the exception if in testing environment
      *
-     * @param ex the {@link RuntimeException}
+     * @param ex
+     *     the {@link RuntimeException}
      */
     private void handleException(RuntimeException ex) {
         switch (environment) {

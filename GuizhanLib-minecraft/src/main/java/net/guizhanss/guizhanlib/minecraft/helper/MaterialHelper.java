@@ -19,7 +19,8 @@ public final class MaterialHelper {
     /**
      * 返回材料({@link Material})的中文名称
      *
-     * @param mat {@link Material} 材料
+     * @param mat
+     *     {@link Material} 材料
      *
      * @return 材料的中文名称，如果获取失败则返回对应的键名
      */
@@ -31,7 +32,8 @@ public final class MaterialHelper {
     /**
      * 获取物品材料({@link Material})的键名
      *
-     * @param mat {@link Material} 物品材料
+     * @param mat
+     *     {@link Material} 物品材料
      *
      * @return 物品材料的键名
      */
@@ -47,7 +49,8 @@ public final class MaterialHelper {
     /**
      * 根据给定的材料字符串返回中文名称
      *
-     * @param material 材料的{@link String}格式
+     * @param material
+     *     材料的{@link String}格式
      *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式
      */
@@ -59,8 +62,10 @@ public final class MaterialHelper {
     /**
      * 根据给定的材料字符串返回中文名称
      *
-     * @param material    材料的{@link String}格式
-     * @param emptyString 是否返回空字符串
+     * @param material
+     *     材料的{@link String}格式
+     * @param emptyString
+     *     是否返回空字符串
      *
      * @return 物品材料的中文名称，如果获取失败则返回材料名可读格式或空字符串
      */

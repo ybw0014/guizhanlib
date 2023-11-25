@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
@@ -29,7 +28,7 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 class UpdaterTask implements Runnable {
-    private static boolean DEBUG = false;
+    private static final boolean DEBUG = false;
 
     private final AbstractGuizhanBuildsUpdater updater;
 
@@ -45,15 +44,18 @@ class UpdaterTask implements Runnable {
     public void run() {
         getRepoInfo();
 
-        String format = getVersionFormat();
-        if (format == null) {
-            updater.log(Level.SEVERE, Locales.INVALID_VERSION);
-            return;
+        if (updater.getConfig().checkVersionFormat()) {
+            String format = getVersionFormat();
+            if (format == null) {
+                updater.log(Level.SEVERE, LocaleKey.INVALID_VERSION);
+                return;
+            }
+            if (!checkVersion(format)) {
+                updater.log(Level.WARNING, LocaleKey.INVALID_FILE_VERSION);
+                return;
+            }
         }
-        if (!checkVersion(format)) {
-            updater.log(Level.WARNING, Locales.INVALID_FILE_VERSION);
-            return;
-        }
+
         if (hasUpdate()) {
             if (updater.getConfig().checkOnly()) {
                 sendUpdateNotification();
@@ -109,7 +111,7 @@ class UpdaterTask implements Runnable {
             // Get working directory
             workingDirectory = key.replace(":", "/");
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
-            updater.log(Level.SEVERE, Locales.CANNOT_FIND_REPO);
+            updater.log(Level.SEVERE, LocaleKey.CANNOT_FIND_REPO);
             if (DEBUG) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
@@ -136,14 +138,12 @@ class UpdaterTask implements Runnable {
     /**
      * Check if version format matches.
      *
-     * @param format The version format.
+     * @param format
+     *     The version format.
      *
      * @return Whether the version format matches.
      */
     private boolean checkVersion(String format) {
-        if (!updater.getConfig().checkVersionFormat()) {
-            return true;
-        }
         String regex = format.replace("(", "\\(")
             .replace(")", "\\)")
             .replace("{version}", "\\d{1,6}")
@@ -178,20 +178,25 @@ class UpdaterTask implements Runnable {
                 build = null;
             }
             if (build == null) {
-                updater.log(Level.SEVERE, Locales.CANNOT_FIND_BUILDS);
+                updater.log(Level.SEVERE, LocaleKey.CANNOT_FIND_BUILDS);
                 return false;
             }
 
-            String pluginName = JsonUtil.getFromPath(repoInfo, "buildOptions.name").getAsString();
-            boolean needUpdate = !MessageFormat.format("{0}-{1}.jar", pluginName, updater.getPlugin().getDescription().getVersion()).equals(build.get("target").getAsString());
-            if (!needUpdate) {
-                updater.log(Level.INFO, Locales.UP_TO_DATE, updater.getPlugin().getName());
+            // compare the checksum
+            String currentChecksum = updater.getChecksum();
+            if (currentChecksum == null) {
+                return false;
+            }
+
+            String checksum = build.get("sha1").getAsString();
+            if (currentChecksum.equals(checksum)) {
+                updater.log(Level.INFO, LocaleKey.UP_TO_DATE, updater.getPlugin().getName());
                 return false;
             }
             updateInfo = build;
             return true;
-        } catch (MalformedURLException | IllegalArgumentException | IllegalStateException | NullPointerException ex) {
-            updater.log(Level.SEVERE, Locales.CANNOT_FETCH_INFO);
+        } catch (IllegalArgumentException | IllegalStateException | NullPointerException | IOException ex) {
+            updater.log(Level.SEVERE, LocaleKey.CANNOT_FETCH_INFO);
             if (DEBUG) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
@@ -203,8 +208,8 @@ class UpdaterTask implements Runnable {
      * Send update notification.
      */
     private void sendUpdateNotification() {
-        updater.log(Level.INFO, Locales.NEED_UPDATE, updater.getPlugin().getName());
-        updater.log(Level.INFO, Locales.DOWNLOAD_NOTIFICATION, updater.getPlugin().getName());
+        updater.log(Level.INFO, LocaleKey.NEED_UPDATE, updater.getPlugin().getName());
+        updater.log(Level.INFO, LocaleKey.DOWNLOAD_NOTIFICATION, updater.getPlugin().getName());
     }
 
     /**
@@ -212,8 +217,8 @@ class UpdaterTask implements Runnable {
      */
     private void update() {
         String targetFilename = updateInfo.get("target").getAsString();
-        updater.log(Level.INFO, Locales.NEED_UPDATE, updater.getPlugin().getName());
-        updater.log(Level.INFO, Locales.DOWNLOADING, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
+        updater.log(Level.INFO, LocaleKey.NEED_UPDATE, updater.getPlugin().getName());
+        updater.log(Level.INFO, LocaleKey.DOWNLOADING, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
 
         try {
             BufferedInputStream input = new BufferedInputStream(new URL(updater.getTargetUrl(workingDirectory, targetFilename)).openStream());
@@ -228,7 +233,7 @@ class UpdaterTask implements Runnable {
             input.close();
             output.close();
         } catch (Exception ex) {
-            updater.log(Level.SEVERE, Locales.DOWNLOAD_FAIL, updater.getPlugin().getName());
+            updater.log(Level.SEVERE, LocaleKey.DOWNLOAD_FAIL, updater.getPlugin().getName());
             if (DEBUG) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
@@ -236,16 +241,17 @@ class UpdaterTask implements Runnable {
         }
 
         updater.log(Level.INFO, " ");
-        updater.log(Level.INFO, Locales.UPDATE_INFO_0);
-        updater.log(Level.INFO, Locales.UPDATE_INFO_1, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
-        updater.log(Level.INFO, Locales.UPDATE_INFO_2);
+        updater.log(Level.INFO, LocaleKey.UPDATE_INFO_0);
+        updater.log(Level.INFO, LocaleKey.UPDATE_INFO_1, updater.getPlugin().getName(), updateInfo.get("id").getAsString());
+        updater.log(Level.INFO, LocaleKey.UPDATE_INFO_2);
         updater.log(Level.INFO, " ");
     }
 
     /**
      * Fetch information from {@link URL}.
      *
-     * @param url The {@link URL} of resource.
+     * @param url
+     *     The {@link URL} of resource.
      *
      * @return The content {@link String}.
      */
@@ -268,7 +274,7 @@ class UpdaterTask implements Runnable {
 
             return content.toString();
         } catch (IOException | NullPointerException ex) {
-            updater.log(Level.WARNING, Locales.CANNOT_FETCH_INFO);
+            updater.log(Level.WARNING, LocaleKey.CANNOT_FETCH_INFO);
             if (DEBUG) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }

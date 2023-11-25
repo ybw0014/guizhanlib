@@ -15,9 +15,12 @@ public final class IntegerHelper {
      * 将字符串{@link String}转为整型{@link Integer}，并限制在范围内
      * 如果给定字符串为空，则默认取最小值
      *
-     * @param sequence 字符串 {@link String}
-     * @param min      最小值
-     * @param max      最大值
+     * @param sequence
+     *     字符串 {@link String}
+     * @param min
+     *     最小值
+     * @param max
+     *     最大值
      *
      * @return 范围内的整型
      */
