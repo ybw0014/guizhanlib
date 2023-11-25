@@ -31,9 +31,11 @@ public final class LanguageHelper {
     /**
      * 从输入流({@link InputStream})中读取语言文件
      *
-     * @param stream 输入流({@link InputStream})
+     * @param stream
+     *     输入流({@link InputStream})
      *
-     * @throws IllegalArgumentException 如果输入流为空
+     * @throws IllegalArgumentException
+     *     如果输入流为空
      */
     public static void loadFromStream(@Nonnull InputStream stream) {
         Preconditions.checkArgument(stream != null, "输入流不能为空");
@@ -50,8 +52,10 @@ public final class LanguageHelper {
     /**
      * 获取语言文件中指定键名的内容
      *
-     * @param key        {@link String} 键名
-     * @param defaultVal 默认值
+     * @param key
+     *     {@link String} 键名
+     * @param defaultVal
+     *     默认值
      *
      * @return 键名内容
      */
@@ -64,7 +68,8 @@ public final class LanguageHelper {
     /**
      * 获取语言文件中指定键名的内容
      *
-     * @param key {@link String} 键名
+     * @param key
+     *     {@link String} 键名
      *
      * @return 键名内容
      */
@@ -76,7 +81,8 @@ public final class LanguageHelper {
     /**
      * 获取语言文件中指定键名的内容
      *
-     * @param key {@link String} 键名
+     * @param key
+     *     {@link String} 键名
      *
      * @return 键名内容
      */

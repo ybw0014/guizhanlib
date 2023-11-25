@@ -18,7 +18,8 @@ public final class BiomeHelper {
     /**
      * 返回生物群系({@link Biome})的中文名
      *
-     * @param biome {@link Biome} 生物群系
+     * @param biome
+     *     {@link Biome} 生物群系
      *
      * @return 生物群系的中文名, 如果获取失败则返回键名
      */
@@ -30,7 +31,8 @@ public final class BiomeHelper {
     /**
      * 获取生物群系({@link Biome})的键名
      *
-     * @param biome {@link Biome} 生物群系
+     * @param biome
+     *     {@link Biome} 生物群系
      *
      * @return 生物群系的键名
      */

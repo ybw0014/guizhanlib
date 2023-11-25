@@ -128,8 +128,10 @@ public enum ChatColors {
     /**
      * 构造函数
      *
-     * @param color   {@link ChatColor}
-     * @param chinese 中文
+     * @param color
+     *     {@link ChatColor}
+     * @param chinese
+     *     中文
      */
     @ParametersAreNonnullByDefault
     ChatColors(ChatColor color, String chinese) {
@@ -140,7 +142,8 @@ public enum ChatColors {
     /**
      * 根据聊天颜色返回对应的枚举
      *
-     * @param chatColor {@link ChatColor} 聊天颜色
+     * @param chatColor
+     *     {@link ChatColor} 聊天颜色
      *
      * @return 对应的枚举
      */

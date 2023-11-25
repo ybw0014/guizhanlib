@@ -17,8 +17,10 @@ public final class RandomUtil {
     /**
      * Get a random {@link Integer} between min (inclusive) and max (inclusive).
      *
-     * @param min The minimum range.
-     * @param max The maximum range.
+     * @param min
+     *     The minimum range.
+     * @param max
+     *     The maximum range.
      *
      * @return The random {@link Integer}
      */
@@ -29,8 +31,10 @@ public final class RandomUtil {
     /**
      * Get a random {@link Double} between min (inclusive) and max (inclusive).
      *
-     * @param min The minimum range.
-     * @param max The maximum range.
+     * @param min
+     *     The minimum range.
+     * @param max
+     *     The maximum range.
      *
      * @return The random {@link Double}
      */
@@ -42,8 +46,10 @@ public final class RandomUtil {
     /**
      * Test chance of chance / bound.
      *
-     * @param chance Numerator (must be greater than 0)
-     * @param bound  Denominator (must be greater than 0)
+     * @param chance
+     *     Numerator (must be greater than 0)
+     * @param bound
+     *     Denominator (must be greater than 0)
      *
      * @return If the roll succeed.
      */

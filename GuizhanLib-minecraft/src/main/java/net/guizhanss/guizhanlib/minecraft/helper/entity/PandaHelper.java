@@ -22,7 +22,8 @@ public final class PandaHelper {
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文
      *
-     * @param gene {@link Panda.Gene} 熊猫基因
+     * @param gene
+     *     {@link Panda.Gene} 熊猫基因
      *
      * @return 熊猫基因的中文
      */
@@ -34,7 +35,8 @@ public final class PandaHelper {
     /**
      * 获取熊猫基因({@link Panda.Gene})的中文
      *
-     * @param gene {@link String} 熊猫基因
+     * @param gene
+     *     {@link String} 熊猫基因
      *
      * @return 熊猫基因的中文
      */
@@ -106,7 +108,8 @@ public final class PandaHelper {
         /**
          * 获取熊猫基因
          *
-         * @param pandaGene {@link Panda.Gene} 熊猫基因
+         * @param pandaGene
+         *     {@link Panda.Gene} 熊猫基因
          *
          * @return 熊猫基因
          */

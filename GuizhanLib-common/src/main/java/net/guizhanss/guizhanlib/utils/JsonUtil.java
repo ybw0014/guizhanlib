@@ -24,7 +24,8 @@ public final class JsonUtil {
     /**
      * Parse json {@link String}.
      *
-     * @param json The string to be parsed.
+     * @param json
+     *     The string to be parsed.
      *
      * @return The parsed {@link JsonElement}.
      */
@@ -37,7 +38,8 @@ public final class JsonUtil {
     /**
      * Parse json from {@link BufferedReader}.
      *
-     * @param reader The {@link BufferedReader} to read json from.
+     * @param reader
+     *     The {@link BufferedReader} to read json from.
      *
      * @return The parsed {@link JsonElement}.
      */
@@ -50,8 +52,10 @@ public final class JsonUtil {
     /**
      * The value from given path of {@link JsonObject}.
      *
-     * @param root Root {@link JsonElement}.
-     * @param path The path of target value.
+     * @param root
+     *     Root {@link JsonElement}.
+     * @param path
+     *     The path of target value.
      *
      * @return The value got from path, {@code null} if not found.
      */

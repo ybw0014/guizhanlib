@@ -42,7 +42,7 @@ public final class MachineLayout {
         )
         .setOutputBorder(
             15, 16, 17,
-            24,     26,
+            24, 26,
             33, 34, 35
         )
         .setOutputSlots(25)

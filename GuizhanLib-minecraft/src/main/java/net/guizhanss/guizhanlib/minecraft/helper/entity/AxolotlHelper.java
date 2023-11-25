@@ -22,7 +22,8 @@ public final class AxolotlHelper {
     /**
      * 获取美西螈的变种({@link Axolotl.Variant})的中文
      *
-     * @param variant {@link Axolotl.Variant} 美西螈的变种
+     * @param variant
+     *     {@link Axolotl.Variant} 美西螈的变种
      *
      * @return 美西螈的变种的中文
      */
@@ -34,7 +35,8 @@ public final class AxolotlHelper {
     /**
      * 获取美西螈的变种({@link Axolotl.Variant})的中文
      *
-     * @param variant {@link String} 美西螈的变种
+     * @param variant
+     *     {@link String} 美西螈的变种
      *
      * @return 美西螈的变种的中文
      */
@@ -98,7 +100,8 @@ public final class AxolotlHelper {
         /**
          * 获取美西螈的变种
          *
-         * @param axolotlVariant {@link Axolotl.Variant} 美西螈的变种
+         * @param axolotlVariant
+         *     {@link Axolotl.Variant} 美西螈的变种
          *
          * @return 美西螈的变种
          */

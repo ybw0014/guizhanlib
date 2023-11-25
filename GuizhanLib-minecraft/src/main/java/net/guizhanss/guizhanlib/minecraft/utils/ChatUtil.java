@@ -26,7 +26,8 @@ public final class ChatUtil {
     /**
      * Translate color code of a {@link String}.
      *
-     * @param str The {@link String} to be translated.
+     * @param str
+     *     The {@link String} to be translated.
      *
      * @return String with color code translated.
      */
@@ -38,7 +39,8 @@ public final class ChatUtil {
     /**
      * Translate color code of a {@link String} {@link List}.
      *
-     * @param strList The {@link String} {@link List} to be translated.
+     * @param strList
+     *     The {@link String} {@link List} to be translated.
      *
      * @return {@link String} {@link List} with color code translated.
      */
@@ -53,9 +55,12 @@ public final class ChatUtil {
      * <p>
      * Will use {@code MessageFormat.format()} to format the message.
      *
-     * @param sender  {@link CommandSender}
-     * @param message Message
-     * @param args    Arguments
+     * @param sender
+     *     {@link CommandSender}
+     * @param message
+     *     Message
+     * @param args
+     *     Arguments
      */
     @ParametersAreNonnullByDefault
     public static void send(CommandSender sender, String message, Object... args) {
@@ -67,9 +72,12 @@ public final class ChatUtil {
      * <p>
      * Will use {@code MessageFormat.format()} to format the message.
      *
-     * @param player  {@link Player}
-     * @param message Message
-     * @param args    Arguments
+     * @param player
+     *     {@link Player}
+     * @param message
+     *     Message
+     * @param args
+     *     Arguments
      */
     @ParametersAreNonnullByDefault
     public static void sendActionBar(Player player, String message, Object... args) {

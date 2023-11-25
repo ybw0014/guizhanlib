@@ -22,7 +22,8 @@ public final class FrogHelper {
     /**
      * 获取青蛙肤色({@link Frog.Variant})的中文
      *
-     * @param variant {@link Frog.Variant} 青蛙肤色
+     * @param variant
+     *     {@link Frog.Variant} 青蛙肤色
      *
      * @return 青蛙肤色的中文
      */
@@ -34,7 +35,8 @@ public final class FrogHelper {
     /**
      * 获取青蛙肤色({@link Frog.Variant})的中文
      *
-     * @param variant {@link String} 青蛙肤色
+     * @param variant
+     *     {@link String} 青蛙肤色
      *
      * @return 青蛙肤色的中文
      */
@@ -90,7 +92,8 @@ public final class FrogHelper {
         /**
          * 获取青蛙肤色
          *
-         * @param frogVariant {@link Frog.Variant} 青蛙肤色
+         * @param frogVariant
+         *     {@link Frog.Variant} 青蛙肤色
          *
          * @return 青蛙肤色
          */
