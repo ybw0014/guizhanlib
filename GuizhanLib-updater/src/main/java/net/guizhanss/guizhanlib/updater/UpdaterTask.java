@@ -3,6 +3,8 @@ package net.guizhanss.guizhanlib.updater;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import lombok.AccessLevel;
+import lombok.Getter;
 import net.guizhanss.guizhanlib.utils.JsonUtil;
 
 import javax.annotation.Nonnull;
@@ -28,7 +30,8 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 class UpdaterTask implements Runnable {
-    private static final boolean DEBUG = false;
+    @Getter(AccessLevel.NONE)
+    private static boolean debug = false;
 
     private final AbstractGuizhanBuildsUpdater updater;
 
@@ -112,7 +115,7 @@ class UpdaterTask implements Runnable {
             workingDirectory = key.replace(":", "/");
         } catch (MalformedURLException | IllegalStateException | IllegalArgumentException | NullPointerException ex) {
             updater.log(Level.SEVERE, LocaleKey.CANNOT_FIND_REPO);
-            if (DEBUG) {
+            if (debug) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
         }
@@ -128,7 +131,7 @@ class UpdaterTask implements Runnable {
         try {
             return JsonUtil.getFromPath(repoInfo, "buildOptions.version").getAsString();
         } catch (IllegalStateException | IllegalArgumentException | NullPointerException ex) {
-            if (DEBUG) {
+            if (debug) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
             return null;
@@ -197,7 +200,7 @@ class UpdaterTask implements Runnable {
             return true;
         } catch (IllegalArgumentException | IllegalStateException | NullPointerException | IOException ex) {
             updater.log(Level.SEVERE, LocaleKey.CANNOT_FETCH_INFO);
-            if (DEBUG) {
+            if (debug) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
             return false;
@@ -234,7 +237,7 @@ class UpdaterTask implements Runnable {
             output.close();
         } catch (Exception ex) {
             updater.log(Level.SEVERE, LocaleKey.DOWNLOAD_FAIL, updater.getPlugin().getName());
-            if (DEBUG) {
+            if (debug) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
             return;
@@ -275,7 +278,7 @@ class UpdaterTask implements Runnable {
             return content.toString();
         } catch (IOException | NullPointerException ex) {
             updater.log(Level.WARNING, LocaleKey.CANNOT_FETCH_INFO);
-            if (DEBUG) {
+            if (debug) {
                 updater.log(Level.SEVERE, ex, ex.getMessage());
             }
             return null;
