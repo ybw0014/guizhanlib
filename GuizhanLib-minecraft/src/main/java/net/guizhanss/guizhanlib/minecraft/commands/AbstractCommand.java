@@ -3,6 +3,7 @@ package net.guizhanss.guizhanlib.minecraft.commands;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import javax.annotation.Nonnull;
@@ -132,24 +133,24 @@ public abstract class AbstractCommand {
      *     The arguments of the command.
      */
     @ParametersAreNonnullByDefault
-    protected final void onCommandExecute(CommandSender sender, String[] args) {
+    protected final void onCommandExecute(CommandSender sender, Command command, String label, String[] args) {
         if (hasSubCommands()) {
             if (getUsage().isValid(args)) {
                 onExecute(sender, args);
             } else {
-                sendHelp(sender);
+                sendHelp(sender, label);
             }
         } else {
             if (args.length == 0) {
-                sendHelp(sender);
+                sendHelp(sender, label);
             } else {
                 for (var subCommand : getSubCommands()) {
                     if (subCommand.getName().equalsIgnoreCase(args[0])) {
-                        subCommand.onCommandExecute(sender, Arrays.copyOfRange(args, 1, args.length));
+                        subCommand.onCommandExecute(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
                         return;
                     }
                 }
-                sendHelp(sender);
+                sendHelp(sender, label);
             }
         }
     }
@@ -165,7 +166,7 @@ public abstract class AbstractCommand {
     @Nullable
     @ParametersAreNonnullByDefault
     protected final List<String> onTabCompleteExecute(CommandSender sender, String[] args) {
-        if (!hasSubCommands()) {
+        if (hasSubCommands()) {
             if (args.length == 1) {
                 return getSubCommands().stream().map(AbstractCommand::getName).toList();
             } else {
@@ -187,10 +188,13 @@ public abstract class AbstractCommand {
      * <p>
      * Example: /command subcommand &lt;arg1&gt; [arg2]
      *
+     * @param label
+     *   The label of the command.
+     *
      * @return The full usage of this node.
      */
     @Nonnull
-    public String getFullUsage() {
+    public String getFullUsage(String label) {
         final Deque<AbstractCommand> layers = new ArrayDeque<>();
         AbstractCommand current = this;
         while (current != null) {
@@ -198,7 +202,7 @@ public abstract class AbstractCommand {
             current = current.getParent();
         }
         String cmd = layers.stream()
-            .map(AbstractCommand::getName)
+            .map(command -> command instanceof BaseCommand ? label : command.getName())
             .collect(Collectors.joining(" ", "/", ""));
         cmd += " " + getUsage().get();
         return cmd;
@@ -209,15 +213,17 @@ public abstract class AbstractCommand {
      *
      * @param sender
      *     The {@link CommandSender} to send the help message to.
+     * @param label
+     *    The label of the command.
      */
     @ParametersAreNonnullByDefault
-    protected void sendHelp(CommandSender sender) {
+    protected void sendHelp(CommandSender sender, String label) {
         if (hasSubCommands()) {
             for (var subCommand : getSubCommands()) {
-                subCommand.sendHelp(sender);
+                subCommand.sendHelp(sender, label);
             }
         } else {
-            sender.sendMessage(ChatColor.YELLOW + getFullUsage() + ChatColor.WHITE + " - " + getDescription().apply(this));
+            sender.sendMessage(ChatColor.YELLOW + getFullUsage(label) + ChatColor.WHITE + " - " + getDescription().apply(this));
         }
     }
 

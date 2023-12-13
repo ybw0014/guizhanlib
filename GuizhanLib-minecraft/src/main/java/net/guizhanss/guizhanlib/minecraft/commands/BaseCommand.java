@@ -33,7 +33,7 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Override
     @ParametersAreNonnullByDefault
     public final boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        onCommandExecute(sender, args);
+        onCommandExecute(sender, command, label, args);
         return true;
     }
 
