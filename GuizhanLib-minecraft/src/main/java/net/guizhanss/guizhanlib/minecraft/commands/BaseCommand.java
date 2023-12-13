@@ -15,6 +15,8 @@ import java.util.function.Function;
 /**
  * The {@link BaseCommand} is the root node of a command tree.
  * It has no parent node.
+ *
+ * @author ybw0014
  */
 @Getter
 public abstract class BaseCommand extends AbstractCommand implements CommandExecutor, TabCompleter {
@@ -31,7 +33,7 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Override
     @ParametersAreNonnullByDefault
     public final boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        onCommandExecute(sender, command, label, args);
+        onCommandExecute(sender, args);
         return true;
     }
 
@@ -39,9 +41,12 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Nullable
     @ParametersAreNonnullByDefault
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return onTabCompleteExecute(sender, command, label, args);
+        return onTabCompleteExecute(sender, args);
     }
 
+    /**
+     * Register this command.
+     */
     public void register() {
         command.setExecutor(this);
         command.setTabCompleter(this);
