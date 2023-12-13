@@ -8,7 +8,6 @@ import org.bukkit.command.TabCompleter;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -22,7 +21,8 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     private final Command command;
 
     @ParametersAreNonnullByDefault
-    public BaseCommand(Command command, Function<AbstractCommand, String> description, String usage, AbstractCommand... subCommands) {
+    protected BaseCommand(Command command, Function<AbstractCommand, String> description, String usage,
+                          AbstractCommand... subCommands) {
         super(command.getName(), description, usage, subCommands);
         this.command = command;
     }
@@ -41,25 +41,7 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Override
     @ParametersAreNonnullByDefault
     public final boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!hasSubCommands()) {
-            if (getUsage().isValid(args)) {
-                onExecute(sender, args);
-            } else {
-                sendHelp(sender);
-            }
-        } else {
-            if (args.length == 0) {
-                sendHelp(sender);
-            } else {
-                for (var subCommand : getSubCommands()) {
-                    if (subCommand.getName().equalsIgnoreCase(args[0])) {
-                        subCommand.onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
-                        return true;
-                    }
-                }
-                sendHelp(sender);
-            }
-        }
+        onCommandExecute(sender, command, label, args);
         return true;
     }
 
@@ -67,6 +49,6 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Nullable
     @ParametersAreNonnullByDefault
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return null;
+        return List.of();
     }
 }

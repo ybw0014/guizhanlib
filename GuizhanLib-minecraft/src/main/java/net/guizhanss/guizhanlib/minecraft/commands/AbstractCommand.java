@@ -8,10 +8,10 @@ import org.bukkit.command.CommandSender;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * This is a node in a command tree.
@@ -41,7 +41,7 @@ public abstract class AbstractCommand {
 
     @ParametersAreNonnullByDefault
     protected AbstractCommand(String name, Function<AbstractCommand, String> description, String usage,
-                          AbstractCommand... subCommands) {
+                              AbstractCommand... subCommands) {
         this(null, name, description, usage, subCommands);
     }
 
@@ -81,7 +81,27 @@ public abstract class AbstractCommand {
         return !subCommands.isEmpty();
     }
 
-    public abstract boolean onCommand(CommandSender sender, Command command, String label, String[] args);
+    protected final void onCommandExecute(CommandSender sender, Command command, String label, String[] args) {
+        if (!hasSubCommands()) {
+            if (getUsage().isValid(args)) {
+                onExecute(sender, args);
+            } else {
+                sendHelp(sender);
+            }
+        } else {
+            if (args.length == 0) {
+                sendHelp(sender);
+            } else {
+                for (var subCommand : getSubCommands()) {
+                    if (subCommand.getName().equalsIgnoreCase(args[0])) {
+                        subCommand.onCommandExecute(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
+                        return;
+                    }
+                }
+                sendHelp(sender);
+            }
+        }
+    }
 
     protected abstract void sendHelp(CommandSender sender);
 
