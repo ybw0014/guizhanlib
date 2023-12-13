@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
 import javax.annotation.Nullable;
@@ -18,24 +19,13 @@ import java.util.function.Function;
 @Getter
 public abstract class BaseCommand extends AbstractCommand implements CommandExecutor, TabCompleter {
 
-    private final Command command;
+    private final PluginCommand command;
 
     @ParametersAreNonnullByDefault
-    protected BaseCommand(Command command, Function<AbstractCommand, String> description, String usage,
+    protected BaseCommand(PluginCommand command, Function<AbstractCommand, String> description, String usage,
                           AbstractCommand... subCommands) {
         super(command.getName(), description, usage, subCommands);
         this.command = command;
-    }
-
-    @ParametersAreNonnullByDefault
-    protected void sendHelp(CommandSender sender) {
-        if (!hasSubCommands()) {
-            sender.sendMessage(getUsage().get());
-        } else {
-            for (var subCommand : getSubCommands()) {
-                subCommand.sendHelp(sender);
-            }
-        }
     }
 
     @Override
@@ -49,6 +39,11 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
     @Nullable
     @ParametersAreNonnullByDefault
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return List.of();
+        return onTabCompleteExecute(sender, command, label, args);
+    }
+
+    public void register() {
+        command.setExecutor(this);
+        command.setTabCompleter(this);
     }
 }
