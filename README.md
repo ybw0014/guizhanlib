@@ -2,30 +2,26 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/GuizhanLib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
 
-一个可用于汉化插件的库。
+A library that helps developing Slimefun addons and translate Slimefun addons to Simplified Chinese.  
+一个帮助粘液科技附属开发，并可以汉化粘液附属的库。
 
-## 内容
+## Usage | 如何使用
 
-* 内置Minecraft简体中文语言文件，可实现获取任意语言文件中包含的内容
-    * 该文件打包至jar中，打包后 70.4 KB
-* Slimefun金属中文名
-* 部分附属插件的金属中文名
-
-## 如何使用
-
-将GuizhanLib-api（包含所有包）或者指定的包添加为依赖项:
+Add `GuizhanLib-api` (which includes all sub modules) or respective modules as dependency (Maven for example):
+将`GuizhanLib-api`（包含所有包）或者指定的包添加为依赖项（以 Maven 为例）：
 
 ```
     <dependency>
         <groupId>net.guizhanss</groupId>
         <artifactId>GuizhanLib-api</artifactId>
-        <version>将此处替换为版本号</version>
+        <version>REPLACE WITH VERSION</version>
         <scope>compile</scope>
     </dependency>
 ```
 
-在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突（如果已存在`maven-shade-plugin`
-的配置，只需要添加relocation即可:
+You will need to relocate the library classes if you use it for addon development.
+在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突
+（如果已存在`maven-shade-plugin`的配置，只需要添加relocation即可:
 
 ```
         <plugins>
@@ -35,13 +31,15 @@
                 <version>3.3.0</version>
 
                 <configuration>
+                    <!-- Add the following field to remove all unused classes and reduce the size of generated jar file. Not required, but recommended  -->
                     <!-- 你可以添加下面这一行，去除所有库中未使用的类，来减少生成jar的大小，非必须，但建议开启 -->
                     <minimizeJar>true</minimizeJar>
                     <relocations>
+                        <!-- IMPORTANT: add the following relocation -->
                         <!-- 重要: 你需要将以下relocation(迁移)部分添加到你的pom.xml中 -->
                         <relocation>
                             <pattern>net.guizhanss.guizhanlib</pattern>
-                            <shadedPattern>将此处替换为你的软件包.guizhanlib</shadedPattern>
+                            <shadedPattern>(YOUR PACKAGE NAME HERE).guizhanlib</shadedPattern>
                         </relocation>
                     </relocations>
 
@@ -67,6 +65,8 @@
         </plugins>
 ```
 
-## 更新日志
+## Changelog | 更新日志
 
-[点我查看](/CHANGELOG.md)
+The changelog is only available in Chinese.
+
+[Changelog](/CHANGELOG.md)
