@@ -7,7 +7,7 @@ A library that helps developing Slimefun addons and translate Slimefun addons to
 
 ## Usage | 如何使用
 
-Add `GuizhanLib-api` (which includes all sub modules) or respective modules as dependency (Maven for example):
+Add `GuizhanLib-api` (which includes all sub modules) or respective modules as dependency (Maven for example):  
 将`GuizhanLib-api`（包含所有包）或者指定的包添加为依赖项（以 Maven 为例）：
 
 ```
@@ -19,7 +19,7 @@ Add `GuizhanLib-api` (which includes all sub modules) or respective modules as d
     </dependency>
 ```
 
-You will need to relocate the library classes if you use it for addon development.
+You will need to relocate the library classes if you use it for addon development.  
 在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突
 （如果已存在`maven-shade-plugin`的配置，只需要添加relocation即可:
 
