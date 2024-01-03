@@ -6,7 +6,7 @@
 
     <groupId>net.guizhanss</groupId>
     <artifactId>GuizhanLib</artifactId>
-    <version>1.7.0-SNAPSHOT</version>
+    <version>1.7.0</version>
 
     <packaging>pom</packaging>
 
@@ -233,7 +233,6 @@
     </profiles>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
         <defaultGoal>clean package</defaultGoal>
         <finalName>${project.name}-${project.version}</finalName>
         <resources>
