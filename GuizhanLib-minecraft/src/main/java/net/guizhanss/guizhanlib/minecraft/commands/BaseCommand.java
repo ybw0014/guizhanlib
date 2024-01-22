@@ -26,7 +26,7 @@ public abstract class BaseCommand extends AbstractCommand implements CommandExec
 
     @ParametersAreNonnullByDefault
     protected BaseCommand(PluginCommand command, BiFunction<AbstractCommand, CommandSender, String> description, String usage,
-                          AbstractCommand... subCommands) {
+                          SubCommand... subCommands) {
         super(command.getName(), description, usage, subCommands);
         this.command = command;
     }
