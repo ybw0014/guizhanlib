@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class stores the usage of a command.
+ * Can also validate the args based on the usage.
+ *
+ * @author ybw0014
+ */
 @SuppressWarnings("ConstantConditions")
 public final class Usage {
     private static final Pattern USAGE_ARG_PATTERN = Pattern.compile("<[^>]*>|\\[[^]]*\\]|\\S+");
