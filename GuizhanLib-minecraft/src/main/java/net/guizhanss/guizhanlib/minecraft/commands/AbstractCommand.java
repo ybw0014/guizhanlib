@@ -9,8 +9,13 @@ import org.bukkit.command.CommandSender;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +30,7 @@ public abstract class AbstractCommand {
     private final Set<AbstractCommand> subCommands = new HashSet<>();
     private final AbstractCommand parent;
     private final String name;
-    private final Function<AbstractCommand, String> description;
+    private final BiFunction<AbstractCommand, CommandSender, String> description;
     private final Usage usage;
 
     /**
@@ -38,7 +43,7 @@ public abstract class AbstractCommand {
      * @param subCommands the sub-commands of this node.
      */
     protected AbstractCommand(@Nullable AbstractCommand parent, @Nonnull String name,
-                              @Nonnull Function<AbstractCommand, String> description,
+                              @Nonnull BiFunction<AbstractCommand, CommandSender, String> description,
                               @Nonnull String usage, @Nonnull AbstractCommand... subCommands) {
         Preconditions.checkArgument(name != null && !name.isEmpty(), "name cannot be null or empty");
         Preconditions.checkArgument(description != null, "description cannot be null");
@@ -59,8 +64,8 @@ public abstract class AbstractCommand {
      * @param subCommands the sub-commands of this node.
      */
     @ParametersAreNonnullByDefault
-    protected AbstractCommand(String name, Function<AbstractCommand, String> description, String usage,
-                              AbstractCommand... subCommands) {
+    protected AbstractCommand(String name, BiFunction<AbstractCommand, CommandSender, String> description,
+                              String usage, AbstractCommand... subCommands) {
         this(null, name, description, usage, subCommands);
     }
 
@@ -197,7 +202,7 @@ public abstract class AbstractCommand {
                 subCommand.sendHelp(sender, label);
             }
         } else {
-            sender.sendMessage(ChatColor.YELLOW + getFullUsage(label) + ChatColor.WHITE + " - " + getDescription().apply(this));
+            sender.sendMessage(ChatColor.YELLOW + getFullUsage(label) + ChatColor.WHITE + " - " + getDescription().apply(this, sender));
         }
     }
 
