@@ -22,9 +22,7 @@ public final class RabbitHelper {
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文
      *
-     * @param type
-     *     {@link Rabbit.Type} 兔子的类型
-     *
+     * @param type {@link Rabbit.Type} 兔子的类型
      * @return 兔子的类型的中文
      */
     @Nonnull
@@ -35,9 +33,7 @@ public final class RabbitHelper {
     /**
      * 获取兔子的类型({@link Rabbit.Type})的中文
      *
-     * @param type
-     *     {@link String} 兔子的类型
-     *
+     * @param type {@link String} 兔子的类型
      * @return 兔子的类型的中文
      */
     @Nonnull
@@ -108,9 +104,7 @@ public final class RabbitHelper {
         /**
          * 获取兔子的类型
          *
-         * @param rabbitType
-         *     {@link Rabbit.Type} 兔子的类型
-         *
+         * @param rabbitType {@link Rabbit.Type} 兔子的类型
          * @return 兔子的类型
          */
         @Nonnull

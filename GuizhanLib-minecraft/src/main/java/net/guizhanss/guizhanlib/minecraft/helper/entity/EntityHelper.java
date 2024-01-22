@@ -17,9 +17,7 @@ public final class EntityHelper {
     /**
      * 返回实体({@link Entity})的显示名称
      *
-     * @param entity
-     *     {@link Entity} 实体
-     *
+     * @param entity {@link Entity} 实体
      * @return 实体的显示名称
      */
     @Nonnull
@@ -33,9 +31,7 @@ public final class EntityHelper {
     /**
      * 返回实体({@link Entity})的中文名称
      *
-     * @param entity
-     *     {@link Entity} 实体
-     *
+     * @param entity {@link Entity} 实体
      * @return 实体的中文名称, 如果获取失败则返回键名
      */
     @Nonnull

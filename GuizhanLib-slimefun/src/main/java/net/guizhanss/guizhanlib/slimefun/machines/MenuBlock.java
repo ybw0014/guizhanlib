@@ -36,14 +36,10 @@ public abstract class MenuBlock extends SlimefunItem {
      * Constructor of {@link MenuBlock}.
      * Add events on break and place
      *
-     * @param itemGroup
-     *     the {@link ItemGroup} of this {@link MenuBlock}
-     * @param item
-     *     the {@link SlimefunItemStack} of this {@link MenuBlock}
-     * @param recipeType
-     *     the {@link RecipeType} of this {@link MenuBlock}
-     * @param recipe
-     *     the recipe of this {@link MenuBlock}
+     * @param itemGroup  the {@link ItemGroup} of this {@link MenuBlock}
+     * @param item       the {@link SlimefunItemStack} of this {@link MenuBlock}
+     * @param recipeType the {@link RecipeType} of this {@link MenuBlock}
+     * @param recipe     the recipe of this {@link MenuBlock}
      */
     @ParametersAreNonnullByDefault
     protected MenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {

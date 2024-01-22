@@ -9,12 +9,7 @@ import org.bukkit.command.CommandSender;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -36,16 +31,11 @@ public abstract class AbstractCommand {
     /**
      * Creates a new {@link AbstractCommand} instance.
      *
-     * @param parent
-     *     the parent node.
-     * @param name
-     *     the name of this node.
-     * @param description
-     *     the description of this node.
-     * @param usage
-     *     the usage of this node.
-     * @param subCommands
-     *     the sub-commands of this node.
+     * @param parent      the parent node.
+     * @param name        the name of this node.
+     * @param description the description of this node.
+     * @param usage       the usage of this node.
+     * @param subCommands the sub-commands of this node.
      */
     protected AbstractCommand(@Nullable AbstractCommand parent, @Nonnull String name,
                               @Nonnull Function<AbstractCommand, String> description,
@@ -63,14 +53,10 @@ public abstract class AbstractCommand {
     /**
      * Creates a new {@link AbstractCommand} instance, without a parent node.
      *
-     * @param name
-     *     the name of this node.
-     * @param description
-     *     the description of this node.
-     * @param usage
-     *     the usage of this node.
-     * @param subCommands
-     *     the sub-commands of this node.
+     * @param name        the name of this node.
+     * @param description the description of this node.
+     * @param usage       the usage of this node.
+     * @param subCommands the sub-commands of this node.
      */
     @ParametersAreNonnullByDefault
     protected AbstractCommand(String name, Function<AbstractCommand, String> description, String usage,
@@ -81,9 +67,7 @@ public abstract class AbstractCommand {
     /**
      * Adds a {@link AbstractCommand} to this node.
      *
-     * @param subCommand
-     *     the {@link AbstractCommand} to add.
-     *
+     * @param subCommand the {@link AbstractCommand} to add.
      * @return This {@link AbstractCommand} instance, for chaining.
      */
     @Nonnull
@@ -95,9 +79,7 @@ public abstract class AbstractCommand {
     /**
      * Adds several {@link AbstractCommand} to this node.
      *
-     * @param subCommands
-     *     the array of {@link AbstractCommand} to add.
-     *
+     * @param subCommands the array of {@link AbstractCommand} to add.
      * @return This {@link AbstractCommand} instance, for chaining.
      */
     @Nonnull
@@ -127,10 +109,8 @@ public abstract class AbstractCommand {
     /**
      * The general logic of command execution. This does not contain the real logic of the command.
      *
-     * @param sender
-     *     The {@link CommandSender} of the command.
-     * @param args
-     *     The arguments of the command.
+     * @param sender The {@link CommandSender} of the command.
+     * @param args   The arguments of the command.
      */
     @ParametersAreNonnullByDefault
     protected final void onCommandExecute(CommandSender sender, Command command, String label, String[] args) {
@@ -158,10 +138,8 @@ public abstract class AbstractCommand {
     /**
      * The general logic of tab complete execution. This does not contain the real logic of the command.
      *
-     * @param sender
-     *     The {@link CommandSender} of the command.
-     * @param args
-     *     The arguments of the command.
+     * @param sender The {@link CommandSender} of the command.
+     * @param args   The arguments of the command.
      */
     @Nullable
     @ParametersAreNonnullByDefault
@@ -188,9 +166,7 @@ public abstract class AbstractCommand {
      * <p>
      * Example: /command subcommand &lt;arg1&gt; [arg2]
      *
-     * @param label
-     *   The label of the command.
-     *
+     * @param label The label of the command.
      * @return The full usage of this node.
      */
     @Nonnull
@@ -211,10 +187,8 @@ public abstract class AbstractCommand {
     /**
      * Send the help message of this node to the {@link CommandSender}.
      *
-     * @param sender
-     *     The {@link CommandSender} to send the help message to.
-     * @param label
-     *    The label of the command.
+     * @param sender The {@link CommandSender} to send the help message to.
+     * @param label  The label of the command.
      */
     @ParametersAreNonnullByDefault
     protected void sendHelp(CommandSender sender, String label) {

@@ -6,9 +6,7 @@ import java.util.Map;
 /**
  * This package provides rate limit feature.
  *
- * @param <K>
- *     The type of key.
- *
+ * @param <K> The type of key.
  * @author ybw0014
  */
 public final class RateLimit<K> {
@@ -26,10 +24,8 @@ public final class RateLimit<K> {
     /**
      * Constructor.
      *
-     * @param time
-     *     Time period in milliseconds.
-     * @param visits
-     *     The limit times of visits.
+     * @param time   Time period in milliseconds.
+     * @param visits The limit times of visits.
      */
     public RateLimit(long time, int visits) {
         this.limitTime = time;
@@ -48,9 +44,7 @@ public final class RateLimit<K> {
     /**
      * Get the used visits.
      *
-     * @param key
-     *     The query key.
-     *
+     * @param key The query key.
      * @return Used times of visits.
      */
     public int getUsed(K key) {
@@ -73,9 +67,7 @@ public final class RateLimit<K> {
     /**
      * Get remaining times of visits
      *
-     * @param key
-     *     The query key.
-     *
+     * @param key The query key.
      * @return Remaining times of visits
      */
     public int getRemaining(K key) {
@@ -85,11 +77,8 @@ public final class RateLimit<K> {
     /**
      * Increases the times of visits.
      *
-     * @param key
-     *     The query key.
-     * @param visits
-     *     The times of visits
-     *
+     * @param key    The query key.
+     * @param visits The times of visits
      * @return Whether the action succeeds.
      */
     public boolean add(K key, int visits) {
@@ -115,9 +104,7 @@ public final class RateLimit<K> {
     /**
      * Increases the times of visits by 1.
      *
-     * @param key
-     *     The query key.
-     *
+     * @param key The query key.
      * @return Whether the action succeeds.
      */
     public boolean add(K key) {
@@ -127,8 +114,7 @@ public final class RateLimit<K> {
     /**
      * Reset rate limit
      *
-     * @param key
-     *     The query key.
+     * @param key The query key.
      */
     public void reset(K key) {
         timeMap.remove(key);

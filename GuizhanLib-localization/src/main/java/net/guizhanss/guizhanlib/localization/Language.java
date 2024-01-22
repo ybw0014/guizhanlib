@@ -26,12 +26,9 @@ public final class Language {
     /**
      * Constructor
      *
-     * @param lang
-     *     The name of language.
-     * @param currentFile
-     *     The current language {@link File}.
-     * @param defaultConfig
-     *     The {@link FileConfiguration} of default from resource.
+     * @param lang          The name of language.
+     * @param currentFile   The current language {@link File}.
+     * @param defaultConfig The {@link FileConfiguration} of default from resource.
      */
     @ParametersAreNonnullByDefault
     public Language(String lang, File currentFile, FileConfiguration defaultConfig) {

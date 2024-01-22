@@ -57,8 +57,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance
+     * @param plugin The {@link JavaPlugin} instance
      */
     @ParametersAreNonnullByDefault
     public SlimefunLocalization(JavaPlugin plugin) {
@@ -68,10 +67,8 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance
-     * @param folderName
-     *     The name of the folder that holds all language files
+     * @param plugin     The {@link JavaPlugin} instance
+     * @param folderName The name of the folder that holds all language files
      */
     @ParametersAreNonnullByDefault
     public SlimefunLocalization(JavaPlugin plugin, String folderName) {
@@ -81,12 +78,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance
-     * @param folderName
-     *     The name of the folder that holds all language files
-     * @param langFile
-     *     The name of language file (without file extension .yml)
+     * @param plugin     The {@link JavaPlugin} instance
+     * @param folderName The name of the folder that holds all language files
+     * @param langFile   The name of language file (without file extension .yml)
      */
     @ParametersAreNonnullByDefault
     public SlimefunLocalization(JavaPlugin plugin, String folderName, String langFile) {
@@ -96,15 +90,10 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified key, id and {@link Material}.
      *
-     * @param key
-     *     The key to read item from in language file.
-     * @param id
-     *     The id of item.
-     * @param material
-     *     The {@link Material} of item.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param key       The key to read item from in language file.
+     * @param id        The id of item.
+     * @param material  The {@link Material} of item.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     @Nonnull
@@ -128,15 +117,10 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified key, id and head texture.
      *
-     * @param key
-     *     The key to read item from in language file.
-     * @param id
-     *     The id of item.
-     * @param texture
-     *     The texture of head.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param key       The key to read item from in language file.
+     * @param id        The id of item.
+     * @param texture   The texture of head.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and head texture.
      */
     @Nonnull
@@ -160,15 +144,10 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified key, id and {@link ItemStack}.
      *
-     * @param key
-     *     The key to read item from in language file.
-     * @param id
-     *     The id of item.
-     * @param itemStack
-     *     The {@link ItemStack}.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param key       The key to read item from in language file.
+     * @param id        The id of item.
+     * @param itemStack The {@link ItemStack}.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
      */
     @Nonnull
@@ -192,11 +171,8 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} for ItemGroup.
      *
-     * @param id
-     *     The id of category.
-     * @param material
-     *     The {@link Material} of item.
-     *
+     * @param id       The id of category.
+     * @param material The {@link Material} of item.
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     @Nonnull
@@ -208,11 +184,8 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} for ItemGroup.
      *
-     * @param id
-     *     The id of category.
-     * @param texture
-     *     The texture of head.
-     *
+     * @param id      The id of category.
+     * @param texture The texture of head.
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     @Nonnull
@@ -224,11 +197,8 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} for ItemGroup.
      *
-     * @param id
-     *     The id of category.
-     * @param itemStack
-     *     The {@link ItemStack} of item.
-     *
+     * @param id        The id of category.
+     * @param itemStack The {@link ItemStack} of item.
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     @Nonnull
@@ -240,13 +210,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified id and {@link Material}.
      *
-     * @param id
-     *     The id of item.
-     * @param material
-     *     The {@link Material} of item.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param material  The {@link Material} of item.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and {@link Material}.
      */
     public SlimefunItemStack getItem(String id, Material material, String... extraLore) {
@@ -256,13 +222,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified id and head texture.
      *
-     * @param id
-     *     The id of item.
-     * @param texture
-     *     The texture of head.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param texture   The texture of head.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and head texture.
      */
     @Nonnull
@@ -274,13 +236,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link SlimefunItemStack} with specified id and {@link Material}.
      *
-     * @param id
-     *     The id of item.
-     * @param itemStack
-     *     The {@link ItemStack}.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param itemStack The {@link ItemStack}.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link SlimefunItemStack} with specified id and {@link ItemStack}.
      */
     @Nonnull
@@ -292,13 +250,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link RecipeType} with specified id and {@link Material}.
      *
-     * @param id
-     *     The id of item.
-     * @param material
-     *     The {@link Material} of item.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param material  The {@link Material} of item.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link RecipeType} with specified id and {@link Material}.
      */
     @Nonnull
@@ -313,13 +267,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link RecipeType} with specified id and head texture.
      *
-     * @param id
-     *     The id of item.
-     * @param texture
-     *     The texture of head.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param texture   The texture of head.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link RecipeType} with specified id and head texture.
      */
     @Nonnull
@@ -334,13 +284,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     /**
      * Get the {@link RecipeType} with specified id and {@link ItemStack}.
      *
-     * @param id
-     *     The id of item.
-     * @param itemStack
-     *     The {@link ItemStack}.
-     * @param extraLore
-     *     The extra lore to append to the end of current lore.
-     *
+     * @param id        The id of item.
+     * @param itemStack The {@link ItemStack}.
+     * @param extraLore The extra lore to append to the end of current lore.
      * @return The {@link RecipeType} with specified id and {@link ItemStack}.
      */
     @Nonnull

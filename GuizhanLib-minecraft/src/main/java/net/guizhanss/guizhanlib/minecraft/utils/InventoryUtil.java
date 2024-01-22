@@ -23,10 +23,8 @@ public final class InventoryUtil {
      * This method push all {@link ItemStack} to {@link Player}'s inventory.
      * if some items cannot be pushed, they will be dropped at {@link Player}'s {@link Location}.
      *
-     * @param p
-     *     the {@link Player}
-     * @param itemStacks
-     *     all the {@link ItemStack}s to be pushed
+     * @param p          the {@link Player}
+     * @param itemStacks all the {@link ItemStack}s to be pushed
      */
     @ParametersAreNonnullByDefault
     public static void push(Player p, ItemStack... itemStacks) {
@@ -39,12 +37,9 @@ public final class InventoryUtil {
      * This method push all {@link ItemStack} to {@link Player}'s inventory.
      * if some items cannot be pushed, they will be dropped at the specified {@link Location}.
      *
-     * @param p
-     *     the {@link Player}
-     * @param loc
-     *     the {@link Location} to drop items
-     * @param itemStacks
-     *     all the {@link ItemStack}s to be pushed
+     * @param p          the {@link Player}
+     * @param loc        the {@link Location} to drop items
+     * @param itemStacks all the {@link ItemStack}s to be pushed
      */
     @ParametersAreNonnullByDefault
     public static void push(Player p, Location loc, ItemStack... itemStacks) {

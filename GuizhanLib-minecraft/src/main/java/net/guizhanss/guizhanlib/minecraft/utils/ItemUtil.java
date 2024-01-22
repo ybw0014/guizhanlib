@@ -22,11 +22,8 @@ public class ItemUtil {
     /**
      * Append lore to an {@link ItemStack}.
      *
-     * @param itemStack
-     *     The {@link ItemStack} to append lore.
-     * @param extraLore
-     *     The lore to append.
-     *
+     * @param itemStack The {@link ItemStack} to append lore.
+     * @param extraLore The lore to append.
      * @return The {@link ItemStack} with lore appended.
      */
     public static <T extends ItemStack> T appendLore(@Nonnull T itemStack, @Nullable String... extraLore) {

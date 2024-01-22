@@ -9,12 +9,7 @@ import net.guizhanss.guizhanlib.utils.JsonUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -141,9 +136,7 @@ class UpdaterTask implements Runnable {
     /**
      * Check if version format matches.
      *
-     * @param format
-     *     The version format.
-     *
+     * @param format The version format.
      * @return Whether the version format matches.
      */
     private boolean checkVersion(String format) {
@@ -253,9 +246,7 @@ class UpdaterTask implements Runnable {
     /**
      * Fetch information from {@link URL}.
      *
-     * @param url
-     *     The {@link URL} of resource.
-     *
+     * @param url The {@link URL} of resource.
      * @return The content {@link String}.
      */
     @Nullable

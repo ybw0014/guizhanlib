@@ -240,9 +240,7 @@ public enum MinecraftTag {
     /**
      * This method returns if given {@link Material} is tagged.
      *
-     * @param type
-     *     the {@link Material} to be determined
-     *
+     * @param type the {@link Material} to be determined
      * @return if given {@link Material} is tagged
      */
     public abstract boolean isTagged(Material type);
@@ -250,9 +248,7 @@ public enum MinecraftTag {
     /**
      * This method returns if given {@link ItemStack} is tagged.
      *
-     * @param itemStack
-     *     the {@link ItemStack} to be determined
-     *
+     * @param itemStack the {@link ItemStack} to be determined
      * @return if given {@link ItemStack} is tagged
      */
     public boolean isTagged(ItemStack itemStack) {

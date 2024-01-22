@@ -126,9 +126,7 @@ public enum AdvancedMetal {
     /**
      * 根据英文返回对应的枚举
      *
-     * @param english
-     *     {@link String} 提供的英文
-     *
+     * @param english {@link String} 提供的英文
      * @return 对应的枚举
      */
     @Nullable
@@ -141,9 +139,7 @@ public enum AdvancedMetal {
     /**
      * 根据中文返回对应的枚举
      *
-     * @param chinese
-     *     {@link String} 提供的中文
-     *
+     * @param chinese {@link String} 提供的中文
      * @return 对应的枚举
      */
     @Nullable
@@ -156,9 +152,7 @@ public enum AdvancedMetal {
     /**
      * 根据粘液物品ID返回对应的枚举
      *
-     * @param id
-     *     粘液物品ID
-     *
+     * @param id 粘液物品ID
      * @return 对应的枚举
      */
     @Nullable

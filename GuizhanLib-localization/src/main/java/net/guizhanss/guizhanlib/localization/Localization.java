@@ -12,11 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 /**
@@ -42,8 +38,7 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance.
+     * @param plugin The {@link JavaPlugin} instance.
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin) {
@@ -53,10 +48,8 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance
-     * @param folderName
-     *     The name of the folder that holds all language files
+     * @param plugin     The {@link JavaPlugin} instance
+     * @param folderName The name of the folder that holds all language files
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin, String folderName) {
@@ -81,12 +74,9 @@ public class Localization {
     /**
      * Constructor
      *
-     * @param plugin
-     *     The {@link JavaPlugin} instance.
-     * @param folderName
-     *     The name of the folder that holds all language files.
-     * @param langFile
-     *     The name of language file (without file extension .yml)
+     * @param plugin     The {@link JavaPlugin} instance.
+     * @param folderName The name of the folder that holds all language files.
+     * @param langFile   The name of language file (without file extension .yml)
      */
     @ParametersAreNonnullByDefault
     public Localization(JavaPlugin plugin, String folderName, String langFile) {
@@ -97,8 +87,7 @@ public class Localization {
     /**
      * Load a language file to configuration
      *
-     * @param langFilename
-     *     the filename of language file without extension .yml
+     * @param langFilename the filename of language file without extension .yml
      */
     public final void addLanguage(@Nonnull String langFilename) {
         Preconditions.checkArgument(langFilename != null, "The language file name should not be null");
@@ -124,9 +113,7 @@ public class Localization {
     /**
      * Get localized {@link String} from path.
      *
-     * @param path
-     *     The localization path.
-     *
+     * @param path The localization path.
      * @return Localized {@link String}, empty if string is not found.
      */
     @Nonnull
@@ -145,9 +132,7 @@ public class Localization {
     /**
      * Get localized {@link String} {@link List} from path.
      *
-     * @param path
-     *     The localization path.
-     *
+     * @param path The localization path.
      * @return Localized {@link String} {@link List}.
      */
     @Nonnull
@@ -166,9 +151,7 @@ public class Localization {
     /**
      * Get localized {@link String} array from path.
      *
-     * @param path
-     *     the localization path.
-     *
+     * @param path the localization path.
      * @return Localized {@link String} array.
      */
     @Nonnull

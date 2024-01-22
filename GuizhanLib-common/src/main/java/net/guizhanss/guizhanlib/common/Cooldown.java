@@ -6,9 +6,7 @@ import java.util.Map;
 /**
  * This class provides cooldown feature, based on keys.
  *
- * @param <K>
- *     The type of key.
- *
+ * @param <K> The type of key.
  * @author ybw0014
  */
 public final class Cooldown<K> {
@@ -24,9 +22,7 @@ public final class Cooldown<K> {
     /**
      * Query if the key can be used.
      *
-     * @param key
-     *     The key.
-     *
+     * @param key The key.
      * @return Whether the key can be used.
      */
     public boolean check(K key) {
@@ -44,10 +40,8 @@ public final class Cooldown<K> {
     /**
      * Set cooldown of key.
      *
-     * @param key
-     *     The key.
-     * @param time
-     *     The cooldown in milliseconds.
+     * @param key  The key.
+     * @param time The cooldown in milliseconds.
      */
     public void set(K key, long time) {
         useMap.put(key, System.nanoTime());

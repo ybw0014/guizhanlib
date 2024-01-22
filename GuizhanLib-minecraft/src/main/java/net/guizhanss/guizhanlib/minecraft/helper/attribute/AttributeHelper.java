@@ -19,9 +19,7 @@ public final class AttributeHelper {
     /**
      * 返回属性({@link Attribute})的中文名
      *
-     * @param attribute
-     *     {@link Attribute} 属性
-     *
+     * @param attribute {@link Attribute} 属性
      * @return 属性的中文名, 如果获取失败则返回键名
      */
     @Nonnull
@@ -32,9 +30,7 @@ public final class AttributeHelper {
     /**
      * 获取属性({@link Biome})的键名
      *
-     * @param attribute
-     *     {@link Biome} 属性
-     *
+     * @param attribute {@link Biome} 属性
      * @return 属性的键名
      */
     @Nonnull

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import lombok.experimental.UtilityClass;
 
 import javax.annotation.Nonnull;
@@ -24,9 +25,7 @@ public final class JsonUtil {
     /**
      * Parse json {@link String}.
      *
-     * @param json
-     *     The string to be parsed.
-     *
+     * @param json The string to be parsed.
      * @return The parsed {@link JsonElement}.
      */
     @Nonnull
@@ -38,9 +37,7 @@ public final class JsonUtil {
     /**
      * Parse json from {@link BufferedReader}.
      *
-     * @param reader
-     *     The {@link BufferedReader} to read json from.
-     *
+     * @param reader The {@link BufferedReader} to read json from.
      * @return The parsed {@link JsonElement}.
      */
     @Nonnull
@@ -50,13 +47,22 @@ public final class JsonUtil {
     }
 
     /**
+     * Parse json from {@link JsonReader}.
+     *
+     * @param reader The {@link JsonReader} to read json from.
+     * @return The parsed {@link JsonElement}.
+     */
+    @Nonnull
+    public static JsonElement parse(@Nonnull JsonReader reader) {
+        Preconditions.checkArgument(reader != null, "reader should not be null");
+        return new JsonParser().parse(reader);
+    }
+
+    /**
      * The value from given path of {@link JsonObject}.
      *
-     * @param root
-     *     Root {@link JsonElement}.
-     * @param path
-     *     The path of target value.
-     *
+     * @param root Root {@link JsonElement}.
+     * @param path The path of target value.
      * @return The value got from path, {@code null} if not found.
      */
     @Nullable

@@ -22,9 +22,7 @@ public final class FoxHelper {
     /**
      * 获取狐狸的类型({@link Fox.Type})的中文
      *
-     * @param type
-     *     {@link Fox.Type} 狐狸的类型
-     *
+     * @param type {@link Fox.Type} 狐狸的类型
      * @return 狐狸的类型的中文
      */
     @Nonnull
@@ -35,9 +33,7 @@ public final class FoxHelper {
     /**
      * 获取狐狸的类型({@link Fox.Type})的中文
      *
-     * @param type
-     *     {@link String} 狐狸的类型
-     *
+     * @param type {@link String} 狐狸的类型
      * @return 狐狸的类型的中文
      */
     @Nonnull
@@ -88,9 +84,7 @@ public final class FoxHelper {
         /**
          * 获取狐狸的类型
          *
-         * @param foxType
-         *     {@link Fox.Type} 狐狸的类型
-         *
+         * @param foxType {@link Fox.Type} 狐狸的类型
          * @return 狐狸的类型
          */
         @Nonnull

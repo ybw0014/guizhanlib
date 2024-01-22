@@ -20,9 +20,7 @@ public final class PotionEffectTypeHelper {
     /**
      * 返回药水效果({@link PotionEffectType})的中文名
      *
-     * @param type
-     *     {@link PotionEffectType} 药水效果
-     *
+     * @param type {@link PotionEffectType} 药水效果
      * @return 药水效果的中文名, 如果获取失败则返回键名
      */
     @Nonnull
@@ -33,9 +31,7 @@ public final class PotionEffectTypeHelper {
     /**
      * 获取药水效果({@link PotionEffectType}的键名
      *
-     * @param type
-     *     {@link PotionEffectType} 药水效果
-     *
+     * @param type {@link PotionEffectType} 药水效果
      * @return 药水效果的键名
      */
     @Nonnull

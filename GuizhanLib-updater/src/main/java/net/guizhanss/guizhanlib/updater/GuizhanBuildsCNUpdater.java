@@ -17,16 +17,11 @@ public final class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin
-     *     The {@link Plugin} instance
-     * @param file
-     *     The {@link File} of plugin
-     * @param user
-     *     GitHub user
-     * @param repo
-     *     GitHub repository
-     * @param branch
-     *     GitHub branch
+     * @param plugin The {@link Plugin} instance
+     * @param file   The {@link File} of plugin
+     * @param user   GitHub user
+     * @param repo   GitHub repository
+     * @param branch GitHub branch
      */
     @ParametersAreNonnullByDefault
     public GuizhanBuildsCNUpdater(Plugin plugin, File file, String user, String repo, String branch) {
@@ -36,18 +31,12 @@ public final class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin
-     *     The {@link Plugin} instance
-     * @param file
-     *     The {@link File} of plugin
-     * @param user
-     *     GitHub user
-     * @param repo
-     *     GitHub repository
-     * @param branch
-     *     GitHub branch
-     * @param updaterConfig
-     *     The {@link UpdaterConfig}.
+     * @param plugin        The {@link Plugin} instance
+     * @param file          The {@link File} of plugin
+     * @param user          GitHub user
+     * @param repo          GitHub repository
+     * @param branch        GitHub branch
+     * @param updaterConfig The {@link UpdaterConfig}.
      */
     @ParametersAreNonnullByDefault
     public GuizhanBuildsCNUpdater(Plugin plugin, File file, String user, String repo, String branch,
@@ -58,19 +47,12 @@ public final class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin
-     *     The {@link Plugin} instance
-     * @param file
-     *     The {@link File} of plugin
-     * @param user
-     *     GitHub user
-     * @param repo
-     *     GitHub repository
-     * @param branch
-     *     GitHub branch
-     * @param checkOnly
-     *     Whether to check the version only, without downloading
-     *
+     * @param plugin    The {@link Plugin} instance
+     * @param file      The {@link File} of plugin
+     * @param user      GitHub user
+     * @param repo      GitHub repository
+     * @param branch    GitHub branch
+     * @param checkOnly Whether to check the version only, without downloading
      * @deprecated in favor of {@link UpdaterConfig}.
      */
     @Deprecated
@@ -82,21 +64,13 @@ public final class GuizhanBuildsCNUpdater extends AbstractGuizhanBuildsUpdater {
     /**
      * This constructor sets up the updater.
      *
-     * @param plugin
-     *     The {@link Plugin} instance
-     * @param file
-     *     The {@link File} of plugin
-     * @param user
-     *     GitHub user
-     * @param repo
-     *     GitHub repository
-     * @param branch
-     *     GitHub branch
-     * @param checkOnly
-     *     Whether to check the version only, without downloading
-     * @param lang
-     *     The language of updater
-     *
+     * @param plugin    The {@link Plugin} instance
+     * @param file      The {@link File} of plugin
+     * @param user      GitHub user
+     * @param repo      GitHub repository
+     * @param branch    GitHub branch
+     * @param checkOnly Whether to check the version only, without downloading
+     * @param lang      The language of updater
      * @deprecated The language option is no longer used, since it is now
      * configured under global config file (/plugins/GuizhanBuildsUpdater/config.yml).
      */

@@ -22,9 +22,7 @@ public final class HorseHelper {
     /**
      * 获取马的颜色({@link Horse.Color})的中文
      *
-     * @param color
-     *     {@link Horse.Color} 马的颜色
-     *
+     * @param color {@link Horse.Color} 马的颜色
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -35,9 +33,7 @@ public final class HorseHelper {
     /**
      * 获取马的样式({@link Horse.Style})的中文
      *
-     * @param style
-     *     {@link Horse.Style} 马的样式
-     *
+     * @param style {@link Horse.Style} 马的样式
      * @return 马的样式的中文
      */
     @Nonnull
@@ -48,9 +44,7 @@ public final class HorseHelper {
     /**
      * 获取马的颜色({@link Horse.Color})的中文
      *
-     * @param color
-     *     {@link String} 马的颜色
-     *
+     * @param color {@link String} 马的颜色
      * @return 马的颜色的中文
      */
     @Nonnull
@@ -68,9 +62,7 @@ public final class HorseHelper {
     /**
      * 获取马的样式({@link Horse.Style})的中文
      *
-     * @param style
-     *     {@link String} 马的样式
-     *
+     * @param style {@link String} 马的样式
      * @return 马的样式的中文
      */
     @Nonnull
@@ -141,9 +133,7 @@ public final class HorseHelper {
         /**
          * 获取马的颜色
          *
-         * @param horseColor
-         *     {@link Horse.Color} 马的颜色
-         *
+         * @param horseColor {@link Horse.Color} 马的颜色
          * @return 马的颜色
          */
         @Nonnull
@@ -208,9 +198,7 @@ public final class HorseHelper {
         /**
          * 获取马的样式
          *
-         * @param horseStyle
-         *     {@link Horse.Style} 马的样式
-         *
+         * @param horseStyle {@link Horse.Style} 马的样式
          * @return 马的样式
          */
         @Nonnull
