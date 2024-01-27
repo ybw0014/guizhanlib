@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("ConstantConditions")
 @Getter
 public abstract class AbstractCommand {
-    private final Set<AbstractCommand> subCommands = new HashSet<>();
+    private final Set<SubCommand> subCommands = new HashSet<>();
     private final AbstractCommand parent;
     private final String name;
     private final BiFunction<AbstractCommand, CommandSender, String> description;
@@ -44,7 +44,7 @@ public abstract class AbstractCommand {
      */
     protected AbstractCommand(@Nullable AbstractCommand parent, @Nonnull String name,
                               @Nonnull BiFunction<AbstractCommand, CommandSender, String> description,
-                              @Nonnull String usage, @Nonnull AbstractCommand... subCommands) {
+                              @Nonnull String usage, @Nonnull SubCommand... subCommands) {
         Preconditions.checkArgument(name != null && !name.isEmpty(), "name cannot be null or empty");
         Preconditions.checkArgument(description != null, "description cannot be null");
 
@@ -65,30 +65,18 @@ public abstract class AbstractCommand {
      */
     @ParametersAreNonnullByDefault
     protected AbstractCommand(String name, BiFunction<AbstractCommand, CommandSender, String> description,
-                              String usage, AbstractCommand... subCommands) {
+                              String usage, SubCommand... subCommands) {
         this(null, name, description, usage, subCommands);
     }
 
     /**
-     * Adds a {@link AbstractCommand} to this node.
+     * Adds several {@link SubCommand} to this node.
      *
-     * @param subCommand the {@link AbstractCommand} to add.
+     * @param subCommands the array of {@link SubCommand} to add.
      * @return This {@link AbstractCommand} instance, for chaining.
      */
     @Nonnull
-    public AbstractCommand addSubCommand(@Nonnull AbstractCommand subCommand) {
-        this.subCommands.add(subCommand);
-        return this;
-    }
-
-    /**
-     * Adds several {@link AbstractCommand} to this node.
-     *
-     * @param subCommands the array of {@link AbstractCommand} to add.
-     * @return This {@link AbstractCommand} instance, for chaining.
-     */
-    @Nonnull
-    public AbstractCommand addSubCommands(@Nonnull AbstractCommand... subCommands) {
+    public AbstractCommand addSubCommand(@Nonnull SubCommand... subCommands) {
         this.subCommands.addAll(Set.of(subCommands));
         return this;
     }
@@ -108,7 +96,7 @@ public abstract class AbstractCommand {
      * @return Whether this node has child nodes.
      */
     public boolean hasSubCommands() {
-        return subCommands.isEmpty();
+        return !subCommands.isEmpty();
     }
 
     /**
@@ -175,7 +163,7 @@ public abstract class AbstractCommand {
      * @return The full usage of this node.
      */
     @Nonnull
-    public String getFullUsage(String label) {
+    public String getFullUsage(@Nonnull String label) {
         final Deque<AbstractCommand> layers = new ArrayDeque<>();
         AbstractCommand current = this;
         while (current != null) {

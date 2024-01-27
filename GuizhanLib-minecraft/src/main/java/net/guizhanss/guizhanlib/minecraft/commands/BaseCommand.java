@@ -11,11 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 /**
  * The {@link BaseCommand} is the root node of a command tree.
- * It has no parent node.
+ * It has no parent node, and is {@link CommandExecutor} and {@link TabCompleter}.
+ * <p>
+ * Be sure to call {@link #register()} after creating a new instance of this class.
  *
  * @author ybw0014
  */

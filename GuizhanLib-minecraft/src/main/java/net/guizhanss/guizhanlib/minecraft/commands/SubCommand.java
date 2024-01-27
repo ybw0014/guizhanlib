@@ -10,13 +10,13 @@ import java.util.function.BiFunction;
 public abstract class SubCommand extends AbstractCommand {
     protected SubCommand(@Nullable AbstractCommand parent, @Nonnull String name,
                          @Nonnull BiFunction<AbstractCommand, CommandSender, String> description,
-                         @Nonnull String usage, @Nonnull AbstractCommand... subCommands) {
+                         @Nonnull String usage, @Nonnull SubCommand... subCommands) {
         super(parent, name, description, usage, subCommands);
     }
 
     @ParametersAreNonnullByDefault
     protected SubCommand(String name, BiFunction<AbstractCommand, CommandSender, String> description,
-                         String usage, AbstractCommand... subCommands) {
+                         String usage, SubCommand... subCommands) {
         super(name, description, usage, subCommands);
     }
 }
