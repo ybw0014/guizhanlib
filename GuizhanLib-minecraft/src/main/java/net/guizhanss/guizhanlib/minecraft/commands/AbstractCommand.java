@@ -107,7 +107,7 @@ public abstract class AbstractCommand {
      */
     @ParametersAreNonnullByDefault
     protected final void onCommandExecute(CommandSender sender, Command command, String label, String[] args) {
-        if (hasSubCommands()) {
+        if (!hasSubCommands()) {
             if (getUsage().isValid(args)) {
                 onExecute(sender, args);
             } else {
