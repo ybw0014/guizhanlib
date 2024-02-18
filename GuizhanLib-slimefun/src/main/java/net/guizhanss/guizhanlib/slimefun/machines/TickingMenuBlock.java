@@ -24,7 +24,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public abstract class TickingMenuBlock extends MenuBlock {
 
-    public TickingMenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    @ParametersAreNonnullByDefault
+    protected TickingMenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
 
         addItemHandler(new BlockTicker() {
@@ -34,6 +35,7 @@ public abstract class TickingMenuBlock extends MenuBlock {
             }
 
             @Override
+            @ParametersAreNonnullByDefault
             public void tick(Block b, SlimefunItem item, Config data) {
                 BlockMenu menu = BlockStorage.getInventory(b);
                 if (menu != null) {
@@ -44,6 +46,7 @@ public abstract class TickingMenuBlock extends MenuBlock {
         });
     }
 
+    @ParametersAreNonnullByDefault
     protected abstract void tick(Block b, BlockMenu menu);
 
     protected boolean isSync() {

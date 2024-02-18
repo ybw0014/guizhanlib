@@ -21,11 +21,13 @@ public abstract class AbstractMachineBlock extends TickingMenuBlock implements E
     protected int energyPerTick = -1;
     protected int energyCapacity = -1;
 
-    public AbstractMachineBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    @ParametersAreNonnullByDefault
+    protected AbstractMachineBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     protected void tick(Block b, BlockMenu menu) {
         if (getCharge(menu.getLocation()) < energyPerTick) {
             if (menu.hasViewer()) {
@@ -56,7 +58,7 @@ public abstract class AbstractMachineBlock extends TickingMenuBlock implements E
     @Override
     public final void register(@Nonnull SlimefunAddon addon) {
         if (energyPerTick == -1) {
-            throw new IllegalStateException("You must call .energyPerTick() before registering!");
+            throw new IllegalStateException("You must call .setEnergyPerTick() before registering!");
         }
         if (energyCapacity == -1) {
             energyCapacity = energyPerTick * 2;

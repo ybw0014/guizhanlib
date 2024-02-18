@@ -48,6 +48,7 @@ public abstract class MenuBlock extends SlimefunItem {
         addItemHandler(
             new BlockBreakHandler(false, false) {
                 @Override
+                @ParametersAreNonnullByDefault
                 public void onPlayerBreak(BlockBreakEvent e, ItemStack itemStack, List<ItemStack> list) {
                     BlockMenu menu = BlockStorage.getInventory(e.getBlock());
                     if (menu != null) {
@@ -57,6 +58,7 @@ public abstract class MenuBlock extends SlimefunItem {
             },
             new BlockPlaceHandler(false) {
                 @Override
+                @ParametersAreNonnullByDefault
                 public void onPlayerPlace(BlockPlaceEvent e) {
                     onPlace(e, e.getBlockPlaced());
                 }
@@ -64,8 +66,11 @@ public abstract class MenuBlock extends SlimefunItem {
         );
     }
 
+    /**
+     * Be sure to call {@code super.postRegister()} if you override this method.
+     */
     @Override
-    public final void postRegister() {
+    public void postRegister() {
         new MenuBlockPreset(this);
     }
 
