@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.6
+
+- 添加`FileUtil`
+
 ## 1.7.5
 
 - `MenuBlock`的`postRegister`方法不再为final
