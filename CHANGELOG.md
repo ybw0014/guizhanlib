@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0
+
+- 重新对库进行整理，使用 Gradle 并将模块名称转为小写。
+- minecraft 模块中的所有中文翻译支持类从本库中删除，并添加到 GuizhanLibPlugin
+
 ## 1.7.6
 
 - 添加`FileUtil`

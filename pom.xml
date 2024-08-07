@@ -49,13 +49,13 @@
     </issueManagement>
 
     <modules>
-        <module>GuizhanLib-common</module>
-        <module>GuizhanLib-localization</module>
-        <module>GuizhanLib-minecraft</module>
-        <module>GuizhanLib-slimefun</module>
-        <module>GuizhanLib-updater</module>
+        <module>guizhanlib-common</module>
+        <module>guizhanlib-localization</module>
+        <module>guizhanlib-minecraft</module>
+        <module>guizhanlib-slimefun</module>
+        <module>guizhanlib-updater</module>
 
-        <module>GuizhanLib-api</module>
+        <module>guizhanlib-api</module>
     </modules>
 
     <distributionManagement>
