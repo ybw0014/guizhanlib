@@ -1,4 +1,4 @@
 /**
- * This package provides localization services.
+ * This package provides single-file localization service.
  */
 package net.guizhanss.guizhanlib.localization;

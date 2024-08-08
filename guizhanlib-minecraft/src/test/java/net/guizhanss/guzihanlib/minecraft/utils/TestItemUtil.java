@@ -1,7 +1,7 @@
 package net.guizhanss.guzihanlib.minecraft.utils;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class TestItemUtil {
+
     @BeforeAll
     public static void setUp() {
         MockBukkit.mock();
@@ -28,27 +29,24 @@ class TestItemUtil {
     @Test
     @DisplayName("Test ItemUtil.appendLore(...)")
     void testAppendLore() {
-        ItemStack itemStack = new CustomItemStack(
-            Material.DIAMOND,
-            "&aTest Item",
-            "&cOriginal Lore"
-        );
+        final ItemStack item = new ItemStack(Material.DIAMOND);
+        final ItemMeta meta = item.getItemMeta();
+        meta.setLore(ChatUtil.color(List.of("&aTest Item", "&cOriginal Lore")));
+        item.setItemMeta(meta);
 
-        ItemStack expected = new CustomItemStack(
-            Material.DIAMOND,
-            "&aTest Item",
-            "&cOriginal Lore",
-            "&aNew Lore"
-        );
+        final ItemStack expected = new ItemStack(Material.DIAMOND);
+        final ItemMeta expectedMeta = expected.getItemMeta();
+        expectedMeta.setLore(ChatUtil.color(List.of("&aTest Item", "&cOriginal Lore", "&aNew Lore")));
+        expected.setItemMeta(expectedMeta);
 
-        ItemUtil.appendLore(itemStack, "&aNew Lore");
+        ItemUtil.appendLore(item, "&aNew Lore");
 
-        Assertions.assertTrue(itemStack.hasItemMeta());
+        Assertions.assertTrue(item.hasItemMeta());
 
-        ItemMeta meta = itemStack.getItemMeta();
-        Assertions.assertTrue(meta.hasLore());
+        ItemMeta itemMeta = item.getItemMeta();
+        Assertions.assertTrue(itemMeta.hasLore());
 
-        List<String> lore = meta.getLore();
+        List<String> lore = itemMeta.getLore();
 
         Assertions.assertEquals(lore, expected.getItemMeta().getLore());
     }

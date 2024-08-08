@@ -21,7 +21,6 @@ subprojects {
 
     dependencies {
         compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-        compileOnly("com.github.SlimefunGuguProject:Slimefun4:2024.3")
         api("io.papermc:paperlib:1.0.8")
         api("com.google.code.findbugs:jsr305:3.0.2")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.3")

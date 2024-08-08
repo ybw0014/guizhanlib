@@ -1,5 +1,6 @@
-package net.guizhanss.guizhanlib.localization;
+package net.guizhanss.guizhanlib.minecraft.localization;
 
+import net.guizhanss.guizhanlib.localization.Localization;
 import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author ybw0014
  */
 public class MinecraftLocalization extends Localization {
+
     /**
      * Constructor
      *

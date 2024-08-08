@@ -1,4 +1,4 @@
 /**
- * This package contains a command framework.
+ * This package contains a bukkit command framework.
  */
 package net.guizhanss.guizhanlib.minecraft.commands;

@@ -2,7 +2,7 @@
 
 ## 2.0
 
-重新对库进行整理，使用 Gradle 并将模块名称转为小写。
+重新对库进行整理，使用 Gradle 并将模块名称改为小写。
 最低 Minecraft 版本支持提高至 1.18。
 
 ### common
@@ -10,6 +10,11 @@
 - 优化 Javadocs
 - 移除 `java` 包（在 GuizhanLibPlugin 中添加）
 - `JsonUtil` 移除所有 `parse` 方法
+
+### minecraft
+
+- 移除简体中文名称相关类（在 GuizhanLibPlugin 中添加）
+- `ItemUtil` 添加 `isValid`、`removeDamage`、`canStack`
 
 ## 1.7.6
 

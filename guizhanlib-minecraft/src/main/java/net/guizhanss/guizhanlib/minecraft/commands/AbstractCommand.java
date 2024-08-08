@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("ConstantConditions")
 @Getter
 public abstract class AbstractCommand {
+
     private final Set<SubCommand> subCommands = new HashSet<>();
     private final AbstractCommand parent;
     private final String name;

@@ -9,6 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestChatUtil {
+
     @Test
     void testColorString() {
         String original1 = "&c114514";

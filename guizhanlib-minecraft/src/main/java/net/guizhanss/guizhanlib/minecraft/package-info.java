@@ -1,4 +1,4 @@
 /**
- * 该包包含我的世界(Minecraft)本地相关助手类
+ * This package contains classes that help with Minecraft bukkit plugin development.
  */
 package net.guizhanss.guizhanlib.minecraft;

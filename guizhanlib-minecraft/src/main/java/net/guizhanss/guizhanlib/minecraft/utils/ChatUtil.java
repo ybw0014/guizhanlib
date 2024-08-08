@@ -20,9 +20,10 @@ import java.util.stream.Collectors;
  *
  * @author ybw0014
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "deprecation"})
 @UtilityClass
 public final class ChatUtil {
+
     /**
      * Translate color code of a {@link String}.
      *
@@ -43,17 +44,19 @@ public final class ChatUtil {
     @Nonnull
     public static List<String> color(@Nonnull List<String> strList) {
         Preconditions.checkArgument(strList != null, "String list cannot be null");
+
         return strList.stream().map(ChatUtil::color).collect(Collectors.toList());
     }
 
     /**
      * Send message to {@link CommandSender}, the color codes in the message will be translated.
      * <p>
-     * Will use {@code MessageFormat.format()} to format the message.
+     * Will use {@code MessageFormat.format()} to format the message,
+     * so be sure the content between curly braces is valid.
      *
      * @param sender  {@link CommandSender}
-     * @param message Message
-     * @param args    Arguments
+     * @param message the message template.
+     * @param args    the arguments.
      */
     @ParametersAreNonnullByDefault
     public static void send(CommandSender sender, String message, Object... args) {
@@ -63,11 +66,12 @@ public final class ChatUtil {
     /**
      * Send action bar message to {@link Player}, the color codes in the message will be translated.
      * <p>
-     * Will use {@code MessageFormat.format()} to format the message.
+     * Will use {@code MessageFormat.format()} to format the message,
+     * so be sure the content between curly braces is valid.
      *
      * @param player  {@link Player}
-     * @param message Message
-     * @param args    Arguments
+     * @param message the message template.
+     * @param args    the arguments.
      */
     @ParametersAreNonnullByDefault
     public static void sendActionBar(Player player, String message, Object... args) {

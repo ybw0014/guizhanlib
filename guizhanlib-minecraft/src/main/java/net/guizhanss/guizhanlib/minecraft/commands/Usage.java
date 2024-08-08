@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  */
 @SuppressWarnings("ConstantConditions")
 public final class Usage {
+
     private static final Pattern USAGE_ARG_PATTERN = Pattern.compile("<[^>]*>|\\[[^]]*\\]|\\S+");
     private final String usageStr;
 
