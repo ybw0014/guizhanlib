@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.utils;
+package net.guizhanss.guizhanlib.common.utils;
 
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @UtilityClass
 public final class RandomUtil {
+
     private static final double DOUBLE_PRECISION = 1_000_000D;
 
     /**

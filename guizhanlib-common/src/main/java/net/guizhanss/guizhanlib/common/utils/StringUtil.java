@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.utils;
+package net.guizhanss.guizhanlib.common.utils;
 
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 @UtilityClass
 @SuppressWarnings("ConstantConditions")
 public final class StringUtil {
+
     private static final Pattern UNDERSCORE_PATTERN = Pattern.compile("_");
     private static final String NULL_STRING_MESSAGE = "The string cannot be null";
 
@@ -89,10 +90,10 @@ public final class StringUtil {
     }
 
     /**
-     * Check if given {@link String} is blank.
+     * Check if the given {@link String} is null or blank.
      *
      * @param str The {@link String} to be checked.
-     * @return If the {@link String} is blank.
+     * @return If the {@link String} is null or blank.
      */
     public static boolean isBlank(@Nullable String str) {
         if (str == null) {

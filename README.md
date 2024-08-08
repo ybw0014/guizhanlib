@@ -2,26 +2,26 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/GuizhanLib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
 
-A library that helps developing Slimefun addons and translate Slimefun addons to Simplified Chinese.  
-一个帮助粘液科技附属开发，并可以汉化粘液附属的库。
+A library that helps developing Slimefun addons. 
+一个帮助粘液科技附属开发。
 
 ## Usage | 如何使用
 
-Add `GuizhanLib-api` (which includes all sub modules) or respective modules as dependency (Maven for example):  
-将`GuizhanLib-api`（包含所有包）或者指定的包添加为依赖项（以 Maven 为例）：
+Add `GuizhanLib-all` (which includes all sub modules) or respective modules as dependency (Maven for example):  
+将`GuizhanLib-all`（包含所有包）或者指定的包添加为依赖项（以 Maven 为例）：
 
 ```
     <dependency>
         <groupId>net.guizhanss</groupId>
-        <artifactId>GuizhanLib-api</artifactId>
+        <artifactId>GuizhanLib-all</artifactId>
         <version>REPLACE WITH VERSION</version>
         <scope>compile</scope>
     </dependency>
 ```
 
 You will need to relocate the library classes if you use it for addon development.  
-在`build`中，你需要将GuizhanLib迁移到你的包中，避免与其他插件中使用的GuizhanLib冲突
-（如果已存在`maven-shade-plugin`的配置，只需要添加relocation即可:
+在`build`中，你需要将 GuizhanLib 迁移到你的包中，避免与其他插件中使用的 GuizhanLib 冲突
+（如果已存在 `maven-shade-plugin` 的配置，只需要添加 relocation 即可:
 
 ```
         <plugins>

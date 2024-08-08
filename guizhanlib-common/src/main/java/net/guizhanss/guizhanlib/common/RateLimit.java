@@ -1,5 +1,8 @@
 package net.guizhanss.guizhanlib.common;
 
+import com.google.common.base.Preconditions;
+
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,22 +13,17 @@ import java.util.Map;
  * @author ybw0014
  */
 public final class RateLimit<K> {
+
     private final long limitTime;
     private final int limitVisits;
-    /**
-     * This map records the first visit time.
-     */
-    private final Map<K, Long> timeMap = new HashMap<>();
-    /**
-     * This map records the times of visits.
-     */
-    private final Map<K, Integer> visitMap = new HashMap<>();
+    private final Map<K, Long> timeMap = new HashMap<>(); // the first visit time
+    private final Map<K, Integer> visitMap = new HashMap<>(); // time of visits
 
     /**
      * Constructor.
      *
      * @param time   Time period in milliseconds.
-     * @param visits The limit times of visits.
+     * @param visits The limit times of visits within the period.
      */
     public RateLimit(long time, int visits) {
         this.limitTime = time;
@@ -47,7 +45,9 @@ public final class RateLimit<K> {
      * @param key The query key.
      * @return Used times of visits.
      */
-    public int getUsed(K key) {
+    public int getUsed(@Nonnull K key) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         Long time = timeMap.get(key);
         Integer visits = visitMap.get(key);
 
@@ -68,9 +68,11 @@ public final class RateLimit<K> {
      * Get remaining times of visits
      *
      * @param key The query key.
-     * @return Remaining times of visits
+     * @return Remaining times of visits.
      */
-    public int getRemaining(K key) {
+    public int getRemaining(@Nonnull K key) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         return getLimit() - getUsed(key);
     }
 
@@ -81,7 +83,9 @@ public final class RateLimit<K> {
      * @param visits The times of visits
      * @return Whether the action succeeds.
      */
-    public boolean add(K key, int visits) {
+    public boolean add(@Nonnull K key, int visits) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         Long time = timeMap.get(key);
         Integer visited = visitMap.get(key);
 
@@ -107,16 +111,20 @@ public final class RateLimit<K> {
      * @param key The query key.
      * @return Whether the action succeeds.
      */
-    public boolean add(K key) {
+    public boolean add(@Nonnull K key) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         return add(key, 1);
     }
 
     /**
-     * Reset rate limit
+     * Reset rate limit.
      *
      * @param key The query key.
      */
-    public void reset(K key) {
+    public void reset(@Nonnull K key) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         timeMap.remove(key);
         visitMap.remove(key);
     }

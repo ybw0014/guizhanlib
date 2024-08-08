@@ -1,5 +1,8 @@
 package net.guizhanss.guizhanlib.common;
 
+import com.google.common.base.Preconditions;
+
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +13,9 @@ import java.util.Map;
  * @author ybw0014
  */
 public final class Cooldown<K> {
-    /**
-     * This map records when key is used.
-     */
-    private final Map<K, Long> useMap = new HashMap<>();
-    /**
-     * This map records the cooldown time/
-     */
-    private final Map<K, Long> timeMap = new HashMap<>();
+
+    private final Map<K, Long> useMap = new HashMap<>(); // record the last use time of the key
+    private final Map<K, Long> timeMap = new HashMap<>(); // record the cooldown duration of the key
 
     /**
      * Query if the key can be used.
@@ -25,7 +23,9 @@ public final class Cooldown<K> {
      * @param key The key.
      * @return Whether the key can be used.
      */
-    public boolean check(K key) {
+    public boolean check(@Nonnull K key) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         Long lastUse = useMap.get(key);
         Long cdTime = timeMap.get(key);
 
@@ -43,7 +43,9 @@ public final class Cooldown<K> {
      * @param key  The key.
      * @param time The cooldown in milliseconds.
      */
-    public void set(K key, long time) {
+    public void set(@Nonnull K key, long time) {
+        Preconditions.checkArgument(key != null, "key should not be null");
+
         useMap.put(key, System.nanoTime());
         timeMap.put(key, time * 1_000_000L);
     }

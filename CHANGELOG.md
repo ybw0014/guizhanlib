@@ -2,8 +2,14 @@
 
 ## 2.0
 
-- 重新对库进行整理，使用 Gradle 并将模块名称转为小写。
-- minecraft 模块中的所有中文翻译支持类从本库中删除，并添加到 GuizhanLibPlugin
+重新对库进行整理，使用 Gradle 并将模块名称转为小写。
+最低 Minecraft 版本支持提高至 1.18。
+
+### common
+
+- 优化 Javadocs
+- 移除 `java` 包（在 GuizhanLibPlugin 中添加）
+- `JsonUtil` 移除所有 `parse` 方法
 
 ## 1.7.6
 
