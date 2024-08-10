@@ -27,9 +27,13 @@ subprojects {
     apply(plugin = "com.gradleup.shadow")
 
     dependencies {
+        fun compileOnlyAndTestImplementation(dependencyNotation: Any) {
+            compileOnly(dependencyNotation)
+            testImplementation(dependencyNotation)
+        }
+
         api("com.google.code.findbugs:jsr305:3.0.2")
-        compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-        testImplementation("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+        compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.3")
         testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.3")
     }

@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * This enum contains some useful tags that
+ * This enum contains some useful {@link Material} tags that
  * {@link org.bukkit.Tag} does not have.
  *
  * @author ybw0014
