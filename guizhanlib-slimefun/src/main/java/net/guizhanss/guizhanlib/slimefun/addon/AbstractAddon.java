@@ -23,8 +23,7 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 /**
- * An abstract {@link SlimefunAddon} class that contains
- * the updater and some utilities.
+ * An abstract {@link SlimefunAddon} class that contains some utilities.
  * <p>
  * Extend this as your main class to use them.
  * <p>

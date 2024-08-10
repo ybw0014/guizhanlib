@@ -19,6 +19,7 @@ import java.util.Map;
 @UtilityClass
 @SuppressWarnings("ConstantConditions")
 class UpdaterLocalizations {
+
     private static final Map<String, Map<LocaleKey, String>> MAP = new HashMap<>();
 
     private static final Map<LocaleKey, String> LOCALE_EN = new EnumMap<>(LocaleKey.class);

@@ -3,9 +3,10 @@ package net.guizhanss.guizhanlib.updater;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.AccessLevel;
 import lombok.Getter;
-import net.guizhanss.guizhanlib.utils.JsonUtil;
+import net.guizhanss.guizhanlib.common.utils.JsonUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,6 +31,7 @@ import java.util.regex.Pattern;
  * @author ybw0014
  */
 class UpdaterTask implements Runnable {
+
     @Getter(AccessLevel.NONE)
     private static boolean debug = false;
 
@@ -78,7 +80,7 @@ class UpdaterTask implements Runnable {
             if (repos == null) {
                 throw new IllegalStateException("Repository list is null");
             }
-            JsonObject reposJson = (JsonObject) JsonUtil.parse(repos);
+            JsonObject reposJson = JsonParser.parseString(repos).getAsJsonObject();
 
             String key = updater.getRepoKey();
             // direct find
@@ -169,8 +171,8 @@ class UpdaterTask implements Runnable {
         try {
             // Retrieve builds info
             URL buildsUrl = new URL(updater.getBuildsInfo(workingDirectory));
-            JsonObject buildsJson = (JsonObject) JsonUtil.parse(fetch(buildsUrl));
-            JsonArray builds = (JsonArray) JsonUtil.getFromPath(buildsJson, "builds");
+            JsonObject buildsJson = JsonParser.parseString(fetch(buildsUrl)).getAsJsonObject();
+            JsonArray builds = JsonUtil.getFromPath(buildsJson, "builds").getAsJsonArray();
 
             JsonObject build = null;
             for (int i = builds.size() - 1; i >= 0; i--) {

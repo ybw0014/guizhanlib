@@ -5,7 +5,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import lombok.Getter;
 import lombok.Setter;
-import net.guizhanss.guizhanlib.localization.MinecraftLocalization;
+import net.guizhanss.guizhanlib.minecraft.localization.MinecraftLocalization;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

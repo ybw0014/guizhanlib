@@ -1,6 +1,6 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
-import net.guizhanss.guizhanlib.utils.StringUtil;
+import net.guizhanss.guizhanlib.common.utils.StringUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import javax.annotation.Nonnull;
