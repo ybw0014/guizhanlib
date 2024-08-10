@@ -6,6 +6,7 @@ plugins {
     signing
     id("io.freefair.lombok") version "8.7.1"
     id("com.gradleup.shadow") version "8.3.0"
+    id("co.uzzu.dotenv.gradle") version "4.0.0"
 }
 
 group = "net.guizhanss"
@@ -97,16 +98,16 @@ subprojects {
                 name = "CentralRelease"
                 url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
-                    username = System.getenv("OSSRH_USERNAME") ?: ""
-                    password = System.getenv("OSSRH_PASSWORD") ?: ""
+                    username = env.OSSRH_USERNAME.orElse("")
+                    password = env.OSSRH_PASSWORD.orElse("")
                 }
             }
             maven {
                 name = "CentralSnapshot"
                 url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
                 credentials {
-                    username = System.getenv("OSSRH_USERNAME") ?: ""
-                    password = System.getenv("OSSRH_PASSWORD") ?: ""
+                    username = env.OSSRH_USERNAME.orElse("")
+                    password = env.OSSRH_PASSWORD.orElse("")
                 }
             }
         }
