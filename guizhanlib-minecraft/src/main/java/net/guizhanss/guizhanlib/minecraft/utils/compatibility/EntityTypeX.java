@@ -1,12 +1,12 @@
 package net.guizhanss.guizhanlib.minecraft.utils.compatibility;
 
 import lombok.experimental.UtilityClass;
-import net.guizhanss.guizhanlib.minecraft.utils.MinecraftVersionUtil;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.entity.EntityType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 
 @UtilityClass
 public class EntityTypeX {
@@ -30,34 +30,27 @@ public class EntityTypeX {
     public static final EntityType LIGHTNING_BOLT;
 
     static {
-        boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
-
-        ITEM = isAtLeast1_20_5 ? EntityType.ITEM : getKey("DROPPED_ITEM");
-        LEASH_KNOT = isAtLeast1_20_5 ? EntityType.LEASH_KNOT : getKey("LEASH_HITCH");
-        EYE_OF_ENDER = isAtLeast1_20_5 ? EntityType.EYE_OF_ENDER : getKey("ENDER_SIGNAL");
-        POTION = isAtLeast1_20_5 ? EntityType.POTION : getKey("SPLASH_POTION");
-        EXPERIENCE_BOTTLE = isAtLeast1_20_5 ? EntityType.EXPERIENCE_BOTTLE : getKey("THROWN_EXP_BOTTLE");
-        TNT = isAtLeast1_20_5 ? EntityType.TNT : getKey("PRIMED_TNT");
-        FIREWORK_ROCKET = isAtLeast1_20_5 ? EntityType.FIREWORK_ROCKET : getKey("FIREWORK");
-        COMMAND_BLOCK_MINECART = isAtLeast1_20_5 ? EntityType.COMMAND_BLOCK_MINECART : getKey("MINECART_COMMAND");
-        CHEST_MINECART = isAtLeast1_20_5 ? EntityType.CHEST_MINECART : getKey("MINECART_CHEST");
-        FURNACE_MINECART = isAtLeast1_20_5 ? EntityType.FURNACE_MINECART : getKey("MINECART_FURNACE");
-        TNT_MINECART = isAtLeast1_20_5 ? EntityType.TNT_MINECART : getKey("MINECART_TNT");
-        HOPPER_MINECART = isAtLeast1_20_5 ? EntityType.HOPPER_MINECART : getKey("MINECART_HOPPER");
-        SPAWNER_MINECART = isAtLeast1_20_5 ? EntityType.SPAWNER_MINECART : getKey("MINECART_MOB_SPAWNER");
-        MOOSHROOM = isAtLeast1_20_5 ? EntityType.MOOSHROOM : getKey("MUSHROOM_COW");
-        SNOW_GOLEM = isAtLeast1_20_5 ? EntityType.SNOW_GOLEM : getKey("SNOWMAN");
-        FISHING_BOBBER = isAtLeast1_20_5 ? EntityType.FISHING_BOBBER : getKey("FISHING_HOOK");
-        LIGHTNING_BOLT = isAtLeast1_20_5 ? EntityType.LIGHTNING_BOLT : getKey("LIGHTNING");
+        ITEM = getByKey("item");
+        LEASH_KNOT = getByKey("leash_knot");
+        EYE_OF_ENDER = getByKey("eye_of_ender");
+        POTION = getByKey("potion");
+        EXPERIENCE_BOTTLE = getByKey("experience_bottle");
+        TNT = getByKey("tnt");
+        FIREWORK_ROCKET = getByKey("firework_rocket");
+        COMMAND_BLOCK_MINECART = getByKey("command_block_minecart");
+        CHEST_MINECART = getByKey("chest_minecart");
+        FURNACE_MINECART = getByKey("furnace_minecart");
+        TNT_MINECART = getByKey("tnt_minecart");
+        HOPPER_MINECART = getByKey("hopper_minecart");
+        SPAWNER_MINECART = getByKey("spawner_minecart");
+        MOOSHROOM = getByKey("mooshroom");
+        SNOW_GOLEM = getByKey("snow_golem");
+        FISHING_BOBBER = getByKey("fishing_bobber");
+        LIGHTNING_BOLT = getByKey("lightning_bolt");
     }
 
     @Nullable
-    private static EntityType getKey(@Nonnull String key) {
-        try {
-            Field field = EntityType.class.getDeclaredField(key);
-            return (EntityType) field.get(null);
-        } catch (Exception e) {
-            return null;
-        }
+    private static EntityType getByKey(@Nonnull String key) {
+        return Registry.ENTITY_TYPE.get(NamespacedKey.minecraft(key));
     }
 }

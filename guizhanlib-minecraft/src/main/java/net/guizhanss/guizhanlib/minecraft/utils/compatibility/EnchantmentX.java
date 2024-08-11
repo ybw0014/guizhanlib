@@ -1,12 +1,12 @@
 package net.guizhanss.guizhanlib.minecraft.utils.compatibility;
 
 import lombok.experimental.UtilityClass;
-import net.guizhanss.guizhanlib.minecraft.utils.MinecraftVersionUtil;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 
 /**
  * This class holds {@link Enchantment} that are renamed in 1.20.5.
@@ -36,37 +36,30 @@ public class EnchantmentX {
     public static final Enchantment SWEEPING_EDGE;
 
     static {
-        boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
-
-        PROTECTION = isAtLeast1_20_5 ? Enchantment.PROTECTION : getKey("PROTECTION_ENVIRONMENTAL");
-        FIRE_PROTECTION = isAtLeast1_20_5 ? Enchantment.FIRE_PROTECTION : getKey("PROTECTION_FIRE");
-        FEATHER_FALLING = isAtLeast1_20_5 ? Enchantment.FEATHER_FALLING : getKey("PROTECTION_FALL");
-        BLAST_PROTECTION = isAtLeast1_20_5 ? Enchantment.BLAST_PROTECTION : getKey("PROTECTION_EXPLOSIONS");
-        PROJECTILE_PROTECTION = isAtLeast1_20_5 ? Enchantment.PROJECTILE_PROTECTION : getKey("PROTECTION_PROJECTILE");
-        RESPIRATION = isAtLeast1_20_5 ? Enchantment.RESPIRATION : getKey("OXYGEN");
-        AQUA_AFFINITY = isAtLeast1_20_5 ? Enchantment.AQUA_AFFINITY : getKey("WATER_WORKER");
-        SHARPNESS = isAtLeast1_20_5 ? Enchantment.SHARPNESS : getKey("DAMAGE_ALL");
-        SMITE = isAtLeast1_20_5 ? Enchantment.SMITE : getKey("DAMAGE_UNDEAD");
-        BANE_OF_ARTHROPODS = isAtLeast1_20_5 ? Enchantment.BANE_OF_ARTHROPODS : getKey("DAMAGE_ARTHROPODS");
-        LOOTING = isAtLeast1_20_5 ? Enchantment.LOOTING : getKey("LOOT_BONUS_MOBS");
-        EFFICIENCY = isAtLeast1_20_5 ? Enchantment.EFFICIENCY : getKey("DIG_SPEED");
-        UNBREAKING = isAtLeast1_20_5 ? Enchantment.UNBREAKING : getKey("DURABILITY");
-        FORTUNE = isAtLeast1_20_5 ? Enchantment.FORTUNE : getKey("LOOT_BONUS_BLOCKS");
-        POWER = isAtLeast1_20_5 ? Enchantment.POWER : getKey("ARROW_DAMAGE");
-        PUNCH = isAtLeast1_20_5 ? Enchantment.PUNCH : getKey("ARROW_KNOCKBACK");
-        FLAME = isAtLeast1_20_5 ? Enchantment.FLAME : getKey("ARROW_FIRE");
-        INFINITY = isAtLeast1_20_5 ? Enchantment.INFINITY : getKey("ARROW_INFINITE");
-        LUCK_OF_THE_SEA = isAtLeast1_20_5 ? Enchantment.LUCK_OF_THE_SEA : getKey("LUCK");
-        SWEEPING_EDGE = isAtLeast1_20_5 ? Enchantment.SWEEPING_EDGE : getKey("SWEEPING");
+        PROTECTION = getByKey("protection");
+        FIRE_PROTECTION = getByKey("fire_protection");
+        FEATHER_FALLING = getByKey("feather_falling");
+        BLAST_PROTECTION = getByKey("blast_protection");
+        PROJECTILE_PROTECTION = getByKey("projectile_protection");
+        RESPIRATION = getByKey("respiration");
+        AQUA_AFFINITY = getByKey("aqua_affinity");
+        SHARPNESS = getByKey("sharpness");
+        SMITE = getByKey("smite");
+        BANE_OF_ARTHROPODS = getByKey("bane_of_arthropods");
+        LOOTING = getByKey("looting");
+        EFFICIENCY = getByKey("efficiency");
+        UNBREAKING = getByKey("unbreaking");
+        FORTUNE = getByKey("fortune");
+        POWER = getByKey("power");
+        PUNCH = getByKey("punch");
+        FLAME = getByKey("flame");
+        INFINITY = getByKey("infinity");
+        LUCK_OF_THE_SEA = getByKey("luck_of_the_sea");
+        SWEEPING_EDGE = getByKey("sweeping_edge");
     }
 
     @Nullable
-    private static Enchantment getKey(@Nonnull String key) {
-        try {
-            Field field = Enchantment.class.getDeclaredField(key);
-            return (Enchantment) field.get(null);
-        } catch (Exception e) {
-            return null;
-        }
+    private static Enchantment getByKey(@Nonnull String key) {
+        return Registry.ENCHANTMENT.get(NamespacedKey.minecraft(key));
     }
 }
