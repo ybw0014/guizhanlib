@@ -74,9 +74,22 @@ public abstract class MenuBlock extends SlimefunItem {
         new MenuBlockPreset(this);
     }
 
+    /**
+     * Set up the {@link BlockMenuPreset} of this block.
+     *
+     * @param preset The {@link BlockMenuPreset} of this block.
+     */
     @ParametersAreNonnullByDefault
     protected abstract void setup(BlockMenuPreset preset);
 
+    /**
+     * Returns the slots for different {@link ItemTransportFlow}. For insert, return input slots. For withdraw, return output slots.
+     *
+     * @param menu The {@link DirtyChestMenu} of this block.
+     * @param flow The {@link ItemTransportFlow}.
+     * @param item The {@link ItemStack} to transport.
+     * @return The slots for different {@link ItemTransportFlow}.
+     */
     @ParametersAreNonnullByDefault
     @Nonnull
     protected final int[] getTransportSlots(DirtyChestMenu menu, ItemTransportFlow flow, ItemStack item) {
@@ -86,20 +99,48 @@ public abstract class MenuBlock extends SlimefunItem {
         };
     }
 
+    /**
+     * The input slots for the given {@link ItemStack}. By default, it returns all the input slots.
+     *
+     * @param menu The {@link DirtyChestMenu} of this block.
+     * @param item The {@link ItemStack} to transport.
+     * @return The input slots for the given {@link ItemStack}.
+     */
     @ParametersAreNonnullByDefault
     protected int[] getInputSlots(DirtyChestMenu menu, ItemStack item) {
         return getInputSlots();
     }
 
+    /**
+     * All the input slots.
+     *
+     * @return All the input slots.
+     */
     protected abstract int[] getInputSlots();
 
+    /**
+     * All the output slots.
+     *
+     * @return All the output slots.
+     */
     protected abstract int[] getOutputSlots();
 
+    /**
+     * This method is called when a new instance of this block is created. (usually after placed, or after server start)
+     *
+     * @param menu The {@link BlockMenu} of this block.
+     * @param b    The {@link Block}.
+     */
     @ParametersAreNonnullByDefault
     protected void onNewInstance(BlockMenu menu, Block b) {
-
     }
 
+    /**
+     * The default handler when block breaks. Drop items in input and output slots.
+     *
+     * @param e    The {@link BlockBreakEvent}.
+     * @param menu The {@link BlockMenu} of this block.
+     */
     @ParametersAreNonnullByDefault
     protected void onBreak(BlockBreakEvent e, BlockMenu menu) {
         Location l = menu.getLocation();
@@ -107,8 +148,13 @@ public abstract class MenuBlock extends SlimefunItem {
         menu.dropItems(l, getOutputSlots());
     }
 
+    /**
+     * The default handler when block places.
+     *
+     * @param e The {@link BlockPlaceEvent}.
+     * @param b The {@link Block} placed.
+     */
     @ParametersAreNonnullByDefault
     protected void onPlace(BlockPlaceEvent e, Block b) {
-
     }
 }

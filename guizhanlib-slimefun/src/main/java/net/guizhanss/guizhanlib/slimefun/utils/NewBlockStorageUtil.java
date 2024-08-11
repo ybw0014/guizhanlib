@@ -14,12 +14,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * BlockStorage utilities for StarWishsama's Slimefun4.
+ * BlockStorage utilities for Simplified Chinese fork of Slimefun4.
  *
  * @author ybw0014
  */
 @UtilityClass
-public final class BlockStorageUtil {
+public final class NewBlockStorageUtil {
 
     @Nonnull
     @ParametersAreNonnullByDefault
