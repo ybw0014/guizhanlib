@@ -7,6 +7,7 @@ plugins {
     id("io.freefair.lombok") version "8.7.1"
     id("com.gradleup.shadow") version "8.3.0"
     id("co.uzzu.dotenv.gradle") version "4.0.0"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "net.guizhanss"
@@ -26,6 +27,7 @@ subprojects {
     apply(plugin = "signing")
     apply(plugin = "io.freefair.lombok")
     apply(plugin = "com.gradleup.shadow")
+    apply(plugin = "org.sonarqube")
 
     dependencies {
         fun compileOnlyAndTestImplementation(dependencyNotation: Any) {
@@ -52,6 +54,14 @@ subprojects {
 
     tasks.withType<ShadowJar> {
         archiveAppendix = ""
+    }
+
+    sonar {
+        properties {
+            property("sonar.projectKey", "ybw0014_GuizhanLib")
+            property("sonar.organization", "ybw0014")
+            property("sonar.host.url", "https://sonarcloud.io")
+        }
     }
 
     publishing {
