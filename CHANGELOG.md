@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0
+
+- 添加 `MinecraftVerisonUtil`
+- 添加向后兼容包
+
 ## 1.7.6
 
 - 添加`FileUtil`
