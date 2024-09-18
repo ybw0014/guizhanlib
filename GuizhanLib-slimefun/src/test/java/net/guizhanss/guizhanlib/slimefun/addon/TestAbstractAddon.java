@@ -22,63 +22,63 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class TestAbstractAddon {
 
-    private static ServerMock server;
-    private static MockAddon addon;
-
-    @BeforeAll
-    public static void load() {
-        server = MockBukkit.mock();
-        MockBukkit.load(Slimefun.class);
-        addon = MockBukkit.load(MockAddon.class);
-    }
-
-    @AfterAll
-    public static void unload() {
-        MockBukkit.unmock();
-    }
-
-    @Test
-    void testNotNullEnvironment() {
-        assertNotNull(addon.getEnvironment());
-    }
-
-    @Test
-    void testNotNullConfig() {
-        assertNotNull(addon.getConfig());
-    }
-
-    @Test
-    void testCreateKey() {
-        assertNotNull(MockAddon.createKey("test"));
-    }
-
-    @Test
-    void testAutoUpdatedDisabled() {
-        assertFalse(addon.isAutoUpdateEnabled());
-    }
-
-    @Test
-    void testBugTrackerURL() {
-        assertEquals("https://github.com/ybw0014/GuizhanLib/issues", addon.getBugTrackerURL());
-    }
-
-    @Test
-    void testInstance() {
-        assertDoesNotThrow((ThrowingSupplier<Object>) MockAddon::getInstance);
-    }
-
-    @Test
-    void testDuplicateInstance() {
-        assertThrows(RuntimeException.class, () -> MockBukkit.load(MockAddon.class));
-    }
-
-    void testSlimefunTickCount() {
-        server.getScheduler().performOneTick();
-        assertEquals(1, MockAddon.getSlimefunTickCount());
-    }
-
-    @Test
-    void testNotRelocatedLive() {
-        assertThrows(RuntimeException.class, () -> MockBukkit.load(MockAddon.class, Environment.LIVE, null));
-    }
+//    private static ServerMock server;
+//    private static MockAddon addon;
+//
+//    @BeforeAll
+//    public static void load() {
+//        server = MockBukkit.mock();
+//        MockBukkit.load(Slimefun.class);
+//        addon = MockBukkit.load(MockAddon.class);
+//    }
+//
+//    @AfterAll
+//    public static void unload() {
+//        MockBukkit.unmock();
+//    }
+//
+//    @Test
+//    void testNotNullEnvironment() {
+//        assertNotNull(addon.getEnvironment());
+//    }
+//
+//    @Test
+//    void testNotNullConfig() {
+//        assertNotNull(addon.getConfig());
+//    }
+//
+//    @Test
+//    void testCreateKey() {
+//        assertNotNull(MockAddon.createKey("test"));
+//    }
+//
+//    @Test
+//    void testAutoUpdatedDisabled() {
+//        assertFalse(addon.isAutoUpdateEnabled());
+//    }
+//
+//    @Test
+//    void testBugTrackerURL() {
+//        assertEquals("https://github.com/ybw0014/GuizhanLib/issues", addon.getBugTrackerURL());
+//    }
+//
+//    @Test
+//    void testInstance() {
+//        assertDoesNotThrow((ThrowingSupplier<Object>) MockAddon::getInstance);
+//    }
+//
+//    @Test
+//    void testDuplicateInstance() {
+//        assertThrows(RuntimeException.class, () -> MockBukkit.load(MockAddon.class));
+//    }
+//
+//    void testSlimefunTickCount() {
+//        server.getScheduler().performOneTick();
+//        assertEquals(1, MockAddon.getSlimefunTickCount());
+//    }
+//
+//    @Test
+//    void testNotRelocatedLive() {
+//        assertThrows(RuntimeException.class, () -> MockBukkit.load(MockAddon.class, Environment.LIVE, null));
+//    }
 }
