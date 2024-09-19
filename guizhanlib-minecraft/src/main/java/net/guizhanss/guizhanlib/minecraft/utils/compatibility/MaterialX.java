@@ -4,6 +4,8 @@ import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.utils.MinecraftVersionUtil;
 import org.bukkit.Material;
 
+import javax.annotation.Nullable;
+
 @UtilityClass
 public class MaterialX {
 
@@ -11,7 +13,12 @@ public class MaterialX {
     public static final Material TURTLE_SCUTE;
 
     static {
-        SHORT_GRASS = MinecraftVersionUtil.isAtLeast(20, 3) ? Material.getMaterial("SHORT_GRASS") : Material.getMaterial("GRASS");
-        TURTLE_SCUTE = MinecraftVersionUtil.isAtLeast(20, 5) ? Material.getMaterial("TURTLE_SCUTE") : Material.getMaterial("SCUTE");
+        SHORT_GRASS = MinecraftVersionUtil.isAtLeast(20, 3) ? getByName("SHORT_GRASS") : getByName("GRASS");
+        TURTLE_SCUTE = MinecraftVersionUtil.isAtLeast(20, 5) ? getByName("TURTLE_SCUTE") : getByName("SCUTE");
+    }
+
+    @Nullable
+    private static Material getByName(String name) {
+        return Material.getMaterial(name);
     }
 }

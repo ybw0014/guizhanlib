@@ -2,31 +2,31 @@ package net.guizhanss.guizhanlib.minecraft.utils.compatibility;
 
 import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.utils.MinecraftVersionUtil;
-import org.bukkit.inventory.ItemFlag;
+import org.bukkit.attribute.Attribute;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 
 /**
- * This class holds {@link ItemFlag} that are renamed in 1.20.5.
+ * This class holds {@link Attribute} that are renamed in 1.20.5.
  */
 @UtilityClass
-public class ItemFlagX {
+public class AttributeX {
 
-    public static final ItemFlag HIDE_ADDITIONAL_TOOLTIP;
+    public static final Attribute GENERIC_JUMP_STRENGTH;
 
     static {
         boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        HIDE_ADDITIONAL_TOOLTIP = isAtLeast1_20_5 ? ItemFlag.HIDE_ADDITIONAL_TOOLTIP : getField("HIDE_POTION_EFFECTS");
+        GENERIC_JUMP_STRENGTH = isAtLeast1_20_5 ? Attribute.GENERIC_JUMP_STRENGTH : getField("HORSE_JUMP_STRENGTH");
     }
 
     @Nullable
-    private static ItemFlag getField(@Nonnull String key) {
+    private static Attribute getField(@Nonnull String key) {
         try {
-            Field field = ItemFlag.class.getDeclaredField(key);
-            return (ItemFlag) field.get(null);
+            Field field = Attribute.class.getDeclaredField(key);
+            return (Attribute) field.get(null);
         } catch (Exception e) {
             return null;
         }

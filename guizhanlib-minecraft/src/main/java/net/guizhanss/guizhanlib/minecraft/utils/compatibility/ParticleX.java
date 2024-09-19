@@ -48,42 +48,42 @@ public class ParticleX {
     static {
         boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        POOF = isAtLeast1_20_5 ? Particle.POOF : getKey("EXPLOSION_NORMAL");
-        EXPLOSION = isAtLeast1_20_5 ? Particle.EXPLOSION : getKey("EXPLOSION_LARGE");
-        EXPLOSION_EMITTER = isAtLeast1_20_5 ? Particle.EXPLOSION_EMITTER : getKey("EXPLOSION_HUGE");
-        FIREWORK = isAtLeast1_20_5 ? Particle.FIREWORK : getKey("FIREWORKS_SPARK");
-        BUBBLE = isAtLeast1_20_5 ? Particle.BUBBLE : getKey("WATER_BUBBLE");
-        SPLASH = isAtLeast1_20_5 ? Particle.SPLASH : getKey("WATER_SPLASH");
-        FISHING = isAtLeast1_20_5 ? Particle.FISHING : getKey("WATER_WAKE");
-        UNDERWATER = isAtLeast1_20_5 ? Particle.UNDERWATER : getKey("SUSPENDED");
-        ENCHANTED_HIT = isAtLeast1_20_5 ? Particle.ENCHANTED_HIT : getKey("CRIT_MAGIC");
-        SMOKE = isAtLeast1_20_5 ? Particle.SMOKE : getKey("SMOKE_NORMAL");
-        LARGE_SMOKE = isAtLeast1_20_5 ? Particle.LARGE_SMOKE : getKey("SMOKE_LARGE");
-        EFFECT = isAtLeast1_20_5 ? Particle.EFFECT : getKey("SPELL");
-        INSTANT_EFFECT = isAtLeast1_20_5 ? Particle.INSTANT_EFFECT : getKey("SPELL_INSTANT");
-        ENTITY_EFFECT = isAtLeast1_20_5 ? Particle.ENTITY_EFFECT : getKey("SPELL_MOB");
-        WITCH = isAtLeast1_20_5 ? Particle.WITCH : getKey("SPELL_WITCH");
-        DRIPPING_WATER = isAtLeast1_20_5 ? Particle.DRIPPING_WATER : getKey("DRIP_WATER");
-        DRIPPING_LAVA = isAtLeast1_20_5 ? Particle.DRIPPING_LAVA : getKey("DRIP_LAVA");
-        ANGRY_VILLAGER = isAtLeast1_20_5 ? Particle.ANGRY_VILLAGER : getKey("VILLAGER_ANGRY");
-        HAPPY_VILLAGER = isAtLeast1_20_5 ? Particle.HAPPY_VILLAGER : getKey("VILLAGER_HAPPY");
-        MYCELIUM = isAtLeast1_20_5 ? Particle.MYCELIUM : getKey("TOWN_AURA");
-        ENCHANT = isAtLeast1_20_5 ? Particle.ENCHANT : getKey("ENCHANTMENT_TABLE");
-        DUST = isAtLeast1_20_5 ? Particle.DUST : getKey("REDSTONE");
-        ITEM_SNOWBALL = isAtLeast1_20_5 ? Particle.ITEM_SNOWBALL : getKey("SNOWBALL");
-        ITEM_SLIME = isAtLeast1_20_5 ? Particle.ITEM_SLIME : getKey("SLIME");
-        ITEM = isAtLeast1_20_5 ? Particle.ITEM : getKey("ITEM_CRACK");
-        BLOCK = isAtLeast1_20_5 ? Particle.BLOCK : getKey("BLOCK_DUST");
-        RAIN = isAtLeast1_20_5 ? Particle.RAIN : getKey("WATER_DROP");
-        ELDER_GUARDIAN = isAtLeast1_20_5 ? Particle.ELDER_GUARDIAN : getKey("MOB_APPEARANCE");
-        TOTEM_OF_UNDYING = isAtLeast1_20_5 ? Particle.TOTEM_OF_UNDYING : getKey("TOTEM");
+        POOF = isAtLeast1_20_5 ? Particle.POOF : getField("EXPLOSION_NORMAL");
+        EXPLOSION = isAtLeast1_20_5 ? Particle.EXPLOSION : getField("EXPLOSION_LARGE");
+        EXPLOSION_EMITTER = isAtLeast1_20_5 ? Particle.EXPLOSION_EMITTER : getField("EXPLOSION_HUGE");
+        FIREWORK = isAtLeast1_20_5 ? Particle.FIREWORK : getField("FIREWORKS_SPARK");
+        BUBBLE = isAtLeast1_20_5 ? Particle.BUBBLE : getField("WATER_BUBBLE");
+        SPLASH = isAtLeast1_20_5 ? Particle.SPLASH : getField("WATER_SPLASH");
+        FISHING = isAtLeast1_20_5 ? Particle.FISHING : getField("WATER_WAKE");
+        UNDERWATER = isAtLeast1_20_5 ? Particle.UNDERWATER : getField("SUSPENDED");
+        ENCHANTED_HIT = isAtLeast1_20_5 ? Particle.ENCHANTED_HIT : getField("CRIT_MAGIC");
+        SMOKE = isAtLeast1_20_5 ? Particle.SMOKE : getField("SMOKE_NORMAL");
+        LARGE_SMOKE = isAtLeast1_20_5 ? Particle.LARGE_SMOKE : getField("SMOKE_LARGE");
+        EFFECT = isAtLeast1_20_5 ? Particle.EFFECT : getField("SPELL");
+        INSTANT_EFFECT = isAtLeast1_20_5 ? Particle.INSTANT_EFFECT : getField("SPELL_INSTANT");
+        ENTITY_EFFECT = isAtLeast1_20_5 ? Particle.ENTITY_EFFECT : getField("SPELL_MOB");
+        WITCH = isAtLeast1_20_5 ? Particle.WITCH : getField("SPELL_WITCH");
+        DRIPPING_WATER = isAtLeast1_20_5 ? Particle.DRIPPING_WATER : getField("DRIP_WATER");
+        DRIPPING_LAVA = isAtLeast1_20_5 ? Particle.DRIPPING_LAVA : getField("DRIP_LAVA");
+        ANGRY_VILLAGER = isAtLeast1_20_5 ? Particle.ANGRY_VILLAGER : getField("VILLAGER_ANGRY");
+        HAPPY_VILLAGER = isAtLeast1_20_5 ? Particle.HAPPY_VILLAGER : getField("VILLAGER_HAPPY");
+        MYCELIUM = isAtLeast1_20_5 ? Particle.MYCELIUM : getField("TOWN_AURA");
+        ENCHANT = isAtLeast1_20_5 ? Particle.ENCHANT : getField("ENCHANTMENT_TABLE");
+        DUST = isAtLeast1_20_5 ? Particle.DUST : getField("REDSTONE");
+        ITEM_SNOWBALL = isAtLeast1_20_5 ? Particle.ITEM_SNOWBALL : getField("SNOWBALL");
+        ITEM_SLIME = isAtLeast1_20_5 ? Particle.ITEM_SLIME : getField("SLIME");
+        ITEM = isAtLeast1_20_5 ? Particle.ITEM : getField("ITEM_CRACK");
+        BLOCK = isAtLeast1_20_5 ? Particle.BLOCK : getField("BLOCK_DUST");
+        RAIN = isAtLeast1_20_5 ? Particle.RAIN : getField("WATER_DROP");
+        ELDER_GUARDIAN = isAtLeast1_20_5 ? Particle.ELDER_GUARDIAN : getField("MOB_APPEARANCE");
+        TOTEM_OF_UNDYING = isAtLeast1_20_5 ? Particle.TOTEM_OF_UNDYING : getField("TOTEM");
 
         GUST_EMITTER_LARGE = MinecraftVersionUtil.isBefore(20) ? null :
-            isAtLeast1_20_5 ? Particle.GUST_EMITTER_LARGE : getKey("GUST_EMITTER");
+            isAtLeast1_20_5 ? Particle.GUST_EMITTER_LARGE : getField("GUST_EMITTER");
     }
 
     @Nullable
-    private static Particle getKey(@Nonnull String key) {
+    private static Particle getField(@Nonnull String key) {
         try {
             Field field = Particle.class.getDeclaredField(key);
             return (Particle) field.get(null);

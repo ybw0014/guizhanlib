@@ -26,18 +26,18 @@ public class PatternTypeX {
     static {
         boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        DIAGONAL_UP_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_RIGHT : getKey("DIAGONAL_RIGHT");
-        SMALL_STRIPES = isAtLeast1_20_5 ? PatternType.SMALL_STRIPES : getKey("STRIPE_SMALL");
-        DIAGONAL_UP_LEFT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_LEFT : getKey("DIAGONAL_LEFT_MIRROR");
-        DIAGONAL_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_RIGHT : getKey("DIAGONAL_RIGHT_MIRROR");
-        CIRCLE = isAtLeast1_20_5 ? PatternType.CIRCLE : getKey("CIRCLE_MIDDLE");
-        RHOMBUS = isAtLeast1_20_5 ? PatternType.RHOMBUS : getKey("RHOMBUS_MIDDLE");
-        HALF_VERTICAL_RIGHT = isAtLeast1_20_5 ? PatternType.HALF_VERTICAL_RIGHT : getKey("HALF_VERTICAL_MIRROR");
-        HALF_HORIZONTAL_BOTTOM = isAtLeast1_20_5 ? PatternType.HALF_HORIZONTAL_BOTTOM : getKey("HALF_HORIZONTAL_MIRROR");
+        DIAGONAL_UP_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_RIGHT : getField("DIAGONAL_RIGHT");
+        SMALL_STRIPES = isAtLeast1_20_5 ? PatternType.SMALL_STRIPES : getField("STRIPE_SMALL");
+        DIAGONAL_UP_LEFT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_LEFT : getField("DIAGONAL_LEFT_MIRROR");
+        DIAGONAL_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_RIGHT : getField("DIAGONAL_RIGHT_MIRROR");
+        CIRCLE = isAtLeast1_20_5 ? PatternType.CIRCLE : getField("CIRCLE_MIDDLE");
+        RHOMBUS = isAtLeast1_20_5 ? PatternType.RHOMBUS : getField("RHOMBUS_MIDDLE");
+        HALF_VERTICAL_RIGHT = isAtLeast1_20_5 ? PatternType.HALF_VERTICAL_RIGHT : getField("HALF_VERTICAL_MIRROR");
+        HALF_HORIZONTAL_BOTTOM = isAtLeast1_20_5 ? PatternType.HALF_HORIZONTAL_BOTTOM : getField("HALF_HORIZONTAL_MIRROR");
     }
 
     @Nullable
-    private static PatternType getKey(@Nonnull String key) {
+    private static PatternType getField(@Nonnull String key) {
         try {
             Field field = PatternType.class.getDeclaredField(key);
             return (PatternType) field.get(null);
