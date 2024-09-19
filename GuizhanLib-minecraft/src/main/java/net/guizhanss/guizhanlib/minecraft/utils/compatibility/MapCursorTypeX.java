@@ -30,22 +30,6 @@ public class MapCursorTypeX {
     public static final MapCursor.Type VILLAGE_SNOWY;
     public static final MapCursor.Type VILLAGE_TAIGA;
 
-    // .change("RED_MARKER", "TARGET_POINT")
-    //            .forAllVersions()
-    //            .change("WHITE_POINTER", "PLAYER")
-    //            .change("GREEN_POINTER", "FRAME")
-    //            .change("RED_POINTER", "RED_MARKER")
-    //            .change("BLUE_POINTER", "BLUE_MARKER")
-    //            .change("WHITE_CROSS", "TARGET_X")
-    //            .change("WHITE_CIRCLE", "PLAYER_OFF_MAP")
-    //            .change("SMALL_WHITE_CIRCLE", "PLAYER_OFF_LIMITS")
-    //            .change("TEMPLE", "MONUMENT")
-    //            .change("DESERT_VILLAGE", "VILLAGE_DESERT")
-    //            .change("PLAINS_VILLAGE", "VILLAGE_PLAINS")
-    //            .change("SAVANNA_VILLAGE", "VILLAGE_SAVANNA")
-    //            .change("SNOWY_VILLAGE", "VILLAGE_SNOWY")
-    //            .change("TAIGA_VILLAGE", "VILLAGE_TAIGA")
-
     static {
         boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
 
