@@ -16,8 +16,8 @@
 - 移除简体中文名称相关类（在 GuizhanLibPlugin 中添加）
 - `ItemUtil` 添加 `isValid`、`removeDamage`、`canStack`
 - 添加 `MinecraftVersionUtil` 用于判断 Minecraft 版本
-- 添加 `compatibility`
- 
+- 添加 `compatibility` 包，用于向后兼容
+
 ## 1.8.0
 
 - 添加 `MinecraftVerisonUtil`
