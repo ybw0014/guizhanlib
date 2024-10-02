@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     signing
     id("io.freefair.lombok") version "8.7.1"
-    id("com.gradleup.shadow") version "8.3.0"
+    id("com.gradleup.shadow") version "8.3.3"
     id("org.sonarqube") version "4.4.1.3373"
 }
 
