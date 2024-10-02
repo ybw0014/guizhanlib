@@ -4,9 +4,10 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("io.freefair.lombok") version "8.7.1"
-    id("com.gradleup.shadow") version "8.3.0"
+    id("io.freefair.lombok") version "8.10"
+    id("com.gradleup.shadow") version "8.3.3"
     id("org.sonarqube") version "4.4.1.3373"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "net.guizhanss"
@@ -104,28 +105,32 @@ subprojects {
             }
         }
 
-        repositories {
-            maven {
-                name = "CentralRelease"
-                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-                credentials {
-                    username = System.getenv("OSSRH_USERNAME") ?: ""
-                    password = System.getenv("OSSRH_PASSWORD") ?: ""
-                }
-            }
-            maven {
-                name = "CentralSnapshot"
-                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-                credentials {
-                    username = System.getenv("OSSRH_USERNAME") ?: ""
-                    password = System.getenv("OSSRH_PASSWORD") ?: ""
-                }
-            }
-        }
+//        repositories {
+//            maven {
+//                val releaseRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+//                val snapshotRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+//                val isSnapshot = version.toString().endsWith("SNAPSHOT")
+//
+//                name = "central"
+//                url = uri(if (isSnapshot) snapshotRepoUrl else releaseRepoUrl)
+//                credentials {
+//                    username = System.getenv("OSSRH_USERNAME") ?: ""
+//                    password = System.getenv("OSSRH_PASSWORD") ?: ""
+//                }
+//            }
+//        }
     }
 
     signing {
-        useGpgCmd()
-        sign(configurations.runtimeElements.get())
+        sign(publishing.publications["maven"])
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
     }
 }
