@@ -6,7 +6,7 @@ plugins {
     signing
     id("io.freefair.lombok") version "8.10"
     id("com.gradleup.shadow") version "8.3.3"
-    id("org.sonarqube") version "4.4.1.3373"
+    id("org.sonarqube") version "5.1.0.4882"
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
