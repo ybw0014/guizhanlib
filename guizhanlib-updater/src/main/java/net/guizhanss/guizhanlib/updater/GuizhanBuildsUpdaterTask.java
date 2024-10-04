@@ -2,6 +2,7 @@ package net.guizhanss.guizhanlib.updater;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,7 +21,7 @@ import java.util.logging.Level;
  *
  * @author ybw0014
  */
-class GuizhanBuildsUpdaterTask implements Runnable {
+class GuizhanBuildsUpdaterTask extends BukkitRunnable {
 
     private final GuizhanBuildsUpdater updater;
     private final HttpClient httpClient;
@@ -41,7 +42,7 @@ class GuizhanBuildsUpdaterTask implements Runnable {
     public void run() {
         getProjectInfo();
 
-        if (hasUpdate()) {
+        if (projectInfo != null && hasUpdate()) {
             if (updater.getUpdaterConfig().checkOnly()) {
                 sendUpdateNotification();
             } else {
@@ -127,7 +128,7 @@ class GuizhanBuildsUpdaterTask implements Runnable {
      */
     private void update() {
         updater.log(Level.INFO, "%s needs to be updated!", updater.getPlugin().getName());
-        updater.log(Level.INFO, "Downloading %s - Build #%d", updater.getPlugin().getName(), buildInfo.get("id").getAsString());
+        updater.log(Level.INFO, "Downloading %s - Build %d", updater.getPlugin().getName(), buildInfo.get("id").getAsInt());
 
         try {
             URI baseUrl = new URI(updater.getUpdaterConfig().baseUrl());
@@ -163,7 +164,7 @@ class GuizhanBuildsUpdaterTask implements Runnable {
 
         updater.log(Level.INFO, " ");
         updater.log(Level.INFO, "========== Guizhan Auto Update ==========");
-        updater.log(Level.INFO, "Successfully downloaded %s - Build #%d", updater.getPlugin().getName(), buildInfo.get("id").getAsString());
+        updater.log(Level.INFO, "Successfully downloaded %s - Build %d", updater.getPlugin().getName(), buildInfo.get("id").getAsInt());
         updater.log(Level.INFO, "Restart the server to install the update");
         updater.log(Level.INFO, " ");
     }

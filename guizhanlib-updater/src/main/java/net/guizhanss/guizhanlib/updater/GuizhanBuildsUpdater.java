@@ -59,7 +59,8 @@ public final class GuizhanBuildsUpdater {
         Preconditions.checkNotNull(branch);
         Preconditions.checkNotNull(updaterConfig);
 
-        new GuizhanBuildsUpdaterTask(new GuizhanBuildsUpdater(plugin, file, owner, repository, branch, updaterConfig)).run();
+        var task = new GuizhanBuildsUpdaterTask(new GuizhanBuildsUpdater(plugin, file, owner, repository, branch, updaterConfig));
+        task.runTaskLater(plugin, 1);
     }
 
     private GuizhanBuildsUpdater(Plugin plugin, File file, String owner, String repository, String branch, UpdaterConfig updaterConfig) {
