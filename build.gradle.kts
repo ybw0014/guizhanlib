@@ -53,7 +53,7 @@ subprojects {
     }
 
     tasks.withType<ShadowJar> {
-        archiveAppendix = ""
+        archiveClassifier = ""
     }
 
     sonar {
@@ -104,21 +104,6 @@ subprojects {
                 }
             }
         }
-
-//        repositories {
-//            maven {
-//                val releaseRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-//                val snapshotRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-//                val isSnapshot = version.toString().endsWith("SNAPSHOT")
-//
-//                name = "central"
-//                url = uri(if (isSnapshot) snapshotRepoUrl else releaseRepoUrl)
-//                credentials {
-//                    username = System.getenv("OSSRH_USERNAME") ?: ""
-//                    password = System.getenv("OSSRH_PASSWORD") ?: ""
-//                }
-//            }
-//        }
     }
 
     signing {

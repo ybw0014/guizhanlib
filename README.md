@@ -2,18 +2,20 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/GuizhanLib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
 
-A library that helps developing Slimefun addons. 
-一个帮助粘液科技附属开发。
+A Java library that helps developing Slimefun addons.  
+一个帮助粘液科技附属开发的 Java 库。
 
 ## Usage | 如何使用
 
-Add `GuizhanLib-all` (which includes all sub modules) or respective modules as dependency (Maven for example):  
-将`GuizhanLib-all`（包含所有包）或者指定的包添加为依赖项（以 Maven 为例）：
+### Maven
+
+Add `guizhanlib-all` (which includes all sub modules) or respective modules as dependency:  
+将`guizhanlib-all`（包含所有包）或者指定的包添加为依赖项：
 
 ```
     <dependency>
         <groupId>net.guizhanss</groupId>
-        <artifactId>GuizhanLib-all</artifactId>
+        <artifactId>guizhanlib-all</artifactId>
         <version>REPLACE WITH VERSION</version>
         <scope>compile</scope>
     </dependency>
@@ -66,7 +68,5 @@ You will need to relocate the library classes if you use it for addon developmen
 ```
 
 ## Changelog | 更新日志
-
-The changelog is only available in Chinese.
 
 [Changelog](/CHANGELOG.md)

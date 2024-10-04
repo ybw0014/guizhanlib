@@ -1,3 +1,3 @@
 dependencies {
-    api(project(":guizhanlib-common"))
+    api(project(":guizhanlib-common", configuration = "shadow"))
 }

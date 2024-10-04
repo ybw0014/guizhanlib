@@ -1,7 +1,7 @@
 dependencies {
-    api(project(":guizhanlib-common"))
-    api(project(":guizhanlib-localization"))
-    api(project(":guizhanlib-minecraft"))
-    api(project(":guizhanlib-slimefun"))
-    api(project(":guizhanlib-updater"))
+    api(project(":guizhanlib-common", configuration = "shadow"))
+    api(project(":guizhanlib-localization", configuration = "shadow"))
+    api(project(":guizhanlib-minecraft", configuration = "shadow"))
+    api(project(":guizhanlib-slimefun", configuration = "shadow"))
+    api(project(":guizhanlib-updater", configuration = "shadow"))
 }

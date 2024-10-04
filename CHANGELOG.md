@@ -2,7 +2,8 @@
 
 ## 2.1.0
 
-- 重构自动更新，使用 API 获取信息
+- Refactored auto updater. It gets metadata from API now.
+- 重构自动更新，使用 API 获取信息。
 
 ## 2.0
 
