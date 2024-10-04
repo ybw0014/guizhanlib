@@ -1,7 +1,13 @@
 # Dev notes
 
-## Publish
+## Snapshot
 
 ```sh
-./gradlew publishToSonatype closeSonatypeStagingRepository
+./gradlew publishToSonaType
+```
+
+## Release
+
+```sh
+./gradlew publishToSonatype closeAndReleaseStagingRepository
 ```
