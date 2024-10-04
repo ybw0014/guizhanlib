@@ -3,7 +3,10 @@
 ## 2.1.0
 
 - Refactored auto updater. It gets metadata from API now.
+- Fixed the compatibility util `PotionEffectTypeX` on Minecraft versions before 1.20.3.
+
 - 重构自动更新，使用 API 获取信息。
+- 修复 `PotionEffectTypeX` 对 Minecraft 1.20.3 之前版本的兼容。
 
 ## 2.0
 
