@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * This class contains config options for {@link AbstractGuizhanBuildsUpdater},
+ * This class contains config options for {@link GuizhanBuildsUpdater},
  * which is passed as an argument.
  *
  * @author ybw0014
- * @see AbstractGuizhanBuildsUpdater
+ * @see GuizhanBuildsUpdater
  */
 @Data
 @NoArgsConstructor
@@ -26,10 +26,12 @@ public final class UpdaterConfig {
      * Limits the updater to check update only,
      * no file download.
      */
+    @Builder.Default
     private boolean checkOnly = false;
 
     /**
-     * Whether the updater checks the version format
+     * The base URL of Guizhan Builds.
      */
-    private boolean checkVersionFormat = false;
+    @Builder.Default
+    private String baseUrl = "https://builds.guizhanss.com/";
 }
