@@ -6,6 +6,7 @@ import org.bukkit.Material;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("unused")
 @UtilityClass
 public class MaterialX {
 

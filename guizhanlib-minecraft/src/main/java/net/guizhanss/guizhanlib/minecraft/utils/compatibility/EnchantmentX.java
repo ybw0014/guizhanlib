@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 /**
  * This class holds {@link Enchantment} that are renamed in 1.20.5.
  */
+@SuppressWarnings("unused")
 @UtilityClass
 public class EnchantmentX {
 

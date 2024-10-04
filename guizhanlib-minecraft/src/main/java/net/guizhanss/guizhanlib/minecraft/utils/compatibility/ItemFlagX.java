@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 /**
  * This class holds {@link ItemFlag} that are renamed in 1.20.5.
  */
+@SuppressWarnings("unused")
 @UtilityClass
 public class ItemFlagX {
 

@@ -8,6 +8,10 @@ import org.bukkit.entity.EntityType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * This class holds {@link EntityType} that are renamed in 1.20.5.
+ */
+@SuppressWarnings("unused")
 @UtilityClass
 public class EntityTypeX {
 
