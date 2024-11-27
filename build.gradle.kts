@@ -15,9 +15,10 @@ group = "net.guizhanss"
 allprojects {
     repositories {
         mavenCentral()
-        maven(url = "https://jitpack.io/")
-        maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-        maven(url = "https://papermc.io/repo/repository/maven-public")
+        maven("https://jitpack.io/")
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+        maven("https://papermc.io/repo/repository/maven-public")
+        maven("https://repo.alessiodp.com/releases/")
     }
 }
 
