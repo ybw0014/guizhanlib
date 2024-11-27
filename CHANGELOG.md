@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+
+- Added `guizhanlib-libraris` module, which contains a custom LibraryManager that supports loading/downloading libraries from the server root directory.
+
+- 添加 `guizhanlib-libraris` 模块，其中包含一个自定义的 LibraryManager，支持从服务器根目录加载/下载库。
+
 ## 2.1.0
 
 - Refactored auto updater. It gets metadata from API now.
