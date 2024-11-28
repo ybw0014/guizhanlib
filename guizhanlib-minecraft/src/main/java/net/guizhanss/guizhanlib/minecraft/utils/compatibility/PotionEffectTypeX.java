@@ -29,17 +29,17 @@ public class PotionEffectTypeX {
 
     static {
         // EFFECT registry was added in 1.20.3, use legacy field access before that
-        boolean isAtLeast1_20_3 = MinecraftVersionUtil.isAtLeast(20, 3);
+        boolean isPost203 = MinecraftVersionUtil.isAtLeast(20, 3);
 
-        SLOWNESS = isAtLeast1_20_3 ? getByKey("slowness") : getField("SLOW");
-        HASTE = isAtLeast1_20_3 ? getByKey("haste") : getField("FAST_DIGGING");
-        MINING_FATIGUE = isAtLeast1_20_3 ? getByKey("mining_fatigue") : getField("SLOW_DIGGING");
-        STRENGTH = isAtLeast1_20_3 ? getByKey("strength") : getField("INCREASE_DAMAGE");
-        INSTANT_HEALTH = isAtLeast1_20_3 ? getByKey("instant_health") : getField("HEAL");
-        INSTANT_DAMAGE = isAtLeast1_20_3 ? getByKey("instant_damage") : getField("HARM");
-        JUMP_BOOST = isAtLeast1_20_3 ? getByKey("jump_boost") : getField("JUMP");
-        NAUSEA = isAtLeast1_20_3 ? getByKey("nausea") : getField("CONFUSION");
-        RESISTANCE = isAtLeast1_20_3 ? getByKey("resistance") : getField("DAMAGE_RESISTANCE");
+        SLOWNESS = isPost203 ? getByKey("slowness") : getField("SLOW");
+        HASTE = isPost203 ? getByKey("haste") : getField("FAST_DIGGING");
+        MINING_FATIGUE = isPost203 ? getByKey("mining_fatigue") : getField("SLOW_DIGGING");
+        STRENGTH = isPost203 ? getByKey("strength") : getField("INCREASE_DAMAGE");
+        INSTANT_HEALTH = isPost203 ? getByKey("instant_health") : getField("HEAL");
+        INSTANT_DAMAGE = isPost203 ? getByKey("instant_damage") : getField("HARM");
+        JUMP_BOOST = isPost203 ? getByKey("jump_boost") : getField("JUMP");
+        NAUSEA = isPost203 ? getByKey("nausea") : getField("CONFUSION");
+        RESISTANCE = isPost203 ? getByKey("resistance") : getField("DAMAGE_RESISTANCE");
     }
 
     @Nullable

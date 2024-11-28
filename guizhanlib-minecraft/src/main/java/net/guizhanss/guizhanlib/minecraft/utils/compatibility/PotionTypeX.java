@@ -22,13 +22,13 @@ public class PotionTypeX {
     public static final PotionType REGENERATION;
 
     static {
-        boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        LEAPING = isAtLeast1_20_5 ? PotionType.LEAPING : getField("JUMP");
-        SWIFTNESS = isAtLeast1_20_5 ? PotionType.SWIFTNESS : getField("SPEED");
-        HEALING = isAtLeast1_20_5 ? PotionType.HEALING : getField("INSTANT_HEAL");
-        HARMING = isAtLeast1_20_5 ? PotionType.HARMING : getField("INSTANT_DAMAGE");
-        REGENERATION = isAtLeast1_20_5 ? PotionType.REGENERATION : getField("REGEN");
+        LEAPING = isPost205 ? PotionType.LEAPING : getField("JUMP");
+        SWIFTNESS = isPost205 ? PotionType.SWIFTNESS : getField("SPEED");
+        HEALING = isPost205 ? PotionType.HEALING : getField("INSTANT_HEAL");
+        HARMING = isPost205 ? PotionType.HARMING : getField("INSTANT_DAMAGE");
+        REGENERATION = isPost205 ? PotionType.REGENERATION : getField("REGEN");
     }
 
     @Nullable

@@ -18,9 +18,9 @@ public class AttributeX {
     public static final Attribute GENERIC_JUMP_STRENGTH;
 
     static {
-        boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        GENERIC_JUMP_STRENGTH = isAtLeast1_20_5 ? Attribute.GENERIC_JUMP_STRENGTH : getField("HORSE_JUMP_STRENGTH");
+        GENERIC_JUMP_STRENGTH = isPost205 ? Attribute.GENERIC_JUMP_STRENGTH : getField("HORSE_JUMP_STRENGTH");
     }
 
     @Nullable

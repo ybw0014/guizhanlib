@@ -25,16 +25,16 @@ public class PatternTypeX {
     public static final PatternType HALF_HORIZONTAL_BOTTOM;
 
     static {
-        boolean isAtLeast1_20_5 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
 
-        DIAGONAL_UP_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_RIGHT : getField("DIAGONAL_RIGHT");
-        SMALL_STRIPES = isAtLeast1_20_5 ? PatternType.SMALL_STRIPES : getField("STRIPE_SMALL");
-        DIAGONAL_UP_LEFT = isAtLeast1_20_5 ? PatternType.DIAGONAL_UP_LEFT : getField("DIAGONAL_LEFT_MIRROR");
-        DIAGONAL_RIGHT = isAtLeast1_20_5 ? PatternType.DIAGONAL_RIGHT : getField("DIAGONAL_RIGHT_MIRROR");
-        CIRCLE = isAtLeast1_20_5 ? PatternType.CIRCLE : getField("CIRCLE_MIDDLE");
-        RHOMBUS = isAtLeast1_20_5 ? PatternType.RHOMBUS : getField("RHOMBUS_MIDDLE");
-        HALF_VERTICAL_RIGHT = isAtLeast1_20_5 ? PatternType.HALF_VERTICAL_RIGHT : getField("HALF_VERTICAL_MIRROR");
-        HALF_HORIZONTAL_BOTTOM = isAtLeast1_20_5 ? PatternType.HALF_HORIZONTAL_BOTTOM : getField("HALF_HORIZONTAL_MIRROR");
+        DIAGONAL_UP_RIGHT = isPost205 ? PatternType.DIAGONAL_UP_RIGHT : getField("DIAGONAL_RIGHT");
+        SMALL_STRIPES = isPost205 ? PatternType.SMALL_STRIPES : getField("STRIPE_SMALL");
+        DIAGONAL_UP_LEFT = isPost205 ? PatternType.DIAGONAL_UP_LEFT : getField("DIAGONAL_LEFT_MIRROR");
+        DIAGONAL_RIGHT = isPost205 ? PatternType.DIAGONAL_RIGHT : getField("DIAGONAL_RIGHT_MIRROR");
+        CIRCLE = isPost205 ? PatternType.CIRCLE : getField("CIRCLE_MIDDLE");
+        RHOMBUS = isPost205 ? PatternType.RHOMBUS : getField("RHOMBUS_MIDDLE");
+        HALF_VERTICAL_RIGHT = isPost205 ? PatternType.HALF_VERTICAL_RIGHT : getField("HALF_VERTICAL_MIRROR");
+        HALF_HORIZONTAL_BOTTOM = isPost205 ? PatternType.HALF_HORIZONTAL_BOTTOM : getField("HALF_HORIZONTAL_MIRROR");
     }
 
     @Nullable
