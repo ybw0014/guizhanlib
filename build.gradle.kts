@@ -17,7 +17,7 @@ allprojects {
         mavenCentral()
         maven("https://jitpack.io/")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-        maven("https://papermc.io/repo/repository/maven-public")
+        maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.alessiodp.com/releases/")
     }
 }
@@ -43,8 +43,9 @@ subprojects {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        disableAutoTargetJvm()
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
         withJavadocJar()
         withSourcesJar()
     }
