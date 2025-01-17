@@ -9,8 +9,8 @@ A Java library that helps developing Slimefun addons.
 
 ### Maven
 
-Add `guizhanlib-all` (which includes all sub modules) or respective modules as dependency:  
-将`guizhanlib-all`（包含所有包）或者指定的包添加为依赖项：
+Add `guizhanlib-all` (which includes all sub modules) or **the modules you need** as dependency:  
+将`guizhanlib-all`（包含所有包）或者你需要使用的包添加为依赖项：
 
 ```
     <dependency>
