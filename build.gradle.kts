@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     signing
     id("io.freefair.lombok") version "8.12.1"
-    id("com.gradleup.shadow") version "8.3.5"
+    id("com.gradleup.shadow") version "8.3.6"
     id("org.sonarqube") version "6.0.1.5171"
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
