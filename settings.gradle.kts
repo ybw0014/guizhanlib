@@ -6,6 +6,7 @@ include(
     "guizhanlib-libraries",
     "guizhanlib-localization",
     "guizhanlib-slimefun",
+    "guizhanlib-slimefun-cn",
     "guizhanlib-updater",
     "guizhanlib-all",
 )

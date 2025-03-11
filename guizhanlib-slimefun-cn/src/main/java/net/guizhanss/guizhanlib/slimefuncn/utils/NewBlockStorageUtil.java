@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.slimefun.utils;
+package net.guizhanss.guizhanlib.slimefuncn.utils;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * BlockStorage utilities for Simplified Chinese fork of Slimefun4.
+ * BlockStorage utilities for SlimefunGuguProject's Slimefun fork.
  *
  * @author ybw0014
  */

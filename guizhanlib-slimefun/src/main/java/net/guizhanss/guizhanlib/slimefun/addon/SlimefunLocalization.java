@@ -3,10 +3,10 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import lombok.Getter;
 import lombok.Setter;
 import net.guizhanss.guizhanlib.minecraft.localization.MinecraftLocalization;
-import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -14,14 +14,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Localization service for Slimefun addons.
+ * <p>
+ * The following fields can be changed with setter methods: <br>
+ * - idPrefix: The prefix of id for items, will be prepended to the id of item when constructing {@link SlimefunItemStack}. <br>
+ * - itemGroupKey: The key of ItemGroups in language file, default is "categories". <br>
  *
  * @author ybw0014
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "unused"})
 public class SlimefunLocalization extends MinecraftLocalization {
 
     private static final String KEY_NAME = ".name";
@@ -99,19 +105,9 @@ public class SlimefunLocalization extends MinecraftLocalization {
     @Nonnull
     @ParametersAreNonnullByDefault
     public SlimefunItemStack getItemBy(String key, String id, Material material, String... extraLore) {
-        Preconditions.checkArgument(key != null, MSG_KEY_NULL);
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
         Preconditions.checkArgument(material != null, MSG_MATERIAL_NULL);
 
-        return ItemUtil.appendLore(
-            new SlimefunItemStack(
-                (idPrefix + id).toUpperCase(Locale.ROOT),
-                material,
-                getString(key + "." + id + KEY_NAME),
-                getStringArray(key + "." + id + KEY_LORE)
-            ),
-            extraLore
-        );
+        return getItemBy(key, id, new ItemStack(material), extraLore);
     }
 
     /**
@@ -126,19 +122,7 @@ public class SlimefunLocalization extends MinecraftLocalization {
     @Nonnull
     @ParametersAreNonnullByDefault
     public SlimefunItemStack getItemBy(String key, String id, String texture, String... extraLore) {
-        Preconditions.checkArgument(key != null, MSG_KEY_NULL);
-        Preconditions.checkArgument(id != null, MSG_ID_NULL);
-        Preconditions.checkArgument(texture != null, MSG_TEXTURE_NULL);
-
-        return ItemUtil.appendLore(
-            new SlimefunItemStack(
-                (idPrefix + id).toUpperCase(Locale.ROOT),
-                texture,
-                getString(key + "." + id + KEY_NAME),
-                getStringArray(key + "." + id + KEY_LORE)
-            ),
-            extraLore
-        );
+        return getItemBy(key, id, SlimefunUtils.getCustomHead(texture), extraLore);
     }
 
     /**
@@ -157,14 +141,14 @@ public class SlimefunLocalization extends MinecraftLocalization {
         Preconditions.checkArgument(id != null, MSG_ID_NULL);
         Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
 
-        return ItemUtil.appendLore(
-            new SlimefunItemStack(
-                (idPrefix + id).toUpperCase(Locale.ROOT),
-                itemStack,
-                getString(key + "." + id + KEY_NAME),
-                getStringArray(key + "." + id + KEY_LORE)
-            ),
-            extraLore
+        List<String> lore = getStringList(key + "." + id + KEY_LORE);
+        Collections.addAll(lore, extraLore);
+
+        return new SlimefunItemStack(
+            (idPrefix + id).toUpperCase(Locale.ROOT),
+            itemStack,
+            getString(key + "." + id + KEY_NAME),
+            lore.toArray(String[]::new)
         );
     }
 
