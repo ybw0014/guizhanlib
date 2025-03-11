@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0
+
+- Moved classes for SlimefunGuguProject's Slimefun fork to `guizhanlib-slimefun-cn` module.
+- Added support for Slimefun experimental builds in SlimefunLocalization.
+
+- 将 Slimefun 汉化版相关的类移至 `guizhanlib-slimefun-cn` 模块。
+- 在 SlimefunLocalization 中添加对 Slimefun 实验版的支持。
+
 ## 2.2.0
 
 - Added `guizhanlib-libraris` module, which contains a custom LibraryManager that supports loading/downloading libraries from the server root directory.
