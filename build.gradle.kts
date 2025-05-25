@@ -37,7 +37,7 @@ subprojects {
         }
 
         api("com.google.code.findbugs:jsr305:3.0.2")
-        compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
+        compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
         testImplementation("org.junit.jupiter:junit-jupiter-engine:5.12.1")
     }
@@ -69,7 +69,7 @@ subprojects {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                project.shadow.component(this)
+                from(components["shadow"])
 
                 artifact(tasks.named("javadocJar").get())
                 artifact(tasks.named("sourcesJar").get())
@@ -116,8 +116,8 @@ subprojects {
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
         }
     }
 }
