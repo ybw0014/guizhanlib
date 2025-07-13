@@ -39,6 +39,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
     private static final Pattern GITHUB_PATTERN = Pattern.compile("[\\w-]+");
     private static final String NULL_LOG_LEVEL = "Log level cannot be null";
     private static final String NULL_LOG_MESSAGE = "Log message cannot be null";
+    private static final int MOD = 1000000007; // 10^9 + 7
 
     private static AbstractAddon instance;
 
@@ -324,7 +325,7 @@ public abstract class AbstractAddon extends JavaPlugin implements SlimefunAddon 
 
         // Create total tick count
         if (environment == Environment.LIVE) {
-            scheduler.repeat(Slimefun.getTickerTask().getTickRate(), () -> slimefunTickCount++);
+            scheduler.repeat(Slimefun.getTickerTask().getTickRate(), () -> slimefunTickCount = (slimefunTickCount + 1) % MOD);
         }
 
         // Call enable()
