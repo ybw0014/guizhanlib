@@ -43,11 +43,18 @@ public abstract class TickingMenuBlock extends MenuBlock {
                 }
             }
 
+            @Override
+            public void uniqueTick() {
+                TickingMenuBlock.this.uniqueTick();
+            }
         });
     }
 
     @ParametersAreNonnullByDefault
     protected abstract void tick(Block b, BlockMenu menu);
+
+    protected void uniqueTick() {
+    }
 
     protected boolean isSync() {
         return false;
