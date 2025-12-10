@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -23,6 +24,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public abstract class TickingMenuBlock extends MenuBlock {
+
+    /**
+     * The elapsed Slimefun ticks since the instance was created.
+     */
+    @Getter
+    private int tickCount = 0;
 
     @ParametersAreNonnullByDefault
     protected TickingMenuBlock(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
@@ -45,6 +52,7 @@ public abstract class TickingMenuBlock extends MenuBlock {
 
             @Override
             public void uniqueTick() {
+                TickingMenuBlock.this.tickCount++;
                 TickingMenuBlock.this.uniqueTick();
             }
         });
