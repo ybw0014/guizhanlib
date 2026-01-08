@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.0
+
+- Added `AttributeX` for multi-version compatibility.
+- Added `TickingMenuBlock` for Slimefun addon development.
+
+- 添加 `AttributeX` 用于多版本兼容。
+- 添加 `TickingMenuBlock` 用于 Slimefun 插件开发。
+
 ## 2.3.0
 
 - Moved classes for SlimefunGuguProject's Slimefun fork to `guizhanlib-slimefun-cn` module.
