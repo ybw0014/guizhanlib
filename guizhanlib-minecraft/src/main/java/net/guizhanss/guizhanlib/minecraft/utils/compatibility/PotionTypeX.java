@@ -22,7 +22,7 @@ public class PotionTypeX {
     public static final PotionType REGENERATION;
 
     static {
-        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(1, 20, 5);
 
         LEAPING = isPost205 ? PotionType.LEAPING : getField("JUMP");
         SWIFTNESS = isPost205 ? PotionType.SWIFTNESS : getField("SPEED");

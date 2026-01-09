@@ -14,8 +14,8 @@ public class MaterialX {
     public static final Material TURTLE_SCUTE;
 
     static {
-        SHORT_GRASS = MinecraftVersionUtil.isAtLeast(20, 3) ? getByName("SHORT_GRASS") : getByName("GRASS");
-        TURTLE_SCUTE = MinecraftVersionUtil.isAtLeast(20, 5) ? getByName("TURTLE_SCUTE") : getByName("SCUTE");
+        SHORT_GRASS = MinecraftVersionUtil.isAtLeast(1, 20, 3) ? getByName("SHORT_GRASS") : getByName("GRASS");
+        TURTLE_SCUTE = MinecraftVersionUtil.isAtLeast(1, 20, 5) ? getByName("TURTLE_SCUTE") : getByName("SCUTE");
     }
 
     @Nullable

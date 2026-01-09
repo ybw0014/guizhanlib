@@ -47,7 +47,7 @@ public class ParticleX {
     public static final Particle GUST_EMITTER_LARGE;
 
     static {
-        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(1, 20, 5);
 
         POOF = isPost205 ? Particle.POOF : getField("EXPLOSION_NORMAL");
         EXPLOSION = isPost205 ? Particle.EXPLOSION : getField("EXPLOSION_LARGE");
@@ -79,7 +79,7 @@ public class ParticleX {
         ELDER_GUARDIAN = isPost205 ? Particle.ELDER_GUARDIAN : getField("MOB_APPEARANCE");
         TOTEM_OF_UNDYING = isPost205 ? Particle.TOTEM_OF_UNDYING : getField("TOTEM");
 
-        if (MinecraftVersionUtil.isBefore(20)) {
+        if (MinecraftVersionUtil.isBefore(1, 20, 0)) {
             GUST_EMITTER_LARGE = null;
         } else {
             GUST_EMITTER_LARGE = isPost205 ? Particle.GUST_EMITTER_LARGE : getField("GUST_EMITTER");

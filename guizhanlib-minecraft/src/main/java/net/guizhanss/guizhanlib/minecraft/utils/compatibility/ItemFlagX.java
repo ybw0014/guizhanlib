@@ -18,7 +18,7 @@ public class ItemFlagX {
     public static final ItemFlag HIDE_ADDITIONAL_TOOLTIP;
 
     static {
-        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(1, 20, 5);
 
         HIDE_ADDITIONAL_TOOLTIP = isPost205 ? ItemFlag.HIDE_ADDITIONAL_TOOLTIP : getField("HIDE_POTION_EFFECTS");
     }

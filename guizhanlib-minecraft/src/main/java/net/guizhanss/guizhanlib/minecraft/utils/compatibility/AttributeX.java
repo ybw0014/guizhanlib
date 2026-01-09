@@ -50,8 +50,8 @@ public class AttributeX {
     public static final Attribute SPAWN_REINFORCEMENTS;
 
     static {
-        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
-        boolean isPost213 = MinecraftVersionUtil.isAtLeast(21, 3);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(1, 20, 5);
+        boolean isPost213 = MinecraftVersionUtil.isAtLeast(1, 21, 3);
 
         // 1.20.5 rename
         GENERIC_JUMP_STRENGTH = isPost213 ? Attribute.JUMP_STRENGTH : isPost205 ? getField("GENERIC_JUMP_STRENGTH") : getField("HORSE_JUMP_STRENGTH");

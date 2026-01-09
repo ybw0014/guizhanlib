@@ -31,7 +31,7 @@ public class MapCursorTypeX {
     public static final MapCursor.Type VILLAGE_TAIGA;
 
     static {
-        boolean isPost205 = MinecraftVersionUtil.isAtLeast(20, 5);
+        boolean isPost205 = MinecraftVersionUtil.isAtLeast(1, 20, 5);
 
         TARGET_POINT = isPost205 ? MapCursor.Type.TARGET_POINT : getField("RED_MARKER");
         PLAYER = isPost205 ? MapCursor.Type.PLAYER : getField("WHITE_POINTER");

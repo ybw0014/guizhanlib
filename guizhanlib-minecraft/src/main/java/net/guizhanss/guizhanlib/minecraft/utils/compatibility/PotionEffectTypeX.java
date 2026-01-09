@@ -29,7 +29,7 @@ public class PotionEffectTypeX {
 
     static {
         // EFFECT registry was added in 1.20.3, use legacy field access before that
-        boolean isPost203 = MinecraftVersionUtil.isAtLeast(20, 3);
+        boolean isPost203 = MinecraftVersionUtil.isAtLeast(1, 20, 3);
 
         SLOWNESS = isPost203 ? getByKey("slowness") : getField("SLOW");
         HASTE = isPost203 ? getByKey("haste") : getField("FAST_DIGGING");
