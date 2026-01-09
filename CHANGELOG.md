@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.0
+
+- Update `MinecraftVersionUtil` to support new year-based versions.
+
+- 更新 `MinecraftVersionUtil` 以支持新年份版本格式。
+
 ## 2.4.0
 
 - Added `AttributeX` for multi-version compatibility.
