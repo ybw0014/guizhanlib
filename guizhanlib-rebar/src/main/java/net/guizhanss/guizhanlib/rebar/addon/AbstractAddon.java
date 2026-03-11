@@ -4,26 +4,24 @@ import com.google.common.base.Preconditions;
 import io.github.pylonmc.rebar.addon.RebarAddon;
 import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
 import net.guizhanss.guizhanlib.minecraft.plugin.AbstractJavaPlugin;
+import net.guizhanss.guizhanlib.minecraft.plugin.Environment;
 import net.guizhanss.guizhanlib.minecraft.plugin.Logger;
 import net.guizhanss.guizhanlib.minecraft.plugin.Scheduler;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
+import java.util.logging.Level;
 
 /**
  * An abstract {@link RebarAddon} class that contains some utilities.
  * <p>
- * Extend this as your main class to use them.
- * <p>
- * Modified from InfinityLib
+ * Extend this as your main class to use them. Do not call `registerWithRebar()` as this is already done.
  *
- * @author Mooy1
  * @author ybw0014
  */
 @ParametersAreNonnullByDefault
@@ -35,7 +33,7 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarA
     @Nullable
     private static AbstractAddon instance;
 
-    private int slimefunTickCount;
+    private final String autoUpdateKey;
 
     /**
      * Addon constructor.
@@ -47,6 +45,7 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarA
      */
     protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         super(githubUser, githubRepo, githubBranch);
+        this.autoUpdateKey = autoUpdateKey;
     }
 
     /**
@@ -136,7 +135,18 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarA
 
     @Override
     protected final void startPlatformTasks() {
-
+        registerWithRebar();
+        if (getEnvironment() != Environment.TEST) {
+            // auto update
+            if (!getPluginConfig().contains(autoUpdateKey)) {
+                getPluginLogger().log(Level.WARNING, () -> "Auto update is not properly configured, default to enabled");
+                getPluginConfig().set(autoUpdateKey, true);
+                getPluginConfig().save();
+            }
+            if (getPluginConfig().getBoolean(autoUpdateKey, true)) {
+                autoUpdate();
+            }
+        }
     }
 
     @Override
@@ -144,21 +154,14 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarA
     }
 
     /**
-     * This returns the default bug tracker URL by the given GitHub username and repository in constructor.
-     * <p>
-     * Override it if you don't use GitHub issues as bug tracker.
-     *
-     * @return the default bug tracker url
+     * Override this for auto update logic.
      */
-    @Nonnull
-    @Override
-    public String getBugTrackerURL() {
-        return super.getBugTrackerURL();
+    protected void autoUpdate() {
     }
 
-    @Override
     @Nonnull
-    public JavaPlugin getJavaPlugin() {
+    @Override
+    public final JavaPlugin getJavaPlugin() {
         return this;
     }
 }

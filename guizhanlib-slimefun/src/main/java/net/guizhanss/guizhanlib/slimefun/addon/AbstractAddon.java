@@ -10,11 +10,13 @@ import net.guizhanss.guizhanlib.minecraft.plugin.Logger;
 import net.guizhanss.guizhanlib.minecraft.plugin.Scheduler;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
+import java.util.logging.Level;
 
 /**
  * An abstract {@link SlimefunAddon} class that contains some utilities.
@@ -35,6 +37,8 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     @Nullable
     private static AbstractAddon instance;
 
+    private final String autoUpdateKey;
+
     private int slimefunTickCount;
 
     /**
@@ -47,6 +51,7 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
      */
     protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
         super(githubUser, githubRepo, githubBranch);
+        this.autoUpdateKey = autoUpdateKey;
     }
 
     /**
@@ -146,16 +151,40 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     @Override
     protected final void startPlatformTasks() {
         if (getEnvironment() != Environment.TEST) {
+            // global slimefun tick count
+            // AVOID using this, machines should have their own instance tick count
             getPluginScheduler().repeat(
                 Slimefun.getTickerTask().getTickRate(),
                 () -> slimefunTickCount = (slimefunTickCount + 1) % MOD
             );
+
+            // auto update
+            if (!getPluginConfig().contains(autoUpdateKey)) {
+                getPluginLogger().log(Level.WARNING, () -> "Auto update is not properly configured, default to enabled");
+                getPluginConfig().set(autoUpdateKey, true);
+                getPluginConfig().save();
+            }
+            if (getPluginConfig().getBoolean(autoUpdateKey, true)) {
+                autoUpdate();
+            }
         }
     }
 
     @Override
     protected final void resetPlatformState() {
         slimefunTickCount = 0;
+    }
+
+    /**
+     * Override this for auto update logic.
+     */
+    protected void autoUpdate() {
+    }
+
+    @Override
+    @Nonnull
+    public JavaPlugin getJavaPlugin() {
+        return this;
     }
 
     /**
