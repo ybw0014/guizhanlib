@@ -1,4 +1,4 @@
-package net.guizhanss.guizhanlib.slimefun.addon;
+package net.guizhanss.guizhanlib.minecraft.config;
 
 import java.util.ArrayList;
 import java.util.List;

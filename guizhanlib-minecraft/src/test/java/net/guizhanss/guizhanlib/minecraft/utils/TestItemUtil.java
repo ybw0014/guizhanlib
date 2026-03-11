@@ -1,6 +1,6 @@
-package net.guizhanss.guzihanlib.minecraft.utils;
+package net.guizhanss.guizhanlib.minecraft.utils;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import net.guizhanss.guizhanlib.minecraft.utils.ChatUtil;
 import net.guizhanss.guizhanlib.minecraft.utils.ItemUtil;
 import org.bukkit.Material;

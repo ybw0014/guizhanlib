@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     signing
     id("io.freefair.lombok") version "8.13.1"
-    id("com.gradleup.shadow") version "8.3.6"
+    id("com.gradleup.shadow") version "9.3.1"
     id("org.sonarqube") version "6.1.0.5360"
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
@@ -16,9 +16,9 @@ allprojects {
     repositories {
         mavenCentral()
         maven("https://jitpack.io/")
-        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.alessiodp.com/releases/")
+        maven("https://repo.xenondevs.xyz/releases/")
     }
 }
 
@@ -37,9 +37,10 @@ subprojects {
         }
 
         api("com.google.code.findbugs:jsr305:3.0.2")
-        compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+        compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
         testImplementation("org.junit.jupiter:junit-jupiter-engine:5.12.1")
+        testImplementation("com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT")
     }
 
     java {

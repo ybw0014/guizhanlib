@@ -1,15 +1,15 @@
-package net.guizhanss.guizhanlib.slimefun.addon;
+package net.guizhanss.guizhanlib.rebar.addon;
 
 import com.google.common.base.Preconditions;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.pylonmc.rebar.addon.RebarAddon;
 import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
 import net.guizhanss.guizhanlib.minecraft.plugin.AbstractJavaPlugin;
-import net.guizhanss.guizhanlib.minecraft.plugin.Environment;
 import net.guizhanss.guizhanlib.minecraft.plugin.Logger;
 import net.guizhanss.guizhanlib.minecraft.plugin.Scheduler;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 /**
- * An abstract {@link SlimefunAddon} class that contains some utilities.
+ * An abstract {@link RebarAddon} class that contains some utilities.
  * <p>
  * Extend this as your main class to use them.
  * <p>
@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @ParametersAreNonnullByDefault
 @SuppressWarnings({"ConstantConditions", "unused"})
-public abstract class AbstractAddon extends AbstractJavaPlugin implements SlimefunAddon {
+public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarAddon {
 
     private static final int MOD = 1000000007;
 
@@ -96,15 +96,6 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     }
 
     /**
-     * Returns the total number of Slimefun ticks that have occurred.
-     *
-     * @return total number of Slimefun ticks
-     */
-    public static int getSlimefunTickCount() {
-        return getInstance().slimefunTickCount;
-    }
-
-    /**
      * Get the {@link PluginCommand} of {@link AbstractAddon}.
      *
      * @param command the command name
@@ -145,17 +136,11 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
 
     @Override
     protected final void startPlatformTasks() {
-        if (getEnvironment() != Environment.TEST) {
-            getPluginScheduler().repeat(
-                Slimefun.getTickerTask().getTickRate(),
-                () -> slimefunTickCount = (slimefunTickCount + 1) % MOD
-            );
-        }
+
     }
 
     @Override
     protected final void resetPlatformState() {
-        slimefunTickCount = 0;
     }
 
     /**
@@ -169,5 +154,11 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     @Override
     public String getBugTrackerURL() {
         return super.getBugTrackerURL();
+    }
+
+    @Override
+    @Nonnull
+    public JavaPlugin getJavaPlugin() {
+        return this;
     }
 }
