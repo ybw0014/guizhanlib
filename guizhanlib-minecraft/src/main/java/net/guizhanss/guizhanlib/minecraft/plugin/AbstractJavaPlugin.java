@@ -216,7 +216,7 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
      * @return the {@link YamlConfig} instance
      */
     @Nonnull
-    protected final YamlConfig getPluginConfig() {
+    public final YamlConfig getPluginConfig() {
         if (config == null) {
             throw new IllegalStateException("Config is not available");
         }
@@ -230,7 +230,7 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
      * @return the shared logger wrapper
      */
     @Nonnull
-    protected final Logger getPluginLogger() {
+    public final Logger getPluginLogger() {
         if (logger == null) {
             throw new IllegalStateException("Logger is not available");
         }
@@ -244,7 +244,7 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
      * @return the shared scheduler wrapper
      */
     @Nonnull
-    protected final Scheduler getPluginScheduler() {
+    public final Scheduler getPluginScheduler() {
         if (scheduler == null) {
             throw new IllegalStateException("Scheduler is not available");
         }
