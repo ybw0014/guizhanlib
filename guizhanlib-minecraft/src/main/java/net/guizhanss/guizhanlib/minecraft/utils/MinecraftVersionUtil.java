@@ -62,18 +62,6 @@ public class MinecraftVersionUtil {
     }
 
     /**
-     * Check if the sever's current minecraft version is at least the specified version (inclusive).
-     *
-     * @param major The major version.
-     * @return Whether the server's current version is at least the specified version.
-     * @deprecated Use {@link #isAtLeast(int, int)} or {@link #isAtLeast(int, int, int)} instead.
-     */
-    @Deprecated(since = "2.5.0", forRemoval = true)
-    public static boolean isAtLeast(int major) {
-        return isAtLeast(major, 0);
-    }
-
-    /**
      * Check if the server's current minecraft version is before the specified version (exclusive).
      *
      * @param major The major version.
@@ -98,17 +86,5 @@ public class MinecraftVersionUtil {
             return isBefore(1, major, minor);
         }
         return isBefore(major, minor, 0);
-    }
-
-    /**
-     * Check if the sever's current minecraft version is before the specified version (exclusive).
-     *
-     * @param minor The major version.
-     * @return Whether the server's current version is before the specified version.
-     * @deprecated Use {@link #isBefore(int, int)} or {@link #isBefore(int, int, int)} instead.
-     */
-    @Deprecated(since = "2.5.0", forRemoval = true)
-    public static boolean isBefore(int minor) {
-        return isBefore(minor, 0);
     }
 }

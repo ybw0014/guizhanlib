@@ -28,8 +28,6 @@ import java.util.logging.Level;
 @SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarAddon {
 
-    private static final int MOD = 1000000007;
-
     @Nullable
     private static AbstractAddon instance;
 

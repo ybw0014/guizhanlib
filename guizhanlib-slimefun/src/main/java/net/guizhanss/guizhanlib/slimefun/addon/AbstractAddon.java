@@ -2,7 +2,6 @@ package net.guizhanss.guizhanlib.slimefun.addon;
 
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
 import net.guizhanss.guizhanlib.minecraft.plugin.AbstractJavaPlugin;
 import net.guizhanss.guizhanlib.minecraft.plugin.Environment;
@@ -32,14 +31,10 @@ import java.util.logging.Level;
 @SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class AbstractAddon extends AbstractJavaPlugin implements SlimefunAddon {
 
-    private static final int MOD = 1000000007;
-
     @Nullable
     private static AbstractAddon instance;
 
     private final String autoUpdateKey;
-
-    private int slimefunTickCount;
 
     /**
      * Addon constructor.
@@ -101,15 +96,6 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     }
 
     /**
-     * Returns the total number of Slimefun ticks that have occurred.
-     *
-     * @return total number of Slimefun ticks
-     */
-    public static int getSlimefunTickCount() {
-        return getInstance().slimefunTickCount;
-    }
-
-    /**
      * Get the {@link PluginCommand} of {@link AbstractAddon}.
      *
      * @param command the command name
@@ -151,13 +137,6 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     @Override
     protected final void startPlatformTasks() {
         if (getEnvironment() != Environment.TEST) {
-            // global slimefun tick count
-            // AVOID using this, machines should have their own instance tick count
-            getPluginScheduler().repeat(
-                Slimefun.getTickerTask().getTickRate(),
-                () -> slimefunTickCount = (slimefunTickCount + 1) % MOD
-            );
-
             // auto update
             if (!getPluginConfig().contains(autoUpdateKey)) {
                 getPluginLogger().log(Level.WARNING, () -> "Auto update is not properly configured, default to enabled");
@@ -168,11 +147,6 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
                 autoUpdate();
             }
         }
-    }
-
-    @Override
-    protected final void resetPlatformState() {
-        slimefunTickCount = 0;
     }
 
     /**
