@@ -38,6 +38,7 @@ subprojects {
         compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
         testImplementation("org.junit.jupiter:junit-jupiter-engine:5.12.1")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
         testImplementation("com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT")
     }
 
