@@ -1,14 +1,14 @@
 # GuizhanLib
 
-**English** | [简体中文](/README.zh_cn.md)
+[English](/README.md) | **简体中文**
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.guizhanss/guizhanlib-all.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22net.guizhanss%22%20AND%20a:%22GuizhanLib%22)
 ![Java 21+](https://img.shields.io/badge/Java-21%2B-blue)
 [![Javadoc](https://javadoc.io/badge2/net.guizhanss/guizhanlib-all/javadoc.svg)](https://javadoc.io/doc/net.guizhanss/guizhanlib-all)
 
-A Java library that helps developing Slimefun/Pylon addons.
+一个帮助粘液科技/Pylon附属开发的 Java 库。
 
-## Usage
+## 如何使用
 
 ### Gradle
 
@@ -22,7 +22,7 @@ dependencies {
 }
 ```
 
-If you use the Shadow plugin, relocate the library to your own package to avoid conflicts with GuizhanLib bundled in other plugins:
+如果你使用 Shadow 插件，需要将 GuizhanLib 迁移到你的包中，避免与其他插件中使用的 GuizhanLib 冲突：
 
 ```kotlin
 tasks.shadowJar {
@@ -32,7 +32,7 @@ tasks.shadowJar {
 
 ### Maven
 
-Add `guizhanlib-all` (which includes all sub modules) or **the modules you need** as dependency:
+将`guizhanlib-all`（包含所有包）或者你需要使用的包添加为依赖项：
 
 ```
     <dependency>
@@ -43,7 +43,8 @@ Add `guizhanlib-all` (which includes all sub modules) or **the modules you need*
     </dependency>
 ```
 
-You will need to relocate the library classes if you use it for addon development.
+在`build`中，你需要将 GuizhanLib 迁移到你的包中，避免与其他插件中使用的 GuizhanLib 冲突
+（如果已存在 `maven-shade-plugin` 的配置，只需要添加 relocation 即可:
 
 ```
         <plugins>
@@ -53,10 +54,10 @@ You will need to relocate the library classes if you use it for addon developmen
                 <version>3.3.0</version>
 
                 <configuration>
-                    <!-- Add the following field to remove all unused classes and reduce the size of generated jar file. Not required, but recommended  -->
+                    <!-- 你可以添加下面这一行，去除所有库中未使用的类，来减少生成jar的大小，非必须，但建议开启 -->
                     <minimizeJar>true</minimizeJar>
                     <relocations>
-                        <!-- IMPORTANT: add the following relocation -->
+                        <!-- 重要: 你需要将以下relocation(迁移)部分添加到你的pom.xml中 -->
                         <relocation>
                             <pattern>net.guizhanss.guizhanlib</pattern>
                             <shadedPattern>(YOUR PACKAGE NAME HERE).guizhanlib</shadedPattern>
@@ -85,6 +86,6 @@ You will need to relocate the library classes if you use it for addon developmen
         </plugins>
 ```
 
-## Changelog
+## 更新日志
 
 [Changelog](/CHANGELOG.md)

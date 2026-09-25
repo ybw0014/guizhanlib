@@ -23,6 +23,7 @@ GuizhanLib is a Gradle multi-project Java library for Slimefun and Rebar addon d
 - Respect the current layering: `common` stays platform-agnostic, `minecraft` stays free of Slimefun/Rebar compile-time coupling, and higher-level modules own their platform-specific adapters and lifecycle hooks.
 - Keep changes inside the owning module when possible, and prefer moving reusable Bukkit/plugin behavior down into `guizhanlib-minecraft` instead of duplicating it in higher-level modules.
 - For normal debugging, local compile checks, and artifact generation, prefer `./gradlew clean shadowJar` over `./gradlew build`.
+- Publishing: snapshots with `./gradlew publishToSonatype`; releases with `./gradlew publishToSonatype closeAndReleaseStagingRepository`.
 - Avoid using `build` as the default iteration command in this repo: it is broader than needed for most debug loops and the current workspace also contains non-ignored IDE artifacts such as `.settings/`, `.factorypath`, and `bin/` that should not be treated as source changes.
 - If workspace artifacts such as `.settings/`, `.factorypath`, or `bin/` appear in searches or diffs, treat them as tooling noise unless the user explicitly asks to work on IDE/project metadata.
 - Preserve shared code conventions observed across the repo: Java 17, Lombok usage, explicit nullability annotations, fail-fast argument validation with `Preconditions`, and concise English Javadocs/comments.
