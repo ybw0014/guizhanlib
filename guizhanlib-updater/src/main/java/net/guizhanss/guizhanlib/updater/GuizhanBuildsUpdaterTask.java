@@ -103,7 +103,7 @@ class GuizhanBuildsUpdaterTask extends BukkitRunnable {
             buildInfo = buildResp.get("data").getAsJsonObject();
 
             // check if there is update
-            var pluginVersion = updater.getPlugin().getDescription().getVersion();
+            var pluginVersion = updater.getPlugin().getPluginMeta().getVersion();
             var target = updater.getPlugin().getName() + "-" + pluginVersion + ".jar";
             return !target.equals(buildInfo.get("target").getAsString());
         } catch (Exception ex) {
