@@ -4,9 +4,8 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("io.freefair.lombok") version "8.13.1"
-    id("com.gradleup.shadow") version "9.3.1"
-    id("org.sonarqube") version "6.1.0.5360"
+    id("io.freefair.lombok") version "9.7.0"
+    id("com.gradleup.shadow") version "9.6.1"
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
@@ -28,7 +27,6 @@ subprojects {
     apply(plugin = "signing")
     apply(plugin = "io.freefair.lombok")
     apply(plugin = "com.gradleup.shadow")
-    apply(plugin = "org.sonarqube")
 
     dependencies {
         fun compileOnlyAndTestImplementation(dependencyNotation: Any) {
@@ -45,10 +43,17 @@ subprojects {
 
     java {
         disableAutoTargetJvm()
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(25)
+        }
         withJavadocJar()
         withSourcesJar()
+    }
+
+    tasks.withType<JavaCompile>().configureEach {
+        options.release.set(21)
     }
 
     tasks.withType<Test> {
@@ -57,14 +62,6 @@ subprojects {
 
     tasks.withType<ShadowJar> {
         archiveClassifier = ""
-    }
-
-    sonar {
-        properties {
-            property("sonar.projectKey", "ybw0014_GuizhanLib")
-            property("sonar.organization", "ybw0014")
-            property("sonar.host.url", "https://sonarcloud.io")
-        }
     }
 
     publishing {
