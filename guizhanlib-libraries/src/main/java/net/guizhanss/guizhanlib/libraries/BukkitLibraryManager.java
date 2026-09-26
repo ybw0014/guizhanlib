@@ -13,6 +13,21 @@ import java.util.Objects;
 
 /**
  * A custom {@link LibraryManager} for Bukkit, that loads libraries from the server's root directory.
+ * <p>
+ * Repositories are tried in insertion order, so a mirror added before Maven Central is preferred.
+ * Example:
+ * <pre>{@code
+ * var manager = new BukkitLibraryManager(plugin);
+ * // Optional: mirror, tried before Maven Central for faster downloads
+ * manager.addRepository("https://maven.aliyun.com/repository/public/");
+ * manager.addMavenCentral();
+ *
+ * manager.loadLibrary(Library.builder()
+ *         .groupId("com.google.code.gson")
+ *         .artifactId("gson")
+ *         .version("2.10.1")
+ *         .build());
+ * }</pre>
  *
  * @author ybw0014
  * @since 2.2.0

@@ -89,3 +89,20 @@ tasks.shadowJar {
 ## 更新日志
 
 [Changelog](/CHANGELOG.md)
+
+## 库加载
+
+如果你的附属需要运行时加载库,可以使用 `guizhanlib-libraries` 模块中的 `BukkitLibraryManager`。仓库按添加顺序依次尝试,可将镜像添加在 Maven Central 之前以加速下载:
+
+```java
+var manager = new BukkitLibraryManager(this);
+// 可选: 镜像,优先于 Maven Central 尝试
+manager.addRepository("https://maven.aliyun.com/repository/public/");
+manager.addMavenCentral();
+
+manager.loadLibrary(Library.builder()
+        .groupId("com.google.code.gson")
+        .artifactId("gson")
+        .version("2.10.1")
+        .build());
+```

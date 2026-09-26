@@ -88,3 +88,20 @@ You will need to relocate the library classes if you use it for addon developmen
 ## Changelog
 
 [Changelog](/CHANGELOG.md)
+
+## Library loading
+
+If your addon needs runtime libraries, use `BukkitLibraryManager` from the `guizhanlib-libraries` module. Repositories are tried in insertion order, so add a mirror before Maven Central for faster downloads:
+
+```java
+var manager = new BukkitLibraryManager(this);
+// Optional: mirror, tried before Maven Central
+manager.addRepository("https://maven.aliyun.com/repository/public/");
+manager.addMavenCentral();
+
+manager.loadLibrary(Library.builder()
+        .groupId("com.google.code.gson")
+        .artifactId("gson")
+        .version("2.10.1")
+        .build());
+```
