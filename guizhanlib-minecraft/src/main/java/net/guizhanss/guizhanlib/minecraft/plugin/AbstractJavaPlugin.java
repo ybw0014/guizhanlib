@@ -1,16 +1,18 @@
 package net.guizhanss.guizhanlib.minecraft.plugin;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
+import org.bukkit.NamespacedKey;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.text.MessageFormat;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
 /**
  * Shared lifecycle template for GuizhanLib Java plugins.
@@ -21,79 +23,87 @@ import java.util.regex.Pattern;
 @SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class AbstractJavaPlugin extends JavaPlugin {
 
-    private static final Pattern GITHUB_PATTERN = Pattern.compile("[\\w-]+");
+    @Nullable
+    private static AbstractJavaPlugin instance;
 
     @Getter
     @Accessors(makeFinal = true)
     private final Environment environment;
-    @Getter
-    @Accessors(makeFinal = true)
-    private final String githubUser;
-    @Getter
-    @Accessors(makeFinal = true)
-    private final String githubRepo;
-    @Getter
-    @Accessors(makeFinal = true)
-    private final String githubBranch;
-    @Getter
-    private final String bugTrackerURL;
 
     @Nullable
     private YamlConfig config;
     @Nullable
     private Logger logger;
-    @Nullable
-    private Scheduler scheduler;
     private boolean loading;
     private boolean enabling;
     private boolean disabling;
 
     /**
      * Create a new abstract Java plugin.
-     *
-     * @param githubUser   GitHub username of this project
-     * @param githubRepo   GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
      */
-    protected AbstractJavaPlugin(String githubUser, String githubRepo, String githubBranch) {
-        this(Environment.detect(), githubUser, githubRepo, githubBranch);
+    protected AbstractJavaPlugin() {
+        this(Environment.detect());
     }
 
     /**
      * Create a new abstract Java plugin with explicit environment.
      *
-     * @param environment  runtime environment
-     * @param githubUser   GitHub username of this project
-     * @param githubRepo   GitHub repository of this project
-     * @param githubBranch GitHub branch of this project
+     * @param environment runtime environment
      */
-    protected AbstractJavaPlugin(
-        Environment environment,
-        String githubUser,
-        String githubRepo,
-        String githubBranch
-    ) {
+    protected AbstractJavaPlugin(Environment environment) {
         this.environment = environment;
-        this.githubUser = githubUser;
-        this.githubRepo = githubRepo;
-        this.githubBranch = githubBranch;
-        this.bugTrackerURL = MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
-        validate();
     }
 
     /**
-     * Validate shared metadata provided by constructor.
+     * Get the enabled addon.
+     *
+     * @return the enabled addon
      */
-    private void validate() {
-        if (!GITHUB_PATTERN.matcher(githubUser).matches()) {
-            throw new IllegalArgumentException("Invalid githubUser");
-        }
-        if (!GITHUB_PATTERN.matcher(githubRepo).matches()) {
-            throw new IllegalArgumentException("Invalid githubRepo");
-        }
-        if (!GITHUB_PATTERN.matcher(githubBranch).matches()) {
-            throw new IllegalArgumentException("Invalid githubBranch");
-        }
+    protected static AbstractJavaPlugin getPlatformInstance() {
+        return Objects.requireNonNull(instance, "Addon is not enabled!");
+    }
+
+    /**
+     * Get the addon's {@link YamlConfig} for the default {@code config.yml}.
+     *
+     * @return the {@link YamlConfig}
+     */
+    @Nonnull
+    public static YamlConfig config() {
+        return getPlatformInstance().getPluginConfig();
+    }
+
+    /**
+     * Get the addon's wrapping {@link Logger}.
+     *
+     * @return the {@link Logger}
+     */
+    @Nonnull
+    public static Logger logger() {
+        return getPlatformInstance().getPluginLogger();
+    }
+
+    /**
+     * Get the {@link PluginCommand} of {@link AbstractJavaPlugin}.
+     *
+     * @param command the command name
+     * @return the {@link PluginCommand} of {@link AbstractJavaPlugin}
+     */
+    @Nonnull
+    public static PluginCommand getPluginCommand(String command) {
+        Preconditions.checkArgument(command != null, "command should not be null");
+        return Objects.requireNonNull(getPlatformInstance().getCommand(command));
+    }
+
+    /**
+     * Creates a {@link NamespacedKey} from the given string.
+     *
+     * @param key the {@link String} representation of the key
+     * @return the {@link NamespacedKey} created from given string
+     */
+    @Nonnull
+    public static NamespacedKey createKey(String key) {
+        return new NamespacedKey(getPlatformInstance(), key);
     }
 
     /**
@@ -135,7 +145,6 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
         }
 
         logger = new Logger(this);
-        scheduler = new Scheduler(this);
         startPlatformTasks();
 
         try {
@@ -167,7 +176,6 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
             clearSubclassInstance();
             config = null;
             logger = null;
-            scheduler = null;
             resetPlatformState();
         }
     }
@@ -189,17 +197,27 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
     protected abstract void disable();
 
     /**
-     * Assign subclass-owned singleton/state references.
+     * Assign the shared addon instance when enabling.
      */
-    protected abstract void assignSubclassInstance();
+    protected final void assignSubclassInstance() {
+        if (instance != null) {
+            throw new IllegalStateException(
+                "Addon " + instance.getName() + " is already using this GuizhanLib, Shade an relocate your own!"
+            );
+        }
+
+        instance = this;
+    }
 
     /**
-     * Clear subclass-owned singleton/state references.
+     * Clear the shared addon instance when disabling.
      */
-    protected abstract void clearSubclassInstance();
+    protected final void clearSubclassInstance() {
+        instance = null;
+    }
 
     /**
-     * Start platform-specific tasks after scheduler is ready.
+     * Start platform-specific tasks after runtime state is ready.
      */
     protected void startPlatformTasks() {
     }
@@ -236,20 +254,6 @@ public abstract class AbstractJavaPlugin extends JavaPlugin {
         }
 
         return logger;
-    }
-
-    /**
-     * Get the shared scheduler wrapper.
-     *
-     * @return the shared scheduler wrapper
-     */
-    @Nonnull
-    public final Scheduler getPluginScheduler() {
-        if (scheduler == null) {
-            throw new IllegalStateException("Scheduler is not available");
-        }
-
-        return scheduler;
     }
 
     /**

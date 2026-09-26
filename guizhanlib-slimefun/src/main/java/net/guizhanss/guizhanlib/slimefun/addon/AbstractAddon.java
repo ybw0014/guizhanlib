@@ -1,20 +1,16 @@
 package net.guizhanss.guizhanlib.slimefun.addon;
 
-import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import net.guizhanss.guizhanlib.minecraft.plugin.AbstractJavaPlugin;
 import net.guizhanss.guizhanlib.minecraft.plugin.Environment;
-import net.guizhanss.guizhanlib.minecraft.plugin.Logger;
-import net.guizhanss.guizhanlib.minecraft.plugin.Scheduler;
-import org.bukkit.NamespacedKey;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Objects;
+import java.text.MessageFormat;
+import java.util.regex.Pattern;
 import java.util.logging.Level;
 
 /**
@@ -31,9 +27,17 @@ import java.util.logging.Level;
 @SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class AbstractAddon extends AbstractJavaPlugin implements SlimefunAddon {
 
-    @Nullable
-    private static AbstractAddon instance;
+    private static final Pattern GITHUB_PATTERN = Pattern.compile("[\\w-]+");
 
+    @Getter
+    @Accessors(makeFinal = true)
+    private final String githubUser;
+    @Getter
+    @Accessors(makeFinal = true)
+    private final String githubRepo;
+    @Getter
+    @Accessors(makeFinal = true)
+    private final String githubBranch;
     private final String autoUpdateKey;
 
     /**
@@ -45,8 +49,24 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
      * @param autoUpdateKey Auto update key in the config
      */
     protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
-        super(githubUser, githubRepo, githubBranch);
+        super();
+        this.githubUser = githubUser;
+        this.githubRepo = githubRepo;
+        this.githubBranch = githubBranch;
         this.autoUpdateKey = autoUpdateKey;
+        validate();
+    }
+
+    private void validate() {
+        if (!GITHUB_PATTERN.matcher(githubUser).matches()) {
+            throw new IllegalArgumentException("Invalid githubUser");
+        }
+        if (!GITHUB_PATTERN.matcher(githubRepo).matches()) {
+            throw new IllegalArgumentException("Invalid githubRepo");
+        }
+        if (!GITHUB_PATTERN.matcher(githubBranch).matches()) {
+            throw new IllegalArgumentException("Invalid githubBranch");
+        }
     }
 
     /**
@@ -58,84 +78,21 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     @Nonnull
     @SuppressWarnings("unchecked")
     public static <T extends AbstractAddon> T getInstance() {
-        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
-    }
-
-    private static void setInstance(@Nullable AbstractAddon inst) {
-        instance = inst;
+        return (T) getPlatformInstance();
     }
 
     /**
-     * Get the {@link YamlConfig} for the default {@code config.yml}.
-     *
-     * @return the {@link YamlConfig}
+     * Start the addon auto update task.
      */
-    @Nonnull
-    public static YamlConfig getAddonConfig() {
-        return getInstance().getPluginConfig();
-    }
-
-    /**
-     * Get the wrapping {@link Logger}.
-     *
-     * @return the {@link Logger}
-     */
-    @Nonnull
-    public static Logger getAddonLogger() {
-        return getInstance().getPluginLogger();
-    }
-
-    /**
-     * Get the {@link Scheduler}.
-     *
-     * @return the {@link Scheduler}
-     */
-    @Nonnull
-    public static Scheduler getAddonScheduler() {
-        return getInstance().getPluginScheduler();
-    }
-
-    /**
-     * Get the {@link PluginCommand} of {@link AbstractAddon}.
-     *
-     * @param command the command name
-     * @return the {@link PluginCommand} of {@link AbstractAddon}
-     */
-    @Nonnull
-    public static PluginCommand getPluginCommand(String command) {
-        Preconditions.checkArgument(command != null, "command should not be null");
-        return Objects.requireNonNull(getInstance().getCommand(command));
-    }
-
-    /**
-     * Creates a {@link NamespacedKey} from the given string.
-     *
-     * @param key the {@link String} representation of the key
-     * @return the {@link NamespacedKey} created from given string
-     */
-    @Nonnull
-    public static NamespacedKey createKey(String key) {
-        return new NamespacedKey(getInstance(), key);
-    }
-
-    @Override
-    protected final void assignSubclassInstance() {
-        if (instance != null) {
-            throw new IllegalStateException(
-                "Addon " + instance.getName() + " is already using this GuizhanLib, Shade an relocate your own!"
-            );
-        }
-
-        setInstance(this);
-    }
-
-    @Override
-    protected final void clearSubclassInstance() {
-        setInstance(null);
-    }
-
     @Override
     protected final void startPlatformTasks() {
+        setupAutoUpdate();
+    }
+
+    /**
+     * Configure auto update after the scheduler is ready.
+     */
+    protected final void setupAutoUpdate() {
         if (getEnvironment() != Environment.TEST) {
             // auto update
             if (!getPluginConfig().contains(autoUpdateKey)) {
@@ -155,22 +112,25 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements Slimef
     protected void autoUpdate() {
     }
 
+    /**
+     * Get the default GitHub issues URL for this addon.
+     *
+     * @return the default bug tracker URL
+     */
+    @Override
+    @Nonnull
+    public String getBugTrackerURL() {
+        return MessageFormat.format("https://github.com/{0}/{1}/issues", githubUser, githubRepo);
+    }
+
+    /**
+     * Get this addon as a Java plugin.
+     *
+     * @return this plugin
+     */
     @Override
     @Nonnull
     public JavaPlugin getJavaPlugin() {
         return this;
-    }
-
-    /**
-     * This returns the default bug tracker URL by the given GitHub username and repository in constructor.
-     * <p>
-     * Override it if you don't use GitHub issues as bug tracker.
-     *
-     * @return the default bug tracker url
-     */
-    @Nonnull
-    @Override
-    public String getBugTrackerURL() {
-        return super.getBugTrackerURL();
     }
 }

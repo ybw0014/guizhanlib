@@ -1,21 +1,11 @@
 package net.guizhanss.guizhanlib.rebar.addon;
 
-import com.google.common.base.Preconditions;
 import io.github.pylonmc.rebar.addon.RebarAddon;
-import net.guizhanss.guizhanlib.minecraft.config.YamlConfig;
 import net.guizhanss.guizhanlib.minecraft.plugin.AbstractJavaPlugin;
-import net.guizhanss.guizhanlib.minecraft.plugin.Environment;
-import net.guizhanss.guizhanlib.minecraft.plugin.Logger;
-import net.guizhanss.guizhanlib.minecraft.plugin.Scheduler;
-import org.bukkit.NamespacedKey;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Objects;
-import java.util.logging.Level;
 
 /**
  * An abstract {@link RebarAddon} class that contains some utilities.
@@ -28,22 +18,11 @@ import java.util.logging.Level;
 @SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarAddon {
 
-    @Nullable
-    private static AbstractAddon instance;
-
-    private final String autoUpdateKey;
-
     /**
      * Addon constructor.
-     *
-     * @param githubUser    GitHub username of this project
-     * @param githubRepo    GitHub repository of this project
-     * @param githubBranch  GitHub branch of this project
-     * @param autoUpdateKey Auto update key in the config
      */
-    protected AbstractAddon(String githubUser, String githubRepo, String githubBranch, String autoUpdateKey) {
-        super(githubUser, githubRepo, githubBranch);
-        this.autoUpdateKey = autoUpdateKey;
+    protected AbstractAddon() {
+        super();
     }
 
     /**
@@ -55,108 +34,22 @@ public abstract class AbstractAddon extends AbstractJavaPlugin implements RebarA
     @Nonnull
     @SuppressWarnings("unchecked")
     public static <T extends AbstractAddon> T getInstance() {
-        return (T) Objects.requireNonNull(instance, "Addon is not enabled!");
-    }
-
-    private static void setInstance(@Nullable AbstractAddon inst) {
-        instance = inst;
+        return (T) getPlatformInstance();
     }
 
     /**
-     * Get the {@link YamlConfig} for the default {@code config.yml}.
-     *
-     * @return the {@link YamlConfig}
+     * Register with Rebar.
      */
-    @Nonnull
-    public static YamlConfig getAddonConfig() {
-        return getInstance().getPluginConfig();
-    }
-
-    /**
-     * Get the wrapping {@link Logger}.
-     *
-     * @return the {@link Logger}
-     */
-    @Nonnull
-    public static Logger getAddonLogger() {
-        return getInstance().getPluginLogger();
-    }
-
-    /**
-     * Get the {@link Scheduler}.
-     *
-     * @return the {@link Scheduler}
-     */
-    @Nonnull
-    public static Scheduler getAddonScheduler() {
-        return getInstance().getPluginScheduler();
-    }
-
-    /**
-     * Get the {@link PluginCommand} of {@link AbstractAddon}.
-     *
-     * @param command the command name
-     * @return the {@link PluginCommand} of {@link AbstractAddon}
-     */
-    @Nonnull
-    public static PluginCommand getPluginCommand(String command) {
-        Preconditions.checkArgument(command != null, "command should not be null");
-        return Objects.requireNonNull(getInstance().getCommand(command));
-    }
-
-    /**
-     * Creates a {@link NamespacedKey} from the given string.
-     *
-     * @param key the {@link String} representation of the key
-     * @return the {@link NamespacedKey} created from given string
-     */
-    @Nonnull
-    public static NamespacedKey createKey(String key) {
-        return new NamespacedKey(getInstance(), key);
-    }
-
-    @Override
-    protected final void assignSubclassInstance() {
-        if (instance != null) {
-            throw new IllegalStateException(
-                "Addon " + instance.getName() + " is already using this GuizhanLib, Shade an relocate your own!"
-            );
-        }
-
-        setInstance(this);
-    }
-
-    @Override
-    protected final void clearSubclassInstance() {
-        setInstance(null);
-    }
-
     @Override
     protected final void startPlatformTasks() {
         registerWithRebar();
-        if (getEnvironment() != Environment.TEST) {
-            // auto update
-            if (!getPluginConfig().contains(autoUpdateKey)) {
-                getPluginLogger().log(Level.WARNING, () -> "Auto update is not properly configured, default to enabled");
-                getPluginConfig().set(autoUpdateKey, true);
-                getPluginConfig().save();
-            }
-            if (getPluginConfig().getBoolean(autoUpdateKey, true)) {
-                autoUpdate();
-            }
-        }
-    }
-
-    @Override
-    protected final void resetPlatformState() {
     }
 
     /**
-     * Override this for auto update logic.
+     * Get this addon as a Java plugin.
+     *
+     * @return this plugin
      */
-    protected void autoUpdate() {
-    }
-
     @Nonnull
     @Override
     public final JavaPlugin getJavaPlugin() {

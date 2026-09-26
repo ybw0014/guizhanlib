@@ -23,8 +23,6 @@ public class AbstractJavaPluginTestPlugin extends JavaPlugin {
     @Nullable
     private Logger logger;
     @Nullable
-    private Scheduler scheduler;
-    @Nullable
     private RuntimeSnapshot loadSnapshot;
     @Nullable
     private RuntimeSnapshot autoUpdateSnapshot;
@@ -88,8 +86,6 @@ public class AbstractJavaPluginTestPlugin extends JavaPlugin {
             }
         }
 
-        scheduler = new Scheduler(this);
-
         try {
             enable();
         } catch (RuntimeException ex) {
@@ -117,7 +113,6 @@ public class AbstractJavaPluginTestPlugin extends JavaPlugin {
             instance = null;
             config = null;
             logger = null;
-            scheduler = null;
         }
     }
 
@@ -180,7 +175,7 @@ public class AbstractJavaPluginTestPlugin extends JavaPlugin {
     }
 
     boolean isRuntimeStateCreated() {
-        return config != null || logger != null || scheduler != null;
+        return config != null || logger != null;
     }
 
     boolean isAutoUpdateEnabledForTest() {
@@ -200,11 +195,10 @@ public class AbstractJavaPluginTestPlugin extends JavaPlugin {
     }
 
     private RuntimeSnapshot snapshot() {
-        return new RuntimeSnapshot(config != null, logger != null, scheduler != null, instance == this);
+        return new RuntimeSnapshot(config != null, logger != null, instance == this);
     }
 
-    public record RuntimeSnapshot(boolean configAvailable, boolean loggerAvailable, boolean schedulerAvailable,
-                                  boolean instanceAssigned) {
+    public record RuntimeSnapshot(boolean configAvailable, boolean loggerAvailable, boolean instanceAssigned) {
     }
 
     public enum FailureStage {

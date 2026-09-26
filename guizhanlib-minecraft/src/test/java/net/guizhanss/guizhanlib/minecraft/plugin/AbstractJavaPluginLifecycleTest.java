@@ -32,7 +32,7 @@ class AbstractJavaPluginLifecycleTest {
 
         Assertions.assertEquals(List.of("load"), plugin.getLifecycleEvents());
         Assertions.assertEquals(
-            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(false, false, false, false),
+            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(false, false, false),
             plugin.getLoadSnapshot()
         );
         Assertions.assertFalse(plugin.isRuntimeStateCreated());
@@ -48,15 +48,15 @@ class AbstractJavaPluginLifecycleTest {
 
         Assertions.assertEquals(List.of("load", "auto-update", "enable"), plugin.getLifecycleEvents());
         Assertions.assertEquals(
-            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(false, false, false, false),
+            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(false, false, false),
             plugin.getLoadSnapshot()
         );
         Assertions.assertEquals(
-            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, false, true),
+            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, true),
             plugin.getAutoUpdateSnapshot()
         );
         Assertions.assertEquals(
-            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, true, true),
+            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, true),
             plugin.getEnableSnapshot()
         );
         Assertions.assertTrue(plugin.isRuntimeStateCreated());
@@ -67,7 +67,7 @@ class AbstractJavaPluginLifecycleTest {
 
         Assertions.assertEquals(List.of("load", "auto-update", "enable", "disable"), plugin.getLifecycleEvents());
         Assertions.assertEquals(
-            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, true, true),
+            new AbstractJavaPluginTestPlugin.RuntimeSnapshot(true, true, true),
             plugin.getDisableSnapshot()
         );
         Assertions.assertFalse(plugin.isRuntimeStateCreated());
