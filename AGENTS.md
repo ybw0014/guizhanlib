@@ -16,7 +16,6 @@ GuizhanLib is a Gradle multi-project Java library for Slimefun and Rebar addon d
 - `guizhanlib-slimefun-cn`: Slimefun CN compatibility helpers.
 - `guizhanlib-updater`: Guizhan Builds updater helpers.
 - `guizhanlib-all`: aggregator artifact that re-exports active modules; treat it as packaging rather than a primary source module.
-- `.sisyphus/`: planning artifacts for agent workflows, not published library sources.
 
 ## 3. Working Agreements
 - Treat this file as the only repository-level AGENTS guide unless the user explicitly asks for a more granular layout.
