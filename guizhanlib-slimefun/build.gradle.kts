@@ -6,6 +6,4 @@ dependencies {
     compileOnly("com.github.slimefun:Slimefun4:experimental-SNAPSHOT")
     testImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     testImplementation("com.github.slimefun:Slimefun4:experimental-SNAPSHOT")
-    testImplementation("com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
 }
