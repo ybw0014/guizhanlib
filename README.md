@@ -95,8 +95,11 @@ If your addon needs runtime libraries, use `BukkitLibraryManager` from the `guiz
 
 ```java
 var manager = new BukkitLibraryManager(this);
-// Optional: mirror, tried before Maven Central
+// Optional: mirrors, tried in order
 manager.addRepository("https://maven.aliyun.com/repository/public/");
+manager.addRepository("https://maven-central.storage-download.googleapis.com/maven2/");
+// Last resort: Maven Central is for build-time dependencies, heavy direct
+// usage hits its rate limits; jars are cached locally after the first download
 manager.addMavenCentral();
 
 manager.loadLibrary(Library.builder()

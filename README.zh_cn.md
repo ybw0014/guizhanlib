@@ -96,8 +96,10 @@ tasks.shadowJar {
 
 ```java
 var manager = new BukkitLibraryManager(this);
-// 可选: 镜像,优先于 Maven Central 尝试
+// 可选: 镜像,按添加顺序尝试
 manager.addRepository("https://maven.aliyun.com/repository/public/");
+manager.addRepository("https://maven-central.storage-download.googleapis.com/maven2/");
+// 兜底: Maven Central 面向构建期依赖,大规模直连会被限流；库首次下载后会缓存到本地
 manager.addMavenCentral();
 
 manager.loadLibrary(Library.builder()
