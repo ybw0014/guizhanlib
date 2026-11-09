@@ -1,5 +1,61 @@
 # Changelog
 
+## 3.0.0
+
+### Breaking Changes
+
+- Reorganized modules: added `guizhanlib-rebar` module for Rebar addon bases; moved `YamlConfig`, `AbstractJavaPlugin`, `Environment`, `Logger`, `PathBuilder` and `Scheduler` into `guizhanlib-minecraft`.
+- Restructured addon base classes: rewrote `AbstractJavaPlugin`, removed `Scheduler`, and slimmed down `AbstractAddon` in rebar and slimefun modules.
+- Removed deprecated `MinecraftVersionUtil` shims and the Slimefun tick counter in `AbstractAddon`.
+- Removed the `guizhanlib-slimefun-cn` module (no real content).
+- Removed dead utility APIs: `RateLimit`, `JsonUtil` and `NewBlockStorageUtil`.
+
+### Fixes
+
+- Adjusted member visibility in `AbstractJavaPlugin`.
+- Updater: replaced deprecated `Plugin#getDescription` with `PluginMeta#getVersion`.
+
+### Build & CI
+
+- Upgraded to Gradle 9.8.0 with JDK 25 toolchain (release 21) and freefair-lombok 9.7.0; removed sonarqube.
+- CI now builds with JDK 25 and the foojay toolchain resolver.
+- Declared `junit-platform-launcher` required by Gradle 9, and removed duplicated test dependencies from module scripts.
+- `guizhanlib-all` now generates aggregated Javadoc.
+- `gradle build` now runs tests and produces the shadow jar per module, plus an `-original` unshaded jar; `gradle publish` uploads snapshots directly, and for release versions it closes and releases the staging repo automatically.
+- Removed jitpack config; moved `renovate.json` into `.github`.
+
+### Documentation
+
+- Split README by language, added Gradle usage and badges, and merged `dev.md` into `AGENTS.md`.
+- Documented library loading with mirror support.
+
+### 破坏性变更
+
+- 重组模块结构：新增 `guizhanlib-rebar` 模块，提供 Rebar 附属基类；`YamlConfig`、`AbstractJavaPlugin`、`Environment`、`Logger`、`PathBuilder` 与 `Scheduler` 迁入 `guizhanlib-minecraft`。
+- 重构附属基类：重写 `AbstractJavaPlugin`，移除 `Scheduler`，精简 rebar 与 slimefun 模块的 `AbstractAddon`。
+- 移除已弃用的 `MinecraftVersionUtil` 兼容层与 `AbstractAddon` 的粘液刻计数。
+- 移除 `guizhanlib-slimefun-cn` 模块（无实际内容）。
+- 移除无用工具 API：`RateLimit`、`JsonUtil` 与 `NewBlockStorageUtil`。
+
+### 修复
+
+- 调整 `AbstractJavaPlugin` 的成员可见性。
+- 更新器：使用 `PluginMeta#getVersion` 替换已弃用的 `Plugin#getDescription`。
+
+### 构建与 CI
+
+- 升级至 Gradle 9.8.0，使用 JDK 25 工具链（release 21）与 freefair-lombok 9.7.0；移除 sonarqube。
+- CI 改用 JDK 25 构建，并添加 foojay 工具链解析器。
+- 声明 Gradle 9 所需的 `junit-platform-launcher`，并移除各模块脚本中重复的测试依赖。
+- `guizhanlib-all` 现在生成聚合 Javadoc。
+- `gradle build` 现在会运行测试并为各模块产出 shadow jar 及 `-original` 未打包 jar；`gradle publish` 对快照版本直传快照仓库，对正式版本自动关闭并发布 staging 仓库。
+- 移除 jitpack 配置；`renovate.json` 移入 `.github`。
+
+### 文档
+
+- README 按语言拆分，新增 Gradle 使用说明与徽章，`dev.md` 并入 `AGENTS.md`。
+- 补充了使用镜像加载库的文档。
+
 ## 2.5.0
 
 - Update `MinecraftVersionUtil` to support new year-based versions.
