@@ -37,9 +37,9 @@ subprojects {
 
         api("com.google.code.findbugs:jsr305:3.0.2")
         compileOnlyAndTestImplementation("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
-        testImplementation("org.junit.jupiter:junit-jupiter-engine:5.12.1")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.14.4")
+        testImplementation("org.junit.jupiter:junit-jupiter-engine:5.14.4")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.14.4")
         testImplementation("com.github.MockBukkit:MockBukkit:v1.21-SNAPSHOT")
     }
 
