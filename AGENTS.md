@@ -28,7 +28,8 @@ directories (deleted-module leftovers and non-ignored tooling artifacts like
 
 ## 3. Publishing
 
-Publishing is manual from this machine; CI is build-only. One command covers both paths:
+Publishing is manual from this machine or from the manual `Release` GitHub
+Action; CI is build-only. One command covers both paths:
 `./gradlew publish`.
 
 - Snapshot versions (`-SNAPSHOT`): uploads straight to the Central Portal
@@ -36,6 +37,11 @@ Publishing is manual from this machine; CI is build-only. One command covers bot
   tasks self-skip.
 - Release versions (no suffix): publishes, then closes and releases the
   Central staging repo automatically.
+- Releases can be triggered from the manual `Release` GitHub Action
+  (`.github/workflows/release.yml`): it publishes the version currently set in
+  gradle.properties via `./gradlew publish`; non-snapshot versions additionally
+  get the `v<version>` tag and a GitHub release from the matching CHANGELOG
+  section.
 - Sonatype credentials and the signing key come from gradle properties outside
   the repo (`~/.gradle/gradle.properties`); nothing is stored here.
 
