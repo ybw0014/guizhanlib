@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import java.time.Duration
 
 plugins {
     `java-library`
@@ -65,6 +66,14 @@ subprojects {
         archiveClassifier = ""
     }
 
+    tasks.named<Jar>("jar") {
+        archiveClassifier = "original"
+    }
+
+    tasks.named("build") {
+        dependsOn(tasks.named("shadowJar"))
+    }
+
     publishing {
         publications {
             create<MavenPublication>("maven") {
@@ -112,11 +121,21 @@ subprojects {
     }
 }
 
+tasks.named("publish") {
+    dependsOn(tasks.named("publishToSonatype"))
+    dependsOn(tasks.named("closeAndReleaseSonatypeStagingRepository"))
+}
+
 nexusPublishing {
     repositories {
         sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
         }
+    }
+    // Central Portal validation can take several minutes on a multi-module build
+    transitionCheckOptions {
+        maxRetries = 240
+        delayBetween = Duration.ofSeconds(5)
     }
 }
