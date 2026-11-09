@@ -26,4 +26,4 @@ bin/
 .idea/
 .env
 
-.sisyphus/
+.slim/
