@@ -7,7 +7,6 @@ dependencies {
     api(project(":guizhanlib-minecraft", configuration = "shadow"))
     api(project(":guizhanlib-rebar", configuration = "shadow"))
     api(project(":guizhanlib-slimefun", configuration = "shadow"))
-    api(project(":guizhanlib-slimefun-cn", configuration = "shadow"))
     api(project(":guizhanlib-updater", configuration = "shadow"))
 }
 
@@ -19,7 +18,6 @@ val documentedModules = listOf(
     ":guizhanlib-minecraft",
     ":guizhanlib-rebar",
     ":guizhanlib-slimefun",
-    ":guizhanlib-slimefun-cn",
     ":guizhanlib-updater",
 )
 

@@ -13,7 +13,6 @@ GuizhanLib is a Gradle multi-project Java library for Slimefun and Rebar addon d
 - `guizhanlib-minecraft`: shared Bukkit/Paper-facing config, command, plugin, compatibility, and environment utilities.
 - `guizhanlib-rebar`: Rebar addon base abstractions built on top of `guizhanlib-minecraft`.
 - `guizhanlib-slimefun`: Slimefun addon bases plus machine/menu abstractions built on top of `guizhanlib-minecraft`.
-- `guizhanlib-slimefun-cn`: Slimefun CN compatibility helpers.
 - `guizhanlib-updater`: Guizhan Builds updater helpers.
 - `guizhanlib-all`: aggregator artifact that re-exports active modules; treat it as packaging rather than a primary source module.
 
