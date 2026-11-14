@@ -20,7 +20,10 @@ import java.util.logging.Level;
  * Auto update task.
  *
  * @author ybw0014
+ * @deprecated Companion of the deprecated {@link GuizhanBuildsUpdater}; see its
+ *             Javadoc for details.
  */
+@Deprecated(forRemoval = true)
 class GuizhanBuildsUpdaterTask extends BukkitRunnable {
 
     private final GuizhanBuildsUpdater updater;

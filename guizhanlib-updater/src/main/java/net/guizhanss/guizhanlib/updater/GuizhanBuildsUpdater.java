@@ -14,7 +14,11 @@ import java.util.logging.Level;
  * Guizhan Builds.
  *
  * @author ybw0014
+ * @deprecated Guizhan Builds shuts down on 2026-11-15 12:00 (UTC+8), after which
+ *             this updater will stop working. Use {@link GuizhanResourcesUpdater}
+ *             instead. Scheduled for removal in 4.0.
  */
+@Deprecated(forRemoval = true)
 @SuppressWarnings("ConstantConditions")
 @Getter(AccessLevel.PACKAGE)
 public final class GuizhanBuildsUpdater {
