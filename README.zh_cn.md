@@ -86,6 +86,10 @@ tasks.shadowJar {
         </plugins>
 ```
 
+## 自动更新
+
+`guizhanlib-updater` 模块提供鬼斩资源站、Modrinth、Hangar 与 GitHub Releases 的自动更新器。从鬼斩构建站更新器迁移？参见[从鬼斩构建站迁移](/CHANGELOG.md#从鬼斩构建站迁移)。
+
 ## 更新日志
 
 [Changelog](/CHANGELOG.md)

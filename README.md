@@ -85,6 +85,10 @@ You will need to relocate the library classes if you use it for addon developmen
         </plugins>
 ```
 
+## Auto-updates
+
+GuizhanLib ships auto-updaters for Guizhan Resources, Modrinth, Hangar and GitHub Releases in the `guizhanlib-updater` module. Migrating from the Guizhan Builds updater? See [Migrating from Guizhan Builds](/CHANGELOG.md#migrating-from-guizhan-builds).
+
 ## Changelog
 
 [Changelog](/CHANGELOG.md)

@@ -1,5 +1,37 @@
 # Changelog
 
+## 3.1.0
+
+### Updater
+
+- Added auto-updaters for Guizhan Resources, Modrinth, Hangar and GitHub Releases, sharing a single `AbstractUpdater` base: asynchronous checks, version comparison with prerelease awareness (falling back to string inequality for unparseable versions), SHA-256/SHA-512 checksum verification, and verified atomic installation into the server's update folder.
+- Guizhan Resources updater: `GuizhanResourcesUpdater.start(plugin, file, slug[, channel][, config])`, defaulting to `https://resources.guizhanss.com/api/v1` and the `release` channel.
+- `UpdaterConfig` gained optional `userAgent`, `apiKey`, `minecraftVersion` and `platform` options (still not read from config.yml).
+- The existing `GuizhanBuildsUpdater` is deprecated for removal; it will stop working when Guizhan Builds shuts down.
+
+#### Migrating from Guizhan Builds
+
+- Replace your call: `GuizhanBuildsUpdater.start(plugin, file, owner, repository, branch[, config])` → `GuizhanResourcesUpdater.start(plugin, file, slug[, channel][, config])`. `checkOnly` still limits the updater to notify-only; a custom builds `baseUrl` must be removed or replaced — only the old default address is substituted automatically.
+- Guizhan Builds identifiers (`owner/repo:branch`) cannot be mapped to Guizhan Resources slugs automatically. Create or import your project on Guizhan Resources, note its slug (the `<slug>` part of the project page URL), and confirm the actual channel slug on the project's versions page (do not assume `release`).
+- The version string of each release on the platform must match the released JAR's own `PluginMeta#getVersion()` (from plugin.yml or paper-plugin.yml), without a `v` prefix. Versions that both parse numerically are compared numerically; the string-inequality fallback (which may re-download or downgrade) only applies when either version cannot be parsed.
+- Plugins shading an older GuizhanLib do not upgrade automatically when the library releases — update the dependency and re-publish your plugin.
+- `GuizhanBuildsUpdater` will stop working when Guizhan Builds shuts down; the deprecated class will be removed.
+
+### 更新器
+
+- 新增鬼斩资源站、Modrinth、Hangar 与 GitHub Releases 自动更新器，共享单一 `AbstractUpdater` 基类：异步检查、带预发布感知的版本比较（不可解析时退化为字符串比较）、SHA-256/SHA-512 校验，以及校验通过后原子安装到服务器更新目录。
+- 资源站更新器：`GuizhanResourcesUpdater.start(plugin, file, slug[, channel][, config])`，默认基址 `https://resources.guizhanss.com/api/v1`，channel 默认 `release`。
+- `UpdaterConfig` 新增可选的 `userAgent`、`apiKey`、`minecraftVersion`、`platform` 配置（仍然不从 config.yml 读取）。
+- 现有 `GuizhanBuildsUpdater` 已弃用并计划移除；构建站停服后其将停止工作。
+
+#### 从鬼斩构建站迁移
+
+- 替换调用：`GuizhanBuildsUpdater.start(plugin, file, owner, repository, branch[, config])` → `GuizhanResourcesUpdater.start(plugin, file, slug[, channel][, config])`。`checkOnly` 仍表示仅通知不下载；自定义的构建站 `baseUrl` 必须移除或替换——只有旧默认地址会被自动替换。
+- 构建站标识（`owner/repo:branch`）无法自动映射为资源站 slug。请在资源站创建或导入项目，记下 slug（项目页 URL 中的 `<slug>` 部分），并在项目的版本页面核对实际的 channel slug（不要默认认为是 `release`）。
+- 平台上每个发布版本的版本号必须与该发布 JAR 自身的 `PluginMeta#getVersion()`（来自 plugin.yml 或 paper-plugin.yml）一致，且不带 `v` 前缀。两侧都能按数字解析时进行数值比较；仅当任一版本无法解析时才退化为字符串比较（可能重复下载甚至降级）。
+- shade 了旧版 GuizhanLib 的插件不会随库发布自动升级——请更新依赖并重新发布插件。
+- 构建站停服后 `GuizhanBuildsUpdater` 将停止工作；该已弃用类将被移除。
+
 ## 3.0.0
 
 ### Breaking Changes
